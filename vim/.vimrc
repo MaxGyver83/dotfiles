@@ -1,0 +1,242 @@
+set nocompatible            " be iMproved, required
+set hidden                  " allow leaving a buffer unsaved when switching to another one
+
+filetype plugin on
+runtime macros/matchit.vim
+
+"set background=dark
+" Color scheme
+"colorscheme molokai
+"colorscheme solarized
+"colorscheme badwolf
+"colorscheme afterglow
+"colorscheme happy_hacking
+colorscheme minimalist
+
+syntax enable       " enable syntax highlighting
+
+set number          " show line numbers
+set relativenumber  " show relative line numbers
+
+" no relative numbers when in insert mode or buffer loses focus
+augroup numbertoggle
+  autocmd!
+  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+augroup END
+
+set showcmd          " show command in bottom bar
+set cursorline       " highlight current line
+set showmatch        " highlight matching [{()}]
+set wildmenu         " visual autocomplete for command menu
+
+set tabstop=4        " number of visual spaces per TAB
+set softtabstop=4    " number of spaces in tab when editing
+set shiftwidth=4     " 1 tab == 4 spaces
+set expandtab        " tabs are spaces
+set autoindent       " indent new lines
+set listchars=tab:>. " show tabs as >...
+set list             " show non-printable chars
+
+autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2
+
+set ignorecase       " make search case-insensitive by default (word\C → case sens.)
+set smartcase        " make search case-sensitive if word contains uppercase letter
+set incsearch        " search as characters are entered
+set hlsearch         " highlight matches
+" turn off search highlight and sneak highlight
+let mapleader="\<Space>"   " leader is space
+nnoremap <leader><space> :nohlsearch \| call sneak#cancel()<CR>
+
+" avoid delay after pressing CapsLock key (which is mapped to Escape via xcape)
+"set timeoutlen=1000
+"set ttimeoutlen=0
+
+" don't consider 007 an octal number when de-/increasing using Ctrl-x/Ctrl-a
+set nrformats-=octal
+
+" show at least three lines before/after current line
+set scrolloff=3
+
+" show as much as possible of the last line in the windows (instead of @@@)
+set display+=lastline
+
+" set language for spell checking to German and English (activate with :set spell)
+set spelllang=de,en
+
+" highlight trailing whitespaces
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
+
+" show buffer list and select by number
+nnoremap gb :ls<CR>:b<Space>
+
+" yank/cut/paste to/from system clipboard
+noremap <Leader>y "+y
+noremap <Leader>d "+d
+noremap <Leader>p "+p
+noremap <Leader>P "+P
+
+" copy complete file content to system clipboard
+noremap <Leader>ca gg"+yG``
+
+" copy relative path/full path/just filename to clipboard
+noremap <Leader>cr :let @+ = expand("%")<cr>
+noremap <Leader>cp :let @+ = expand("%:p")<cr>
+noremap <Leader>cn :let @+ = expand("%:t")<cr>
+
+" save file
+noremap <Leader>w :w<cr>
+
+"delete not into register (use dl for cutting one character into register)
+nnoremap x "_x
+
+" replace word/selection with yanked text
+nnoremap <Leader>r "_ciw<C-r>0<ESC>
+xnoremap <Leader>r "_c<C-r>0<ESC>
+
+" execute file in python
+autocmd FileType python nnoremap <Leader>x :w !python3<cr>
+" execute selection in python
+autocmd FileType python xnoremap <Leader>x :w !python3<cr>
+
+" open file with xdg-open
+nnoremap <Leader>o :!xdg-open % &<cr>
+
+" toggle buffer
+nnoremap <Leader>t <C-^>
+
+" toggle NERDTree
+nnoremap <Leader>n :NERDTreeToggle<cr>
+
+" surround in <kbd> tags
+" xnoremap <Leader>k <Plug>VSurround<kbd>
+
+" previous/next result (after vimgrep)
+"noremap <Leader>e :cprevious<cr>
+"noremap <Leader>i :cnext<cr>
+noremap <C-h> :cprevious<cr>
+noremap <C-l> :cnext<cr>
+
+" swap ; and , (next/previous match after t, T, f, F)
+nnoremap ; ,
+nnoremap , ;
+vnoremap ; ,
+vnoremap , ;
+" swap ; and , (next/previous match after s, S)
+nmap ; <Plug>SneakPrevious
+nmap , <Plug>SneakNext
+vmap ; <Plug>SneakPrevious
+vmap , <Plug>SneakNext
+"let g:sneak#s_next = 1
+
+" vim-sneak case-insensitive
+let g:sneak#use_ic_scs = 1
+
+" Map g. as an alias for g;
+nnoremap g. g;
+
+" move vertically by visual line
+" if a count is given, ignore wrapped lines
+nnoremap <expr> <Down> (v:count == 0 ? 'gj' : 'j')
+nnoremap <expr> <Up> (v:count == 0 ? 'gk' : 'k')
+vnoremap <expr> <Down> (v:count == 0 ? 'gj' : 'j')
+vnoremap <expr> <Up> (v:count == 0 ? 'gk' : 'k')
+
+" make Y yank till end of line (as proposed in `:help Y`)
+map Y y$
+
+" yank or select line without line break
+" (replaces plugins vim-textobj-line and vim-textobj-user)
+" Problem: causes a delay after a simple y in visual mode
+" noremap yal 0y$
+" noremap yil ^yg_
+" noremap val 0v$
+" noremap vil ^vg_
+
+" Move lines up and down via Ctrl + j or k
+
+" Normal mode
+nnoremap <C-j> :m .+1<CR>==
+nnoremap <C-k> :m .-2<CR>==
+
+" Insert mode
+inoremap <C-j> <ESC>:m .+1<CR>==gi
+inoremap <C-k> <ESC>:m .-2<CR>==gi
+
+" Visual mode
+vnoremap <C-j> :m '>+1<CR>gv=gv
+vnoremap <C-k> :m '<-2<CR>gv=gv
+
+
+" Move lines up and down via Shift + arrow keys
+" (currently overwritten by terminator settings)
+
+" Normal mode (may change indentation)
+" nnoremap <S-Down> :m .+1<CR>==
+" nnoremap <S-Up> :m .-2<CR>==
+
+" better: keep indentation
+nnoremap <S-Down> ddp
+nnoremap <S-Up> ddkP
+" This moves the current line two lines up if it is the last line.
+
+" Insert mode
+inoremap <S-Down> <ESC>:m .+1<CR>==gi
+inoremap <S-Up> <ESC>:m .-2<CR>==gi
+
+" Visual mode
+vnoremap <S-Down> :m '>+1<CR>gv=gv
+vnoremap <S-Up> :m '<-2<CR>gv=gv
+
+
+" Jump to previous/next paragraph via Ctrl + arrow key
+
+" Normal mode
+nnoremap <C-Down> }
+nnoremap <C-Up> {
+
+" Sessions
+map <F2> :mksession! ~/.vim_session<cr> " Quick write session with F2
+map <F3> :source ~/.vim_session<cr>     " And load session with F3
+
+" buftabline (https://github.com/ap/vim-buftabline)
+let g:buftabline_indicators=1
+let g:buftabline_numbers=2
+nmap <leader>1 <Plug>BufTabLine.Go(1)
+nmap <leader>2 <Plug>BufTabLine.Go(2)
+nmap <leader>3 <Plug>BufTabLine.Go(3)
+nmap <leader>4 <Plug>BufTabLine.Go(4)
+nmap <leader>5 <Plug>BufTabLine.Go(5)
+nmap <leader>6 <Plug>BufTabLine.Go(6)
+nmap <leader>7 <Plug>BufTabLine.Go(7)
+nmap <leader>8 <Plug>BufTabLine.Go(8)
+nmap <leader>9 <Plug>BufTabLine.Go(9)
+nmap <leader>0 <Plug>BufTabLine.Go(10)
+
+" use fzf (FuzzyFinder) in vim
+set rtp+=~/workspace/fzf
+
+" map Ctrl-f to :FZF
+nnoremap <C-f> :FZF<CR>
+nnoremap <leader><C-f> :FZF ~<CR>
+
+" remap unused umlauts
+nmap ä ;
+nmap ü [
+nmap ö ]
+"nmap ßß @@
+nmap ß @
+
+" Abbreviations
+" iab mfg Mit freundlichen Grüßen
+" type kb>
+iab kb <kbd></kbd><C-o>F<<BS>
+" auto complete closing HTML tag
+iab </ </<C-X><C-O><Del><Del>
+
+function! ClearRegisters()
+    let regs='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/-"' | let i=0 | while (i<strlen(regs)) | exec 'let @'.regs[i].'=""' | let i=i+1 | endwhile | unlet regs
+endfunction
+" Source: https://stackoverflow.com/questions/19430200/how-to-clear-vim-registers-effectively
+

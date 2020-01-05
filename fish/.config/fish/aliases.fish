@@ -1,0 +1,56 @@
+# aliases
+abbr ... 'cd ../..'
+abbr .... 'cd ../../..'
+abbr ..... 'cd ../../../..'
+
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
+abbr ff 'fzf'
+
+abbr fi 'find . -iname'
+abbr fif 'find . -type f -iname'
+abbr fid 'find . -type d -iname'
+
+abbr df 'df -h'
+
+abbr du1 'du -h -d1'
+abbr du0 'du -h -d0'
+abbr grn 'grep -rn'
+abbr grni 'grep -rni'
+
+abbr xo 'xdg-open'
+
+abbr rsyncp 'rsync --info=progress2 -ah'
+
+abbr manc 'set PAGER most; man'
+abbr y 'yank'
+abbr cb 'xclip -sel clip'
+
+# lc = last command
+abbr lc 'eval $history[1]'
+# lcs = last command, select line
+abbr lcs 'eval $history[1] | yank'
+
+abbr acs 'apt-cache search'
+abbr sai 'sudo apt install'
+abbr ali 'apt list --installed'
+abbr nh 'sudo nethogs wlp2s0 -v 3'
+abbr hg 'history | grep'
+
+abbr rr 'ranger'
+
+abbr feh 'feh --scale-down --auto-zoom'
+
+# git
+abbr gd 'git diff'
+# gh = "git home" (go to the toplevel of the current repo)
+abbr gh 'cd (git rev-parse --show-toplevel)'
+# git log
+abbr gitlog 'git log --oneline --graph --decorate'
+abbr gitlogs 'git log --oneline --graph --decorate --stat'
+abbr gitloga 'git log --oneline --graph --decorate --all'
+abbr gitlogc 'git log --pretty="%C(Yellow)%h  %C(reset)%ad (%C(Green)%cr%C(reset))%x09 %C(Cyan)%an: %C(reset)%s"'
+abbr gitunpushed 'git log ..@{u}'
+abbr gitunmerged 'git branch --no-merged master'

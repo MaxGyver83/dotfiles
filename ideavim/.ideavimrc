@@ -1,0 +1,35 @@
+set surround
+set commentary
+set ideajoin
+
+nnoremap ; ,
+nnoremap , ;
+vnoremap ; ,
+vnoremap , ;
+
+" leader is space
+let mapleader=" "
+nnoremap <leader><space> :nohlsearch<CR>
+"noremap <Leader>y "+y
+"noremap <Leader>d "+d
+"noremap <Leader>p "+p
+"noremap <Leader>P "+P
+map <leader>y :action $Copy<CR>
+map <leader>d :action $Cut<CR>
+map <leader>p :action $Paste<CR>
+"map <leader>a :action $SelectAll<CR>
+
+"delete not into register (use dl for cutting one character into register)
+nnoremap x "_x
+
+" replace word with yanked text
+nnoremap <Leader>r ciw<C-r>0<ESC>
+
+set ignorecase      " make search case-insensitive by default (word\C → case sens.)
+set smartcase       " make search case-sensitive if word contains uppercase letter
+set incsearch       " search as characters are entered
+set hlsearch        " highlight matches
+
+" edit ideavim config
+nnoremap <leader>vv :e ~/.ideavimrc<CR>
+nnoremap <leader>vr :source ~/.ideavimrc<CR>
