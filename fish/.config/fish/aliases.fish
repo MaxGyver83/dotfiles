@@ -40,11 +40,12 @@ abbr nh 'sudo nethogs wlp2s0 -v 3'
 abbr hg 'history | grep'
 
 abbr rr 'ranger'
-
 abbr feh 'feh --scale-down --auto-zoom'
+abbr batp 'bat --style=plain'
 
 # git
 abbr gd 'git diff'
+abbr gp 'git pull'
 # gh = "git home" (go to the toplevel of the current repo)
 abbr gh 'cd (git rev-parse --show-toplevel)'
 # git log
@@ -54,3 +55,9 @@ abbr gitloga 'git log --oneline --graph --decorate --all'
 abbr gitlogc 'git log --pretty="%C(Yellow)%h  %C(reset)%ad (%C(Green)%cr%C(reset))%x09 %C(Cyan)%an: %C(reset)%s"'
 abbr gitunpushed 'git log ..@{u}'
 abbr gitunmerged 'git branch --no-merged master'
+
+# source work related / private stuff (not part of the dotfiles repo)
+if [ -f $HOME/.config/fish/local.fish ]
+  source $HOME/.config/fish/local.fish
+end
+

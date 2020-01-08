@@ -30,9 +30,11 @@ alias hg='history | grep'
 alias titlecase=$'rename \'s/(\S+)/\u\L$1/g\''
 
 alias rr='ranger'
+alias batp='bat --style=plain'
 
 # git
 alias gd='git diff'
+alias gp='git pull'
 # gh = "git home" (go to the toplevel of the current repo)
 alias gh='cd $(git rev-parse --show-toplevel)'
 # git log
