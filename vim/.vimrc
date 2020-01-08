@@ -39,18 +39,13 @@ set listchars=tab:>. " show tabs as >...
 set list             " show non-printable chars
 
 autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2
+" Autocompletion for python3
+autocmd FileType python set omnifunc=python3complete#Complete
 
 set ignorecase       " make search case-insensitive by default (word\C → case sens.)
 set smartcase        " make search case-sensitive if word contains uppercase letter
 set incsearch        " search as characters are entered
 set hlsearch         " highlight matches
-" turn off search highlight and sneak highlight
-let mapleader="\<Space>"   " leader is space
-nnoremap <leader><space> :nohlsearch \| call sneak#cancel()<CR>
-
-" avoid delay after pressing CapsLock key (which is mapped to Escape via xcape)
-"set timeoutlen=1000
-"set ttimeoutlen=0
 
 " don't consider 007 an octal number when de-/increasing using Ctrl-x/Ctrl-a
 set nrformats-=octal
@@ -67,6 +62,12 @@ set spelllang=de,en
 " highlight trailing whitespaces
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
+
+"---------
+" mappings
+"---------
+
+let mapleader="\<Space>"   " leader is space
 
 " show buffer list and select by number
 nnoremap gb :ls<CR>:b<Space>
@@ -123,15 +124,6 @@ nnoremap ; ,
 nnoremap , ;
 vnoremap ; ,
 vnoremap , ;
-" swap ; and , (next/previous match after s, S)
-nmap ; <Plug>SneakPrevious
-nmap , <Plug>SneakNext
-vmap ; <Plug>SneakPrevious
-vmap , <Plug>SneakNext
-"let g:sneak#s_next = 1
-
-" vim-sneak case-insensitive
-let g:sneak#use_ic_scs = 1
 
 " Map g. as an alias for g;
 nnoremap g. g;
@@ -168,7 +160,6 @@ inoremap <C-k> <ESC>:m .-2<CR>==gi
 vnoremap <C-j> :m '>+1<CR>gv=gv
 vnoremap <C-k> :m '<-2<CR>gv=gv
 
-
 " Move lines up and down via Shift + arrow keys
 " (currently overwritten by terminator settings)
 
@@ -189,7 +180,6 @@ inoremap <S-Up> <ESC>:m .-2<CR>==gi
 vnoremap <S-Down> :m '>+1<CR>gv=gv
 vnoremap <S-Up> :m '<-2<CR>gv=gv
 
-
 " Jump to previous/next paragraph via Ctrl + arrow key
 
 " Normal mode
@@ -199,6 +189,35 @@ nnoremap <C-Up> {
 " Sessions
 map <F2> :mksession! ~/.vim_session<cr> " Quick write session with F2
 map <F3> :source ~/.vim_session<cr>     " And load session with F3
+
+" remap unused umlauts
+nmap ä ;
+nmap ü [
+nmap ö ]
+nmap ß @
+
+"--------------
+" abbreviations
+"--------------
+
+" iab mfg Mit freundlichen Grüßen
+" type kb>
+iab kb <kbd></kbd><C-o>F<<BS>
+" auto complete closing HTML tag
+iab </ </<C-X><C-O><Del><Del>
+
+"----------
+" functions
+"----------
+
+function! ClearRegisters()
+    let regs='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/-"' | let i=0 | while (i<strlen(regs)) | exec 'let @'.regs[i].'=""' | let i=i+1 | endwhile | unlet regs
+endfunction
+" Source: https://stackoverflow.com/questions/19430200/how-to-clear-vim-registers-effectively
+
+"-------------------
+" related to plugins
+"-------------------
 
 " buftabline (https://github.com/ap/vim-buftabline)
 let g:buftabline_indicators=1
@@ -214,29 +233,24 @@ nmap <leader>8 <Plug>BufTabLine.Go(8)
 nmap <leader>9 <Plug>BufTabLine.Go(9)
 nmap <leader>0 <Plug>BufTabLine.Go(10)
 
+" swap ; and , (next/previous match after s, S)
+nmap ; <Plug>SneakPrevious
+nmap , <Plug>SneakNext
+vmap ; <Plug>SneakPrevious
+vmap , <Plug>SneakNext
+"let g:sneak#s_next = 1
+" vim-sneak case-insensitive
+let g:sneak#use_ic_scs = 1
+" turn off search highlight and sneak highlight
+nnoremap <leader><space> :nohlsearch \| call sneak#cancel()<CR>
+
 " use fzf (FuzzyFinder) in vim
 set rtp+=~/workspace/fzf
 
+" autocompletion with supertab
+let g:SuperTabClosePreviewOnPopupClose = 1
+" try omnifunc first, then normal autocompletion
+call SuperTabChain(&omnifunc, "<c-p>")
 " map Ctrl-f to :FZF
 nnoremap <C-f> :FZF<CR>
 nnoremap <leader><C-f> :FZF ~<CR>
-
-" remap unused umlauts
-nmap ä ;
-nmap ü [
-nmap ö ]
-"nmap ßß @@
-nmap ß @
-
-" Abbreviations
-" iab mfg Mit freundlichen Grüßen
-" type kb>
-iab kb <kbd></kbd><C-o>F<<BS>
-" auto complete closing HTML tag
-iab </ </<C-X><C-O><Del><Del>
-
-function! ClearRegisters()
-    let regs='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/-"' | let i=0 | while (i<strlen(regs)) | exec 'let @'.regs[i].'=""' | let i=i+1 | endwhile | unlet regs
-endfunction
-" Source: https://stackoverflow.com/questions/19430200/how-to-clear-vim-registers-effectively
-
