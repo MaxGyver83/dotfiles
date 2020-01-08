@@ -250,7 +250,10 @@ set rtp+=~/workspace/fzf
 " autocompletion with supertab
 let g:SuperTabClosePreviewOnPopupClose = 1
 " try omnifunc first, then normal autocompletion
-call SuperTabChain(&omnifunc, "<c-p>")
+autocmd FileType python
+    \ if &omnifunc != '' |
+    \   call SuperTabChain(&omnifunc, "<c-p>") |
+    \ endif
 " map Ctrl-f to :FZF
 nnoremap <C-f> :FZF<CR>
 nnoremap <leader><C-f> :FZF ~<CR>
