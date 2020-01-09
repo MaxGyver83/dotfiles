@@ -56,12 +56,20 @@ set scrolloff=3
 " show as much as possible of the last line in the windows (instead of @@@)
 set display+=lastline
 
+" this seems to be missing im vim 8.2
+set backspace=indent,eol,start
+
 " set language for spell checking to German and English (activate with :set spell)
 set spelllang=de,en
 
 " highlight trailing whitespaces
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
+
+" use new popup windows instead of preview windows in vim 8.2
+if has('textprop')
+    set completeopt+=popup
+endif
 
 "---------
 " mappings
