@@ -66,10 +66,12 @@ set spelllang=de,en
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
 
+set completeopt-=preview
 " use new popup windows instead of preview windows in vim 8.2
-if has('textprop')
-    set completeopt+=popup
-endif
+" this seems to cause crashes (at least in vim 8.2.107 and 8.2.111)
+" if has('textprop')
+"     set completeopt+=popup
+" endif
 
 "---------
 " mappings
