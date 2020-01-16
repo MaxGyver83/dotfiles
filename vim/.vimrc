@@ -73,6 +73,9 @@ set completeopt-=preview
 "     set completeopt+=popup
 " endif
 
+set completeopt=menuone,noinsert
+set shortmess+=c
+
 "---------
 " mappings
 "---------
@@ -257,13 +260,17 @@ nnoremap <leader><space> :nohlsearch \| call sneak#cancel()<CR>
 " use fzf (FuzzyFinder) in vim
 set rtp+=~/workspace/fzf
 
-" autocompletion with supertab
-let g:SuperTabClosePreviewOnPopupClose = 1
-" try omnifunc first, then normal autocompletion
-autocmd FileType python
-    \ if &omnifunc != '' |
-    \   call SuperTabChain(&omnifunc, "<c-p>") |
-    \ endif
+" " autocompletion with supertab
+" let g:SuperTabClosePreviewOnPopupClose = 1
+" " try omnifunc first, then normal autocompletion
+" autocmd FileType python
+"     \ if &omnifunc != '' |
+"     \   call SuperTabChain(&omnifunc, "<c-p>") |
+"     \ endif
+
+" mucomplete
+let g:mucomplete#enable_auto_at_startup = 1
+
 " map Ctrl-f to :FZF
 nnoremap <C-f> :FZF<CR>
 nnoremap <leader><C-f> :FZF ~<CR>

@@ -48,7 +48,7 @@ git clone https://github.com/tpope/vim-repeat
 git clone https://github.com/tpope/vim-commentary
 git clone https://github.com/Raimondi/delimitMate
 git clone https://github.com/justinmk/vim-sneak
-git clone https://github.com/ervandew/supertab
+git clone https://github.com/lifepillar/vim-mucomplete
 git clone https://github.com/kana/vim-textobj-user
 git clone https://github.com/kana/vim-textobj-line
 git clone https://github.com/sukima/vim-tiddlywiki
