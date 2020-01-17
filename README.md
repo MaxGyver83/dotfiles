@@ -42,21 +42,22 @@ I use vim8's integrated package manager. So some plugins need to be cloned into 
 ```sh
 mkdir -p ~/.vim/pack/plugins/start/
 cd ~/.vim/pack/plugins/start/
-git clone https://github.com/ap/vim-buftabline
-git clone https://github.com/tpope/vim-surround
-git clone https://github.com/tpope/vim-repeat
-git clone https://github.com/tpope/vim-commentary
-git clone https://github.com/Raimondi/delimitMate
-git clone https://github.com/justinmk/vim-sneak
-git clone https://github.com/lifepillar/vim-mucomplete
-git clone https://github.com/kana/vim-textobj-user
-git clone https://github.com/kana/vim-textobj-line
-git clone https://github.com/sukima/vim-tiddlywiki
+git clone https://github.com/ap/vim-buftabline.git
+git clone https://github.com/tpope/vim-surround.git
+git clone https://github.com/tpope/vim-repeat.git
+git clone https://github.com/tpope/vim-commentary.git
+git clone https://github.com/Raimondi/delimitMate.git
+git clone https://github.com/tpope/vim-vinegar.git
+git clone https://github.com/justinmk/vim-sneak.git
+git clone https://github.com/lifepillar/vim-mucomplete.git
+git clone https://github.com/kana/vim-textobj-user.git
+git clone https://github.com/kana/vim-textobj-line.git
+git clone https://github.com/sukima/vim-tiddlywiki.git
 
 mkdir -p ~/.vim/pack/plugins/opt/
 cd ~/.vim/pack/plugins/opt/
-git clone https://github.com/ap/vim-css-color
-git clone https://github.com/godlygeek/tabular
-git clone https://github.com/jacquesbh/vim-showmarks
+git clone https://github.com/ap/vim-css-color.git
+git clone https://github.com/godlygeek/tabular.git
+git clone https://github.com/jacquesbh/vim-showmarks.git
 ```
 
