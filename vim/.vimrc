@@ -102,6 +102,9 @@ noremap <Leader>cn :let @+ = expand("%:t")<cr>
 " save file
 noremap <Leader>w :w<cr>
 
+" close window
+noremap <Leader>q :q<cr>
+
 "delete not into register (use dl for cutting one character into register)
 nnoremap x "_x
 
@@ -120,8 +123,7 @@ nnoremap <Leader>o :!xdg-open % &<cr>
 " toggle buffer
 nnoremap <Leader>t <C-^>
 
-" toggle NERDTree
-nnoremap <Leader>n :NERDTreeToggle<cr>
+nnoremap <Leader>l :20Lex \| call CleanNoNameEmptyBuffers()<cr>
 
 " surround in <kbd> tags
 " xnoremap <Leader>k <Plug>VSurround<kbd>
@@ -228,6 +230,14 @@ function! ClearRegisters()
 endfunction
 " Source: https://stackoverflow.com/questions/19430200/how-to-clear-vim-registers-effectively
 
+function! CleanNoNameEmptyBuffers()
+    let buffers = filter(range(1, bufnr('$')), 'buflisted(v:val) && empty(bufname(v:val)) && bufwinnr(v:val) < 0 && (getbufline(v:val, 1, "$") == [""])')
+    if !empty(buffers)
+        exe 'bd '.join(buffers, ' ')
+    endif
+endfunction
+"Source: https://www.reddit.com/r/vim/comments/1a4yf1/how_to_automatically_close_unedited_unnamed/
+
 "-------------------
 " related to plugins
 "-------------------
@@ -270,6 +280,9 @@ set rtp+=~/workspace/fzf
 
 " mucomplete
 let g:mucomplete#enable_auto_at_startup = 1
+
+" toggle NERDTree
+nnoremap <Leader>n :NERDTreeToggle<cr>
 
 " map Ctrl-f to :FZF
 nnoremap <C-f> :FZF<CR>
