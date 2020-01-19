@@ -35,7 +35,7 @@ set softtabstop=4    " number of spaces in tab when editing
 set shiftwidth=4     " 1 tab == 4 spaces
 set expandtab        " tabs are spaces
 set autoindent       " indent new lines
-set listchars=tab:>. " show tabs as >...
+set listchars=tab:\|\  " show tabs as |
 set list             " show non-printable chars
 
 autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2
@@ -101,6 +101,9 @@ noremap <Leader>cn :let @+ = expand("%:t")<cr>
 
 " save file
 noremap <Leader>w :w<cr>
+
+" close buffer
+noremap <Leader>b :bd<cr>
 
 " close window
 noremap <Leader>q :q<cr>
