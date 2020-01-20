@@ -17,4 +17,4 @@ Source: https://wiki.archlinux.org/index.php/X_keyboard_extension
 
 # Use KOU layout on other PCs
 
-Download `kou.xkb` and `kou-activate.bash` (or clone this repository). Run `kou-activate.bash`. This activates KOU and sets an alias for the current session and also appends it to `~/.bash_aliases`. The alias is `haei` (the keys labeled `asdf`) for (re)setting the keyboard layout to `de` (=QWERTZ).
+Download `kou.xkb` and `kou-activate.bash` (or clone this repository). Source `kou-activate.bash`. This activates KOU and sets an alias for the current session and also appends it to `~/.bash_aliases` or `.bashrc` if the former does not exist. The alias is `haei` (the keys labeled `asdf`) for (re)setting the keyboard layout to `de` (=QWERTZ).
