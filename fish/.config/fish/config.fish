@@ -37,14 +37,15 @@ set -x GROFF_NO_SGR 1                            # for konsole and gnome-termina
 # use vim for editing the command line with Alt-e
 set -x VISUAL vim
 
-# also find hidden files with FZF
-#set -x FZF_DEFAULT_COMMAND "find ."
-# better: use fd instead of find
-set -x FZF_DEFAULT_COMMAND 'fd --type f --hidden --follow --exclude .git'
-# use same command for Ctrl-t
-set -x FZF_CTRL_T_COMMAND $FZF_DEFAULT_COMMAND' --search-path $dir'
-# use similar command for Alt-C
-set -x FZF_ALT_C_COMMAND "fd --type d --hidden --follow --exclude .git"
-set -x FZF_DEFAULT_OPTS "--exact"
-set -x FZF_CTRL_T_OPTS "--preview 'bat --style=numbers --line-range :60 --color=always {}'"
-
+if type -q fzf
+    # also find hidden files with FZF
+    #set -x FZF_DEFAULT_COMMAND "find ."
+    # better: use fd instead of find
+    set -x FZF_DEFAULT_COMMAND 'fd --type f --hidden --follow --exclude .git'
+    # use same command for Ctrl-t
+    set -x FZF_CTRL_T_COMMAND $FZF_DEFAULT_COMMAND' --search-path $dir'
+    # use similar command for Alt-C
+    set -x FZF_ALT_C_COMMAND "fd --type d --hidden --follow --exclude .git"
+    set -x FZF_DEFAULT_OPTS "--exact"
+    set -x FZF_CTRL_T_OPTS "--preview 'bat --style=numbers --line-range :60 --color=always {}'"
+end
