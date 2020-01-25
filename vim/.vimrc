@@ -112,8 +112,8 @@ noremap <Leader>q :q<cr>
 nnoremap x "_x
 
 " replace word/selection with yanked text
-nnoremap <Leader>r "_ciw<C-r>0<ESC>
-xnoremap <Leader>r "_c<C-r>0<ESC>
+nnoremap <Leader>r "_ciw<C-r>"<ESC>
+xnoremap <Leader>r "_c<C-r>"<ESC>
 
 " execute file in python
 autocmd FileType python nnoremap <Leader>x :w !python3<cr>
@@ -125,6 +125,9 @@ nnoremap <Leader>o :!xdg-open % &<cr>
 
 " toggle buffer
 nnoremap <Leader>t <C-^>
+
+" toggle window
+nnoremap <Leader>k <C-w><C-w>
 
 nnoremap <Leader>l :20Lex \| call CleanNoNameEmptyBuffers()<cr>
 
