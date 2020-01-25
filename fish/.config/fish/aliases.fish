@@ -40,7 +40,7 @@ abbr nh 'sudo nethogs wlp2s0 -v 3'
 abbr hg 'history | grep'
 
 abbr rr 'ranger'
-abbr feh 'feh --scale-down --auto-zoom'
+abbr feh 'feh --scale-down --auto-zoom --auto-rotate'
 abbr batp 'bat --style=plain'
 
 # git
