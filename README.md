@@ -27,13 +27,19 @@ stow -t $HOME vim
 
 ## fish
 
-This repo's config expects these programs being installed:
+I have configured fish to show Git repository information in the prompt. This prompt uses some Unicode characters that will be rendered wider than one terminal character when the font is set to *Ubuntu Mono Regular* (the default in Ubuntu 18.04). So change it to *Monospace Regular, 14*, for example (in your terminal application).
 
-* [**fd**](https://github.com/sharkdp/fd)
+This fish setup will work best with these programs installed:
+
 * [**fzf**](https://github.com/junegunn/fzf)
-* [**z** (for fish)](https://github.com/jethrokuan/z) via [**fisher**](https://github.com/jorgebucaran/fisher).
+* [**fd**](https://github.com/sharkdp/fd)
+* [**bat**](https://github.com/sharkdp/bat)
 
-I have configured fish to show Git repository information in the prompt. This prompt uses some Unicode characters that will be rendered wider than one terminal character when the font is set to *Ubuntu Mono Regular* (the default in Ubuntu 18.04). So change it to *Monospace Regular, 14*, for example.
+(The settings regarding these programs will be skipped if they are not installed.)
+
+Also recommended:
+
+* [**z** (for fish)](https://github.com/jethrokuan/z) via [**fisher**](https://github.com/jorgebucaran/fisher).
 
 ## vim
 
