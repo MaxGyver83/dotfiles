@@ -293,3 +293,9 @@ nnoremap <Leader>n :NERDTreeToggle<cr>
 " map Ctrl-f to :FZF
 nnoremap <C-f> :FZF<CR>
 nnoremap <leader><C-f> :FZF ~<CR>
+
+" vim-fugitive (git support)
+nnoremap <leader>gs :G<cr>
+nnoremap <leader>gd :Gdiff<cr>
+nnoremap <leader>gb :Gblame<cr>
+nnoremap <leader>gg :Ggrep --color 

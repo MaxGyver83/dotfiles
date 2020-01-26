@@ -52,12 +52,13 @@ git clone https://github.com/ap/vim-buftabline.git
 git clone https://github.com/tpope/vim-surround.git
 git clone https://github.com/tpope/vim-repeat.git
 git clone https://github.com/tpope/vim-commentary.git
-git clone https://github.com/Raimondi/delimitMate.git
-git clone https://github.com/tpope/vim-vinegar.git
 git clone https://github.com/justinmk/vim-sneak.git
 git clone https://github.com/lifepillar/vim-mucomplete.git
+git clone https://github.com/Raimondi/delimitMate.git
+git clone https://github.com/tpope/vim-vinegar.git
 git clone https://github.com/kana/vim-textobj-user.git
 git clone https://github.com/kana/vim-textobj-line.git
+git clone https://github.com/tpope/vim-fugitive.git
 git clone https://github.com/sukima/vim-tiddlywiki.git
 
 mkdir -p ~/.vim/pack/plugins/opt/
