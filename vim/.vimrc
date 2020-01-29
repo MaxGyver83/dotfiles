@@ -16,14 +16,14 @@ colorscheme minimalist
 syntax enable       " enable syntax highlighting
 
 set number          " show line numbers
-set relativenumber  " show relative line numbers
+" set relativenumber  " show relative line numbers
 
 " no relative numbers when in insert mode or buffer loses focus
-augroup numbertoggle
-  autocmd!
-  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
-augroup END
+" augroup numbertoggle
+"   autocmd!
+"   autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+"   autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+" augroup END
 
 set showcmd          " show command in bottom bar
 set cursorline       " highlight current line
@@ -41,6 +41,8 @@ set list             " show non-printable chars
 autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2
 " Autocompletion for python3
 autocmd FileType python set omnifunc=python3complete#Complete
+
+autocmd FileType groovy,python set colorcolumn=120
 
 set ignorecase       " make search case-insensitive by default (word\C → case sens.)
 set smartcase        " make search case-sensitive if word contains uppercase letter
