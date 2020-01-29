@@ -78,6 +78,9 @@ set completeopt-=preview
 set completeopt=menuone,noinsert
 set shortmess+=c
 
+" update GitGutter signs after 750 ms of no input (also affects swap files)
+set updatetime=750
+
 "---------
 " mappings
 "---------

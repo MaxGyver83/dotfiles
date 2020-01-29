@@ -59,6 +59,7 @@ git clone https://github.com/tpope/vim-vinegar.git
 git clone https://github.com/kana/vim-textobj-user.git
 git clone https://github.com/kana/vim-textobj-line.git
 git clone https://github.com/tpope/vim-fugitive.git
+git clone https://github.com/airblade/vim-gitgutter.git
 git clone https://github.com/sukima/vim-tiddlywiki.git
 
 mkdir -p ~/.vim/pack/plugins/opt/
