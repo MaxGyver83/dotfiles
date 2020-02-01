@@ -41,7 +41,10 @@ abbr hg 'history | grep'
 
 abbr rr 'ranger'
 abbr feh 'feh --scale-down --auto-zoom --auto-rotate'
-abbr batp 'bat --style=plain'
+
+# bat: default: line numbers, no pager
+alias batp='bat -pp'
+alias batl='bat --pager="less"'
 
 # git
 abbr gd 'git diff'

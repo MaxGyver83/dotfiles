@@ -34,6 +34,8 @@ set -x LESS_TERMCAP_us (printf "\033[1;32m")     # begin underline
 set -x LESS_TERMCAP_ue (printf "\033[0m")        # reset underline
 set -x GROFF_NO_SGR 1                            # for konsole and gnome-terminal
 
+set -x BAT_PAGER ''
+
 # use vim for editing the command line with Alt-e
 set -x VISUAL vim
 
