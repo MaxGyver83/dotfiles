@@ -47,6 +47,7 @@ alias batp='bat -pp'
 alias batl='bat --pager="less"'
 
 # git
+abbr g 'git status'
 abbr gd 'git diff'
 abbr gp 'git pull'
 # gh = "git home" (go to the toplevel of the current repo)
