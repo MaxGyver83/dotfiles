@@ -11,7 +11,7 @@ unset KOU_DIR
 alias haei='setxkbmap de'
 echo 'Type "asdf" (="haei") for setting the QWERTZ layout!'
 
-# add alias for resetting to ~/.bash_aliases or ~/.bashrc
-test -f ~/.bash_aliases && CONFIG_FILE=~/.bash_aliases || CONFIG_FILE=~/.bashrc
+# add alias for resetting to ~/.bash_aliases or ~/.bashrc (only use ~/.bash_aliases if it exists and it's being loaded in ~/.bashrc)
+test -f ~/.bash_aliases && test -f ~/.bashrc && grep -q '\.bash_aliases' ~/.bashrc && CONFIG_FILE=~/.bash_aliases || CONFIG_FILE=~/.bashrc
 grep -q "alias haei='setxkbmap de'" $CONFIG_FILE || echo -e "\n# alias added temporarily by schimax\nalias haei='setxkbmap de'" >> $CONFIG_FILE
 unset CONFIG_FILE
