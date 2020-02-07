@@ -75,7 +75,7 @@ set completeopt-=preview
 "     set completeopt+=popup
 " endif
 
-set completeopt=menuone,noinsert
+set completeopt=menuone,noselect
 set shortmess+=c
 
 " update GitGutter signs after 750 ms of no input (also affects swap files)
@@ -291,6 +291,7 @@ set rtp+=~/workspace/fzf
 
 " mucomplete
 let g:mucomplete#enable_auto_at_startup = 1
+let g:mucomplete#always_use_completeopt = 1
 
 " toggle NERDTree
 nnoremap <Leader>n :NERDTreeToggle<cr>
