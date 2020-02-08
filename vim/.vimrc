@@ -68,15 +68,15 @@ set spelllang=de,en
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
 
-set completeopt-=preview
-" use new popup windows instead of preview windows in vim 8.2
+set shortmess+=c
+set completeopt=menuone,noselect
+
+" use new popup windows in vim 8.2
 " this seems to cause crashes (at least in vim 8.2.107 and 8.2.111)
 " if has('textprop')
-"     set completeopt+=popup
-" endif
-
-set completeopt=menuone,noselect
-set shortmess+=c
+if has("patch-8.2.118")
+    set completeopt+=popup
+endif
 
 " update GitGutter signs after 750 ms of no input (also affects swap files)
 set updatetime=750
