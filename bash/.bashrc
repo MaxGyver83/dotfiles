@@ -225,7 +225,7 @@ function locatehi () {
 # mkdir and cd into it
 mkcd () { mkdir -p -- "$1" && cd -P -- "$1" ; }
 
-source ~/workspace/z/z.sh
+[ -f ~/workspace/z/z.sh ] && source ~/workspace/z/z.sh
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
