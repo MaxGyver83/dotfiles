@@ -249,6 +249,16 @@ function! CleanNoNameEmptyBuffers()
 endfunction
 "Source: https://www.reddit.com/r/vim/comments/1a4yf1/how_to_automatically_close_unedited_unnamed/
 
+" Switch to insert mode if file is empty
+function InsertIfEmpty()
+    if line('$') == 1 && col('$') == 1
+        " File is empty
+        startinsert
+    endif
+endfunction
+
+autocmd VimEnter * call InsertIfEmpty()
+
 "-------------------
 " related to plugins
 "-------------------
