@@ -315,3 +315,7 @@ nnoremap <leader>gs :G<cr>
 nnoremap <leader>gd :Gdiff<cr>
 nnoremap <leader>gb :Gblame<cr>
 nnoremap <leader>gg :Ggrep --color 
+
+" ale
+let g:ale_python_pyflakes_executable = 'pyflakes3'
+let g:ale_python_pylint_executable = 'pylint3'
