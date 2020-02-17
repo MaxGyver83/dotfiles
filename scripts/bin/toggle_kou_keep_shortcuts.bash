@@ -35,32 +35,25 @@ echo ""
 
 function start_kou_shortcut_remapping {
     echo "Starting kou..."
-    export log_file="$HOME/kou_log_new_level3.txt"
+    log_file="$HOME/kou_log_new_level3.txt"
+    kou_exec="/usr/local/sbin/kou_maxs"
     if [ "$HOSTNAME" = "max-B9440UA" ]; then
-        #tmux new-session -d 'sudo /usr/local/sbin/kou_maxs /dev/input/by-path/platform-i8042-serio-0-event-kbd keyb'
-        tmux new-session -d 'sudo /usr/local/sbin/kou_maxs /dev/input/by-path/platform-i8042-serio-0-event-kbd keyb >> $log_file'
-        #tmux new-session -d 'sudo /usr/local/sbin/kou_maxs /dev/input/by-path/pci-0000:00:14.0-usb-0:2.3:1.0-event-kbd keyb'  # Koolertron 1
-        #tmux new-session -d 'sudo /usr/local/sbin/kou_maxs /dev/input/by-path/pci-0000:00:14.0-usb-0:2.2:1.0-event-kbd keyb'  # Koolertron 2
-        #tmux new-session -d 'sudo /usr/local/sbin/kou_maxs /dev/input/event11 keyb'  # Koolertron 1
-        #tmux new-session -d 'sudo /usr/local/sbin/kou_maxs /dev/input/event13 keyb'  # Koolertron 2
-        #tmux new-session -d 'sudo /usr/local/sbin/kou_maxs /dev/input/by-path/pci-0000:00:14.0-usb-0:2.4:1.0-event-kbd /dev/input/by-path/pci-0000:00:14.0-usb-0:2.2:1.0-event-kbd keyb'  # Koolertron 1+2
-        tmux new-session -d 'sudo /usr/local/sbin/kou_maxs /dev/input/by-id/usb-Logitech_USB_Receiver-if02-event-kbd Logi >> $log_file'
-        tmux new-session -d 'sudo /usr/local/sbin/kou_maxs /dev/input/by-id/usb-Telink_Wireless_Receiver-if01-event-kbd Telink >> $log_file'
-        #tmux new-session -d 'sudo /usr/local/sbin/kou_maxs /dev/input/by-id/usb-Chicony_USB_Keyboard-event-kbd keyb'  # perixx
-        tmux new-session -d 'sudo /usr/local/sbin/kou_maxs /dev/input/by-id/usb-You_idobo_0-event-kbd idobo'  # idobo
-        tmux new-session -d 'sudo /usr/local/sbin/kou_maxs /dev/input/by-id/usb-Apple_Inc._Apple_Keyboard-event-kbd keyb'  # idobo
-        # tmux new-session -d 'sudo /usr/local/sbin/kou_maxs /dev/input/by-id/usb-LingYao_ShangHai_Thumb_Keyboard_081820131130-event-kbd keyb'  # Koolertron
+        tmux new -s kou_$(date +"%H%M%S_%3N") -d "sudo $kou_exec /dev/input/by-path/platform-i8042-serio-0-event-kbd keyb >> $log_file"
+        tmux new -s kou_$(date +"%H%M%S_%3N") -d "sudo $kou_exec /dev/input/by-id/usb-Logitech_USB_Receiver-if02-event-kbd Logi >> $log_file"
+        tmux new -s kou_$(date +"%H%M%S_%3N") -d "sudo $kou_exec /dev/input/by-id/usb-Telink_Wireless_Receiver-if01-event-kbd Telink >> $log_file"
+        tmux new -s kou_$(date +"%H%M%S_%3N") -d "sudo $kou_exec /dev/input/by-id/usb-You_idobo_0-event-kbd idobo"  # idobo
+        tmux new -s kou_$(date +"%H%M%S_%3N") -d "sudo $kou_exec /dev/input/by-id/usb-Apple_Inc._Apple_Keyboard-event-kbd keyb"  # Apple
     else
         # Laptop keyboard
-        tmux new-session -d 'sudo /usr/local/sbin/kou_maxs /dev/input/by-path/platform-i8042-serio-0-event-kbd keyb >> $log_file'
+        tmux new -s kou_$(date +"%H%M%S_%3N") -d "sudo $kou_exec /dev/input/by-path/platform-i8042-serio-0-event-kbd keyb >> $log_file"
         # Dell keyboard
-        tmux new-session -d 'sudo /usr/local/sbin/kou_maxs /dev/input/by-id/usb-413c_Dell_KB216_Wired_Keyboard-event-kbd keyb'
+        tmux new -s kou_$(date +"%H%M%S_%3N") -d "sudo $kou_exec /dev/input/by-id/usb-413c_Dell_KB216_Wired_Keyboard-event-kbd keyb"
         # Cherry keyboard
-        tmux new-session -d 'sudo /usr/local/sbin/kou_maxs /dev/input/by-id/usb-046a_0023-event-kbd HID'
+        tmux new -s kou_$(date +"%H%M%S_%3N") -d "sudo $kou_exec /dev/input/by-id/usb-046a_0023-event-kbd HID"
         # Jelly Comb KS37
-        tmux new-session -d 'sudo /usr/local/sbin/kou_maxs /dev/input/by-id/usb-Telink_Wireless_Receiver-if01-event-kbd Telink >> $log_file'
+        tmux new -s kou_$(date +"%H%M%S_%3N") -d "sudo $kou_exec /dev/input/by-id/usb-Telink_Wireless_Receiver-if01-event-kbd Telink >> $log_file"
         # Sunnyvale: Logitech K400
-        tmux new-session -d 'sudo /usr/local/sbin/kou_maxs /dev/input/event20 K400'
+        tmux new -s kou_$(date +"%H%M%S_%3N") -d "sudo $kou_exec /dev/input/event20 K400"
     fi
 }
 
