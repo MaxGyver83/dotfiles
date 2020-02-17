@@ -3,11 +3,14 @@
 
 Hints.characters = 'haeiybtrnsougczx,';
 
-unmap('r'); // Ctrl-r / F5
-unmap('x'); // Ctrl-w
-unmapAllExcept(['f', 'q', 'i', '<Ctrl-i>', 'cs', 'T'], /http:\/\/127\.0\.0\.1:8080/i);
+unmapAllExcept(['f', 'af', 'gf','q', 'i', '<Ctrl-i>', 'H', 't', 'S', 'D', 'e', 'd', 'se', '?']);
+//unmap('r'); // Ctrl-r / F5
+//unmap('x'); // Ctrl-w
+
 unmapAllExcept(['f', 'q', 'i', '<Ctrl-i>', 'cs'], /mail\.google\.com/i);
 unmapAllExcept(['f', 'q', 'i', '<Ctrl-i>', 'cs'], /maximilian-schillinger\.de\/notizen.html/i);
+unmapAllExcept(['f', 'q', 'i', '<Ctrl-i>', 'cs', 'T'], /http:\/\/127\.0\.0\.1:8080/i);
+//unmap('t', /http:\/\/127\.0\.0\.1:8080/i);
 
 map('`', "'"); // use ` instead of '
 
