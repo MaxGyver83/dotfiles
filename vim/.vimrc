@@ -113,8 +113,11 @@ noremap <Leader>b :bd<cr>
 " close window
 noremap <Leader>q :q<cr>
 
-"delete not into register (use dl for cutting one character into register)
+" delete not into register (use dl for cutting one character into register)
 nnoremap x "_x
+
+" delete not into register with <Leader>d
+nnoremap <Leader>d "_d
 
 " replace word/selection with yanked text
 nnoremap <Leader>r "_ciw<C-r>"<ESC>
@@ -124,6 +127,8 @@ xnoremap <Leader>r "_c<C-r>"<ESC>
 autocmd FileType python nnoremap <Leader>x :w !python3<cr>
 " execute selection in python
 autocmd FileType python xnoremap <Leader>x :w !python3<cr>
+
+autocmd FileType groovy nnoremap <Leader>x :w \| !groovy %<cr>
 
 " open file with xdg-open
 nnoremap <Leader>o :!xdg-open % &<cr>
@@ -257,7 +262,7 @@ function InsertIfEmpty()
     endif
 endfunction
 
-autocmd VimEnter * call InsertIfEmpty()
+"autocmd VimEnter * call InsertIfEmpty()
 
 "-------------------
 " related to plugins
