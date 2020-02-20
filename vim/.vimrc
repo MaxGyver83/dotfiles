@@ -254,6 +254,15 @@ function! CleanNoNameEmptyBuffers()
 endfunction
 "Source: https://www.reddit.com/r/vim/comments/1a4yf1/how_to_automatically_close_unedited_unnamed/
 
+" delete trailing whitespaces, usage:
+" :TrimWhitespace
+fun! TrimWhitespace()
+    let l:save = winsaveview()
+    keeppatterns %s/\s\+$//e
+    call winrestview(l:save)
+endfun
+command! TrimWhitespace call TrimWhitespace()
+
 " Switch to insert mode if file is empty
 function InsertIfEmpty()
     if line('$') == 1 && col('$') == 1
