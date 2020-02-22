@@ -38,11 +38,14 @@ set autoindent       " indent new lines
 set listchars=tab:\|\  " show tabs as |
 set list             " show non-printable chars
 
+" file type dependant
 autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType groovy set colorcolumn=120
+autocmd FileType python set colorcolumn=5,9,13,72,80
 " Autocompletion for python3
-autocmd FileType python set omnifunc=python3complete#Complete
-
-autocmd FileType groovy,python set colorcolumn=120
+if has('python3')
+    autocmd FileType python set omnifunc=python3complete#Complete
+endif
 
 set ignorecase       " make search case-insensitive by default (word\C → case sens.)
 set smartcase        " make search case-sensitive if word contains uppercase letter
