@@ -7,6 +7,15 @@ try() { "$@" || die "cannot $*"; }
 # explanation: https://stackoverflow.com/questions/1378274/in-a-bash-script-how-can-i-exit-the-entire-script-if-a-certain-condition-occurs
 
 use_setxkbmap=true
+use_tmux=false
+
+if [ "$use_tmux" = true ]; then
+    cmd_part1='tmux new -s '
+    cmd_part2=' -d '
+else
+    cmd_part1='screen -S '
+    cmd_part2=' -dm bash -c '
+fi
 
 (! ps -e | grep kou_maxs) # ! inverts the result
 kou_service_running=$?    # = 1 if running
@@ -38,22 +47,22 @@ function start_kou_shortcut_remapping {
     log_file="$HOME/kou_log_new_level3.txt"
     kou_exec="/usr/local/sbin/kou_maxs"
     if [ "$HOSTNAME" = "max-B9440UA" ]; then
-        tmux new -s kou_$(date +"%H%M%S_%3N") -d "sudo $kou_exec /dev/input/by-path/platform-i8042-serio-0-event-kbd keyb >> $log_file"
-        tmux new -s kou_$(date +"%H%M%S_%3N") -d "sudo $kou_exec /dev/input/by-id/usb-Logitech_USB_Receiver-if02-event-kbd Logi >> $log_file"
-        tmux new -s kou_$(date +"%H%M%S_%3N") -d "sudo $kou_exec /dev/input/by-id/usb-Telink_Wireless_Receiver-if01-event-kbd Telink >> $log_file"
-        tmux new -s kou_$(date +"%H%M%S_%3N") -d "sudo $kou_exec /dev/input/by-id/usb-You_idobo_0-event-kbd idobo"  # idobo
-        tmux new -s kou_$(date +"%H%M%S_%3N") -d "sudo $kou_exec /dev/input/by-id/usb-Apple_Inc._Apple_Keyboard-event-kbd keyb"  # Apple
+        ${cmd_part1}kou_$(date +"%H%M%S_%3N")${cmd_part2}"sudo $kou_exec /dev/input/by-path/platform-i8042-serio-0-event-kbd keyb >> $log_file"
+        ${cmd_part1}kou_$(date +"%H%M%S_%3N")${cmd_part2}"sudo $kou_exec /dev/input/by-id/usb-Logitech_USB_Receiver-if02-event-kbd Logi >> $log_file"
+        ${cmd_part1}kou_$(date +"%H%M%S_%3N")${cmd_part2}"sudo $kou_exec /dev/input/by-id/usb-Telink_Wireless_Receiver-if01-event-kbd Telink >> $log_file"
+        ${cmd_part1}kou_$(date +"%H%M%S_%3N")${cmd_part2}"sudo $kou_exec /dev/input/by-id/usb-You_idobo_0-event-kbd idobo"  # idobo
+        ${cmd_part1}kou_$(date +"%H%M%S_%3N")${cmd_part2}"sudo $kou_exec /dev/input/by-id/usb-Apple_Inc._Apple_Keyboard-event-kbd keyb"  # Apple
     else
         # Laptop keyboard
-        tmux new -s kou_$(date +"%H%M%S_%3N") -d "sudo $kou_exec /dev/input/by-path/platform-i8042-serio-0-event-kbd keyb >> $log_file"
+        ${cmd_part1}kou_$(date +"%H%M%S_%3N")${cmd_part2}"sudo $kou_exec /dev/input/by-path/platform-i8042-serio-0-event-kbd keyb >> $log_file"
         # Dell keyboard
-        tmux new -s kou_$(date +"%H%M%S_%3N") -d "sudo $kou_exec /dev/input/by-id/usb-413c_Dell_KB216_Wired_Keyboard-event-kbd keyb"
+        ${cmd_part1}kou_$(date +"%H%M%S_%3N")${cmd_part2}"sudo $kou_exec /dev/input/by-id/usb-413c_Dell_KB216_Wired_Keyboard-event-kbd keyb"
         # Cherry keyboard
-        tmux new -s kou_$(date +"%H%M%S_%3N") -d "sudo $kou_exec /dev/input/by-id/usb-046a_0023-event-kbd HID"
+        ${cmd_part1}kou_$(date +"%H%M%S_%3N")${cmd_part2}"sudo $kou_exec /dev/input/by-id/usb-046a_0023-event-kbd HID"
         # Jelly Comb KS37
-        tmux new -s kou_$(date +"%H%M%S_%3N") -d "sudo $kou_exec /dev/input/by-id/usb-Telink_Wireless_Receiver-if01-event-kbd Telink >> $log_file"
+        ${cmd_part1}kou_$(date +"%H%M%S_%3N")${cmd_part2}"sudo $kou_exec /dev/input/by-id/usb-Telink_Wireless_Receiver-if01-event-kbd Telink >> $log_file"
         # Sunnyvale: Logitech K400
-        tmux new -s kou_$(date +"%H%M%S_%3N") -d "sudo $kou_exec /dev/input/event20 K400"
+        ${cmd_part1}kou_$(date +"%H%M%S_%3N")${cmd_part2}"sudo $kou_exec /dev/input/event20 K400"
     fi
 }
 
