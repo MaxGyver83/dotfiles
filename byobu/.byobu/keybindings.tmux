@@ -12,3 +12,11 @@ unbind -n M-Up
 unbind -n M-Down
 bind-key -n M-Up display-panes \; select-pane -t :.-
 bind-key -n M-Down display-panes \; select-pane -t :.+
+
+# split vertically (left/right) |
+unbind |
+bind | split-window -h -c "#{pane_current_path}"
+
+# split horizontally (top/bottom) %
+unbind %
+bind % split-window -v -c "#{pane_current_path}"
