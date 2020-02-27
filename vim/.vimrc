@@ -47,6 +47,9 @@ if has('python3')
     autocmd FileType python set omnifunc=python3complete#Complete
 endif
 
+" recognize tmux config files
+au BufRead,BufNewFile *.tmux set filetype=tmux
+
 set ignorecase       " make search case-insensitive by default (word\C → case sens.)
 set smartcase        " make search case-sensitive if word contains uppercase letter
 set incsearch        " search as characters are entered
