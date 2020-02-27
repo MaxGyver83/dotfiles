@@ -20,3 +20,9 @@ bind | split-window -h -c "#{pane_current_path}"
 # split horizontally (top/bottom) %
 unbind %
 bind % split-window -v -c "#{pane_current_path}"
+
+# scroll only half pages with Alt-PageUp/PageDown
+unbind -n M-NPage
+unbind -n M-PPage
+bind-key -n M-NPage copy-mode \; send-keys C-d
+bind-key -n M-PPage copy-mode \; send-keys C-u
