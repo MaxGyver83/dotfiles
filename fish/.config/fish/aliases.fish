@@ -59,6 +59,7 @@ abbr gitloga 'git log --oneline --graph --decorate --all'
 abbr gitlogc 'git log --pretty="%C(Yellow)%h  %C(reset)%ad (%C(Green)%cr%C(reset))%x09 %C(Cyan)%an: %C(reset)%s"'
 abbr gitunpushed 'git log ..@{u}'
 abbr gitunmerged 'git branch --no-merged master'
+alias gb "git for-each-ref --sort=committerdate refs/remotes/origin/ --format='%(HEAD) %(color:red)%(objectname:short)%(color:reset) %(color:yellow)%(refname:short)%(color:reset)  %(contents:subject)  %(color:cyan)%(authorname)%(color:reset) (%(color:green)%(committerdate:relative)%(color:reset))'"
 
 # source work related / private stuff (not part of the dotfiles repo)
 if [ -f $HOME/.config/fish/local.fish ]
