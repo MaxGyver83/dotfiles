@@ -41,7 +41,7 @@ set list             " show non-printable chars
 " file type dependant
 autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType groovy set colorcolumn=120
-autocmd FileType python set colorcolumn=5,9,13,72,80
+autocmd FileType python set colorcolumn=72,80
 " Autocompletion for python3
 if has('python3')
     autocmd FileType python set omnifunc=python3complete#Complete
