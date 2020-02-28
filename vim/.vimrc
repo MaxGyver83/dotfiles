@@ -327,8 +327,8 @@ let g:mucomplete#always_use_completeopt = 1
 nnoremap <Leader>n :NERDTreeToggle<cr>
 
 " map Ctrl-f to :FZF
-nnoremap <C-f> :FZF<CR>
-nnoremap <leader><C-f> :FZF ~<CR>
+nnoremap <leader>e :FZF<CR>
+nnoremap <leader>h :FZF ~<CR>
 
 " vim-fugitive (git support)
 nnoremap <leader>gs :G<cr>
