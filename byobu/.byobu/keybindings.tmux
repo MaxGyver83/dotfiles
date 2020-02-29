@@ -7,19 +7,26 @@ bind f send-prefix
 # Ctrl-f Ctrl-f = toggle window
 bind ^F last-window
 
+# Ctrl-PageUp/PageDown for previous/next window
+# needs to be unset in terminator
+bind-key -n C-PPage previous-window
+bind-key -n C-NPage next-window
+
 # Alt-Left and Alt-Right for previous/next pane
 unbind -n M-Up
 unbind -n M-Down
 bind-key -n M-Up display-panes \; select-pane -t :.-
 bind-key -n M-Down display-panes \; select-pane -t :.+
 
-# split vertically (left/right) |
-unbind |
-bind | split-window -h -c "#{pane_current_path}"
-
-# split horizontally (top/bottom) %
 unbind %
-bind % split-window -v -c "#{pane_current_path}"
+unbind |
+unbind -
+# split vertically (left/right) |
+bind | split-window -h -c "#{pane_current_path}"
+# split horizontally (top/bottom) -
+bind - split-window -v -c "#{pane_current_path}"
+# delete buffer (was before -)
+bind % delete-buffer
 
 # scroll only half pages with Alt-PageUp/PageDown
 unbind -n M-NPage
