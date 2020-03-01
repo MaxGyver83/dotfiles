@@ -1,22 +1,29 @@
-unbind-key -n C-a
-unbind-key -n C-f
+# bind = bind-key
+# unbind = unbind-key
+# send = send-keys
+# (un)bind -n = no prefix needed
+
+# replace regular prefix key (C-a) with C-f
+unbind -n C-a
+unbind -n C-f
 set -g prefix ^F
 set -g prefix2 F12
+# Ctrl-f f = send Ctrl-f
 bind f send-prefix
 
 # Ctrl-f Ctrl-f = toggle window
-bind ^F last-window
+bind C-f last-window
 
 # Ctrl-PageUp/PageDown for previous/next window
 # needs to be unset in terminator
-bind-key -n C-PPage previous-window
-bind-key -n C-NPage next-window
+bind -n C-PPage previous-window
+bind -n C-NPage next-window
 
 # Alt-Left and Alt-Right for previous/next pane
 unbind -n M-Up
 unbind -n M-Down
-bind-key -n M-Up display-panes \; select-pane -t :.-
-bind-key -n M-Down display-panes \; select-pane -t :.+
+bind -n M-Up display-panes \; select-pane -t :.-
+bind -n M-Down display-panes \; select-pane -t :.+
 
 unbind %
 unbind |
@@ -31,5 +38,5 @@ bind % delete-buffer
 # scroll only half pages with Alt-PageUp/PageDown
 unbind -n M-NPage
 unbind -n M-PPage
-bind-key -n M-NPage copy-mode \; send-keys C-d
-bind-key -n M-PPage copy-mode \; send-keys C-u
+bind -n M-NPage copy-mode \; send C-d
+bind -n M-PPage copy-mode \; send C-u
