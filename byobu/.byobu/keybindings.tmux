@@ -40,3 +40,7 @@ unbind -n M-NPage
 unbind -n M-PPage
 bind -n M-NPage copy-mode \; send C-d
 bind -n M-PPage copy-mode \; send C-u
+
+# activate Home and End in copy-mode
+bind -T copy-mode-vi Home send -X start-of-line
+bind -T copy-mode-vi End  send -X end-of-line
