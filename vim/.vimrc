@@ -15,6 +15,11 @@ colorscheme minimalist
 
 syntax enable       " enable syntax highlighting
 
+" scrolling with mouse wheel does not move the cursor
+" mouse wheel doesn't scroll terminal backlog in tmux
+" mouse for vim selection (=VISUAL mode)
+set mouse=a
+
 set number          " show line numbers
 " set relativenumber  " show relative line numbers
 
