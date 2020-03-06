@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# byobu custom script: clipboard preview
+
+# message length
+LENGTH="6"
+# X11-selection: clipboard, primary, secondary
+SELECTION="clipboard"
+
+# get n chars of the selections first line followed by three dots
+xclip -out -selection "${SELECTION}" | sed "1!d;s/\(.\{${LENGTH}\}\).*/\1\.\.\./"
