@@ -115,6 +115,11 @@ noremap <Leader>cr :let @+ = expand("%")<cr>
 noremap <Leader>cp :let @+ = expand("%:p")<cr>
 noremap <Leader>cn :let @+ = expand("%:t")<cr>
 
+" copy file/selection formatted as HTML (no line numbers)
+let g:html_number_lines = 0
+nnoremap <Leader>ch :silent TOhtml \| %g/^body {.*/d \| :%y+ \| :bw!<cr>
+xnoremap <silent> <Leader>ch :'<,'>TOhtml \| %g/^body {.*/d \| :%y+ \| :bw!<cr>
+
 " save file
 noremap <Leader>w :w<cr>
 
