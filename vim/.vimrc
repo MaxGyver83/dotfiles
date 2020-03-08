@@ -115,10 +115,12 @@ noremap <Leader>cr :let @+ = expand("%")<cr>
 noremap <Leader>cp :let @+ = expand("%:p")<cr>
 noremap <Leader>cn :let @+ = expand("%:t")<cr>
 
-" copy file/selection formatted as HTML (no line numbers)
+" copy file/selection formatted as HTML for Thunderbird or Gmail (no line numbers)
 let g:html_number_lines = 0
-nnoremap <Leader>ch :silent TOhtml \| %g/^body {.*/d \| :%y+ \| :bw!<cr>
-xnoremap <silent> <Leader>ch :'<,'>TOhtml \| %g/^body {.*/d \| :%y+ \| :bw!<cr>
+nnoremap <Leader>ct :     TOhtml \| %g/^body {.*/d \| %s/^pre {/pre { padding: 0.4em;/ \| :%y+ \| :bw!<cr>
+xnoremap <Leader>ct :'<,'>TOhtml \| %g/^body {.*/d \| %s/^pre {/pre { padding: 0.4em;/ \| :%y+ \| :bw!<cr>
+nnoremap <Leader>cg :     TOhtml \| %s/^pre {/pre { padding: 0.4em;/ \| execute 'w !xclip -sel clip -t text/html' \| :bw!<cr>
+xnoremap <Leader>cg :'<,'>TOhtml \| %s/^pre {/pre { padding: 0.4em;/ \| execute 'w !xclip -sel clip -t text/html' \| :bw!<cr>
 
 " save file
 noremap <Leader>w :w<cr>
@@ -169,8 +171,8 @@ noremap <C-l> :cnext<cr>
 " swap ; and , (next/previous match after t, T, f, F)
 nnoremap ; ,
 nnoremap , ;
-vnoremap ; ,
-vnoremap , ;
+xnoremap ; ,
+xnoremap , ;
 
 " Map g. as an alias for g;
 nnoremap g. g;
@@ -204,8 +206,8 @@ inoremap <C-j> <ESC>:m .+1<CR>==gi
 inoremap <C-k> <ESC>:m .-2<CR>==gi
 
 " Visual mode
-vnoremap <C-j> :m '>+1<CR>gv=gv
-vnoremap <C-k> :m '<-2<CR>gv=gv
+xnoremap <C-j> :m '>+1<CR>gv=gv
+xnoremap <C-k> :m '<-2<CR>gv=gv
 
 " Move lines up and down via Shift + arrow keys
 " (currently overwritten by terminator settings)
@@ -224,8 +226,8 @@ inoremap <S-Down> <ESC>:m .+1<CR>==gi
 inoremap <S-Up> <ESC>:m .-2<CR>==gi
 
 " Visual mode
-vnoremap <S-Down> :m '>+1<CR>gv=gv
-vnoremap <S-Up> :m '<-2<CR>gv=gv
+xnoremap <S-Down> :m '>+1<CR>gv=gv
+xnoremap <S-Up> :m '<-2<CR>gv=gv
 
 " Jump to previous/next paragraph via Ctrl + arrow key
 
