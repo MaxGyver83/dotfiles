@@ -117,10 +117,12 @@ noremap <Leader>cn :let @+ = expand("%:t")<cr>
 
 " copy file/selection formatted as HTML for Thunderbird or Gmail (no line numbers)
 let g:html_number_lines = 0
-nnoremap <Leader>ct :TOhtml \| %g/^body {.*/d \| %s/^pre {/pre { padding: 0.4em;/ \| :%y+ \| :bw!<cr>
-xnoremap <Leader>ct :TOhtml \| %g/^body {.*/d \| %s/^pre {/pre { padding: 0.4em;/ \| :%y+ \| :bw!<cr>
-nnoremap <Leader>cg :TOhtml \| %g/^body {.*/d \| %s/^pre {/pre { padding: 0.4em;/ \| execute 'w !xclip -sel clip -t text/html' \| :bw!<cr>
-xnoremap <Leader>cg :TOhtml \| %g/^body {.*/d \| %s/^pre {/pre { padding: 0.4em;/ \| execute 'w !xclip -sel clip -t text/html' \| :bw!<cr>
+let g:html_no_progress = 1
+let g:html_pre_wrap = 0
+nnoremap <Leader>ct :TOhtml \| exe 'g/^body {/d' \| %s/^pre {/pre { padding: 0.4em; overflow-x: auto; white-space: pre;/ \| exe 'g/^<!-- vim/d' \| %y+ \| bw!<cr>
+xnoremap <Leader>ct :TOhtml \| exe 'g/^body {/d' \| %s/^pre {/pre { padding: 0.4em; overflow-x: auto; white-space: pre;/ \| exe 'g/^<!-- vim/d' \| %y+ \| bw!<cr>
+nnoremap <Leader>cg :TOhtml \| exe 'g/^body {/d' \| %s/^pre {/pre { padding: 0.4em; overflow-x: auto; white-space: pre;/ \| exe 'g/^<!-- vim/d' \| exe 'w !xclip -sel clip -t text/html' \| bw!<cr>
+xnoremap <Leader>cg :TOhtml \| exe 'g/^body {/d' \| %s/^pre {/pre { padding: 0.4em; overflow-x: auto; white-space: pre;/ \| exe 'g/^<!-- vim/d' \| exe 'w !xclip -sel clip -t text/html' \| bw!<cr>
 
 " save file
 noremap <Leader>w :w<cr>
