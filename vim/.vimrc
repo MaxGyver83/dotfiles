@@ -117,10 +117,10 @@ noremap <Leader>cn :let @+ = expand("%:t")<cr>
 
 " copy file/selection formatted as HTML for Thunderbird or Gmail (no line numbers)
 let g:html_number_lines = 0
-nnoremap <Leader>ct :     TOhtml \| %g/^body {.*/d \| %s/^pre {/pre { padding: 0.4em;/ \| :%y+ \| :bw!<cr>
-xnoremap <Leader>ct :'<,'>TOhtml \| %g/^body {.*/d \| %s/^pre {/pre { padding: 0.4em;/ \| :%y+ \| :bw!<cr>
-nnoremap <Leader>cg :     TOhtml \| %s/^pre {/pre { padding: 0.4em;/ \| execute 'w !xclip -sel clip -t text/html' \| :bw!<cr>
-xnoremap <Leader>cg :'<,'>TOhtml \| %s/^pre {/pre { padding: 0.4em;/ \| execute 'w !xclip -sel clip -t text/html' \| :bw!<cr>
+nnoremap <Leader>ct :TOhtml \| %g/^body {.*/d \| %s/^pre {/pre { padding: 0.4em;/ \| :%y+ \| :bw!<cr>
+xnoremap <Leader>ct :TOhtml \| %g/^body {.*/d \| %s/^pre {/pre { padding: 0.4em;/ \| :%y+ \| :bw!<cr>
+nnoremap <Leader>cg :TOhtml \| %g/^body {.*/d \| %s/^pre {/pre { padding: 0.4em;/ \| execute 'w !xclip -sel clip -t text/html' \| :bw!<cr>
+xnoremap <Leader>cg :TOhtml \| %g/^body {.*/d \| %s/^pre {/pre { padding: 0.4em;/ \| execute 'w !xclip -sel clip -t text/html' \| :bw!<cr>
 
 " save file
 noremap <Leader>w :w<cr>
@@ -347,6 +347,9 @@ nnoremap <leader>gs :G<cr>
 nnoremap <leader>gd :Gdiff<cr>
 nnoremap <leader>gb :Gblame<cr>
 nnoremap <leader>gg :Ggrep --color 
+
+" gitgutter
+let g:gitgutter_sign_column_always = 1
 
 " ale
 let g:ale_python_pyflakes_executable = 'pyflakes3'
