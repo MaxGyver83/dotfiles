@@ -20,7 +20,7 @@ syntax enable       " enable syntax highlighting
 " mouse for vim selection (=VISUAL mode)
 set mouse=a
 
-set number          " show line numbers
+set number            " show line numbers
 " set relativenumber  " show relative line numbers
 
 " no relative numbers when in insert mode or buffer loses focus
@@ -115,14 +115,14 @@ noremap <Leader>cr :let @+ = expand("%")<cr>
 noremap <Leader>cp :let @+ = expand("%:p")<cr>
 noremap <Leader>cn :let @+ = expand("%:t")<cr>
 
-" copy file/selection formatted as HTML for Thunderbird or Gmail (no line numbers)
+" copy file/selection formatted as HTML for emails (no line numbers)
 let g:html_number_lines = 0
 let g:html_no_progress = 1
 let g:html_pre_wrap = 0
-nnoremap <Leader>ct :TOhtml \| exe 'g/^body {/d' \| %s/^pre {/pre { padding: 0.4em; overflow-x: auto; white-space: pre;/ \| exe 'g/^<!-- vim/d' \| %y+ \| bw!<cr>
-xnoremap <Leader>ct :TOhtml \| exe 'g/^body {/d' \| %s/^pre {/pre { padding: 0.4em; overflow-x: auto; white-space: pre;/ \| exe 'g/^<!-- vim/d' \| %y+ \| bw!<cr>
-nnoremap <Leader>cg :TOhtml \| exe 'g/^body {/d' \| %s/^pre {/pre { padding: 0.4em; overflow-x: auto; white-space: pre;/ \| exe 'g/^<!-- vim/d' \| exe 'w !xclip -sel clip -t text/html' \| bw!<cr>
-xnoremap <Leader>cg :TOhtml \| exe 'g/^body {/d' \| %s/^pre {/pre { padding: 0.4em; overflow-x: auto; white-space: pre;/ \| exe 'g/^<!-- vim/d' \| exe 'w !xclip -sel clip -t text/html' \| bw!<cr>
+nnoremap <Leader>ch :TOhtml \| call MakeHtmlReadyForEmail() \| %y+ \| bw!<cr>
+xnoremap <Leader>ch :TOhtml \| call MakeHtmlReadyForEmail() \| %y+ \| bw!<cr>
+nnoremap <Leader>ce :TOhtml \| call MakeHtmlReadyForEmail() \| exe 'w !xclip -sel clip -t text/html' \| bw!<cr>
+xnoremap <Leader>ce :TOhtml \| call MakeHtmlReadyForEmail() \| exe 'w !xclip -sel clip -t text/html' \| bw!<cr>
 
 " save file
 noremap <Leader>w :w<cr>
@@ -282,6 +282,24 @@ fun! TrimWhitespace()
     call winrestview(l:save)
 endfun
 command! TrimWhitespace call TrimWhitespace()
+
+function! MakeHtmlReadyForEmail()
+    %s/^pre {/pre { padding: 0.4em; overflow-x: auto; white-space: pre;/
+    " delete javascript block
+    %s/<script\_.*<\/script>//g
+    " delete CSS for body (black background)
+    g/^body {/d
+    " delete comments
+"    g/^<!-- vim/d
+    g/^<!--/d
+    g/^-->/d
+    w! /tmp/email.html
+    " make all CSS inline (needs 'pip3 install premailer --user')
+    %!python3 -m premailer -f /tmp/email.html
+"    %s/ class="\w\+"//g
+    g/^<meta name=/d
+    w! /tmp/email.html
+endfunction
 
 " Switch to insert mode if file is empty
 function InsertIfEmpty()
