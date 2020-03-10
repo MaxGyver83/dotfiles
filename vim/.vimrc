@@ -284,20 +284,24 @@ endfun
 command! TrimWhitespace call TrimWhitespace()
 
 function! MakeHtmlReadyForEmail()
-    %s/^pre {/pre { padding: 0.4em; overflow-x: auto; white-space: pre;/
     " delete javascript block
     %s/<script\_.*<\/script>//g
     " delete CSS for body (black background)
     g/^body {/d
+    " delete font-size: 1em for every tag
+    g/^\* {/d
     " delete comments
-"    g/^<!-- vim/d
     g/^<!--/d
     g/^-->/d
-    w! /tmp/email.html
-    " make all CSS inline (needs 'pip3 install premailer --user')
-    %!python3 -m premailer -f /tmp/email.html
-"    %s/ class="\w\+"//g
+    " add padding and (try to) prevent wrapping long lines
+    %s/^pre {/pre { padding: 0.4em; overflow-x: auto; white-space: pre;/
+    " fix title (remove '.html') that will be added when inserted in Gmail
+    %s/\.html<\/title>/<\/title>/g
+    " make all CSS inline (do first 'pip3 install premailer --user')
+    %!python3 -m premailer
+    " delete unnecessary meta tags
     g/^<meta name=/d
+    " save copied html in file for checking later what has been copied
     w! /tmp/email.html
 endfunction
 
@@ -318,16 +322,16 @@ endfunction
 " buftabline (https://github.com/ap/vim-buftabline)
 let g:buftabline_indicators=1
 let g:buftabline_numbers=2
-nmap <leader>1 <Plug>BufTabLine.Go(1)
-nmap <leader>2 <Plug>BufTabLine.Go(2)
-nmap <leader>3 <Plug>BufTabLine.Go(3)
-nmap <leader>4 <Plug>BufTabLine.Go(4)
-nmap <leader>5 <Plug>BufTabLine.Go(5)
-nmap <leader>6 <Plug>BufTabLine.Go(6)
-nmap <leader>7 <Plug>BufTabLine.Go(7)
-nmap <leader>8 <Plug>BufTabLine.Go(8)
-nmap <leader>9 <Plug>BufTabLine.Go(9)
-nmap <leader>0 <Plug>BufTabLine.Go(10)
+nmap <Leader>1 <Plug>BufTabLine.Go(1)
+nmap <Leader>2 <Plug>BufTabLine.Go(2)
+nmap <Leader>3 <Plug>BufTabLine.Go(3)
+nmap <Leader>4 <Plug>BufTabLine.Go(4)
+nmap <Leader>5 <Plug>BufTabLine.Go(5)
+nmap <Leader>6 <Plug>BufTabLine.Go(6)
+nmap <Leader>7 <Plug>BufTabLine.Go(7)
+nmap <Leader>8 <Plug>BufTabLine.Go(8)
+nmap <Leader>9 <Plug>BufTabLine.Go(9)
+nmap <Leader>0 <Plug>BufTabLine.Go(10)
 
 " swap ; and , (next/previous match after s, S)
 nmap ; <Plug>SneakPrevious
@@ -338,7 +342,7 @@ vmap , <Plug>SneakNext
 " vim-sneak case-insensitive
 let g:sneak#use_ic_scs = 1
 " turn off search highlight and sneak highlight
-nnoremap <leader><space> :nohlsearch \| call sneak#cancel()<CR>
+nnoremap <Leader><Space> :nohlsearch \| call sneak#cancel()<CR>
 
 " use fzf (FuzzyFinder) in vim
 set rtp+=~/workspace/fzf
@@ -359,14 +363,14 @@ let g:mucomplete#always_use_completeopt = 1
 nnoremap <Leader>n :NERDTreeToggle<cr>
 
 " map Ctrl-f to :FZF
-nnoremap <leader>e :FZF<CR>
-nnoremap <leader>h :FZF ~<CR>
+nnoremap <Leader>e :FZF<CR>
+nnoremap <Leader>h :FZF ~<CR>
 
 " vim-fugitive (git support)
-nnoremap <leader>gs :G<cr>
-nnoremap <leader>gd :Gdiff<cr>
-nnoremap <leader>gb :Gblame<cr>
-nnoremap <leader>gg :Ggrep --color 
+nnoremap <Leader>gs :G<cr>
+nnoremap <Leader>gd :Gdiff<cr>
+nnoremap <Leader>gb :Gblame<cr>
+nnoremap <Leader>gg :Ggrep --color 
 
 " gitgutter
 let g:gitgutter_sign_column_always = 1
