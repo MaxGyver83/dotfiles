@@ -101,6 +101,10 @@ let mapleader="\<Space>"   " leader is space
 " show buffer list and select by number
 nnoremap gb :ls<CR>:b<Space>
 
+" insert line and return to normal mode
+nnoremap <Return> o<Esc>
+nnoremap <Leader><Return> O<Esc>
+
 " yank/cut/paste to/from system clipboard
 noremap <Leader>y "+y
 noremap <Leader>d "+d
@@ -138,6 +142,10 @@ nnoremap x "_x
 
 " delete not into register with <Leader>d
 nnoremap <Leader>d "_d
+
+" select word/WORD under cursor
+nnoremap <Leader>v viw
+nnoremap <Leader>V viW
 
 " replace word/selection with yanked text
 nnoremap <Leader>r "_ciw<C-r>"<ESC>

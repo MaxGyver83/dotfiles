@@ -44,3 +44,9 @@ bind -n M-PPage copy-mode \; send C-u
 # activate Home and End in copy-mode
 bind -T copy-mode-vi Home send -X start-of-line
 bind -T copy-mode-vi End  send -X end-of-line
+
+# switch , and ; in vi mode
+unbind -T copy-mode-vi ,
+unbind -T copy-mode-vi \;
+bind -T copy-mode-vi ,  send -X jump-again
+bind -T copy-mode-vi \; send -X jump-reverse
