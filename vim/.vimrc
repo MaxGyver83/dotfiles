@@ -89,6 +89,9 @@ if has("patch-8.2.118")
     set completeopt+=popup
 endif
 
+" no delay after pressing Escape
+set timeoutlen=1000 ttimeoutlen=10
+
 " update GitGutter signs after 750 ms of no input (also affects swap files)
 set updatetime=750
 
@@ -113,6 +116,12 @@ noremap <Leader>P "+P
 
 " copy complete file content to system clipboard
 noremap <Leader>ca gg"+yG``
+
+" copy content of " register into tmux buffer
+if exists('$TMUX')
+    nnoremap <Leader>, :call system('tmux load-buffer -',@")<cr>
+    xnoremap <Leader>, y \| :call system('tmux load-buffer -',@")<cr>
+endif
 
 " copy relative path/full path/just filename to clipboard
 noremap <Leader>cr :let @+ = expand("%")<cr>
