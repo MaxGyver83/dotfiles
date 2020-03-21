@@ -11,7 +11,12 @@ runtime macros/matchit.vim
 "colorscheme badwolf
 "colorscheme afterglow
 "colorscheme happy_hacking
-colorscheme minimalist
+try
+    colorscheme minimalist
+catch /^Vim\%((\a\+)\)\=:E185/
+    colorscheme torte
+    highlight CursorLine ctermfg=NONE ctermbg=239 cterm=NONE
+endtry
 
 syntax enable       " enable syntax highlighting
 
