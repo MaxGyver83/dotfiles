@@ -85,11 +85,13 @@ highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
 
 set shortmess+=c
-set completeopt=menuone,noselect
+set completeopt=menuone
+
+if has("patch-7.4.775")
+    set completeopt+=noselect
+endif
 
 " use new popup windows in vim 8.2
-" this seems to cause crashes (at least in vim 8.2.107 and 8.2.111)
-" if has('textprop')
 if has("patch-8.2.118")
     set completeopt+=popup
 endif
@@ -298,11 +300,11 @@ endfunction
 
 " delete trailing whitespaces, usage:
 " :TrimWhitespace
-fun! TrimWhitespace()
+function! TrimWhitespace()
     let l:save = winsaveview()
     keeppatterns %s/\s\+$//e
     call winrestview(l:save)
-endfun
+endfunction
 command! TrimWhitespace call TrimWhitespace()
 
 function! MakeHtmlReadyForEmail()
