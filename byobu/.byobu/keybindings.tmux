@@ -52,4 +52,4 @@ bind -T copy-mode-vi ,  send -X jump-again
 bind -T copy-mode-vi \; send -X jump-reverse
 
 # send minimal bash config
-bind b send "bind '\"\\e[A\": history-search-backward' '\"\\e[B\": history-search-forward' '\"\\C-b\": shell-backward-word' '\"\\C-f\": shell-forward-word' 'set completion-ignore-case on' '\"\\t\": menu-complete' '\"\\e[Z\": menu-complete-backward' 'set show-all-if-ambiguous on' 'set menu-complete-display-prefix on' && alias ..='cd ..' && alias ...='cd ../..' && alias ....='cd ../../..' && alias .....='cd ../../../..'"
+bind b send "bind '\"\\e[A\": history-search-backward' '\"\\e[B\": history-search-forward' '\"\\C-b\": shell-backward-word' '\"\\C-f\": shell-forward-word' 'set completion-ignore-case on' '\"\\t\": menu-complete' '\"\\e[Z\": menu-complete-backward' 'set show-all-if-ambiguous on' 'set menu-complete-display-prefix on' && alias ..='cd ..' && alias ...='cd ../..' && alias ....='cd ../../..' && alias .....='cd ../../../..' && test -f /tmp/.vimrc && alias vim='vim -u /tmp/.vimrc'"
