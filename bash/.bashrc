@@ -225,6 +225,12 @@ function locatehi () {
 # mkdir and cd into it
 mkcd () { mkdir -p -- "$1" && cd -P -- "$1" ; }
 
+# copy ~/.vimrc to /tmp/.vimrc of host before ssh into it
+function vssh() {
+  scp ~/.vimrc $1:/tmp/.vimrc
+  ssh $1
+}
+
 [ -f ~/workspace/z/z.sh ] && source ~/workspace/z/z.sh
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
