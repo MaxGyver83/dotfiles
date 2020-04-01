@@ -12,6 +12,7 @@ set -g prefix2 F12
 bind f send-prefix
 
 # Ctrl-f Ctrl-f = toggle window
+unbind C-a
 bind C-f last-window
 
 # Ctrl-PageUp/PageDown for previous/next window
@@ -50,6 +51,9 @@ unbind -T copy-mode-vi ,
 unbind -T copy-mode-vi \;
 bind -T copy-mode-vi ,  send -X jump-again
 bind -T copy-mode-vi \; send -X jump-reverse
+
+# reload this file
+bind R source ~/.byobu/keybindings.tmux \; display "Reloaded keybindings.tmux!"
 
 # send minimal bash config
 bind b send "bind '\"\\e[A\": history-search-backward' '\"\\e[B\": history-search-forward' '\"\\C-b\": shell-backward-word' '\"\\C-f\": shell-forward-word' 'set completion-ignore-case on' '\"\\t\": menu-complete' '\"\\e[Z\": menu-complete-backward' 'set show-all-if-ambiguous on' 'set menu-complete-display-prefix on' && alias ..='cd ..' && alias ...='cd ../..' && alias ....='cd ../../..' && alias .....='cd ../../../..' && test -f /tmp/.vimrc && alias vim='vim -u /tmp/.vimrc'"
