@@ -144,14 +144,18 @@ xnoremap <Leader>ch :TOhtml \| call MakeHtmlReadyForEmail() \| %y+ \| bw!<cr>
 nnoremap <Leader>ce :TOhtml \| call MakeHtmlReadyForEmail() \| exe 'w !xclip -sel clip -t text/html' \| bw!<cr>
 xnoremap <Leader>ce :TOhtml \| call MakeHtmlReadyForEmail() \| exe 'w !xclip -sel clip -t text/html' \| bw!<cr>
 
-" save file
-noremap <Leader>w :w<cr>
+" save file (:update only writes if file was changed)
+noremap <C-s> :update<cr>
+vnoremap <C-s> <C-c>:update<cr>
+inoremap <C-s> <C-c>:update<cr>
+noremap <Leader>w :update<cr>
 
 " close buffer
 noremap <Leader>b :bd<cr>
 
 " close window
 noremap <Leader>q :q<cr>
+nnoremap <C-q> :q<cr>
 
 " delete not into register (use dl for cutting one character into register)
 nnoremap x "_x
@@ -213,13 +217,14 @@ vnoremap <expr> <Up> (v:count == 0 ? 'gk' : 'k')
 " make Y yank till end of line (as proposed in `:help Y`)
 map Y y$
 
-" yank or select line without line break
+" yank, delete or select line without line break
 " (replaces plugins vim-textobj-line and vim-textobj-user)
-" Problem: causes a delay after a simple y in visual mode
-" noremap yal 0y$
-" noremap yil ^yg_
-" noremap val 0v$
-" noremap vil ^vg_
+nnoremap yal 0y$
+nnoremap yil ^yg_
+nnoremap dal 0d$
+nnoremap dil ^dg_
+nnoremap val 0v$
+nnoremap vil ^vg_
 
 " Move lines up and down via Ctrl + j or k
 
