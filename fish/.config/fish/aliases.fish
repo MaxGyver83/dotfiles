@@ -39,8 +39,10 @@ abbr ali 'apt list --installed'
 abbr nh 'sudo nethogs wlp2s0 -v 3'
 abbr hg 'history | grep'
 
+alias notes='search_in_notes.sh'
+
 abbr rr 'ranger'
-abbr feh 'feh --scale-down --auto-zoom --auto-rotate'
+alias feh='feh --scale-down --auto-zoom --auto-rotate'
 
 # bat: default: line numbers, no pager
 alias batp='bat -pp'
