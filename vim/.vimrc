@@ -59,7 +59,8 @@ autocmd FileType python set colorcolumn=72,80
 " endif
 
 " recognize tmux config files
-au BufRead,BufNewFile *.tmux set filetype=tmux
+autocmd BufRead,BufNewFile *.tmux set filetype=tmux
+autocmd BufRead,BufNewFile /usr/share/X11/xkb/* set syntax=javascript
 
 set ignorecase       " make search case-insensitive by default (word\C → case sens.)
 set smartcase        " make search case-sensitive if word contains uppercase letter
