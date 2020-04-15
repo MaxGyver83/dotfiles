@@ -1088,9 +1088,9 @@ xkb_symbols "kou" {
     key <AD02> { [ NoSymbol,                exclam,                  NoSymbol,                NoSymbol,                NoSymbol,                NoSymbol,                NoSymbol,                   NoSymbol                 ] };
 
     key.type[Group1] = "EIGHT_LEVEL_ALPHABETIC_LEVEL_FIVE_LOCK";
-    // move f and ssharp keys to new positions, replace at by rightarrow
+    // move f and ssharp keys to new positions, replace at by rightarrow; level4: replace period with semicolon
     key <AD10> { [ f,                       F,                       ampersand,               Greek_phi,               KP_Add,                  KP_Add,                  Greek_PHI,               NoSymbol                 ] };
-    key <BKSL> { [ ssharp,                  U1E9E,                   rightarrow,              Greek_finalsmallsigma,   period,                  KP_Decimal,              jot,                     NoSymbol                 ] };
+    key <BKSL> { [ ssharp,                  U1E9E,                   rightarrow,              Greek_finalsmallsigma,   semicolon,               KP_Decimal,              jot,                     NoSymbol                 ] };
 
     // rotate x, q, z, j and v
     key <AD06> { [ q,                       Q,                       NoSymbol,                U03D5,                   NoSymbol,                NoSymbol,                U211A,                   NoSymbol                 ] };
@@ -1158,7 +1158,8 @@ xkb_symbols "kou" {
     key <AB05> { [ NoSymbol,                NoSymbol,                NoSymbol,                NoSymbol,                U1F44D,                  Undo,                    NoSymbol,                NoSymbol                 ] };
 
     // level4: swap . and ;
-    key <BKSL> { [ NoSymbol,                NoSymbol,                NoSymbol,                NoSymbol,                semicolon,               NoSymbol,                NoSymbol,                NoSymbol                 ] };
+    // key BKSL was already changed above
+    // key <BKSL> { [ NoSymbol,                NoSymbol,                NoSymbol,                NoSymbol,                semicolon,               NoSymbol,                NoSymbol,                NoSymbol                 ] };
     key <AB10> { [ NoSymbol,                NoSymbol,                NoSymbol,                NoSymbol,                period,                  KP_Decimal,              NoSymbol,                NoSymbol                 ] };
 
     // level4: replace ¡ by :
