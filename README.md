@@ -56,7 +56,9 @@ git clone https://github.com/justinmk/vim-sneak.git
 git clone https://github.com/lifepillar/vim-mucomplete.git
 git clone https://github.com/tpope/vim-vinegar.git
 git clone https://github.com/tpope/vim-fugitive.git
+git clone https://github.com/kshenoy/vim-signature.git
 git clone https://github.com/sukima/vim-tiddlywiki.git
+git clone --recursive https://github.com/davidhalter/jedi-vim.git
 
 mkdir -p ~/.vim/pack/plugins/opt/
 cd ~/.vim/pack/plugins/opt/
