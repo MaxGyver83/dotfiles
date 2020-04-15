@@ -36,6 +36,7 @@ set number            " show line numbers
 " augroup END
 
 set showcmd          " show command in bottom bar
+set ruler
 set cursorline       " highlight current line
 set showmatch        " highlight matching [{()}]
 set wildmenu         " visual autocomplete for command menu
@@ -52,10 +53,10 @@ set list             " show non-printable chars
 autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType groovy set colorcolumn=120
 autocmd FileType python set colorcolumn=72,80
-" Autocompletion for python3
-if has('python3')
-    autocmd FileType python set omnifunc=python3complete#Complete
-endif
+" Autocompletion for python3 (currently replaced by jedi-vim)
+" if has('python3')
+    " autocmd FileType python set omnifunc=python3complete#Complete
+" endif
 
 " recognize tmux config files
 au BufRead,BufNewFile *.tmux set filetype=tmux
@@ -80,17 +81,20 @@ set backspace=indent,eol,start
 " set language for spell checking to German and English (activate with :set spell)
 set spelllang=de,en
 
-" highlight trailing whitespaces
+" highlight trailing whitespaces (but do not in insert mode)
 highlight ExtraWhitespace ctermbg=red guibg=red
-match ExtraWhitespace /\s\+$/
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd BufWinLeave * call clearmatches()
 
+" don't give ins-completion-menu messages
 set shortmess+=c
-set completeopt=menuone
 
+set completeopt=menuone
 if has("patch-7.4.775")
     set completeopt+=noselect
 endif
-
 " use new popup windows in vim 8.2
 if has("patch-8.2.118")
     set completeopt+=popup
@@ -102,10 +106,17 @@ set timeoutlen=1000 ttimeoutlen=10
 " update GitGutter signs after 750 ms of no input (also affects swap files)
 set updatetime=750
 
+if &term =~ '^screen'
+    " tmux will send xterm-style keys when its xterm-keys option is on
+    execute "set <xUp>=\e[1;*A"
+    execute "set <xDown>=\e[1;*B"
+    execute "set <xRight>=\e[1;*C"
+    execute "set <xLeft>=\e[1;*D"
+endif
+
 "---------
 " mappings
 "---------
-
 let mapleader="\<Space>"   " leader is space
 
 " show buffer list and select by number
@@ -144,6 +155,9 @@ xnoremap <Leader>ch :TOhtml \| call MakeHtmlReadyForEmail() \| %y+ \| bw!<cr>
 nnoremap <Leader>ce :TOhtml \| call MakeHtmlReadyForEmail() \| exe 'w !xclip -sel clip -t text/html' \| bw!<cr>
 xnoremap <Leader>ce :TOhtml \| call MakeHtmlReadyForEmail() \| exe 'w !xclip -sel clip -t text/html' \| bw!<cr>
 
+" show diff between buffer and saved file
+nnoremap <Leader>i :w !diff --color % -<cr>
+
 " save file (:update only writes if file was changed)
 noremap <C-s> :update<cr>
 vnoremap <C-s> <C-c>:update<cr>
@@ -170,6 +184,18 @@ nnoremap <Leader>V viW
 " replace word/selection with yanked text
 nnoremap <Leader>r "_ciw<C-r>"<ESC>
 xnoremap <Leader>r "_c<C-r>"<ESC>
+
+" search selection with *
+xnoremap * <ESC>/<C-r>*<cr>
+" search word under cursor expanding the selection with leader *
+xnoremap <Leader>* *
+
+" move vertically up or down to next non-whitespace character
+" (similar to Ctrl-Up/Down in Excel/LibreOffice)
+nnoremap <silent><Leader><Up> :call search('\%' . virtcol('.') . 'v\S', 'bW')<CR>
+nnoremap <silent><Leader><Down> :call search('\%' . virtcol('.') . 'v\S', 'W')<CR>
+nnoremap <silent><C-Up> :call search('\%' . virtcol('.') . 'v\S', 'bW')<CR>
+nnoremap <silent><C-Down> :call search('\%' . virtcol('.') . 'v\S', 'W')<CR>
 
 " execute file in python
 autocmd FileType python nnoremap <Leader>x :w !python3<cr>
@@ -260,15 +286,11 @@ inoremap <S-Up> <ESC>:m .-2<CR>==gi
 xnoremap <S-Down> :m '>+1<CR>gv=gv
 xnoremap <S-Up> :m '<-2<CR>gv=gv
 
-" Jump to previous/next paragraph via Ctrl + arrow key
-
-" Normal mode
-nnoremap <C-Down> }
-nnoremap <C-Up> {
-
 " Sessions
-map <F2> :mksession! ~/.vim_session<cr> " Quick write session with F2
-map <F3> :source ~/.vim_session<cr>     " And load session with F3
+" Quick write session with F2
+map <F2> :mksession! ~/.vim_session<cr>
+" And load session with F3
+map <F3> :source ~/.vim_session<cr>
 
 " remap unused umlauts
 nmap ä ;
@@ -280,8 +302,7 @@ nmap ß @
 " abbreviations
 "--------------
 
-" iab mfg Mit freundlichen Grüßen
-" type kb>
+" type kb>, get <kbd></kbd>
 iab kb <kbd></kbd><C-o>F<<BS>
 " auto complete closing HTML tag
 iab </ </<C-X><C-O><Del><Del>
@@ -388,8 +409,18 @@ set rtp+=~/workspace/fzf
 let g:mucomplete#enable_auto_at_startup = 1
 let g:mucomplete#always_use_completeopt = 1
 
-" toggle NERDTree
-nnoremap <Leader>n :NERDTreeToggle<cr>
+" jedi-vim
+" let g:jedi#popup_on_dot = 0
+let g:jedi#show_call_signatures = "0"
+" don't mess with other leader mappings:
+let g:jedi#goto_command = "<leader>jd"
+let g:jedi#goto_assignments_command = "<leader>jg"
+let g:jedi#goto_stubs_command = "<leader>js"
+let g:jedi#goto_definitions_command = ""
+let g:jedi#documentation_command = "K"
+let g:jedi#usages_command = "<leader>jn"
+let g:jedi#completions_command = "<C-Space>"
+let g:jedi#rename_command = "<leader>jr"
 
 " map Ctrl-f to :FZF
 nnoremap <Leader>e :FZF<CR>
@@ -405,5 +436,7 @@ nnoremap <Leader>gg :Ggrep --color
 let g:gitgutter_sign_column_always = 1
 
 " ale
+let g:ale_lint_on_text_changed = 'never'
 let g:ale_python_pyflakes_executable = 'pyflakes3'
 let g:ale_python_pylint_executable = 'pylint3'
+let g:ale_fixers = {'python': ['black']}
