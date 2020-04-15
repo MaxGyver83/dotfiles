@@ -52,6 +52,9 @@ unbind -T copy-mode-vi \;
 bind -T copy-mode-vi ,  send -X jump-again
 bind -T copy-mode-vi \; send -X jump-reverse
 
+# quit copy mode with x (besides q)
+bind -T copy-mode-vi x  send -X cancel
+
 # reload this file
 bind R source ~/.byobu/keybindings.tmux \; display "Reloaded keybindings.tmux!"
 
