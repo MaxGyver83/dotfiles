@@ -6,14 +6,11 @@ runtime macros/matchit.vim
 
 "set background=dark
 " Color scheme
-"colorscheme molokai
-"colorscheme solarized
-"colorscheme badwolf
-"colorscheme afterglow
-"colorscheme happy_hacking
+" (I like molokai, solarized, badwolf, afterglow, happy_hacking, minimalist)
 try
     colorscheme minimalist
 catch /^Vim\%((\a\+)\)\=:E185/
+    " alternative if minimalist is not installed
     colorscheme torte
     highlight CursorLine ctermfg=NONE ctermbg=239 cterm=NONE
 endtry
@@ -26,15 +23,6 @@ syntax enable       " enable syntax highlighting
 set mouse=a
 
 set number            " show line numbers
-" set relativenumber  " show relative line numbers
-
-" no relative numbers when in insert mode or buffer loses focus
-" augroup numbertoggle
-"   autocmd!
-"   autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-"   autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
-" augroup END
-
 set showcmd          " show command in bottom bar
 set ruler
 set cursorline       " highlight current line
@@ -115,6 +103,20 @@ if &term =~ '^screen'
     execute "set <xLeft>=\e[1;*D"
 endif
 
+" use a bar as cursor in insert mode, underline in replace mode
+" https://stackoverflow.com/a/42118416/4121487
+if !has('nvim')
+    let &t_SI = "\e[6 q"
+    let &t_SR = "\e[4 q"
+    let &t_EI = "\e[2 q"
+end
+
+" neovim: open terminals in insert mode, activate insert on entering window
+if has('nvim')
+    autocmd TermOpen term://* startinsert
+    autocmd BufEnter,BufNew term://* startinsert
+endif
+
 "---------
 " mappings
 "---------
@@ -191,6 +193,15 @@ xnoremap * <ESC>/<C-r>*<cr>
 " search word under cursor expanding the selection with leader *
 xnoremap <Leader>* *
 
+" send current line/selection to other (terminal) window
+if has('nvim')
+    nnoremap <Leader>s yy<C-w>w<C-\><C-n>pi<cr><C-\><C-n><C-w>w
+    xnoremap <Leader>s y<C-w>w<C-\><C-n>pi<cr><C-\><C-n><C-w>w
+else
+    nnoremap <Leader>s yy<C-w>w<C-w>"0<C-w>w
+    xnoremap <Leader>s y<C-w>w<C-w>"0<C-w>w
+end
+
 " move vertically up or down to next non-whitespace character
 " (similar to Ctrl-Up/Down in Excel/LibreOffice)
 nnoremap <silent><Leader><Up> :call search('\%' . virtcol('.') . 'v\S', 'bW')<CR>
@@ -260,8 +271,8 @@ nnoremap <C-j> :m .+1<CR>==
 nnoremap <C-k> :m .-2<CR>==
 
 " Insert mode
-inoremap <C-j> <ESC>:m .+1<CR>==gi
-inoremap <C-k> <ESC>:m .-2<CR>==gi
+"inoremap <C-j> <ESC>:m .+1<CR>==gi
+"inoremap <C-k> <ESC>:m .-2<CR>==gi
 
 " Visual mode
 xnoremap <C-j> :m '>+1<CR>gv=gv
@@ -298,6 +309,20 @@ nmap ä ;
 nmap ü [
 nmap ö ]
 nmap ß @
+
+" navigate between windows (incl. terminal) with Alt+h/j/k/l
+tnoremap <A-h> <C-\><C-N><C-w>h
+tnoremap <A-j> <C-\><C-N><C-w>j
+tnoremap <A-k> <C-\><C-N><C-w>k
+tnoremap <A-l> <C-\><C-N><C-w>l
+inoremap <A-h> <C-\><C-N><C-w>h
+inoremap <A-j> <C-\><C-N><C-w>j
+inoremap <A-k> <C-\><C-N><C-w>k
+inoremap <A-l> <C-\><C-N><C-w>l
+nnoremap <A-h> <C-w>h
+nnoremap <A-j> <C-w>j
+nnoremap <A-k> <C-w>k
+nnoremap <A-l> <C-w>l
 
 "--------------
 " abbreviations
