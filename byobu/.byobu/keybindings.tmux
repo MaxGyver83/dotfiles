@@ -21,10 +21,10 @@ bind -n C-PPage previous-window
 bind -n C-NPage next-window
 
 # Alt-Left and Alt-Right for previous/next pane
-unbind -n M-Up
-unbind -n M-Down
-bind -n M-Up display-panes \; select-pane -t :.-
-bind -n M-Down display-panes \; select-pane -t :.+
+# unbind -n M-Up
+# unbind -n M-Down
+# bind -n M-Up display-panes \; select-pane -t :.-
+# bind -n M-Down display-panes \; select-pane -t :.+
 
 unbind %
 unbind |
