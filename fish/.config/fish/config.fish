@@ -12,6 +12,9 @@ set -U fish_prompt_pwd_dir_length 0
 # bright blue working directory in prompt
 set fish_color_cwd brblue
 
+# brighter autosuggestions (default: brblack)
+set fish_color_autosuggestion 888888
+
 set -g __fish_git_prompt_color_branch
 set -g __fish_git_prompt_showcolorhints true
 # set -g __fish_git_prompt_char_upstream_ahead "↑ "
