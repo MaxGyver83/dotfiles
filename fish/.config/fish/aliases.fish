@@ -42,7 +42,7 @@ abbr hg 'history | grep'
 alias notes='search_in_notes.sh'
 
 if [ -f ~/Downloads/nvim.appimage ]
-    alias nvim='~/Downloads/nvim.appimage'
+    alias n='~/Downloads/nvim.appimage'
 end
 abbr rr 'ranger'
 alias feh='feh --scale-down --auto-zoom --auto-rotate'
