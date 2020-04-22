@@ -311,6 +311,14 @@ nmap ö ]
 nmap ß @
 
 " navigate between windows (incl. terminal) with Alt+h/j/k/l
+if !has('nvim')
+    execute "set <A-h>=\eh"
+    execute "set <A-j>=\ej"
+    execute "set <A-k>=\ek"
+    execute "set <A-l>=\el"
+    execute "set <A-q>=\eq"
+    execute "set <A-w>=\ew"
+end
 tnoremap <A-h> <C-\><C-N><C-w>h
 tnoremap <A-j> <C-\><C-N><C-w>j
 tnoremap <A-k> <C-\><C-N><C-w>k
@@ -323,6 +331,10 @@ nnoremap <A-h> <C-w>h
 nnoremap <A-j> <C-w>j
 nnoremap <A-k> <C-w>k
 nnoremap <A-l> <C-w>l
+
+" navigate between buffers with Alt+q/w
+noremap <A-q> :bp<cr>
+noremap <A-w> :bn<cr>
 
 "--------------
 " abbreviations
