@@ -2,14 +2,16 @@
 // https://maximilian-schillinger.de/kou-layout.html
 
 Hints.characters = 'haeiybtrnsougczx,';
+settings.hintAlign = "right";
 
-unmapAllExcept(['f', 'af', 'gf','q', 'i', '<Ctrl-i>', 'H', 't', 'S', 'D', 'e', 'd', 'se', '?']);
+settings.blacklistPattern = /groups.google.com/i;
+unmapAllExcept(['f', 'af', 'gf','q', 'i', 'H', 't', 'S', 'D', 'e', 'd', 'se', '?']);
 //unmap('r'); // Ctrl-r / F5
 //unmap('x'); // Ctrl-w
 
-unmapAllExcept(['f', 'q', 'i', '<Ctrl-i>', 'cs'], /mail\.google\.com/i);
-unmapAllExcept(['f', 'q', 'i', '<Ctrl-i>', 'cs'], /maximilian-schillinger\.de\/notizen.html/i);
-unmapAllExcept(['f', 'q', 'i', '<Ctrl-i>', 'cs', 'T'], /http:\/\/127\.0\.0\.1:8080/i);
+unmapAllExcept(['f', 'q', 'i', 'cs'], /mail\.google\.com/i);
+unmapAllExcept(['f', 'q', 'i', 'cs'], /maximilian-schillinger\.de\/notizen.html/i);
+unmapAllExcept(['f', 'q', 'i', 'cs', 'T'], /http:\/\/127\.0\.0\.1:8080/i);
 //unmap('t', /http:\/\/127\.0\.0\.1:8080/i);
 
 map('`', "'"); // use ` instead of '
