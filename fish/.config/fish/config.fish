@@ -12,6 +12,9 @@ set -U fish_prompt_pwd_dir_length 0
 # bright blue working directory in prompt
 set fish_color_cwd brblue
 
+# green for commands
+set fish_color_command 00b315
+
 # brighter autosuggestions (default: brblack)
 set fish_color_autosuggestion 888888
 
