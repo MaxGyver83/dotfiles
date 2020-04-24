@@ -6,7 +6,7 @@ die() { yell "$*"; exit 111; }
 try() { "$@" || die "cannot $*"; }
 # explanation: https://stackoverflow.com/questions/1378274/in-a-bash-script-how-can-i-exit-the-entire-script-if-a-certain-condition-occurs
 
-use_setxkbmap=true
+use_setxkbmap=false
 use_tmux=false
 
 if [ "$use_tmux" = true ]; then
