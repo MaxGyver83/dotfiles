@@ -76,6 +76,9 @@ function fish_prompt --description 'Prompt ausgeben'
             set suffix '▶'
     end
 
+    # set_color brblack
+    # echo -n \n(date '+%H:%M:%S ')
+    # set_color normal
     # PWD
     set_color $color_cwd
     echo -n \n(prompt_pwd)
@@ -92,8 +95,8 @@ function fish_prompt --description 'Prompt ausgeben'
     echo -n "$suffix "
 end
 
-function fish_right_prompt
-    set_color brblack
-    echo -n (date +%H:%M:%S)
-    set_color normal
-end
+# function fish_right_prompt
+#     set_color brblack
+#     echo -n (date +%H:%M:%S)
+#     set_color normal
+# end
