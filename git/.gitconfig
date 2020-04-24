@@ -1,0 +1,13 @@
+[alias]
+	co = checkout
+	st = status
+	ci = commit
+	br = branch
+[color "diff"]
+	old = red bold
+	new = green bold
+[color "status"]
+	changed = red bold
+    untracked = red bold
+[core]
+	excludesfile = ~/.gitignore
