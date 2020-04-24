@@ -12,6 +12,7 @@ abbr ff 'fzf'
 abbr fi 'find . -iname'
 abbr fif 'find . -type f -iname'
 abbr fid 'find . -type d -iname'
+alias fd='fdfind'
 
 abbr df 'df -h'
 
@@ -41,8 +42,8 @@ abbr hg 'history | grep'
 
 alias notes='search_in_notes.sh'
 
-if [ -f ~/Downloads/nvim.appimage ]
-    alias n='~/Downloads/nvim.appimage'
+if [ -f ~/install/nvim.appimage ]
+    alias n='~/install/nvim.appimage'
 end
 abbr rr 'ranger'
 alias feh='feh --scale-down --auto-zoom --auto-rotate'
