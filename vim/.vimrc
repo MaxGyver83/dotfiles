@@ -76,6 +76,9 @@ autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
 autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
+" also highlight no-break spaces (U+00A0) and narrow no-break spaces (U+202F)
+highlight NoBreakWhitespace ctermbg=blue guibg=blue
+autocmd Syntax * syn match NoBreakWhitespace / \| /
 
 " don't give ins-completion-menu messages
 set shortmess+=c
