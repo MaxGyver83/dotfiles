@@ -69,6 +69,7 @@ git clone https://github.com/ap/vim-css-color.git
 git clone https://github.com/godlygeek/tabular.git
 git clone https://github.com/airblade/vim-gitgutter.git
 git clone https://github.com/jacquesbh/vim-showmarks.git
+git clone https://github.com/tpope/vim-characterize.git
 git clone https://github.com/kana/vim-textobj-user.git
 git clone https://github.com/kana/vim-textobj-line.git
 git clone https://github.com/Raimondi/delimitMate.git
