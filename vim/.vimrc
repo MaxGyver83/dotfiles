@@ -82,6 +82,8 @@ autocmd Syntax * syn match NoBreakWhitespace / \| /
 
 " don't give ins-completion-menu messages
 set shortmess+=c
+" show search count, e.g. [1/5]
+set shortmess-=S
 
 set completeopt=menuone
 if has("patch-7.4.775")
@@ -130,7 +132,6 @@ nnoremap gb :ls<CR>:b<Space>
 
 " insert line and return to normal mode
 nnoremap <Return> o<Esc>
-nnoremap <Leader><Return> O<Esc>
 
 " yank/cut/paste to/from system clipboard
 noremap <Leader>y "+y
@@ -141,10 +142,16 @@ noremap <Leader>P "+P
 " copy complete file content to system clipboard
 noremap <Leader>ca gg"+yG``
 
-" copy content of " register into tmux buffer
+" copy current line/selection into tmux buffer
 if exists('$TMUX')
-    nnoremap <Leader>, :call system('tmux load-buffer -',@")<cr>
+    nnoremap <Leader>, yy \| :call system('tmux load-buffer -',@")<cr>
     xnoremap <Leader>, y \| :call system('tmux load-buffer -',@")<cr>
+endif
+" copy current line/selection into tmux buffer and paste into second pane
+" This mapping is made for sending code lines to ipython3. Disable %autoindent first!
+if exists('$TMUX')
+    nnoremap <Leader><Return> yy \| :silent call system('tmux load-buffer -',@") \| :silent exe '!tmux paste -t 2' \| exe ':redraw!'<cr>
+    xnoremap <Leader><Return> y \| :silent call system('tmux load-buffer -',@") \| :silent exe '!tmux paste -t 2 \; send -t 2 Enter' \| exe ':redraw!'<cr>
 endif
 
 " copy relative path/full path/just filename to clipboard
@@ -196,11 +203,13 @@ xnoremap * <ESC>/<C-r>*<cr>
 " search word under cursor expanding the selection with leader *
 xnoremap <Leader>* *
 
-" send current line/selection to other (terminal) window
+" send current line/selection to other vim (terminal) window
 if has('nvim')
+    " use after :vsp | term ipython3 --no-autoindent
     nnoremap <Leader>s yy<C-w>w<C-\><C-n>pi<cr><C-\><C-n><C-w>w
     xnoremap <Leader>s y<C-w>w<C-\><C-n>pi<cr><C-\><C-n><C-w>w
 else
+    " use after :vert term ipython3 --no-autoindent
     nnoremap <Leader>s yy<C-w>w<C-w>"0<C-w>w
     xnoremap <Leader>s y<C-w>w<C-w>"0<C-w>w
 end
@@ -322,10 +331,17 @@ if !has('nvim')
     execute "set <A-q>=\eq"
     execute "set <A-w>=\ew"
 end
-tnoremap <A-h> <C-\><C-N><C-w>h
-tnoremap <A-j> <C-\><C-N><C-w>j
-tnoremap <A-k> <C-\><C-N><C-w>k
-tnoremap <A-l> <C-\><C-N><C-w>l
+if has('nvim')
+    tnoremap <A-h> <C-\><C-N><C-w>h
+    tnoremap <A-j> <C-\><C-N><C-w>j
+    tnoremap <A-k> <C-\><C-N><C-w>k
+    tnoremap <A-l> <C-\><C-N><C-w>l
+else
+    tnoremap <A-h> <C-w>h
+    tnoremap <A-j> <C-w>j
+    tnoremap <A-k> <C-w>k
+    tnoremap <A-l> <C-w>l
+end
 inoremap <A-h> <C-\><C-N><C-w>h
 inoremap <A-j> <C-\><C-N><C-w>j
 inoremap <A-k> <C-\><C-N><C-w>k
