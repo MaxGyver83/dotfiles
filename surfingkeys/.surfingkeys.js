@@ -1,7 +1,7 @@
-// These settings are optimized for the KOU keyboard layout:
-// https://maximilian-schillinger.de/kou-layout.html
+// These settings are optimized for the VOU keyboard layout:
+// https://maximilian-schillinger.de/vou-layout.html
 
-Hints.characters = 'haeiybtrnsougczx,';
+Hints.characters = 'caeiybtrnsoughzx,dwm';
 settings.hintAlign = "right";
 
 settings.blacklistPattern = /groups.google.com/i;
@@ -9,6 +9,7 @@ unmapAllExcept(['f', 'af', 'gf','q', 'i', 'H', 't', 'S', 'D', 'e', 'd', 'se', '?
 //unmap('r'); // Ctrl-r / F5
 //unmap('x'); // Ctrl-w
 
+unmapAllExcept([], /urac.github.io\/Belegungstester/i);
 unmapAllExcept(['f', 'q', 'i', 'cs'], /mail\.google\.com/i);
 unmapAllExcept(['f', 'q', 'i', 'cs'], /maximilian-schillinger\.de\/notizen.html/i);
 unmapAllExcept(['f', 'q', 'i', 'cs', 'T'], /http:\/\/127\.0\.0\.1:8080/i);
