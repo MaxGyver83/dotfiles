@@ -53,6 +53,8 @@ alias feh='feh --scale-down --auto-zoom --auto-rotate'
 alias batp='bat -pp'
 alias batl='bat --pager="less"'
 
+alias vou='xkbcomp ~/bin/vou.xkb $DISPLAY'
+
 # git
 abbr g 'git status'
 abbr gd 'git diff'
