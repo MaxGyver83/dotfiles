@@ -42,6 +42,7 @@ abbr hg 'history | grep'
 
 alias notes='search_in_notes.sh'
 
+abbr v 'vim'
 if [ -f ~/install/nvim.appimage ]
     alias n='~/install/nvim.appimage'
 end
