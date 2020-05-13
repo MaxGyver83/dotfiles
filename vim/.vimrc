@@ -45,6 +45,7 @@ autocmd FileType python set colorcolumn=72,80
 " if has('python3')
     " autocmd FileType python set omnifunc=python3complete#Complete
 " endif
+autocmd FileType mail setlocal nojoinspaces formatoptions=watqc
 
 " recognize tmux config files
 autocmd BufRead,BufNewFile *.tmux set filetype=tmux
