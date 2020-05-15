@@ -3,17 +3,17 @@
 # send = send-keys
 # (un)bind -n = no prefix needed
 
-# replace regular prefix key (C-a) with C-i
+# replace regular prefix key (C-a) with C-e
 unbind -n C-a
-unbind -n C-i
-set -g prefix ^I
+unbind -n C-e
+set -g prefix ^E
 set -g prefix2 F12
-# Ctrl-f f = send Ctrl-f
-bind f send-prefix
+# Ctrl-e e = send Ctrl-e
+bind e send-prefix
 
-# Ctrl-i Ctrl-i = toggle window
+# Ctrl-e Ctrl-e = toggle window
 unbind C-a
-bind C-i last-window
+bind C-e last-window
 
 # Ctrl-PageUp/PageDown for previous/next window
 # needs to be unset in terminator
