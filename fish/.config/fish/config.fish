@@ -30,6 +30,9 @@ set -g __fish_git_prompt_showcolorhints true
 # set -g __fish_git_prompt_char_cleanstate "✔ "
 # Extra space not necessary, better change terminal font to Monospace Regular, 14.
 
+# add ~/install (AppImages) to PATH
+set PATH $PATH ~/install
+
 # colored man pages
 set -x LESS_TERMCAP_mb (printf "\033[1;31m")     # begin bold
 set -x LESS_TERMCAP_md (printf "\033[1;36m")     # begin blink
