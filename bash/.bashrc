@@ -211,6 +211,9 @@ export LESS_TERMCAP_us=$'\E[1;32m'     # begin underline
 export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
 export GROFF_NO_SGR=1                  # for konsole and gnome-terminal
 
+# add ~/install to PATH
+PATH=$PATH:~/install
+
 # use locate to find a file in home directory and highlight matches
 function locateh () {
   # case sensitive
