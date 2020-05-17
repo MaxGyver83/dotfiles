@@ -173,6 +173,9 @@ xnoremap <Leader>ce :TOhtml \| call MakeHtmlReadyForEmail() \| exe 'w !xclip -se
 " show diff between buffer and saved file
 nnoremap <Leader>i :w !diff --color % -<cr>
 
+" scroll line up with C-u
+nnoremap <C-u> <C-e>
+
 " save file (:update only writes if file was changed)
 noremap <C-s> :update<cr>
 vnoremap <C-s> <C-c>:update<cr>
@@ -325,13 +328,14 @@ nmap ö ]
 nmap ß @
 
 " navigate between windows (incl. terminal) with Alt+h/j/k/l
+" (only valid for VOU keyboard layout)
 if !has('nvim')
-    execute "set <A-h>=\eh"
-    execute "set <A-j>=\ej"
-    execute "set <A-k>=\ek"
-    execute "set <A-l>=\el"
-    execute "set <A-q>=\eq"
-    execute "set <A-w>=\ew"
+    execute "set <A-h>=\eb"
+    execute "set <A-j>=\et"
+    execute "set <A-k>=\er"
+    execute "set <A-l>=\en"
+    execute "set <A-q>=\ev"
+    execute "set <A-w>=\e."
 end
 if has('nvim')
     tnoremap <A-h> <C-\><C-N><C-w>h
