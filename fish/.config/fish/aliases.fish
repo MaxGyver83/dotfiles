@@ -46,6 +46,9 @@ abbr v 'vim'
 if [ -f ~/install/nvim.appimage ]
     alias n='~/install/nvim.appimage'
 end
+if [ -f ~/install/VSCodium-1.45.1-1589539594.glibc2.16-x86_64.AppImage ]
+    alias code='~/install/VSCodium-1.45.1-1589539594.glibc2.16-x86_64.AppImage'
+end
 abbr rr 'ranger'
 alias feh='feh --scale-down --auto-zoom --auto-rotate'
 
