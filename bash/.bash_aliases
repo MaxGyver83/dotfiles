@@ -21,6 +21,7 @@ alias rsyncp='rsync --info=progress2 -ah'
 alias manc='PAGER="most" man'
 alias y='yank'
 alias cb='xclip -sel clip'
+alias vou='setxkbmap de koy && xkbcomp ~/bin/vou.xkb $DISPLAY'
 
 alias acs='apt-cache search'
 alias sai='sudo apt install'
