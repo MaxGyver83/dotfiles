@@ -1,5 +1,6 @@
-set hidden           " allow leaving a buffer unsaved when switching to another one
+set runtimepath+=~/.vim/pack/plugins/start/vim-commentary,~/.vim/pack/plugins/start/vim-surround,/home/max/.vim/pack/plugins/start/vim-sneak
 
+set hidden           " allow leaving a buffer unsaved when switching to another one
 set ignorecase       " make search case-insensitive by default (word\C → case sens.)
 set smartcase        " make search case-sensitive if word contains uppercase letter
 set incsearch        " search as characters are entered
