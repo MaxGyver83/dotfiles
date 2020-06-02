@@ -503,3 +503,6 @@ let g:ale_lint_on_text_changed = 'never'
 let g:ale_python_pyflakes_executable = 'pyflakes3'
 let g:ale_python_pylint_executable = 'pylint3'
 let g:ale_fixers = {'python': ['black']}
+
+" TiddlyWiki
+let g:tiddlywiki_no_mappings=1
