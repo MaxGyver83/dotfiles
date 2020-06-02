@@ -1242,7 +1242,7 @@ xkb_symbols "pc+de(kou)+inet(evdev)+ctrl(swap_lalt_lctl_lwin)" {
     };
     key <AD02> {
         type= "EIGHT_LEVEL_ALPHABETIC_LEVEL_FIVE_LOCK",
-        symbols[Group1]= [          period,          exclam,         percent,           U03D1,            Next,            Next,           U21A6,        NoSymbol ]
+        symbols[Group1]= [          period, enfilledcircbullet,         percent,           U03D1,            Next,            Next,           U21A6,        NoSymbol ]
     };
     key <AD03> {
         type= "EIGHT_LEVEL_ALPHABETIC_LEVEL_FIVE_LOCK",
@@ -1258,7 +1258,7 @@ xkb_symbols "pc+de(kou)+inet(evdev)+ctrl(swap_lalt_lctl_lwin)" {
     };
     key <AD06> {
         type= "EIGHT_LEVEL_ALPHABETIC_LEVEL_FIVE_LOCK",
-        symbols[Group1]= [               q,               Q, enfilledcircbullet,           U03D5,           colon,        NoSymbol,           U211A,        NoSymbol ]
+        symbols[Group1]= [               q,               Q,          exclam,           U03D5,           colon,        NoSymbol,           U211A,        NoSymbol ]
     };
     key <AD07> {
         type= "EIGHT_LEVEL_ALPHABETIC_LEVEL_FIVE_LOCK",
