@@ -60,6 +60,8 @@ git clone https://github.com/lifepillar/vim-mucomplete.git
 git clone https://github.com/tpope/vim-vinegar.git
 git clone https://github.com/tpope/vim-fugitive.git
 git clone https://github.com/kshenoy/vim-signature.git
+git clone https://github.com/EinfachToll/DidYouMean.git
+git clone https://github.com/dag/vim-fish.git
 git clone https://github.com/sukima/vim-tiddlywiki.git
 git clone --recursive https://github.com/davidhalter/jedi-vim.git
 
