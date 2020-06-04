@@ -1,0 +1,68 @@
+// Place your key bindings in this file to override the defaultsauto[]
+[
+    {
+        "key": "ctrl+]",
+        "command": "workbench.action.zoomIn"
+    },
+    {
+        "key": "ctrl+=",
+        "command": "-workbench.action.zoomIn"
+    },
+    {
+        "key": "ctrl+[",
+        "command": "workbench.action.zoomOut"
+    },
+    {
+        "key": "ctrl+-",
+        "command": "-workbench.action.zoomOut"
+    },
+    {
+        "key": "ctrl+=",
+        "command": "workbench.action.zoomReset"
+    },
+    {
+        "key": "ctrl+numpad0",
+        "command": "-workbench.action.zoomReset"
+    },
+    {
+        "key": "alt+left",
+        "command": "workbench.action.navigateBack"
+    },
+    {
+        "key": "ctrl+alt+-",
+        "command": "-workbench.action.navigateBack"
+    },
+    {
+        "key": "alt+right",
+        "command": "workbench.action.navigateForward"
+    },
+    {
+        "key": "ctrl+shift+-",
+        "command": "-workbench.action.navigateForward"
+    },
+    {
+        "key": "ctrl+shift+c",
+        "command": "-workbench.action.terminal.openNativeConsole",
+        "when": "!terminalFocus"
+    },
+    {
+        "key": "ctrl+c",
+        "command": "-vscode-neovim.escape",
+        "when": "editorTextFocus && neovim.init"
+    },
+    {
+        "key": "ctrl+u",
+        "command": "vscode-neovim.ctrl-e",
+        "when": "editorTextFocus && neovim.ctrlKeysNormal && neovim.init && neovim.mode != 'insert'"
+    },
+    {
+        "key": "ctrl+e",
+        "command": "-vscode-neovim.ctrl-e",
+        "when": "editorTextFocus && neovim.ctrlKeysNormal && neovim.init && neovim.mode != 'insert'"
+    },
+    {
+        "key": "ctrl+u",
+        "command": "-vscode-neovim.ctrl-u",
+        "when": "editorTextFocus && neovim.ctrlKeysNormal && neovim.init && neovim.mode != 'insert'"
+    }
+]
