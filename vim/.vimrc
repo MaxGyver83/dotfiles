@@ -398,7 +398,7 @@ command! TrimWhitespace call TrimWhitespace()
 
 function! MakeHtmlReadyForEmail()
     " delete javascript block
-    %s/<script\_.*<\/script>//g
+    %s/<script\_.*<\/script>//ge
     " delete CSS for body (black background)
     g/^body {/d
     " delete font-size: 1em for every tag
@@ -506,3 +506,6 @@ let g:ale_fixers = {'python': ['black']}
 
 " TiddlyWiki
 let g:tiddlywiki_no_mappings=1
+
+" DidYouMean
+" let g:dym_use_fzf = 1
