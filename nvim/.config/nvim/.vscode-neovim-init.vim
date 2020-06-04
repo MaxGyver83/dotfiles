@@ -89,26 +89,6 @@ nnoremap <silent><Leader><Down> :call search('\%' . virtcol('.') . 'v\S', 'W')<C
 nnoremap <silent><C-Up> :call search('\%' . virtcol('.') . 'v\S', 'bW')<CR>
 nnoremap <silent><C-Down> :call search('\%' . virtcol('.') . 'v\S', 'W')<CR>
 
-" open file with xdg-open
-nnoremap <Leader>o :!xdg-open :p:h &<cr>
-
-" toggle buffer
-nnoremap <Leader>t <C-^>
-
-" toggle window
-nnoremap <Leader>k <C-w><C-w>
-
-nnoremap <Leader>l :20Lex \| call CleanNoNameEmptyBuffers()<cr>
-
-" surround in <kbd> tags
-" xnoremap <Leader>k <Plug>VSurround<kbd>
-
-" previous/next result (after vimgrep)
-"noremap <Leader>e :cprevious<cr>
-"noremap <Leader>i :cnext<cr>
-noremap <C-h> :cprevious<cr>
-noremap <C-l> :cnext<cr>
-
 " swap ; and , (next/previous match after t, T, f, F)
 nnoremap ; ,
 nnoremap , ;
@@ -171,7 +151,7 @@ command! TrimWhitespace call TrimWhitespace()
 
 function! MakeHtmlReadyForEmail()
     " delete javascript block
-    %s/<script\_.*<\/script>//g
+    %s/<script\_.*<\/script>//ge
     " delete CSS for body (black background)
     g/^body {/d
     " delete font-size: 1em for every tag
@@ -191,16 +171,6 @@ function! MakeHtmlReadyForEmail()
     w! /tmp/email.html
 endfunction
 
-" Switch to insert mode if file is empty
-function InsertIfEmpty()
-    if line('$') == 1 && col('$') == 1
-        " File is empty
-        startinsert
-    endif
-endfunction
-
-"autocmd VimEnter * call InsertIfEmpty()
-
 " swap ; and , (next/previous match after s, S)
 nmap ; <Plug>SneakPrevious
 nmap , <Plug>SneakNext
@@ -211,10 +181,3 @@ vmap , <Plug>SneakNext
 let g:sneak#use_ic_scs = 1
 " turn off search highlight and sneak highlight
 nnoremap <Leader><Space> :nohlsearch \| call sneak#cancel()<CR>
-
-" use fzf (FuzzyFinder) in vim
-set rtp+=~/workspace/fzf
-
-" map Ctrl-f to :FZF
-nnoremap <Leader>e :FZF<CR>
-nnoremap <Leader>h :FZF ~<CR>
