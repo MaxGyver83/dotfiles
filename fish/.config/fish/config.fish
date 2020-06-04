@@ -20,15 +20,6 @@ set fish_color_autosuggestion 888888
 
 set -g __fish_git_prompt_color_branch
 set -g __fish_git_prompt_showcolorhints true
-# set -g __fish_git_prompt_char_upstream_ahead "↑ "
-# set -g __fish_git_prompt_char_upstream_behind "↓ "
-# set -g __fish_git_prompt_char_upstream_prefix ""
-# set -g __fish_git_prompt_char_stagedstate "● "
-# set -g __fish_git_prompt_char_dirtystate "✚ "
-# set -g __fish_git_prompt_char_untrackedfiles "…"
-# set -g __fish_git_prompt_char_invalidstate "✖ "
-# set -g __fish_git_prompt_char_cleanstate "✔ "
-# Extra space not necessary, better change terminal font to Monospace Regular, 14.
 
 # add ~/install (AppImages) to PATH
 set PATH $PATH ~/install
@@ -63,4 +54,6 @@ if type -q fzf
     if type -q bat
         set -x FZF_CTRL_T_OPTS "--preview 'bat --style=numbers --line-range :60 --color=always {}'"
     end
+    # set color scheme
+    set -x FZF_DEFAULT_OPTS "--color fg:-1,bg:-1,hl:#fa9a2d,fg+:3,hl+:#fa9a2d,info:150,prompt:110,spinner:150,pointer:167,marker:174 $FZF_DEFAULT_OPTS"
 end
