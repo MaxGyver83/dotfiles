@@ -20,7 +20,17 @@ bind C-e last-window
 bind -n C-PPage previous-window
 bind -n C-NPage next-window
 
-# Alt-Left and Alt-Right for previous/next pane
+# Unbind Alt-Left and Alt-Right for previous/next window
+unbind -n M-Left
+unbind -n M-Right
+
+# Unbind Shift-ArrowKey for switching panes
+unbind -n S-Left
+unbind -n S-Right
+unbind -n S-Up
+unbind -n S-Down
+
+# Alt-Up and Alt-Down for previous/next pane
 # unbind -n M-Up
 # unbind -n M-Down
 # bind -n M-Up display-panes \; select-pane -t :.-
