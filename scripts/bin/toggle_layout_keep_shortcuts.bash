@@ -1,7 +1,7 @@
 #!/bin/bash
 # Toggle KOU/QWERTZ keyboard layout.
 # If a layout is given as an argument, activate this layout. (qwertz/kou/vou)
-echo -e "\nRunning toggle_kou_keep_shortcuts.bash"
+echo -e "\nRunning toggle_layout_keep_shortcuts.bash"
 
 yell() { echo "$0: $*" >&2; }
 die() { yell "$*"; exit 111; }
