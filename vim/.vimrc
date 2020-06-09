@@ -331,36 +331,36 @@ nmap ß @
 " navigate between windows (incl. terminal) with Alt+h/j/k/l
 " (only valid for VOU keyboard layout)
 if !has('nvim')
-    execute "set <A-h>=\eb"
-    execute "set <A-j>=\et"
-    execute "set <A-k>=\er"
-    execute "set <A-l>=\en"
-    execute "set <A-q>=\ev"
-    execute "set <A-w>=\e."
+    execute "set <A-b>=\eb"
+    execute "set <A-t>=\et"
+    execute "set <A-r>=\er"
+    execute "set <A-n>=\en"
+    execute "set <A-v>=\ev"
+    execute "set <A-.>=\e."
 end
 if has('nvim')
-    tnoremap <A-h> <C-\><C-N><C-w>h
-    tnoremap <A-j> <C-\><C-N><C-w>j
-    tnoremap <A-k> <C-\><C-N><C-w>k
-    tnoremap <A-l> <C-\><C-N><C-w>l
+    tnoremap <A-b> <C-\><C-N><C-w>h
+    tnoremap <A-t> <C-\><C-N><C-w>j
+    tnoremap <A-r> <C-\><C-N><C-w>k
+    tnoremap <A-n> <C-\><C-N><C-w>l
 else
-    tnoremap <A-h> <C-w>h
-    tnoremap <A-j> <C-w>j
-    tnoremap <A-k> <C-w>k
-    tnoremap <A-l> <C-w>l
+    tnoremap <A-b> <C-w>h
+    tnoremap <A-t> <C-w>j
+    tnoremap <A-r> <C-w>k
+    tnoremap <A-n> <C-w>l
 end
-inoremap <A-h> <C-\><C-N><C-w>h
-inoremap <A-j> <C-\><C-N><C-w>j
-inoremap <A-k> <C-\><C-N><C-w>k
-inoremap <A-l> <C-\><C-N><C-w>l
-nnoremap <A-h> <C-w>h
-nnoremap <A-j> <C-w>j
-nnoremap <A-k> <C-w>k
-nnoremap <A-l> <C-w>l
+inoremap <A-b> <C-\><C-N><C-w>h
+inoremap <A-t> <C-\><C-N><C-w>j
+inoremap <A-r> <C-\><C-N><C-w>k
+inoremap <A-n> <C-\><C-N><C-w>l
+nnoremap <A-b> <C-w>h
+nnoremap <A-t> <C-w>j
+nnoremap <A-r> <C-w>k
+nnoremap <A-n> <C-w>l
 
 " navigate between buffers with Alt+q/w
-noremap <A-q> :bp<cr>
-noremap <A-w> :bn<cr>
+noremap <A-v> :bp<cr>
+noremap <A-.> :bn<cr>
 
 "--------------
 " abbreviations
