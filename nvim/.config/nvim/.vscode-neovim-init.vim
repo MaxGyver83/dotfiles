@@ -1,4 +1,4 @@
-set runtimepath+=~/.vim/pack/plugins/start/vim-commentary,~/.vim/pack/plugins/start/vim-surround,/home/max/.vim/pack/plugins/start/vim-sneak
+set runtimepath+=~/.vim/pack/plugins/start/vim-commentary,~/.vim/pack/plugins/start/vim-sneak,~/.vim/pack/plugins/start/vim-surround
 
 set hidden           " allow leaving a buffer unsaved when switching to another one
 set ignorecase       " make search case-insensitive by default (word\C → case sens.)

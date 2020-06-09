@@ -37,7 +37,7 @@ set autoindent       " indent new lines
 set listchars=tab:\|\  " show tabs as |
 set list             " show non-printable chars
 
-" file type dependant
+" file type dependent
 autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType groovy set colorcolumn=120
 autocmd FileType python set colorcolumn=72,80
@@ -46,6 +46,7 @@ autocmd FileType python set colorcolumn=72,80
     " autocmd FileType python set omnifunc=python3complete#Complete
 " endif
 autocmd FileType mail setlocal nojoinspaces formatoptions=watqc
+autocmd BufRead,BufNewFile ~/Documents/notes/*.txt setlocal syntax=sh
 
 " recognize tmux config files
 autocmd BufRead,BufNewFile *.tmux set filetype=tmux
