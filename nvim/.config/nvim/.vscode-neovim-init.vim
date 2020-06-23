@@ -123,6 +123,10 @@ nmap ü [
 nmap ö ]
 nmap ß @
 
+" find word under cursor in files
+nnoremap <silent> ? :<C-u>call VSCodeNotify('workbench.action.findInFiles', { 'query': expand('<cword>')})<CR>
+xnoremap <silent> ? "fy:call VSCodeNotify('workbench.action.findInFiles', { 'query': expand('<C-r>f')})<CR>
+
 "----------
 " functions
 "----------
