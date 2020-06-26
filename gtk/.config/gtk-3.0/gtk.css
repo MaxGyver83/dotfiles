@@ -1,0 +1,12 @@
+.terminator-terminal-window notebook tab:checked {
+    border-top-style: solid;
+    border-top-color: #c00;
+    border-top-width: 5px;
+}
+.terminator-terminal-window notebook tab:checked label {
+    font-weight: bold;
+}
+
+headerbar.default-decoration {
+    background-color: #555;
+}
