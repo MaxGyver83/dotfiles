@@ -328,6 +328,11 @@ nmap ü [
 nmap ö ]
 nmap ß @
 
+nnoremap j k
+nnoremap k j
+nnoremap l h
+nnoremap h l
+
 " navigate between windows (incl. terminal) with Alt+h/j/k/l
 " (only valid for VOU keyboard layout)
 if !has('nvim')
