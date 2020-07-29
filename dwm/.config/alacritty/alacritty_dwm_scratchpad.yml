@@ -1,0 +1,17 @@
+window:
+  startup_mode: Fullscreen
+
+font:
+  normal:
+    family: monospace
+    style: Regular
+  bold:
+    family: monospace
+    style: Bold
+  italic:
+    family: monospace
+    style: Italic
+  size: 10.0
+
+key_bindings:
+  - { key: F11,      mods: none,          action: ToggleFullscreen }
