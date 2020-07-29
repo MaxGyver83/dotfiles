@@ -60,10 +60,12 @@ abbr gp 'git pull'
 # gh = "git home" (go to the toplevel of the current repo)
 abbr gh 'cd (git rev-parse --show-toplevel)'
 # git log
+abbr gl 'git log'
 alias gitlog='git log --oneline --graph --decorate'
 alias gitlogs='git log --oneline --graph --decorate --stat'
 alias gitloga='git log --oneline --graph --decorate --all'
 alias gitlogc='git log --pretty="%C(Yellow)%h  %C(reset)%ai (%C(Green)%cr%C(reset))%x09 %C(Cyan)%an: %C(reset)%s"'
+alias gitlogc2='git log --pretty="%C(Yellow)%h  %C(reset)%ai (%C(Green)%cr%C(reset))%x09 %C(reset)%s"'
 abbr gitunpushed 'git log ..@{u}'
 abbr gitunmerged 'git branch --no-merged master'
 alias gb "git for-each-ref --sort=committerdate refs/remotes/origin/ --format='%(HEAD) %(color:red)%(objectname:short)%(color:reset) %(color:yellow)%(refname:short)%(color:reset)  %(contents:subject)  %(color:cyan)%(authorname)%(color:reset) (%(color:green)%(committerdate:relative)%(color:reset))'"
