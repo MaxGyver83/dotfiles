@@ -248,3 +248,5 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="fd --type d --hidden --follow --exclude .git"
 export FZF_DEFAULT_OPTS="--exact --color fg:-1,bg:-1,hl:#fa9a2d,fg+:3,hl+:#fa9a2d,info:150,prompt:110,spinner:150,pointer:167,marker:174"
 export FZF_CTRL_T_OPTS="--preview 'bat --style=numbers --line-range :60 --color=always {}'"
+
+stty -ixon
