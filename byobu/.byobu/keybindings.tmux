@@ -70,3 +70,44 @@ bind R source ~/.byobu/keybindings.tmux \; display "Reloaded keybindings.tmux!"
 
 # send minimal bash config
 bind b send "bind '\"\\e[A\": history-search-backward' '\"\\e[B\": history-search-forward' '\"\\C-b\": shell-backward-word' '\"\\C-f\": shell-forward-word' 'set completion-ignore-case on' '\"\\t\": menu-complete' '\"\\e[Z\": menu-complete-backward' 'set show-all-if-ambiguous on' 'set menu-complete-display-prefix on' && alias ..='cd ..' && alias ...='cd ../..' && alias ....='cd ../../..' && alias .....='cd ../../../..' && test -f /tmp/.vimrc && alias vim='vim -u /tmp/.vimrc'"
+
+###########################################################
+# dwm-inspired tiling pane management
+# originally from: https://github.com/saysjonathan/dwm.tmux
+
+# Create new pane in current directory
+bind -n M-n split-window -t :.1 -c "#{pane_current_path}" \;\
+        swap-pane -s :.1 -t :.2 \;\
+        select-layout main-vertical \;\
+        run "tmux resize-pane -t :.1 -x \"$(echo \"#{window_width}/2/1\" | bc)\""
+
+# Kill pane
+bind -n M-q kill-pane -t :. \;\
+        select-layout main-vertical \;\
+        run "tmux resize-pane -t :.1 -x \"$(echo \"#{window_width}/2/1\" | bc)\"" \;\
+        select-pane -t :.1
+
+# Next/prev pane
+bind -n M-t select-pane -t :.+
+bind -n M-r select-pane -t :.-
+
+# Resize pane
+bind -n M-l resize-pane -L
+bind -n M-h resize-pane -R
+
+# Rotate counterclockwise/clockwise
+bind -n M-, rotate-window -U \; select-pane -t 1
+bind -n M-S-, rotate-window -D \; select-pane -t 1
+
+# Focus selected pane
+bind -n M-i swap-pane -d -s :. -t :.1 # \; select-pane -t :.1
+bind -n M-I swap-pane -s :. -t !
+bind -n M-e if-shell "[ $(tmux display -p '#P') = '1' ]" "swap-pane -d -s :. -t :.1" "swap-pane -s :. -t !"
+
+# Refresh layout
+bind -n M-S-r select-layout main-vertical \;\
+        run "tmux resize-pane -t :.1 -x \"$(echo \"#{window_width}/2/1\" | bc)\""
+
+# Zoom selected pane
+unbind M-m
+bind -n M-m resize-pane -Z
