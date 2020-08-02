@@ -36,6 +36,7 @@ abbr lcs 'eval $history[1] | yank'
 
 abbr acs 'apt-cache search'
 abbr sai 'sudo apt install'
+abbr ap 'apt policy'
 abbr ali 'apt list --installed'
 abbr nh 'sudo nethogs wlp2s0 -v 3'
 abbr hg 'history | grep'
