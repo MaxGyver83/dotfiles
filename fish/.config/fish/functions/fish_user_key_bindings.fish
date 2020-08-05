@@ -7,8 +7,8 @@ function fish_user_key_bindings
     bind \cb backward-bigword
     bind \cf forward-bigword
     # jump bigword with Shift+LeftArrow/RightArrow
-    bind '[1;2D' backward-bigword
-    bind '[1;2C' forward-bigword
+    #bind '[1;2D' backward-bigword
+    #bind '[1;2C' forward-bigword
 
     if type -q fzf_key_bindings
         fzf_key_bindings
