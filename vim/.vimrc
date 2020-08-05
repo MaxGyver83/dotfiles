@@ -17,6 +17,12 @@ endtry
 
 syntax enable       " enable syntax highlighting
 
+" Allow to use Ctrl-s and Ctrl-q as keybinds even when not started from a
+" shell
+if has('unix')
+    silent !stty -ixon
+endif
+
 " scrolling with mouse wheel does not move the cursor
 " mouse wheel doesn't scroll terminal backlog in tmux
 " mouse for vim selection (=VISUAL mode)
@@ -34,7 +40,7 @@ set softtabstop=4    " number of spaces in tab when editing
 set shiftwidth=4     " 1 tab == 4 spaces
 set expandtab        " tabs are spaces
 set autoindent       " indent new lines
-set listchars=tab:\|\  " show tabs as |
+set listchars=tab:\|_ " show tabs as |_
 set list             " show non-printable chars
 
 " file type dependent
