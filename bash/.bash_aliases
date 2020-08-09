@@ -45,3 +45,6 @@ alias gitloga='git log --oneline --graph --decorate --all'
 alias gitlogc='git log --pretty="%C(Yellow)%h  %C(reset)%ad (%C(Green)%cr%C(reset))%x09 %C(Cyan)%an: %C(reset)%s"'
 alias gitunpushed='git log ..@{u}'
 alias gitunmerged='git branch --no-merged master'
+
+alias caei='setxkbmap de -option'
+alias asdf='setxkbmap de kou && xkbcomp -w 0 ~/bin/vou-tab.xkb $DISPLAY'
