@@ -1,0 +1,29 @@
+super + q
+#  jumpapp firefox
+
+super + a
+    alacritty -e fish
+
+super + b
+    alacritty -e byobu
+
+super + f
+    firefox
+
+super + s
+    st -e fish
+
+XF86MonBrightnessDown
+    bash /home/max/bin/brightness.bash "-"
+
+XF86MonBrightnessUp
+    bash /home/max/bin/brightness.bash "+"
+
+XF86AudioMute
+    /usr/bin/pactl set-sink-mute "@DEFAULT_SINK@" toggle
+
+XF86AudioLowerVolume
+    /usr/bin/pactl set-sink-volume "@DEFAULT_SINK@" "-5%"
+
+XF86AudioRaiseVolume
+    /usr/bin/pactl set-sink-volume "@DEFAULT_SINK@" "+5%"
