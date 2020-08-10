@@ -11,6 +11,7 @@ static const unsigned int gappov    = 15;       /* vert outer gap between window
 static const int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
+static const int viewontag          = 1;        /* Switch view on tag switch */
 static const char *fonts[]          = { "monospace:size=14" };
 static const char dmenufont[]       = "monospace:size=14";
 static const char col_gray1[]       = "#222222";
@@ -68,6 +69,7 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
+/* static const char *dmenucmd[] = { "rofi -dmenu", NULL }; */
 static const char *termcmd[]  = { "alacritty", "--config-file", "/home/max/.config/alacritty/alacritty_dwm.yml", "-e", "fish", NULL };
 static const char scratchpadname[] = "scratchpad";
 static const char *scratchpadcmd[]  = { "alacritty", "--config-file", "/home/max/.config/alacritty/alacritty_dwm_scratchpad.yml", "-t", scratchpadname, "-e", "byobu", NULL };
@@ -113,7 +115,7 @@ static Key keys[] = {
 	TAGKEYS(                        XK_3,                      2)
 	TAGKEYS(                        XK_4,                      3)
 
-	{ ALT|ShiftMask,             XK_q,      quit,           {0} },
+	{ ALT|ShiftMask,             XK_r,      quit,           {0} }, // = restart dwm
 };
 
 /* button definitions */
