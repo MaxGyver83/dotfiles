@@ -60,6 +60,7 @@ abbr gd 'git diff'
 abbr gp 'git pull'
 # gh = "git home" (go to the toplevel of the current repo)
 abbr gh 'cd (git rev-parse --show-toplevel)'
+abbr gfm 'git ls-files --modified'
 # git log
 abbr gl 'git log'
 alias gitlog='git log --oneline --graph --decorate'
