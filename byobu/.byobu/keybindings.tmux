@@ -92,8 +92,8 @@ bind -n M-t select-pane -t :.+
 bind -n M-r select-pane -t :.-
 
 # Resize pane
-bind -n M-l resize-pane -L
-bind -n M-h resize-pane -R
+bind -n M-l resize-pane -L 2
+bind -n M-h resize-pane -R 2
 
 # Rotate counterclockwise/clockwise
 bind -n M-, rotate-window -U \; select-pane -t 1
