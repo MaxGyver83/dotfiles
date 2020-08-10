@@ -47,4 +47,4 @@ alias gitunpushed='git log ..@{u}'
 alias gitunmerged='git branch --no-merged master'
 
 alias caei='setxkbmap de -option'
-alias asdf='setxkbmap de kou && xkbcomp -w 0 ~/bin/vou-tab.xkb $DISPLAY'
+alias asdf='setxkbmap de koy && xkbcomp -w 0 ~/bin/vou-tab.xkb $DISPLAY'
