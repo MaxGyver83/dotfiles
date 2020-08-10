@@ -1,17 +1,20 @@
-super + q
+#super + q
 #  jumpapp firefox
 
 super + a
-    alacritty -e fish
+    alacritty --config-file /home/max/.config/alacritty/alacritty_dwm.yml -e fish
 
 super + b
-    alacritty -e byobu
+    alacritty --config-file /home/max/.config/alacritty/alacritty_dwm.yml -e byobu
 
 super + f
     firefox
 
 super + s
     st -e fish
+
+super + m
+    /home/max/install/codium
 
 XF86MonBrightnessDown
     bash /home/max/bin/brightness.bash "-"
