@@ -52,6 +52,8 @@ alias feh='feh --scale-down --auto-zoom --auto-rotate'
 alias batp='bat -pp'
 alias batl='bat --pager="less"'
 
+abbr caei 'setxkbmap de -option'
+abbr asdf 'setxkbmap de koy && xkbcomp -w 0 ~/bin/vou-tab.xkb $DISPLAY'
 alias vou='setxkbmap de koy && xkbcomp ~/bin/vou.xkb $DISPLAY -w 0'
 
 # git
