@@ -2,10 +2,10 @@
 #  jumpapp firefox
 
 super + a
-    alacritty --config-file /home/max/.config/alacritty/alacritty_dwm.yml -e fish
+    alacritty --config-file ~/.config/alacritty/alacritty_dwm.yml -e fish
 
 super + b
-    alacritty --config-file /home/max/.config/alacritty/alacritty_dwm.yml -e byobu
+    alacritty --config-file ~/.config/alacritty/alacritty_dwm.yml -e byobu
 
 super + f
     firefox
@@ -14,13 +14,13 @@ super + s
     st -e fish
 
 super + m
-    /home/max/install/codium
+    ~/install/codium
 
 XF86MonBrightnessDown
-    bash /home/max/bin/brightness.bash "-"
+    bash ~/bin/brightness.bash "-"
 
 XF86MonBrightnessUp
-    bash /home/max/bin/brightness.bash "+"
+    bash ~/bin/brightness.bash "+"
 
 XF86AudioMute
     /usr/bin/pactl set-sink-mute "@DEFAULT_SINK@" toggle
