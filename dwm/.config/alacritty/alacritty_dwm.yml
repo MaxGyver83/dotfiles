@@ -8,7 +8,7 @@ font:
   italic:
     family: monospace
     style: Italic
-  size: 10.0
+  size: 9.0
 
 key_bindings:
   - { key: F11,      mods: none,          action: ToggleFullscreen }
