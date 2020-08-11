@@ -9,6 +9,7 @@ function fish_user_key_bindings
     # jump bigword with Shift+LeftArrow/RightArrow
     #bind '[1;2D' backward-bigword
     #bind '[1;2C' forward-bigword
+    bind \cq delete-or-exit
     bind \cp __fish_paginate
     bind \cs __fish_prepend_sudo
     bind \ch history-token-search-backward
