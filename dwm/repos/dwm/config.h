@@ -97,6 +97,7 @@ static Key keys[] = {
 	{ WIN,                       XK_Return, zoom,           {0} },
 	{ WIN,                       XK_Tab,    view,           {0} },
 	{ WIN|ShiftMask,             XK_c,      killclient,     {0} },
+	{ WIN,                       XK_k,      setlayout,      {.v = &layouts[0]} },
 	{ WIN|ShiftMask,             XK_m,      setlayout,      {.v = &layouts[0]} },
 	{ WIN|ShiftMask,             XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ WIN,                       XK_m,      setlayout,      {.v = &layouts[2]} },
