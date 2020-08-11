@@ -58,10 +58,10 @@ static const Layout layouts[] = {
 #define LVL3 Mod5Mask
 #define LVL5 Mod3Mask
 #define TAGKEYS(KEY,TAG) \
-	{ ALT,                       KEY,      view,           {.ui = 1 << TAG} }, \
-	{ ALT|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
-	{ ALT|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
-	{ ALT|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
+	{ WIN,                       KEY,      view,           {.ui = 1 << TAG} }, \
+	{ WIN|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
+	{ WIN|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
+	{ WIN|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
@@ -75,47 +75,47 @@ static const char scratchpadname[] = "scratchpad";
 static const char *scratchpadcmd[]  = { "alacritty", "--config-file", "/home/max/.config/alacritty/alacritty_dwm_scratchpad.yml", "-t", scratchpadname, "-e", "byobu", NULL };
 
 static Key keys[] = {
-	/* modifier                     key        function        argument */
-	{ ALT,                       XK_p,      spawn,          {.v = dmenucmd } },
-	{ ALT|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
-	{ ALT,                       XK_Escape, togglescratch,  {.v = scratchpadcmd } },
-	{ ALT,                       XK_b,      togglebar,      {0} },
-	{ ALT,                       XK_t,      focusstack,     {.i = +1 } },
-	{ ALT,                       XK_r,      focusstack,     {.i = -1 } },
+	/* modifier                  key        function        argument */
+	{ WIN,                       XK_d,      spawn,          {.v = dmenucmd } },
+	{ WIN|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
+	{ WIN,                       XK_Escape, togglescratch,  {.v = scratchpadcmd } },
+	{ WIN|ShiftMask,             XK_b,      togglebar,      {0} },
+	{ WIN,                       XK_t,      focusstack,     {.i = -1 } },
+	{ WIN,                       XK_r,      focusstack,     {.i = +1 } },
 
-	{ WIN,                       XK_i,      incnmaster,     {.i = +1 } },
-	{ WIN,                       XK_d,      incnmaster,     {.i = -1 } },
+	{ WIN|ShiftMask,             XK_i,      incnmaster,     {.i = +1 } },
+	{ WIN|ShiftMask,             XK_d,      incnmaster,     {.i = -1 } },
 
-	{ ALT,                       XK_l,      setmfact,       {.f = -0.05} },
-	{ ALT,                       XK_h,      setmfact,       {.f = +0.05} },
+	{ WIN,                       XK_l,      setmfact,       {.f = -0.05} },
+	{ WIN,                       XK_h,      setmfact,       {.f = +0.05} },
 
 	{ ALT|WIN,                   XK_h,      incrgaps,       {.i = +1 } },
 	{ ALT|WIN,                   XK_l,      incrgaps,       {.i = -1 } },
 	{ ALT|WIN,                   XK_0,      togglegaps,     {0} },
 	{ ALT|WIN|ShiftMask,         XK_0,      defaultgaps,    {0} },
 
-	{ ALT,                       XK_Return, zoom,           {0} },
-	{ ALT,                       XK_Tab,    view,           {0} },
-	{ ALT|ShiftMask,             XK_c,      killclient,     {0} },
-	{ ALT,                       XK_n,      setlayout,      {.v = &layouts[0]} },
-	{ ALT,                       XK_f,      setlayout,      {.v = &layouts[1]} },
-	{ ALT,                       XK_m,      setlayout,      {.v = &layouts[2]} },
-	{ ALT,                       XK_space,  setlayout,      {0} },
-	{ ALT|ShiftMask,             XK_space,  togglefloating, {0} },
-	{ ALT,                       XK_0,      view,           {.ui = ~0 } },
-	{ ALT|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
+	{ WIN,                       XK_Return, zoom,           {0} },
+	{ WIN,                       XK_Tab,    view,           {0} },
+	{ WIN|ShiftMask,             XK_c,      killclient,     {0} },
+	{ WIN|ShiftMask,             XK_m,      setlayout,      {.v = &layouts[0]} },
+	{ WIN|ShiftMask,             XK_f,      setlayout,      {.v = &layouts[1]} },
+	{ WIN,                       XK_m,      setlayout,      {.v = &layouts[2]} },
+	{ WIN,                       XK_space,  setlayout,      {0} },
+	{ WIN|ShiftMask,             XK_space,  togglefloating, {0} },
+	{ WIN,                       XK_0,      view,           {.ui = ~0 } },
+	{ WIN|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
 
-	{ ALT,                       XK_comma,  focusmon,       {.i = -1 } },
-	/* { ALT,                       XK_period, focusmon,       {.i = +1 } }, */
-	{ ALT|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
-	{ ALT|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
+	{ WIN,                       XK_b,      focusmon,       {.i = -1 } },
+	{ WIN,                       XK_n,      focusmon,       {.i = +1 } },
+	{ WIN|ShiftMask,             XK_b,      tagmon,         {.i = -1 } },
+	{ WIN|ShiftMask,             XK_n,      tagmon,         {.i = +1 } },
 
-	TAGKEYS(                        XK_1,                      0)
-	TAGKEYS(                        XK_2,                      1)
-	TAGKEYS(                        XK_3,                      2)
-	TAGKEYS(                        XK_4,                      3)
+	TAGKEYS(                     XK_1,                      0)
+	TAGKEYS(                     XK_2,                      1)
+	TAGKEYS(                     XK_3,                      2)
+	TAGKEYS(                     XK_4,                      3)
 
-	{ ALT|ShiftMask,             XK_r,      quit,           {0} }, // = restart dwm
+	{ WIN|ShiftMask,             XK_r,      quit,           {0} }, // = restart dwm
 };
 
 /* button definitions */
@@ -126,12 +126,12 @@ static Button buttons[] = {
 	{ ClkLtSymbol,          0,           Button3,        setlayout,      {.v = &layouts[2]} },
 	{ ClkWinTitle,          0,           Button2,        zoom,           {0} },
 	{ ClkStatusText,        0,           Button2,        spawn,          {.v = termcmd } },
-	{ ClkClientWin,         ALT,         Button1,        movemouse,      {0} },
-	{ ClkClientWin,         ALT,         Button2,        togglefloating, {0} },
-	{ ClkClientWin,         ALT,         Button3,        resizemouse,    {0} },
+	{ ClkClientWin,         WIN,         Button1,        movemouse,      {0} },
+	{ ClkClientWin,         WIN,         Button2,        togglefloating, {0} },
+	{ ClkClientWin,         WIN,         Button3,        resizemouse,    {0} },
 	{ ClkTagBar,            0,           Button1,        view,           {0} },
 	{ ClkTagBar,            0,           Button3,        toggleview,     {0} },
-	{ ClkTagBar,            ALT,         Button1,        tag,            {0} },
-	{ ClkTagBar,            ALT,         Button3,        toggletag,      {0} },
+	{ ClkTagBar,            WIN,         Button1,        tag,            {0} },
+	{ ClkTagBar,            WIN,         Button3,        toggletag,      {0} },
 };
 

@@ -1,7 +1,4 @@
-#super + q
-#  jumpapp firefox
-
-super + r
+super + e
     rofi -show run
 
 super + w
@@ -13,7 +10,7 @@ super + Tab
 super + a
     alacritty --config-file ~/.config/alacritty/alacritty_dwm.yml -e fish
 
-super + b
+super + alt + b
     alacritty --config-file ~/.config/alacritty/alacritty_dwm.yml -e byobu
 
 super + f
@@ -22,14 +19,14 @@ super + f
 super + s
     st -e fish
 
-super + m
+super + c
     ~/install/codium
 
 # logout (go back to LightDM)
-alt + shift + q
+super + shift + q
     pkill dwm
 
-alt + shift + s
+super + shift + s
     shutdown -h now
 
 XF86MonBrightnessDown
