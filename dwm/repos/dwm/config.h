@@ -1,5 +1,6 @@
 /* See LICENSE file for copyright and license details. */
 #include <X11/XF86keysym.h>
+#include "movestack.c"
 
 /* appearance */
 static const unsigned int borderpx  = 4;        /* border pixel of windows */
@@ -81,6 +82,8 @@ static Key keys[] = {
 	{ WIN|ShiftMask,             XK_b,      togglebar,      {0} },
 	{ WIN,                       XK_l,      focusstack,     {.i = -1 } },
 	{ WIN,                       XK_r,      focusstack,     {.i = +1 } },
+	{ WIN|ShiftMask,             XK_l,      movestack,      {.i = -1 } },
+	{ WIN|ShiftMask,             XK_r,      movestack,      {.i = +1 } },
 
 	{ WIN|ShiftMask,             XK_i,      incnmaster,     {.i = +1 } },
 	{ WIN|ShiftMask,             XK_d,      incnmaster,     {.i = -1 } },
@@ -109,6 +112,10 @@ static Key keys[] = {
 	{ WIN,                       XK_n,      focusmon,       {.i = +1 } },
 	{ WIN|ShiftMask,             XK_t,      tagmon,         {.i = -1 } },
 	{ WIN|ShiftMask,             XK_n,      tagmon,         {.i = +1 } },
+	{ WIN,                       XK_Left,   focusmon,       {.i = -1 } },
+	{ WIN,                       XK_Right,  focusmon,       {.i = +1 } },
+	{ WIN|ShiftMask,             XK_Left,   tagmon,         {.i = -1 } },
+	{ WIN|ShiftMask,             XK_Right,  tagmon,         {.i = +1 } },
 
 	TAGKEYS(                     XK_1,                      0)
 	TAGKEYS(                     XK_2,                      1)
