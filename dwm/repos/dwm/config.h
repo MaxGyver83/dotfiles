@@ -69,7 +69,6 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-/* static const char *dmenucmd[] = { "rofi -dmenu", NULL }; */
 static const char *termcmd[]  = { "alacritty", "--config-file", "/home/max/.config/alacritty/alacritty_dwm.yml", "-e", "fish", NULL };
 static const char scratchpadname[] = "scratchpad";
 static const char *scratchpadcmd[]  = { "alacritty", "--config-file", "/home/max/.config/alacritty/alacritty_dwm_scratchpad.yml", "-t", scratchpadname, "-e", "byobu", NULL };
@@ -80,17 +79,17 @@ static Key keys[] = {
 	{ WIN|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ WIN,                       XK_Escape, togglescratch,  {.v = scratchpadcmd } },
 	{ WIN|ShiftMask,             XK_b,      togglebar,      {0} },
-	{ WIN,                       XK_t,      focusstack,     {.i = -1 } },
+	{ WIN,                       XK_l,      focusstack,     {.i = -1 } },
 	{ WIN,                       XK_r,      focusstack,     {.i = +1 } },
 
 	{ WIN|ShiftMask,             XK_i,      incnmaster,     {.i = +1 } },
 	{ WIN|ShiftMask,             XK_d,      incnmaster,     {.i = -1 } },
 
-	{ WIN,                       XK_l,      setmfact,       {.f = -0.05} },
+	{ WIN,                       XK_g,      setmfact,       {.f = -0.05} },
 	{ WIN,                       XK_h,      setmfact,       {.f = +0.05} },
 
+	{ ALT|WIN,                   XK_g,      incrgaps,       {.i = -1 } },
 	{ ALT|WIN,                   XK_h,      incrgaps,       {.i = +1 } },
-	{ ALT|WIN,                   XK_l,      incrgaps,       {.i = -1 } },
 	{ ALT|WIN,                   XK_0,      togglegaps,     {0} },
 	{ ALT|WIN|ShiftMask,         XK_0,      defaultgaps,    {0} },
 
@@ -106,9 +105,9 @@ static Key keys[] = {
 	{ WIN,                       XK_0,      view,           {.ui = ~0 } },
 	{ WIN|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
 
-	{ WIN,                       XK_b,      focusmon,       {.i = -1 } },
+	{ WIN,                       XK_t,      focusmon,       {.i = -1 } },
 	{ WIN,                       XK_n,      focusmon,       {.i = +1 } },
-	{ WIN|ShiftMask,             XK_b,      tagmon,         {.i = -1 } },
+	{ WIN|ShiftMask,             XK_t,      tagmon,         {.i = -1 } },
 	{ WIN|ShiftMask,             XK_n,      tagmon,         {.i = +1 } },
 
 	TAGKEYS(                     XK_1,                      0)
@@ -116,7 +115,7 @@ static Key keys[] = {
 	TAGKEYS(                     XK_3,                      2)
 	TAGKEYS(                     XK_4,                      3)
 
-	{ WIN|ShiftMask,             XK_r,      quit,           {0} }, // = restart dwm
+	{ WIN|ALT,                   XK_r,      quit,           {0} }, // = restart dwm
 };
 
 /* button definitions */
