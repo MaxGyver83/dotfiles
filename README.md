@@ -79,3 +79,32 @@ git clone https://github.com/Raimondi/delimitMate.git
 git clone --depth 1 https://github.com/dense-analysis/ale.git
 ```
 
+## dwm
+
+For dwm, install its dependencies and other useful tools:
+
+```sh
+sudo apt install suckless-tools sxhkd rofi dunst pcmanfm xfce4-screenshooter
+```
+
+`suckless-tools` includes `st` and `dmenu`. These can also be cloned and built from source.
+
+Then clone dwm:
+
+```sh
+cd ~/repos
+git clone https://git.suckless.org/dwm
+```
+
+Install configs:
+
+```sh
+stow -vv scripts sxhkd dunst st dwm
+```
+
+Build dwm:
+
+```sh
+cd ~/repos/dwm/
+sudo make clean install
+```
