@@ -4,23 +4,28 @@ super + e
 super + w
     rofi -show window
 
-super + Tab
-    rofi -show window
+#super + Tab
+#    rofi -show window
 
 super + a
     alacritty --config-file ~/.config/alacritty/alacritty_dwm.yml -e fish
 
-super + alt + b
-    alacritty --config-file ~/.config/alacritty/alacritty_dwm.yml -e byobu
+super + b
+#    alacritty --config-file ~/.config/alacritty/alacritty_dwm.yml -e byobu
+    pgrep -f byobu &> /dev/null && wmctrl -a byobu || alacritty --config-file ~/.config/alacritty/alacritty_dwm.yml -e byobu
 
 super + f
-    firefox
+    pgrep firefox &> /dev/null && wmctrl -a firefox || firefox
 
 super + s
     st -e fish
 
 super + c
-    ~/install/codium
+#    ~/install/codium
+    pgrep codium &> /dev/null && wmctrl -a codium || ~/install/codium
+
+super + p
+    pcmanfm
 
 # logout (go back to LightDM)
 super + shift + q
@@ -28,6 +33,13 @@ super + shift + q
 
 super + shift + s
     shutdown -h now
+
+Print
+    xfce4-screenshooter -s $(xdg-user-dir PICTURES)
+
+# Screenshot of selected region
+alt + Print
+    xfce4-screenshooter -r -s $(xdg-user-dir PICTURES)
 
 XF86MonBrightnessDown
     bash ~/bin/brightness.bash "-"
