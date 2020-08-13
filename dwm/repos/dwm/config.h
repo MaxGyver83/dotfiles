@@ -80,10 +80,15 @@ static Key keys[] = {
 	{ WIN|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ WIN,                       XK_Escape, togglescratch,  {.v = scratchpadcmd } },
 	{ WIN|ShiftMask,             XK_b,      togglebar,      {0} },
+
 	{ WIN,                       XK_l,      focusstack,     {.i = -1 } },
 	{ WIN,                       XK_r,      focusstack,     {.i = +1 } },
 	{ WIN|ShiftMask,             XK_l,      movestack,      {.i = -1 } },
 	{ WIN|ShiftMask,             XK_r,      movestack,      {.i = +1 } },
+	{ WIN,                       XK_Up,     focusstack,     {.i = -1 } },
+	{ WIN,                       XK_Down,   focusstack,     {.i = +1 } },
+	{ WIN|ShiftMask,             XK_Up,     movestack,      {.i = -1 } },
+	{ WIN|ShiftMask,             XK_Down,   movestack,      {.i = +1 } },
 
 	{ WIN|ShiftMask,             XK_i,      incnmaster,     {.i = +1 } },
 	{ WIN|ShiftMask,             XK_d,      incnmaster,     {.i = -1 } },
