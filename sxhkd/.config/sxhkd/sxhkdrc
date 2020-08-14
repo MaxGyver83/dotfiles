@@ -28,18 +28,31 @@ super + p
     pcmanfm
 
 # logout (go back to LightDM)
-super + shift + q
+super + alt + k
     pkill dwm
 
-super + shift + s
+super + alt + r
+    reboot
+
+super + alt + s
     shutdown -h now
+
+# lock screen
+super + alt + l
+    png="$(xdg-user-dir PICTURES)/Leo3.png" && test -f "$png" && i3lock -e -f -i "$png" -t || i3lock -e -f -c 333333
+super + shift + z
+    png="$(xdg-user-dir PICTURES)/Leo3.png" && test -f "$png" && i3lock -e -f -i "$png" -t || i3lock -e -f -c 333333
 
 Print
     xfce4-screenshooter -s $(xdg-user-dir PICTURES)
 
 # Screenshot of selected region
-alt + Print
+shift + Print
     xfce4-screenshooter -r -s $(xdg-user-dir PICTURES)
+
+# Screenshot of active window
+alt + Print
+    xfce4-screenshooter -w -s $(xdg-user-dir PICTURES)
 
 XF86MonBrightnessDown
     bash ~/bin/brightness.bash "-"
