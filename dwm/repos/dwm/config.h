@@ -145,5 +145,9 @@ static Button buttons[] = {
 	{ ClkTagBar,            0,           Button3,        toggleview,     {0} },
 	{ ClkTagBar,            WIN,         Button1,        tag,            {0} },
 	{ ClkTagBar,            WIN,         Button3,        toggletag,      {0} },
+	{ ClkClientWin,         WIN,         Button4,        focusstack,     {.i = -1 } },
+	{ ClkClientWin,         WIN,         Button5,        focusstack,     {.i = +1 } },
+	{ ClkWinTitle,          0,           Button4,        focusstack,     {.i = -1 } },
+	{ ClkWinTitle,          0,           Button5,        focusstack,     {.i = +1 } },
 };
 
