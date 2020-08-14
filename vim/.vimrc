@@ -57,6 +57,7 @@ autocmd BufRead,BufNewFile ~/Documents/notes/*.txt setlocal syntax=sh
 " recognize tmux config files
 autocmd BufRead,BufNewFile *.tmux set filetype=tmux
 autocmd BufRead,BufNewFile /usr/share/X11/xkb/* set syntax=javascript
+autocmd BufRead,BufNewFile sxhkdrc set syntax=sh
 
 set ignorecase       " make search case-insensitive by default (word\C → case sens.)
 set smartcase        " make search case-sensitive if word contains uppercase letter
