@@ -15,7 +15,7 @@ super + b
     pgrep -f byobu &> /dev/null && wmctrl -a byobu || alacritty --config-file ~/.config/alacritty/alacritty_dwm.yml -e byobu
 
 super + f
-    pgrep firefox &> /dev/null && wmctrl -a firefox || firefox
+    pgrep -f firefox &> /dev/null && wmctrl -a firefox || firefox
 
 super + s
     st -e fish
