@@ -27,6 +27,9 @@ super + c
 super + p
     pcmanfm
 
+# quit (and restart) dwm (defined in dwm's config.h)
+# super + alt + q
+
 # logout (go back to LightDM)
 super + alt + k
     pkill dwm
