@@ -67,10 +67,11 @@ if status is-interactive
             set -gx is_simple_terminal 1
 
         case "linux"
-            set -ex is_simple_terminal
-            function fish_prompt
-                fish_fallback_prompt
-            end
+            set -e is_simple_terminal
+            # function fish_prompt
+            #     # fish_fallback_prompt
+            #     echo '>'
+            # end
     end
 
     if set -q is_simple_terminal
