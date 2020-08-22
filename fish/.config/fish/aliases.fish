@@ -52,9 +52,9 @@ alias feh='feh --scale-down --auto-zoom --auto-rotate'
 alias batp='bat -pp'
 alias batl='bat --pager="less"'
 
-abbr caei 'setxkbmap de -option'
-abbr asdf 'setxkbmap de koy && xkbcomp -w 0 ~/bin/vou-tab.xkb $DISPLAY'
-alias vou='setxkbmap de koy && xkbcomp ~/bin/vou.xkb $DISPLAY -w 0'
+abbr caei 'xhost &> /dev/null && setxkbmap de -option || sudo loadkeys de'
+abbr asdf 'xhost &> /dev/null && setxkbmap de koy && xkbcomp -w 0 ~/bin/vou-tab.xkb $DISPLAY || sudo loadkeys ~/bin/vou.map'
+alias vou='setxkbmap de koy && xkbcomp -w 0 ~/bin/vou.xkb $DISPLAY'
 
 # git
 abbr g 'git status'
