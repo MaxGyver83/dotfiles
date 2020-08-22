@@ -46,5 +46,5 @@ alias gitlogc='git log --pretty="%C(Yellow)%h  %C(reset)%ad (%C(Green)%cr%C(rese
 alias gitunpushed='git log ..@{u}'
 alias gitunmerged='git branch --no-merged master'
 
-alias caei='setxkbmap de -option'
-alias asdf='setxkbmap de koy && xkbcomp -w 0 ~/bin/vou-tab.xkb $DISPLAY'
+alias caei='xhost &> /dev/null && setxkbmap de -option || sudo loadkeys de'
+alias asdf='xhost &> /dev/null && setxkbmap de koy && xkbcomp -w 0 ~/bin/vou-tab.xkb $DISPLAY || sudo loadkeys ~/bin/vou.map'
