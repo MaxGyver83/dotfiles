@@ -7,4 +7,7 @@ sxhkd &
 dunst &
 test -f ~/.screenlayout/ext-monitor-acer.sh && ~/.screenlayout/ext-monitor-acer.sh
 type compton &> /dev/null && compton &
-
+# trayer --widthtype request --align right &
+nm-applet &
+pasystray &
+copyq &
