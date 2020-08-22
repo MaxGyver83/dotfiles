@@ -288,6 +288,7 @@ nnoremap dal 0d$
 nnoremap dil ^dg_
 nnoremap val 0v$
 nnoremap vil ^vg_
+noremap <Leader>yil ^"+yg_
 
 " Move lines up and down via Ctrl + j or k
 
