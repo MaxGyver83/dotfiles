@@ -84,10 +84,10 @@ git clone --depth 1 https://github.com/dense-analysis/ale.git
 For dwm, install its dependencies and other useful tools:
 
 ```sh
-sudo apt install suckless-tools sxhkd rofi dunst pcmanfm xfce4-screenshooter i3lock compton wmctrl
+sudo apt install suckless-tools sxhkd rofi dunst pcmanfm xfce4-screenshooter i3lock compton wmctrl pavucontrol pasystray scrot copyq
 ```
 
-`suckless-tools` includes `st` and `dmenu`. These can also be cloned and built from source.
+`suckless-tools` includes `dmenu`. This can also be cloned and built from source.
 
 Then clone dwm:
 
