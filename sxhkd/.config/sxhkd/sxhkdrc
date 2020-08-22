@@ -38,7 +38,7 @@ super + p
 
 # Zwischenablage
 super + z
-    copyq show
+    copyq toggle > /dev/null
 
 # quit (and restart) dwm (defined in dwm's config.h)
 # super + alt + q
