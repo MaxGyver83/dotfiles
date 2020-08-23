@@ -53,7 +53,7 @@ alias batp='bat -pp'
 alias batl='bat --pager="less"'
 
 abbr caei 'xhost &> /dev/null && setxkbmap de -option || sudo loadkeys de'
-abbr asdf 'xhost &> /dev/null && setxkbmap de koy && xkbcomp -w 0 ~/bin/vou-tab.xkb $DISPLAY || sudo loadkeys ~/bin/vou.map'
+abbr asdf 'xhost &> /dev/null && setxkbmap de koy && xkbcomp -w 0 ~/bin/vou-tabwin.xkb $DISPLAY || sudo loadkeys ~/bin/vou.map'
 alias vou='setxkbmap de koy && xkbcomp -w 0 ~/bin/vou.xkb $DISPLAY'
 
 # git
