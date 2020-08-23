@@ -65,16 +65,16 @@ super + shift + z
 # screenshot
 Print
     #xfce4-screenshooter -s $(xdg-user-dir PICTURES)
-    sleep 0.2 ; scrot "~/Screenshots/%Y-%m-%d %H.%M.%S \$wx\$h.png"
+    sleep 0.2 ; scrot ~/Screenshots/"%Y-%m-%d %H.%M.%S \$wx\$h.png"
 
 # screenshot of active window
 alt + Print
-    sleep 0.2 ; scrot -u "~/Screenshots/%Y-%m-%d %H.%M.%S \$wx\$h.png"
+    sleep 0.2 ; scrot -u ~/Screenshots/"%Y-%m-%d %H.%M.%S \$wx\$h.png"
     #xfce4-screenshooter -w -s $(xdg-user-dir PICTURES)
 
 # screenshot of selected region
 shift + Print
-    sleep 0.2 ; scrot -s "~/Screenshots/%Y-%m-%d %H.%M.%S \$wx\$h.png"
+    sleep 0.2 ; scrot -s ~/Screenshots/"%Y-%m-%d %H.%M.%S \$wx\$h.png"
     #xfce4-screenshooter -r -s $(xdg-user-dir PICTURES)
 
 # screenshot of active window to /tmp and clipboard
@@ -95,12 +95,12 @@ XF86MonBrightnessUp
 
 # mute audio
 XF86AudioMute
-    /usr/bin/pactl set-sink-mute "@DEFAULT_SINK@" toggle
+    bash ~/bin/volume.bash
 
 # lower volume
 XF86AudioLowerVolume
-    /usr/bin/pactl set-sink-volume "@DEFAULT_SINK@" "-5%"
+    bash ~/bin/volume.bash "-"
 
 # raise volume
 XF86AudioRaiseVolume
-    /usr/bin/pactl set-sink-volume "@DEFAULT_SINK@" "+5%"
+    bash ~/bin/volume.bash "+"
