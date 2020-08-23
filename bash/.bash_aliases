@@ -47,4 +47,4 @@ alias gitunpushed='git log ..@{u}'
 alias gitunmerged='git branch --no-merged master'
 
 alias caei='xhost &> /dev/null && setxkbmap de -option || sudo loadkeys de'
-alias asdf='xhost &> /dev/null && setxkbmap de koy && xkbcomp -w 0 ~/bin/vou-tab.xkb $DISPLAY || sudo loadkeys ~/bin/vou.map'
+alias asdf='xhost &> /dev/null && setxkbmap de koy && xkbcomp -w 0 ~/bin/vou-tabwin.xkb $DISPLAY || sudo loadkeys ~/bin/vou.map'
