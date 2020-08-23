@@ -209,8 +209,10 @@ static MouseShortcut mshortcuts[] = {
 /* Internal keyboard shortcuts. */
 #define MODKEY Mod1Mask
 #define TERMMOD (ControlMask|ShiftMask)
-#define CTRL_LVL3 0x84
-#define SHIFT_LVL5 0x21
+#define LVL5 0x20
+#define LVL3 0x80
+#define CTRL_LVL3 (ControlMask|LVL3)
+#define SHIFT_LVL5 (ShiftMask|LVL5)
 
 static Shortcut shortcuts[] = {
 	/* mask                 keysym          function        argument */
@@ -380,6 +382,7 @@ static Key key[] = {
 	{ XK_Delete,        XK_ANY_MOD,     "\033[P",       -1,    0},
 	{ XK_Delete,        XK_ANY_MOD,     "\033[3~",      +1,    0},
 	{ XK_BackSpace,     XK_NO_MOD,      "\177",          0,    0},
+	{ XK_BackSpace,     LVL5,           "\177",          0,    0},
 	{ XK_BackSpace,     Mod1Mask,       "\033\177",      0,    0},
 	{ XK_Home,          ShiftMask,      "\033[2J",       0,   -1},
 	{ XK_Home,          ShiftMask,      "\033[1;2H",     0,   +1},
