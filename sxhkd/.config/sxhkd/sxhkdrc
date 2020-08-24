@@ -79,11 +79,11 @@ shift + Print
 
 # screenshot of active window to /tmp and clipboard
 ctrl + alt + Print
-    scrot -u '/tmp/%Y-%m-%d %H.%M.%S $wx$h.png' -e 'copyq write image/png - < "$f"'
+    sleep 0.2 ; scrot -u '/tmp/%Y-%m-%d %H.%M.%S $wx$h.png' -e 'copyq write image/png - < "$f"'
 
 # screenshot of selected region or window to /tmp and clipboard
 ctrl + shift + Print
-    scrot -s '/tmp/%Y-%m-%d %H.%M.%S $wx$h.png' -e 'copyq write image/png - < "$f"'
+    sleep 0.2 ; scrot -s '/tmp/%Y-%m-%d %H.%M.%S $wx$h.png' -e 'copyq write image/png - < "$f"'
 
 # decrease brightness
 XF86MonBrightnessDown
