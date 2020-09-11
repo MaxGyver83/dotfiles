@@ -293,16 +293,16 @@ noremap <Leader>yil ^"+yg_
 " Move lines up and down via Ctrl + j or k
 
 " Normal mode
-nnoremap <C-j> :m .+1<CR>==
-nnoremap <C-k> :m .-2<CR>==
+" nnoremap <C-j> :m .+1<CR>==
+" nnoremap <C-k> :m .-2<CR>==
 
 " Insert mode
 "inoremap <C-j> <ESC>:m .+1<CR>==gi
 "inoremap <C-k> <ESC>:m .-2<CR>==gi
 
 " Visual mode
-xnoremap <C-j> :m '>+1<CR>gv=gv
-xnoremap <C-k> :m '<-2<CR>gv=gv
+" xnoremap <C-j> :m '>+1<CR>gv=gv
+" xnoremap <C-k> :m '<-2<CR>gv=gv
 
 " Move lines up and down via Shift + arrow keys
 " (currently overwritten by terminator settings)
@@ -383,6 +383,11 @@ noremap <A-.> :bn<cr>
 iab kb <kbd></kbd><C-o>F<<BS>
 " auto complete closing HTML tag
 iab </ </<C-X><C-O><Del><Del>
+inoremap aa ä
+inoremap oo ö
+inoremap uu ü
+inoremap sz ß
+
 
 "----------
 " functions
