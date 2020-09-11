@@ -15,6 +15,9 @@ set fish_color_cwd brblue
 # green for commands
 set fish_color_command 00b315
 
+# brighter red for errors
+set fish_color_error ff6644
+
 # brighter autosuggestions (default: brblack)
 set fish_color_autosuggestion 888888
 
@@ -56,6 +59,10 @@ if type -q fzf
     end
     # set color scheme
     set -x FZF_DEFAULT_OPTS "--color fg:-1,bg:-1,hl:#fa9a2d,fg+:3,hl+:#fa9a2d,info:150,prompt:110,spinner:150,pointer:167,marker:174 $FZF_DEFAULT_OPTS"
+
+    # use Ctrl-g for fzf-cd-widget (like "Go to", default: Alt-c)
+    bind \cg fzf-cd-widget
+    bind -M insert \cg fzf-cd-widget
 end
 
 # fix delete key in st terminal
