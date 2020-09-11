@@ -10,9 +10,13 @@ super + e
 super + w
     rofi -show window
 
+# set random wallpaper
+super + shift + w
+    ~/bin/set-random-wallpaper.bash
+
 # start alacritty (with fish)
 super + a
-    alacritty --config-file ~/.config/alacritty/alacritty_dwm.yml -e fish
+    jumpapp alacritty --config-file ~/.config/alacritty/alacritty_dwm.yml -e fish
 
 # start or focus byobu (in alacritty)
 super + b
@@ -23,9 +27,9 @@ super + b
 super + f
     pgrep -f firefox &> /dev/null && wmctrl -a firefox || firefox
 
-# start st (with fish)
+# start alacritty (with fish)
 super + s
-    st -e fish
+    alacritty --config-file ~/.config/alacritty/alacritty_dwm.yml -e fish
 
 # start or focus VS Codium
 super + c
