@@ -53,6 +53,7 @@ autocmd FileType python set colorcolumn=72,80
 " endif
 autocmd FileType mail setlocal nojoinspaces formatoptions=watqc
 autocmd BufRead,BufNewFile ~/Documents/notes/*.txt setlocal syntax=sh
+autocmd BufRead,BufNewFile ~/.config/kmonad/*.kbd setlocal filetype=lisp
 
 " recognize tmux config files
 autocmd BufRead,BufNewFile *.tmux set filetype=tmux
@@ -91,7 +92,9 @@ highlight NoBreakWhitespace ctermbg=blue guibg=blue
 autocmd Syntax * syn match NoBreakWhitespace / \| \|­/
 
 " don't give ins-completion-menu messages
-set shortmess+=c
+if has("patch-7.4.314")
+    set shortmess+=c
+endif
 " show search count, e.g. [1/5]
 set shortmess-=S
 
@@ -120,11 +123,11 @@ endif
 
 " use a bar as cursor in insert mode, underline in replace mode
 " https://stackoverflow.com/a/42118416/4121487
-if !has('nvim')
+if !has('nvim') && has("patch-7.4.687")
     let &t_SI = "\e[6 q"
     let &t_SR = "\e[4 q"
     let &t_EI = "\e[2 q"
-end
+endif
 
 " neovim: open terminals in insert mode, activate insert on entering window
 if has('nvim')
@@ -225,7 +228,7 @@ else
     " use after :vert term ipython3 --no-autoindent
     nnoremap <Leader>s yy<C-w>w<C-w>"0<C-w>w
     xnoremap <Leader>s y<C-w>w<C-w>"0<C-w>w
-end
+endif
 
 " move vertically up or down to next non-whitespace character
 " (similar to Ctrl-Up/Down in Excel/LibreOffice)
@@ -350,18 +353,21 @@ if !has('nvim')
     execute "set <A-n>=\en"
     execute "set <A-v>=\ev"
     execute "set <A-.>=\e."
-end
-if has('nvim')
-    tnoremap <A-b> <C-\><C-N><C-w>h
-    tnoremap <A-t> <C-\><C-N><C-w>j
-    tnoremap <A-r> <C-\><C-N><C-w>k
-    tnoremap <A-n> <C-\><C-N><C-w>l
-else
-    tnoremap <A-b> <C-w>h
-    tnoremap <A-t> <C-w>j
-    tnoremap <A-r> <C-w>k
-    tnoremap <A-n> <C-w>l
-end
+endif
+
+if has("patch-8.0.0")
+    if has('nvim')
+        tnoremap <A-b> <C-\><C-N><C-w>h
+        tnoremap <A-t> <C-\><C-N><C-w>j
+        tnoremap <A-r> <C-\><C-N><C-w>k
+        tnoremap <A-n> <C-\><C-N><C-w>l
+    else
+        tnoremap <A-b> <C-w>h
+        tnoremap <A-t> <C-w>j
+        tnoremap <A-r> <C-w>k
+        tnoremap <A-n> <C-w>l
+    endif
+endif
 inoremap <A-b> <C-\><C-N><C-w>h
 inoremap <A-t> <C-\><C-N><C-w>j
 inoremap <A-r> <C-\><C-N><C-w>k
@@ -383,7 +389,7 @@ noremap <A-.> :bn<cr>
 iab kb <kbd></kbd><C-o>F<<BS>
 " auto complete closing HTML tag
 iab </ </<C-X><C-O><Del><Del>
-inoremap aa ä
+inoremap ae ä
 inoremap oo ö
 inoremap uu ü
 inoremap sz ß
