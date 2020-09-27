@@ -55,6 +55,7 @@ alias batl='bat --pager="less"'
 abbr cv 'vim ~/.vimrc'
 abbr cf 'vim ~/.config/fish/config.fish'
 abbr ca 'vim ~/.config/fish/aliases.fish'
+abbr td 'vim ~/dev/gta_local/max/todo/todo.md'
 
 abbr caei 'xhost &> /dev/null && setxkbmap de -option || sudo loadkeys de'
 abbr asdf 'xhost &> /dev/null && setxkbmap de koy && xkbcomp -w 0 ~/bin/vou-tabwin.xkb $DISPLAY || sudo loadkeys ~/bin/vou.map'
