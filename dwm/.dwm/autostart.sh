@@ -1,5 +1,8 @@
 numlockx off
-setxkbmap de koy && xkbcomp -w 0 ~/bin/vou-wide-tabwin.xkb $DISPLAY
+#setxkbmap de koy && xkbcomp -w 0 ~/bin/vou-wide-tabwin.xkb $DISPLAY
+~/install/kmonad ~/.config/kmonad/vou4.kbd &
+test -e /dev/input/by-id/usb-Telink_Wireless_Receiver-if01-event-kbd && ~/install/kmonad ~/.config/kmonad/vou4-jellycomb.kbd &
+#test -e /dev/input/by-id/usb-You_idobo_0-event-kbd && ~/install/kmonad ~/.config/kmonad/vou2-idobo.kbd &
 xset r rate 300 50
 #xinput set-prop 'ETPS/2 Elantech Touchpad' 'libinput Natural Scrolling Enabled' 1
 dunst &
@@ -12,4 +15,4 @@ nm-applet &
 pasystray &
 copyq &
 sxhkd &
-~/bin/beep-on-key.bash enter &
+# ~/bin/beep-on-key.bash enter &
