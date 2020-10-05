@@ -53,7 +53,7 @@ autocmd FileType python set colorcolumn=72,80
 " endif
 autocmd FileType mail setlocal nojoinspaces formatoptions=watqc
 autocmd BufRead,BufNewFile ~/Documents/notes/*.txt setlocal syntax=sh
-autocmd BufRead,BufNewFile ~/.config/kmonad/*.kbd setlocal filetype=lisp
+autocmd BufRead,BufNewFile ~/.config/kmonad/*.kbd setlocal filetype=clojure
 
 " recognize tmux config files
 autocmd BufRead,BufNewFile *.tmux set filetype=tmux
@@ -389,10 +389,10 @@ noremap <A-.> :bn<cr>
 iab kb <kbd></kbd><C-o>F<<BS>
 " auto complete closing HTML tag
 iab </ </<C-X><C-O><Del><Del>
-inoremap ae ä
-inoremap oo ö
-inoremap uu ü
-inoremap sz ß
+" inoremap ae ä
+" inoremap oo ö
+" inoremap uu ü
+" inoremap sz ß
 
 
 "----------
