@@ -1,8 +1,9 @@
 numlockx off
 #setxkbmap de koy && xkbcomp -w 0 ~/bin/vou-wide-tabwin.xkb $DISPLAY
-~/install/kmonad ~/.config/kmonad/vou4.kbd &
-test -e /dev/input/by-id/usb-Telink_Wireless_Receiver-if01-event-kbd && ~/install/kmonad ~/.config/kmonad/vou4-jellycomb.kbd &
+#~/install/kmonad ~/.config/kmonad/vou4.kbd &
+#test -e /dev/input/by-id/usb-Telink_Wireless_Receiver-if01-event-kbd && ~/install/kmonad ~/.config/kmonad/vou4-jellycomb.kbd &
 #test -e /dev/input/by-id/usb-You_idobo_0-event-kbd && ~/install/kmonad ~/.config/kmonad/vou2-idobo.kbd &
+fish -c k &
 xset r rate 300 50
 #xinput set-prop 'ETPS/2 Elantech Touchpad' 'libinput Natural Scrolling Enabled' 1
 dunst &
@@ -16,3 +17,5 @@ pasystray &
 copyq &
 sxhkd &
 # ~/bin/beep-on-key.bash enter &
+eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
+export SSH_AUTH_SOCK
