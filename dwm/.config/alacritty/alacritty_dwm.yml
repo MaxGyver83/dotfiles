@@ -14,6 +14,9 @@ background_opacity: 0.92
 
 key_bindings:
   - { key: F11,      mods: none,          action: ToggleFullscreen }
+  - { key: Key0,     mods: Control,       action: ResetFontSize }
+  - { key: Add,      mods: Control|Shift, action: IncreaseFontSize }
+  - { key: Minus,    mods: Control,       action: DecreaseFontSize }
 
 env:
   WINIT_X11_SCALE_FACTOR: "1.0"
