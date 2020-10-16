@@ -214,6 +214,9 @@ nnoremap <Leader>V viW
 nnoremap <Leader>r "_ciw<C-r>"<ESC>
 xnoremap <Leader>r "_c<C-r>"<ESC>
 
+" overwrite with yanked text
+nnoremap <Leader>R R<C-r>"<ESC>
+
 " search selection with *
 xnoremap * <ESC>/<C-r>*<cr>
 " search word under cursor expanding the selection with leader *
@@ -343,6 +346,10 @@ nnoremap j k
 nnoremap k j
 nnoremap l h
 nnoremap h l
+xnoremap j k
+xnoremap k j
+xnoremap l h
+xnoremap h l
 
 " navigate between windows (incl. terminal) with Alt+h/j/k/l
 " (only valid for VOU keyboard layout)
@@ -394,6 +401,12 @@ iab </ </<C-X><C-O><Del><Del>
 " inoremap uu ü
 " inoremap sz ß
 
+
+"----------
+" macros
+"----------
+
+let @k = 'ysiw<kbd>'
 
 "----------
 " functions
@@ -534,3 +547,10 @@ let g:tiddlywiki_no_mappings=1
 
 " DidYouMean
 " let g:dym_use_fzf = 1
+
+" vim-lighline
+set laststatus=2
+set noshowmode
+let g:lightline = {
+    \ 'colorscheme': 'wombat',
+    \ }
