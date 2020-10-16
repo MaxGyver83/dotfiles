@@ -20,6 +20,7 @@ abbr du1 'du -h -d1'
 abbr du0 'du -h -d0'
 abbr grn 'grep -rn'
 abbr grni 'grep -rni'
+abbr wlan 'nmcli d wifi'
 
 abbr xo 'xdg-open'
 
@@ -28,6 +29,12 @@ abbr rsyncp 'rsync --info=progress2 -ah'
 abbr manc 'set PAGER most; man'
 abbr y 'yank'
 abbr cb 'xclip -sel clip'
+# get last non-empty line from output and paste it into command line (in tmux/byobu)
+alias out='tmux capture-pane -p | awk /./ | sed /▶/d | tail -1 | tr "\n" " " | tmux load-buffer - && tmux paste-buffer -s " "'
+
+# not escaped: rg -N 'Emit.*Press' ~/kmonad.log | sed 's/Emitting: Press //' | tr '\n' ' ' | sed 's/<\(.\)>/\1/g' | sed "s/<sft> '/\"/g" | sed 's/<spc>/\n/g' | sed '/pgup\|lft\|rght\|up/d' | sed 's/<ralt> " u/ü/' | sed 's/<ralt> " o/ö/' | sed 's/<ralt> " a/ä/' | sed 's/<sft> \([a-z]\)/\U\1/g' | sed 's/<sft> \(.\)/⇧\1/g' | rg '<bks>'
+alias typos='rg -N \'Emit.*Press\' ~/kmonad.log | sed \'s/Emitting: Press //\' | tr \'\\n\' \' \' | sed \'s/<\\(.\\)>/\\1/g\' | sed "s/<sft> \'/\\"/g" | sed \'s/<spc>/\\n/g\' | sed \'/pgup\\|lft\\|rght\\|up/d\' | sed \'s/<ralt> " u/ü/g\' | sed \'s/<ralt> " o/ö/g\' | sed \'s/<ralt> " a/ä/g\' | sed \'s/<ralt> s s/ß/g\' | sed \'s/<sft> \\([a-z]\\)/\\U\\1/g\' | sed \'s/<sft> \\(.\\)/⇧\\1/g\' | rg \'<bks>\''
+alias words='rg -N \'Emit.*Press\' ~/kmonad.log | sed \'s/Emitting: Press //\' | tr \'\\n\' \' \' | sed \'s/<\\(.\\)>/\\1/g\' | sed "s/<sft> \'/\\"/g" | sed \'s/<spc>/\\n/g\' | sed \'/pgup\\|lft\\|rght\\|up/d\' | sed \'s/<ralt> " u/ü/g\' | sed \'s/<ralt> " o/ö/g\' | sed \'s/<ralt> " a/ä/g\' | sed \'s/<ralt> s s/ß/g\' | sed \'s/<sft> \\([a-z]\\)/\\U\\1/g\' | sed \'s/<sft> \\(.\\)/⇧\\1/g\''
 
 # lc = last command
 abbr lc 'eval $history[1]'
@@ -55,6 +62,8 @@ alias batl='bat --pager="less"'
 abbr cv 'vim ~/.vimrc'
 abbr cf 'vim ~/.config/fish/config.fish'
 abbr ca 'vim ~/.config/fish/aliases.fish'
+abbr cs 'vim ~/.config/sxhkd/sxhkdrc'
+abbr ck 'vim ~/.config/kmonad/vou-linux.kbd'
 abbr td 'vim ~/dev/gta_local/max/todo/todo.md'
 
 abbr caei 'xhost &> /dev/null && setxkbmap de -option || sudo loadkeys de'
