@@ -65,6 +65,7 @@ git clone https://github.com/Konfekt/vim-CtrlXA.git
 git clone https://github.com/EinfachToll/DidYouMean.git
 git clone https://github.com/dag/vim-fish.git
 git clone https://github.com/sukima/vim-tiddlywiki.git
+git clone https://github.com/itchyny/lightline.vim.git
 git clone --recursive https://github.com/davidhalter/jedi-vim.git
 
 mkdir -p ~/.vim/pack/plugins/opt/
