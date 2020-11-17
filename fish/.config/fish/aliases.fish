@@ -69,7 +69,12 @@ abbr td 'vim ~/dev/gta_local/max/todo/todo.md'
 abbr caei 'xhost &> /dev/null && setxkbmap de -option || sudo loadkeys de'
 abbr asdf 'xhost &> /dev/null && setxkbmap de koy && xkbcomp -w 0 ~/bin/vou-tabwin.xkb $DISPLAY || sudo loadkeys ~/bin/vou.map'
 alias vou='setxkbmap de koy && xkbcomp -w 0 ~/bin/vou.xkb $DISPLAY'
+abbr k '~/bin/start-kmonad-for-all-keyboards.fish'
+abbr kk '~/bin/start-kmonad-for-all-keyboards.fish de'
 abbr s 'xrandr | grep -q 2560x1440 && ~/.screenlayout/only-peaq.sh || ~/.screenlayout/only-laptop.sh'
+# redshift: red=night mode (darker, redish), notred=day mode
+abbr red 'redshift -P -O 3500 -b 0.7'
+abbr notred 'redshift -P -O 6500'
 
 # git
 abbr g 'git status'
