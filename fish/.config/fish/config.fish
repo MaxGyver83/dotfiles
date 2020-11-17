@@ -38,6 +38,7 @@ set -x LESS_TERMCAP_ue (printf "\033[0m")        # reset underline
 set -x GROFF_NO_SGR 1                            # for konsole and gnome-terminal
 
 set -x BAT_PAGER ''
+set -x BAT_THEME TwoDark
 
 # use vim for editing the command line with Alt-e
 set -x VISUAL vim
