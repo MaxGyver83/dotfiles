@@ -32,8 +32,8 @@
               C-pgup C-pgdn          f6
   grv       1    2    3    4    5    6    7    8    9    0    -    =
   tab       v    .    @o   u    ä    q    g    @lsp h    f    j    ´
-  @lv3      @cs  @aw  @ec  @i4  y    b    @t4  @rc  @nw  @ss  @lv3 ß
-  lsft @s2  @z   @xa  @,3  ü    ö    p    @d3  @wa  m    k    rsft
+  @22       @c3  @as  @ec  @i4  y    b    @t4  @rc  @ns  @s3  @22  ß
+  lsft @s2  @z   @xa  @,w  ü    ö    p    @dw  @wa  m    @ks  rsft
                                spc             XX        _    @ctlc
 )
 
@@ -65,19 +65,19 @@
 )
 
 (deflayer special
-                  XX    XX                XX
-  XX        XX    XX    XX    XX    XX    XX    XX    XX    XX    XX    XX    XX
-  XX      A-pgup A-pgdn XX    XX    XX    XX    XX    XX    XX    XX    XX    XX
-  XX      A-lft C-pgup  XX C-pgdn A-rght  XX    XX    XX    XX    XX    XX    XX
-  XX   XX   XX    @pb   @nb   XX    XX    XX    XX    XX    XX    XX    XX
-                              XX                      XX          XX    XX
+                  XX    XX                 XX
+  XX        XX    XX    XX     XX    XX    XX    XX    XX    XX    XX    XX    XX
+  XX      A-pgup A-pgdn @cpm C-bspc C-del  XX    XX    XX    XX    XX    XX    XX
+  XX      A-lft C-pgup  XX   C-pgdn A-rght XX    XX    XX    XX    XX    XX    XX
+  XX   XX   XX    @pb   @nb    XX    XX    XX    XX    XX    XX    XX    XX
+                               XX                      XX          XX    XX
 )
 
 (deflayer seldom
                  XX   XX             XX
   XX        f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
-  XX        XX   XX   ö    ü    XX   XX   XX   XX   XX   XX   XX   XX
-  XX        XX   ä    €    j    XX   XX   XX   XX   XX   ß    XX   XX
+  XX        XX   XX   ö    ü    XX   XX   XX   XX   XX   @sch XX   XX
+  XX        XX   ä    €    j    XX   XX   XX   v    XX   ß    XX   XX
   XX   XX   ß    XX   XX   XX   XX   XX   XX   XX   XX   q    XX
                                spc             XX        XX   XX
 )
@@ -112,11 +112,13 @@
   lv3 (layer-toggle level3)
   lv4 (layer-toggle level4)
   spl (layer-toggle special)
+  slt (layer-toggle seldom)
   sld (layer-next seldom)
 )
 
 (defalias
   oo (multi-tap 300 o 300 ö #(o o))
+  ii (multi-tap 300 i ret)
 )
 
 (defalias
@@ -127,21 +129,26 @@
 )
 
 (defalias
-  cs (tap-hold-next-release 500 c lsft)
-  aw (tap-hold-next-release 500 a lmet)
+  sctl (tap-hold-next-release 500 spc lctl)
+;;  22 (layer-next level2)  ;; easier but does not work for more than one capital letter
+  22 (tap-hold-next-release 500 (layer-next level2) @lv2)
+
+  c3 (tap-hold-next-release 500 c @lv3)
+  as (tap-hold-next-release 500 a lsft)
   ec (tap-hold-next-release 500 e lctl)
   i4 (tap-hold-next-release 500 i @lv4)
-  s2 (tap-hold-next-release 500 @sld @lv2)
+  s2 (tap-hold-next-release 500 @sld @slt)
   xa (tap-hold-next-release 500 x lalt)
-  ,3 (tap-hold-next-release 500 , @lv3)
+  ,w (tap-hold-next-release 500 , lmet)
 
   lsp (tap-hold-next-release 500 l @spl)
-  d3  (tap-hold-next-release 500 d @lv3)
+  dw  (tap-hold-next-release 500 d rmet)
   wa  (tap-hold-next-release 500 w lalt)
+  ks  (tap-hold-next-release 500 k @lv2)
   t4  (tap-hold-next-release 500 t @lv4)
   rc  (tap-hold-next-release 500 r rctl)
-  nw  (tap-hold-next-release 500 n rmet)
-  ss  (tap-hold-next-release 500 s rsft)
+  ns  (tap-hold-next-release 500 n rsft)
+  s3  (tap-hold-next-release 500 s @lv3)
 
   ;; ralt = compose key when tapped, rctl when held down
   ctlc (tap-hold-next-release 500 ralt rctl)
@@ -151,6 +158,8 @@
   ;; vim prev/next buffer
   pb #(esc : b p ret)
   nb #(esc : b n ret)
+  ;; copy mode in byobu
+  cpm #(A-pgup A-pgdn)
 )
 
 (defalias
@@ -160,4 +169,8 @@
   ✔  #(ralt y y)  ;; heavy checkmark (✔)
   ✘  #(ralt n n)  ;; heavy ballot (✘)
   ⭐ #(ralt s t)  ;; star (⭐)
+)
+
+(defalias
+  sch #(s c h)
 )
