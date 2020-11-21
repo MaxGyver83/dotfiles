@@ -33,13 +33,13 @@
   grv       1    2    3    4    5    6    7    8    9    0    @-   S-=
   tab       v    .    @o   u    @ä   q    g    @lsp h    f    j    =
   @22       @c3  @as  @ec  @i4  z    b    @t4  @rc  @ns  @s3  @22  @ß
-  lsft @s2  @z   @xa  @,w  @ü   @ö   p    @dw  @wa  m    @ks  rsft
+  lsft @s2  @z   @xa  @,w  @ü   @ö   p    @dw  @wa  m    k    rsft
                                spc             ralt      _    @ctlc
 )
 
 (deflayer level2
                  f2   f3             _
-  grv       °    §    @ℓ   »    «    $    €    „    “    ”    —    ¸
+  @ˇ        °    §    @ℓ   @»   @«   $    @€   @„   @“   @”   @—   ¸
   S-tab     V    •    O    U    S-@ä Q    G    L    H    F    J    ´
   _         C    A    E    I    Z    B    T    R    N    S    _    ß
   _     XX  Y    X    -    S-@ü S-@ö P    D    W    M    K    _
@@ -48,7 +48,7 @@
 
 (deflayer level3
                  _   _               @qwe
-  _         ¹    ²    ³    ›    ‹    ¢    ¥    ‚    ‘    ’    _    _
+  _         @¹   @²   @³   @›   @‹   @¢   @¥   @‚   @‘   @’   @—    _
   _         @@   @%   @{   @}   @^   @!   @<   @>   @=   @&   @€    /
   _         @|   @`   @kau @kzu @*   @?   @/   @:   @-   @\_   _    @→
   _    _    @#   @[   @]   @~   @$   @+   S-2  @'   @\   @;    _
@@ -76,8 +76,8 @@
 (deflayer seldom
                  XX   XX             XX
   XX        f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
-  XX        XX   XX   ;    [    XX   XX   XX   XX   @sch XX   XX   XX
-  XX        XX   '    €    j    XX   XX   XX   v    XX   ß    XX   XX
+  XX        XX   XX   @ö   @ü   XX   XX   XX   XX   @sch XX   XX   XX
+  XX        XX   @ä   @€   j    XX   XX   XX   v    XX   ß    XX   XX
   XX   XX   ß    XX   XX   XX   XX   XX   XX   XX   XX   q    XX
                                spc             XX        XX   XX
 )
@@ -164,19 +164,6 @@
 )
 
 (defalias
-  ;; some unicode characters defined in ~/.XCompose
-  ℓ  #(ralt s l)  ;; script small l (ℓ)
-  Ü  #(ralt " U)  ;; capital Ü (not necessary in commit b7214c4 or newer)
-  ✔  #(ralt y y)  ;; heavy checkmark (✔)
-  ✘  #(ralt n n)  ;; heavy ballot (✘)
-  ⭐ #(ralt s t)  ;; star (⭐)
-)
-
-(defalias
-  sch #(s c h)
-)
-
-(defalias
   ;; aliases for German QWERTZ
   ä '
   ö ;
@@ -218,3 +205,38 @@
   \ #(ralt S-7 S-7)
   ; S-,
 )
+
+(defalias
+  ;; some unicode characters defined in ~/.XCompose
+  ℓ  #(ralt s l)    ;; script small l (ℓ)
+  »  #(ralt @> @>)  ;; guillemot right (»)
+  «  #(ralt @< @<)  ;; guillemot left («)
+  „  #(ralt S-2 ,)  ;; double low-9 quotation mark („)
+  “  #(ralt S-2 @<) ;; left double quotation mark (“)
+  ”  #(ralt S-2 @>) ;; right double quotation mark („)
+  —  #(ralt @- @- @-) ;; em dash (—)
+
+  ;;ˇ  #(ralt spc @<) ;; caron (háček) (ˇ) NOT DEAD
+  ˇ  RA-S-'         ;; dead caron (háček) (ˇ) (=AltGr-Shift-ä) DOESN'T WORK
+  ;;¹  RA-1         ;; onesuperior (¹) DOESN'T WORK
+  ¹  #(grv 1)       ;; onesuperior (¹)
+  ²  #(grv 2)       ;; twosuperior (²)
+  ³  #(grv 3)       ;; threesuperior (³)
+  ›  #(ralt . @>)   ;; single right-pointing angle quotation mark (›)
+  ‹  #(ralt . @<)   ;; single left-pointing angle quotation mark (‹)
+  ¢  #(ralt c @/)   ;; cent (¢)
+  ¥  #(ralt z @=)   ;; yen (¥)
+  ‚  #(ralt @' ,)   ;; single low-9 quotation mark (‚)
+  ‘  #(ralt @' @<)  ;; left single quotation mark (‘)
+  ’  #(ralt @' @>)  ;; right single quotation mark (’)
+
+  Ü  #(ralt " U)    ;; capital Ü (not necessary in commit b7214c4 or newer)
+  ✔  #(ralt y y)    ;; heavy checkmark (✔)
+  ✘  #(ralt n n)    ;; heavy ballot (✘)
+  ⭐ #(ralt s t)    ;; star (⭐)
+)
+
+(defalias
+  sch #(s c h)
+)
+
