@@ -21,7 +21,6 @@ super + k
 # start or focus byobu (in alacritty)
 super + b
 #    alacritty --config-file ~/.config/alacritty/alacritty_dwm.yml -e byobu
-#    pgrep -f byobu &> /dev/null && wmctrl -a byobu || alacritty --config-file ~/.config/alacritty/alacritty_dwm.yml -e byobu
     pgrep -f byobu &> /dev/null && wmctrl -a byobu || ~/install/alacritty-0.6 --config-file ~/.config/alacritty/alacritty_dwm_0.6.yml -e byobu
 
 # start or focus Firefox
@@ -60,10 +59,10 @@ super + alt + s
 
 # lock screen
 super + alt + l
-    png="$(xdg-user-dir PICTURES)/Leo3.png" && test -f "$png" && i3lock -e -f -i "$png" -t || i3lock -e -f -c 333333
+    png="$(xdg-user-dir PICTURES)/Leo4.png" && test -f "$png" && i3lock -e -f -i "$png" -t || i3lock -e -f -c 333333
 # lock screen
 super + shift + z
-    png="$(xdg-user-dir PICTURES)/Leo3.png" && test -f "$png" && i3lock -e -f -i "$png" -t || i3lock -e -f -c 333333
+    png="$(xdg-user-dir PICTURES)/Leo4.png" && test -f "$png" && i3lock -e -f -i "$png" -t || i3lock -e -f -c 333333
 
 # check connected displays
 super + F8
