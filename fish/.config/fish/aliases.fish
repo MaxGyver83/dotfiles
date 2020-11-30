@@ -24,6 +24,8 @@ abbr wlan 'nmcli d wifi'
 
 abbr xo 'xdg-open'
 
+abbr cal 'ncal -bwM3'
+
 abbr rsyncp 'rsync --info=progress2 -ah'
 
 abbr manc 'set PAGER most; man'
