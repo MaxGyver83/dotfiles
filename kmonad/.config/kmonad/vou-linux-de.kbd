@@ -156,8 +156,8 @@
 
 (defalias
   ;; vim prev/next buffer
-  pb #(esc : b p ret)
-  nb #(esc : b n ret)
+  pb #(esc S-. b p ret)
+  nb #(esc S-. b n ret)
   ;; copy mode in byobu
   cpm #(A-pgup A-pgdn)
   ;;cpm #(C-e RA-8)
