@@ -20,7 +20,7 @@
 )
 
 (defsrc
-                 f2   f3             f6
+                                     f6
   grv       1    2    3    4    5    6    7    8    9    0    -    =
   tab       q    w    e    r    t    y    u    i    o    p    [    ]
   caps      a    s    d    f    g    h    j    k    l    ;    '    \
@@ -29,7 +29,7 @@
 )
 
 (deflayer level1
-              C-pgup C-pgdn          f6
+                                     f6
   grv       1    2    3    4    5    6    7    8    9    0    @-   S-=
   tab       v    .    @o   u    @ä   q    g    @lsp h    f    j    =
   @22       @c3  @as  @ec  @i4  z    b    @t4  @rc  @ns  @s3  @22  @ß
@@ -38,7 +38,7 @@
 )
 
 (deflayer level2
-                 f2   f3             _
+                                     _
   @ˇ        °    §    @ℓ   @»   @«   $    @€   @„   @“   @”   @—   ¸
   S-tab     V    •    O    U    S-@ä Q    G    L    H    F    J    ´
   _         C    A    E    I    Z    B    T    R    N    S    _    ß
@@ -47,7 +47,7 @@
 )
 
 (deflayer level3
-                 _   _               @qwe
+                                     @qwe
   _         @¹   @²   @³   @›   @‹   @¢   @¥   @‚   @‘   @’   @—    _
   _         @@   @%   @{   @}   @^   @!   @<   @>   @=   @&   @€    /
   _         @|   @`   @kau @kzu @*   @?   @/   @:   @-   @\_   _    @→
@@ -56,7 +56,7 @@
 )
 
 (deflayer level4
-                 _    _              f6
+                                     f6
   _         ¹    ²    @✔   @✘   @⭐  ¢    ¥    ‚    ‘    ’    _    _
   _         pgup pgdn up   bspc del  :    7    8    9    +    -    S-'
   _         home lft  down rght end  -    4    5    6    ,    _    ;
@@ -65,7 +65,7 @@
 )
 
 (deflayer special
-                  XX    XX                 XX
+                                           XX
   XX        XX    XX    XX     XX    XX    XX    XX    XX    XX    XX    XX    XX
   XX      A-pgup A-pgdn @cpm C-bspc C-del  XX    XX    XX    XX    XX    XX    XX
   XX      A-lft C-pgup  XX   C-pgdn A-rght XX    XX    XX    XX    XX    XX    XX
@@ -74,7 +74,7 @@
 )
 
 (deflayer seldom
-                 XX   XX             XX
+                                     XX
   XX        f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
   XX        XX   XX   @ö   @ü   XX   XX   XX   XX   @sch XX   XX   XX
   XX        XX   @ä   @€   j    XX   XX   XX   v    XX   ß    XX   XX
@@ -83,20 +83,20 @@
 )
 
 (deflayer qwertz
-                 f2   f3             _
-  S-6       1    2    3    4    5    6    7    8    9    0    ß    apos
-  tab       q    w    e    r    t    z    u    i    o    p    ü    +
-  @q3       a    s    d    f    g    h    j    k    l    ö    ä    #
-  lsft <    y    x    c    v    b    n    m    ,    .    -    rsft
+                                     _
+  grv       1    2    3    4    5    6    7    8    9    0    @ß   =
+  tab       q    w    e    r    t    y    u    i    o    p    @ü   @+
+  @q3       a    s    d    f    g    h    j    k    l    @ö   @ä   @#
+  lsft @<   z    x    c    v    b    n    m    ,    .    @-   rsft
                                spc             ralt      cmp  rctl
 )
 
 (deflayer qwertz3
-                 f2   f3             @vou
-  S-6       1    2    3    4    5    6    7    8    9    0    ß    apos
-  tab       q    w    e    r    t    z    u    i    o    p    ü    +
-  caps      a    s    d    f    g    h    j    k    l    ö    ä    #
-  lsft <    y    x    c    v    b    n    m    ,    .    -    rsft
+                                     @vou
+  grv       1    2    3    4    5    6    7    8    9    0    @ß   =
+  tab       q    w    e    r    t    y    u    i    o    p    @ü   @+
+  caps      a    s    d    f    g    h    j    k    l    @ö   @ä   @#
+  lsft @<   z    x    c    v    b    n    m    ,    .    @-   rsft
                                spc             ralt      cmp  rctl
 )
 
