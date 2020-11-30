@@ -43,6 +43,8 @@ set -x BAT_THEME TwoDark
 # use vim for editing the command line with Alt-e
 set -x VISUAL vim
 
+set -x BYOBU_EDITOR vim
+
 if type -q fzf
     # also find hidden files with FZF
     #set -x FZF_DEFAULT_COMMAND "find ."
