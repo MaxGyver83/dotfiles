@@ -53,7 +53,7 @@ autocmd FileType python set colorcolumn=72,80
 " endif
 autocmd FileType mail setlocal nojoinspaces formatoptions=watqc
 autocmd BufRead,BufNewFile ~/Documents/notes/*.txt setlocal syntax=sh
-autocmd BufRead,BufNewFile ~/.config/kmonad/*.kbd setlocal filetype=clojure
+autocmd BufRead,BufNewFile **/kmonad/*.kbd setlocal filetype=clojure
 
 " recognize tmux config files
 autocmd BufRead,BufNewFile *.tmux set filetype=tmux
@@ -494,6 +494,10 @@ vmap , <Plug>SneakNext
 let g:sneak#use_ic_scs = 1
 " turn off search highlight and sneak highlight
 nnoremap <Leader><Space> :nohlsearch \| call sneak#cancel()<CR>
+
+" make vim-CtrlXA work well with vim-speeddating
+nmap <Plug>SpeedDatingFallbackUp   <Plug>(CtrlXA-CtrlA)
+nmap <Plug>SpeedDatingFallbackDown <Plug>(CtrlXA-CtrlX)
 
 " use fzf (FuzzyFinder) in vim
 set rtp+=~/workspace/fzf
