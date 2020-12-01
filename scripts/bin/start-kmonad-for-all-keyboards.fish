@@ -18,6 +18,15 @@ if test -e $keyb
     kmonad $dest & ; disown
 end
 
+set keyb /dev/input/by-id/usb-413c_Dell_KB216_Wired_Keyboard-event-kbd
+if test -e $keyb
+    echo "Activate KMonad for Dell keyboard"
+    set dest "/tmp/kmonad-vou-dell.kbd"
+    cp $config $dest
+    sed -i 's:/dev/input/by-path/platform-i8042-serio-0-event-kbd:'$keyb':' $dest
+    kmonad $dest & ; disown
+end
+
 set keyb /dev/input/by-id/usb-SONiX_USB_DEVICE-event-kbd
 if test -e $keyb
     echo "Activate KMonad for Royal Kludge keyboard"
