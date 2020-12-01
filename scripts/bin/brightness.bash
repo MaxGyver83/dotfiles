@@ -19,5 +19,7 @@ else
     exit 0
 fi
 
-xrandr --output eDP-1 --brightness "$NEWBRIGHT"
+first_monitor=$(xrandr | grep -w connected | head -n 1 | cut -d " " -f1)
+xrandr --output "$first_monitor" --brightness "$NEWBRIGHT"
+
 notify-send -t 500 $(echo "$NEWBRIGHT * 100" | bc | sed 's/\.00//')"%"
