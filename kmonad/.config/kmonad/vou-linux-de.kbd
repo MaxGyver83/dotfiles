@@ -58,9 +58,9 @@
 (deflayer level4
                                      f6
   _         ¹    ²    @✔   @✘   @⭐  ¢    ¥    ‚    ‘    ’    _    _
-  _         pgup pgdn up   bspc del  :    7    8    9    +    -    S-'
-  _         home lft  down rght end  -    4    5    6    ,    _    ;
-  lsft XX   ins  tab  ret  esc  _    _    1    2    3    .    rsft
+  _         pgup pgdn up   bspc del  @:   7    8    9    @+   @-   S-'
+  _         home lft  down rght end  @-   4    5    6    ,    _    @;
+  lsft XX   ins  tab  ret  esc  XX   @\_  1    2    3    .    rsft
                                 0              _         _    _
 )
 
@@ -68,7 +68,7 @@
                                            XX
   XX        XX    XX    XX     XX    XX    XX    XX    XX    XX    XX    XX    XX
   XX      A-pgup A-pgdn @cpm C-bspc C-del  XX    XX    XX    XX    XX    XX    XX
-  XX      A-lft C-pgup  XX   C-pgdn A-rght XX    XX    XX    XX    XX    XX    XX
+  XX      A-lft C-pgup C-tab C-pgdn A-rght XX    XX    XX    XX    XX    XX    XX
   XX   XX   XX    @pb   @nb    XX    XX    XX    XX    XX    XX    XX    XX
                                XX                      XX          XX    XX
 )
