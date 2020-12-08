@@ -19,6 +19,8 @@ bind C-e last-window
 # needs to be unset in terminator
 bind -n C-PPage previous-window
 bind -n C-NPage next-window
+bind -n M-a previous-window
+bind -n M-i next-window
 
 # Unbind Alt-Left and Alt-Right for previous/next window
 unbind -n M-Left
@@ -88,8 +90,8 @@ bind -n M-q kill-pane -t :. \;\
         select-pane -t :.1
 
 # Next/prev pane
-bind -n M-t select-pane -t :.+
-bind -n M-r select-pane -t :.-
+bind -n M-e select-pane -t :.+
+bind -n M-o select-pane -t :.-
 
 # Resize pane
 bind -n M-l resize-pane -L 2
@@ -97,12 +99,12 @@ bind -n M-h resize-pane -R 2
 
 # Rotate counterclockwise/clockwise
 bind -n M-, rotate-window -U \; select-pane -t 1
-bind -n M-S-, rotate-window -D \; select-pane -t 1
+bind -n M-x rotate-window -D \; select-pane -t 1
 
 # Focus selected pane
-bind -n M-i swap-pane -d -s :. -t :.1 # \; select-pane -t :.1
-bind -n M-I swap-pane -s :. -t !
-bind -n M-e if-shell "[ $(tmux display -p '#P') = '1' ]" "swap-pane -d -s :. -t :.1" "swap-pane -s :. -t !"
+bind -n M-d swap-pane -d -s :. -t :.1 # \; select-pane -t :.1
+bind -n M-w swap-pane -s :. -t !
+bind -n M-t if-shell "[ $(tmux display -p '#P') = '1' ]" "swap-pane -d -s :. -t :.1" "swap-pane -s :. -t !"
 
 # Refresh layout
 bind -n M-S-r select-layout main-vertical \;\
