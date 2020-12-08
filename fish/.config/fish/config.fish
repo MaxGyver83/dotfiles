@@ -42,6 +42,7 @@ set -x BAT_THEME TwoDark
 
 # use vim for editing the command line with Alt-e
 set -x VISUAL vim
+set -x EDITOR vim
 
 set -x BYOBU_EDITOR vim
 
