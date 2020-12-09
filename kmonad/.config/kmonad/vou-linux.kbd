@@ -2,7 +2,7 @@
   ;; For Linux
   input  (device-file "/dev/input/by-path/platform-i8042-serio-0-event-kbd")
   output (uinput-sink "KMonad output"
-    "/bin/sleep 1 && /bin/setxkbmap us -option compose:ralt")
+    "/bin/sleep 1 && setxkbmap us -option compose:ralt")
 
   ;; For Windows
   ;; input  (low-level-hook)
