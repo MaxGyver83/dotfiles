@@ -7,7 +7,7 @@ numlockx off
 xset r rate 300 50
 #xinput set-prop 'ETPS/2 Elantech Touchpad' 'libinput Natural Scrolling Enabled' 1
 dunst &
-xrandr | grep -q 2560x1440 && test -f ~/.screenlayout/only-peaq.sh && ~/.screenlayout/only-peaq.sh
+xrandr | grep -q 2560x1440 && test -f ~/.screenlayout/peaq.sh && ~/.screenlayout/peaq.sh
 xrandr --output $(xrandr | grep -w connected | head -n 1 | cut -d " " -f1) --brightness 0.7
 # test -f ~/.screenlayout/ext-monitor-acer.sh && ~/.screenlayout/ext-monitor-acer.sh
 test -d /home/max && ~/bin/set-random-wallpaper.bash || feh --bg-fill ~/Pictures/Leo4.jpg
