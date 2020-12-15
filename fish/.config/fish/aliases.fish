@@ -101,6 +101,10 @@ alias gitlogc='git log --pretty="%C(Yellow)%h  %C(reset)%ai (%C(Green)%cr%C(rese
 abbr gitunpushed 'git log ..@{u}'
 abbr gitunmerged 'git branch --no-merged master'
 alias gb "git for-each-ref --sort=committerdate refs/remotes/origin/ --format='%(HEAD) %(color:red)%(objectname:short)%(color:reset) %(color:yellow)%(refname:short)%(color:reset)  %(contents:subject)  %(color:cyan)%(authorname)%(color:reset) (%(color:green)%(committerdate:relative)%(color:reset))'"
+# copy current branch name into clipboard
+abbr br 'git rev-parse --abbrev-ref HEAD | tr -d \n | xclip -sel clip'
+# for git 2.22 and newer:
+# abbr br 'git branch --show-current | tr -d \n | xclip -sel clip'
 
 # source work related / private stuff (not part of the dotfiles repo)
 if [ -f $HOME/.config/fish/local.fish ]
