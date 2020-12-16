@@ -7,7 +7,10 @@ while true; do
     battery=⎓$(cat /sys/class/power_supply/BAT0/capacity)"%, "
     dat=$(date "+%a %F %R")
     xsetroot -name "${mailinfo}${brightness}${battery}${dat}"
-    sleep 20
+    seconds=$(date +%S)
+    seconds_to_full_minute=$(( 60 - $seconds ))
+    # echo "Sleeping for $seconds_to_full_minute seconds." >> ~/.dwm.log
+    sleep $seconds_to_full_minute
 done &
 
 # start dwm
