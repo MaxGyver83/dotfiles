@@ -1,6 +1,6 @@
 # dotfiles
 
-My bash, fish, vim, neovim, IdeaVim, surfingkeys, alacritty config files and scripts for changing the keyboard layout. These files are organized in such a way that they can be installed with GNU Stow. Stow creates links to the dotfiles from this repo in `$HOME` (or its subfolders).
+My bash, fish, vim, neovim, IdeaVim, surfingkeys, alacritty, Qtile config files and scripts for changing the keyboard layout. These files are organized in such a way that they can be installed with GNU Stow. Stow creates links to the dotfiles from this repo in `$HOME` (or its subfolders).
 
 ```sh
 sudo apt-get install stow
