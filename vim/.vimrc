@@ -54,6 +54,7 @@ autocmd FileType python set colorcolumn=72,80
 autocmd FileType mail setlocal nojoinspaces formatoptions=watqc
 autocmd BufRead,BufNewFile ~/Documents/notes/*.txt setlocal syntax=sh
 autocmd BufRead,BufNewFile **/kmonad/*.kbd setlocal filetype=clojure
+autocmd BufRead,BufNewFile **/dwm.c set autoindent noexpandtab tabstop=4 shiftwidth=4
 
 " recognize tmux config files
 autocmd BufRead,BufNewFile *.tmux set filetype=tmux
@@ -123,7 +124,8 @@ endif
 
 " use a bar as cursor in insert mode, underline in replace mode
 " https://stackoverflow.com/a/42118416/4121487
-if !has('nvim') && has("patch-7.4.687")
+" Does not work in JuiceSSH (Android) (TERM=linux)
+if !has('nvim') && has("patch-7.4.687") && &term != 'linux'
     let &t_SI = "\e[6 q"
     let &t_SR = "\e[4 q"
     let &t_EI = "\e[2 q"
@@ -222,6 +224,9 @@ xnoremap * <ESC>/<C-r>*<cr>
 " search word under cursor expanding the selection with leader *
 xnoremap <Leader>* *
 
+" print value of environment variable under cursor
+nnoremap <Leader>z l?\$<cr>v/\$[a-zA-Z{}_]\+/e<cr>"vy:echo <C-R>v<cr>
+
 " send current line/selection to other vim (terminal) window
 if has('nvim')
     " use after :vsp | term ipython3 --no-autoindent
@@ -264,8 +269,10 @@ nnoremap <Leader>l :20Lex \| call CleanNoNameEmptyBuffers()<cr>
 " previous/next result (after vimgrep)
 "noremap <Leader>e :cprevious<cr>
 "noremap <Leader>i :cnext<cr>
-noremap <C-h> :cprevious<cr>
-noremap <C-l> :cnext<cr>
+" noremap <C-h> :cprevious<cr>
+" noremap <C-l> :cnext<cr>
+noremap <C-l> [c
+noremap <C-h> ]c
 
 " swap ; and , (next/previous match after t, T, f, F)
 nnoremap ; ,
