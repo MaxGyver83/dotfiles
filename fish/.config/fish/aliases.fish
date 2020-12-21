@@ -83,6 +83,10 @@ abbr red 'redshift -P -O 3500 -b 0.7'
 abbr notred 'redshift -P -O 6500'
 abbr ti 'pkill kmonad ; setxkbmap de ; tipp10'
 
+# simulate one or two screens for debugging dwm
+abbr x1 'Xephyr -br -ac -noreset -screen 800x600+400+80 :1'
+abbr x2 'Xephyr +extension RANDR +xinerama -br -ac -noreset -screen 800x600+250+80 -screen 800x600+1050+80 :1'
+
 # git
 abbr g 'git status'
 abbr gd 'git diff'
