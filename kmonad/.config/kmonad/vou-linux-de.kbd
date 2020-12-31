@@ -31,7 +31,7 @@
 (deflayer level1
                                      f6
   grv       1    2    3    4    5    6    7    8    9    0    @-   S-=
-  tab       v    .    @o   u    @ä   q    g    @lsp h    f    j    =
+  tab       v    .    @o   u    @ä   q    @gc4 @lsp @h2  f    j    =
   @22       @c3  @as  @ec  @i4  z    b    @t4  @rc  @ns  @s3  @22  @ß
   lsft @s2  @z   @xa  @,w  @ü   @ö   p    @dw  @wa  m    k    rsft
                                spc             ralt      _    @ctlc
@@ -43,7 +43,7 @@
   S-tab     V    •    O    U    S-@ä Q    G    L    H    F    J    ´
   _         C    A    E    I    Z    B    T    R    N    S    _    ß
   _     XX  Y    X    -    S-@ü S-@ö P    D    W    M    K    _
-                               spc             @lv4      _    _
+                               S-spc           @lv4      _    _
 )
 
 (deflayer level3
@@ -141,7 +141,9 @@
   xa (tap-hold-next-release 500 x lalt)
   ,w (tap-hold-next-release 500 , lmet)
 
+  gc4 (tap-hold-next-release 500 g C-@lv4)
   lsp (tap-hold-next-release 500 l @spl)
+  h2  (tap-hold-next-release 500 h rsft)
   dw  (tap-hold-next-release 500 d rmet)
   wa  (tap-hold-next-release 500 w lalt)
   ks  (tap-hold-next-release 500 k @lv2)
