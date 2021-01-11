@@ -15,6 +15,10 @@ function fish_user_key_bindings
     # bind \cs __fish_prepend_sudo
     # bind \ch history-token-search-backward
 
+    # Ctrl-Home/End = Home/End
+    bind '[1;5H' beginning-of-line
+    bind '[1;5F' end-of-line
+
     if type -q fzf_key_bindings
         fzf_key_bindings
     end
