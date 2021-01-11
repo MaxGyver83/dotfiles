@@ -36,7 +36,7 @@ if test -e $keyb
     kmonad $dest & ; disown
 end
 
-set keyb /dev/input/(grep -B 8 -A 4 120013 /proc/bus/input/devices | grep RK-Bluetooth -A 4 | grep -oE 'event[0-9]+')
+set keyb /dev/input/(grep -B 8 -A 4 12001 /proc/bus/input/devices | grep RK-Bluetooth -A 4 | grep -oE 'event[0-9]+')
 if string match -q -- "*event*" $keyb
     echo "Activate KMonad for Royal Kludge keyboard over bluetooth"
     set dest "/tmp/kmonad-vou-royal-bt.kbd"
