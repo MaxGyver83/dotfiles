@@ -34,7 +34,7 @@ abbr manc 'set PAGER most; man'
 abbr y 'yank'
 abbr cb 'xclip -sel clip'
 # get last non-empty line from previous output and paste it into command line (in tmux/byobu)
-alias out='tmux capture-pane -p | awk /./ | sed /▶/d | sed /\(ansi/d| tail -1 | tr "\n" " " | tmux load-buffer - && tmux paste-buffer -s " "'
+alias out='tmux capture-pane -p | awk /./ | sed /▶/d | sed /\(ansi/d| tail -1 | tr "\n" " " | string trim | tmux load-buffer - && tmux paste-buffer -s " "'
 # lc = last command
 abbr lc 'eval $history[1] -- xsel -b'
 # lcs = last command, select (word)
