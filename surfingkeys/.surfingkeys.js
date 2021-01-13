@@ -11,7 +11,7 @@ unmapAllExcept(['f', 'af', 'gf','q', 'i', 'H', 'S', 'D', 'E', 'R', 'e', 'd', ';e
 
 unmapAllExcept([], /urac.github.io\/Belegungstester/i);
 unmapAllExcept(['f', 'q', 'i', ';e'], /mail\.google\.com/i);
-unmapAllExcept(['f', 'q', 'i', ';e', 'T', '<Ctrl-6>'], /maximilian-schillinger\.de\/notizen.html/i);
+unmapAllExcept(['f', 'q', 'i', ';e', 'T', '<Ctrl-6>'], /maximilian-schillinger\.de\/n\//i);
 unmapAllExcept(['f', 'q', 'i', ';e', 'T', '<Ctrl-6>'], /http:\/\/127\.0\.0\.1:8080/i);
 //unmap('t', /http:\/\/127\.0\.0\.1:8080/i);
 
