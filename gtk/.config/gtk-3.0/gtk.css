@@ -8,13 +8,14 @@
 /* active window */
 headerbar {
     /* background-image: none; */
-    border-top: 5px solid #c00;
+    /* border-top: 5px solid #c00; */
 }
 /* inactive window */
 headerbar:backdrop {
     background-color: #555;
     border-top: none;
 }
+
 /* does not work */
 /* window { border: 1px solid red; } */
 /* window:backdrop { border: none; } */
