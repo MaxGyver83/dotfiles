@@ -12,6 +12,7 @@ try
 catch /^Vim\%((\a\+)\)\=:E185/
     " alternative if minimalist is not installed
     colorscheme torte
+    highlight LineNr ctermfg=59 ctermbg=234 cterm=NONE
     highlight CursorLine ctermfg=NONE ctermbg=239 cterm=NONE
 endtry
 
@@ -559,7 +560,7 @@ let g:tiddlywiki_no_mappings=1
 " DidYouMean
 " let g:dym_use_fzf = 1
 
-" vim-lighline
+" vim-lightline
 set laststatus=2
 set noshowmode
 let g:lightline = {
