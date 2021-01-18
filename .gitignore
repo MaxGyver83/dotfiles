@@ -1,1 +1,12 @@
 vim/.vim/.netrwhist
+byobu/.byobu/.screenrc
+byobu/.byobu/.ssh-agent
+byobu/.byobu/.tmux_history
+byobu/.byobu/backend
+byobu/.byobu/color
+byobu/.byobu/windows
+fish/.config/fish/functions/__z.fish
+fish/.config/fish/functions/__z_add.fish
+fish/.config/fish/functions/__z_clean.fish
+fish/.config/fish/functions/__z_complete.fish
+qtile/.config/qtile/__pycache__/
