@@ -56,6 +56,7 @@ autocmd FileType mail setlocal nojoinspaces formatoptions=watqc
 autocmd BufRead,BufNewFile ~/Documents/notes/*.txt setlocal syntax=sh
 autocmd BufRead,BufNewFile **/kmonad/*.kbd setlocal filetype=clojure
 autocmd BufRead,BufNewFile **/dwm.c set autoindent noexpandtab tabstop=4 shiftwidth=4
+autocmd BufRead,BufNewFile *.js.tid set filetype=javascript noexpandtab tabstop=4 shiftwidth=4
 
 " recognize tmux config files
 autocmd BufRead,BufNewFile *.tmux set filetype=tmux
@@ -225,19 +226,22 @@ xnoremap * <ESC>/<C-r>*<cr>
 " search word under cursor expanding the selection with leader *
 xnoremap <Leader>* *
 
+" search and replace in whole file
+nnoremap <Leader>s :% s/\v//g<left><left><left>
+
 " print value of environment variable under cursor
 nnoremap <Leader>z l?\$<cr>v/\$[a-zA-Z{}_]\+/e<cr>"vy:echo <C-R>v<cr>
 
 " send current line/selection to other vim (terminal) window
-if has('nvim')
-    " use after :vsp | term ipython3 --no-autoindent
-    nnoremap <Leader>s yy<C-w>w<C-\><C-n>pi<cr><C-\><C-n><C-w>w
-    xnoremap <Leader>s y<C-w>w<C-\><C-n>pi<cr><C-\><C-n><C-w>w
-else
-    " use after :vert term ipython3 --no-autoindent
-    nnoremap <Leader>s yy<C-w>w<C-w>"0<C-w>w
-    xnoremap <Leader>s y<C-w>w<C-w>"0<C-w>w
-endif
+" if has('nvim')
+"     " use after :vsp | term ipython3 --no-autoindent
+"     nnoremap <Leader>s yy<C-w>w<C-\><C-n>pi<cr><C-\><C-n><C-w>w
+"     xnoremap <Leader>s y<C-w>w<C-\><C-n>pi<cr><C-\><C-n><C-w>w
+" else
+"     " use after :vert term ipython3 --no-autoindent
+"     nnoremap <Leader>s yy<C-w>w<C-w>"0<C-w>w
+"     xnoremap <Leader>s y<C-w>w<C-w>"0<C-w>w
+" endif
 
 " move vertically up or down to next non-whitespace character
 " (similar to Ctrl-Up/Down in Excel/LibreOffice)

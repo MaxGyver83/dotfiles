@@ -9,4 +9,4 @@ else
     # default: tab key
     keycode=23
 fi
-xinput test 12 | while read in ; do [[ $in = "key press   $keycode" ]] && play -q -n synth 0.1 sin 880 2> /dev/null; done
+xinput test 14 | while read in ; do [[ $in = "key press   $keycode" ]] && play -q -n synth 0.1 sin 880 2> /dev/null; done

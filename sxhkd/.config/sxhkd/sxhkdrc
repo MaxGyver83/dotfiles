@@ -21,7 +21,11 @@ super + k
 # start or focus byobu (in alacritty)
 super + b
 #    alacritty --config-file ~/.config/alacritty/alacritty_dwm.yml -e byobu
-    pgrep -f byobu &> /dev/null && wmctrl -a byobu || ~/install/alacritty-0.6 --config-file ~/.config/alacritty/alacritty_dwm_0.6.yml -e byobu
+    pgrep -f byobu &> /dev/null && wmctrl -a byobu || ~/install/alacritty --config-file ~/.config/alacritty/alacritty_dwm_0.6.yml -e byobu
+
+# start new byobu session (in separate alacritty window)
+super + ctrl + b
+    ~/install/alacritty --config-file ~/.config/alacritty/alacritty_dwm_0.6.yml -e byobu -S session-$(date +%H%M%S)
 
 # start or focus Firefox
 super + f
@@ -66,7 +70,8 @@ super + shift + z
 
 # check connected displays
 super + F8
-    xrandr | grep -q 2560x1440 && ~/.screenlayout/only-peaq.sh || ~/.screenlayout/only-laptop.sh
+    ~/bin/try-next-screenlayout.bash
+    # xrandr | grep -q 2560x1440 && ~/.screenlayout/peaq.sh || ~/.screenlayout/laptop.sh
 
 # screenshot
 Print

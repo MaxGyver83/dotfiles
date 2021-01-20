@@ -6,3 +6,7 @@ include "%L"
 <Multi_key> <n> <n> : "✘"   # no no
 <Multi_key> <s> <t> : "⭐"  # star
 
+<Multi_key> <g> <m> : "Grüße\nMax"
+<Multi_key> <m> <w> : "maxschillinger@web.de"
+<Multi_key> <m> <g> : "maxiximilian.schillinger@gmail.com"
+

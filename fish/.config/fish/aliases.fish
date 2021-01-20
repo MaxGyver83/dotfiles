@@ -77,6 +77,8 @@ abbr asdf 'xhost &> /dev/null && setxkbmap de koy && xkbcomp -w 0 ~/bin/vou-tabw
 alias vou='setxkbmap de koy && xkbcomp -w 0 ~/bin/vou.xkb $DISPLAY'
 abbr k '~/bin/start-kmonad-for-all-keyboards.fish'
 abbr kk '~/bin/start-kmonad-for-all-keyboards.fish de'
+abbr kkk '~/bin/start-kmonad-for-all-keyboards-dev.fish de'
+abbr kkkk '~/bin/start-kmonad-for-all-keyboards-slot.fish de'
 abbr s 'xrandr | grep -q 2560x1440 && ~/.screenlayout/only-peaq.sh || ~/.screenlayout/only-laptop.sh'
 # redshift: red=night mode (darker, redish), notred=day mode
 abbr red 'redshift -P -O 3500 -b 0.7'
@@ -97,11 +99,14 @@ abbr gh 'cd (git rev-parse --show-toplevel)'
 abbr gfm 'git ls-files --modified'
 # git log
 abbr gl 'git log'
-alias glc='git log --pretty="%C(Yellow)%h  %C(reset)%ai (%C(Green)%cr%C(reset))%x09 %C(reset)%s"'
+# git log compact
+# alias glc='git log --pretty="%C(Yellow)%h  %C(reset)%ai (%C(Green)%cr%C(reset))%x09 %C(reset)%s"'
+alias glc='git log --pretty="%C(Yellow)%h   %C(reset)%ai (%C(Green)%cr%C(reset))%x09 %C(reset)%s %C(Red)%d%C(reset)" --decorate=full'
+# git log compact [with] names
+alias glcn='git log --pretty="%C(Yellow)%h  %C(reset)%ai (%C(Green)%cr%C(reset))%x09 %C(Cyan)%an: %C(reset)%s"'
 alias gitlog='git log --oneline --graph --decorate'
 alias gitlogs='git log --oneline --graph --decorate --stat'
 alias gitloga='git log --oneline --graph --decorate --all'
-alias gitlogc='git log --pretty="%C(Yellow)%h  %C(reset)%ai (%C(Green)%cr%C(reset))%x09 %C(Cyan)%an: %C(reset)%s"'
 abbr gitunpushed 'git log ..@{u}'
 abbr gitunmerged 'git branch --no-merged master'
 alias gb "git for-each-ref --sort=committerdate refs/remotes/origin/ --format='%(HEAD) %(color:red)%(objectname:short)%(color:reset) %(color:yellow)%(refname:short)%(color:reset)  %(contents:subject)  %(color:cyan)%(authorname)%(color:reset) (%(color:green)%(committerdate:relative)%(color:reset))'"
