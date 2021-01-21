@@ -13,6 +13,7 @@ unmapAllExcept([], /urac.github.io\/Belegungstester/i);
 unmapAllExcept(['f', 'q', 'i', ';e'], /mail\.google\.com/i);
 unmapAllExcept(['f', 'q', 'i', ';e', 'T', '<Ctrl-6>'], /maximilian-schillinger\.de\/n\//i);
 unmapAllExcept(['f', 'q', 'i', ';e', 'T', '<Ctrl-6>'], /http:\/\/127\.0\.0\.1:8080/i);
+unmapAllExcept(['f', 'q', 'i', ';e', 'T', '<Ctrl-6>'], /localhost:8080/);
 unmapAllExcept(['f', 'q', 'i', ';e', 'T', '<Ctrl-6>'], /\/Downloads\/Wiki\//);
 //unmap('t', /http:\/\/127\.0\.0\.1:8080/i);
 
