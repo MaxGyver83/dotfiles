@@ -1,6 +1,8 @@
 #!/bin/bash
 
-BRIGHT=$(stdbuf -o0 xrandr --verbose | awk '/Brightness/ { print $2; exit }')
+monitor_xpos=$(xdotool getactivewindow getwindowgeometry | grep Position | grep -o '[0-9]*,' | sed 's/,//')
+active_monitor=$(xrandr | grep -w connected | grep "+$monitor_xpos+" | head -n 1 | cut -d " " -f1)
+BRIGHT=$(stdbuf -o0 xrandr --verbose | grep "^$active_monitor" -A 5 | awk '/Brightness/ { print $2; exit }')
 
 STEP=0.1
 
@@ -19,8 +21,10 @@ else
     exit 0
 fi
 
-first_monitor=$(xrandr | grep -w connected | head -n 1 | cut -d " " -f1)
-xrandr --output "$first_monitor" --brightness "$NEWBRIGHT"
+# first_monitor=$(xrandr | grep -w connected | head -n 1 | cut -d " " -f1)
+# xrandr --output "$first_monitor" --brightness "$NEWBRIGHT"
+
+xrandr --output "$active_monitor" --brightness "$NEWBRIGHT"
 
 notify-send -t 500 $(echo "$NEWBRIGHT * 100" | bc | sed 's/\.00//')"%"
 bash ~/.dwm/update-status.bash
