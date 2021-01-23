@@ -66,6 +66,8 @@ git clone https://github.com/tpope/vim-speeddating.git
 git clone https://github.com/EinfachToll/DidYouMean.git
 git clone https://github.com/dag/vim-fish.git
 git clone https://github.com/sukima/vim-tiddlywiki.git
+git clone https://github.com/junegunn/fzf.vim.git
+git clone https://github.com/jesseleite/vim-agriculture.git
 git clone https://github.com/itchyny/lightline.vim.git
 git clone --recursive https://github.com/davidhalter/jedi-vim.git
 
