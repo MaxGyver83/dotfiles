@@ -94,6 +94,21 @@ autocmd BufWinLeave * call clearmatches()
 highlight NoBreakWhitespace ctermbg=blue guibg=blue
 autocmd Syntax * syn match NoBreakWhitespace / \| \|­/
 
+" add command to history when I do: vim -c 'RgRaw ...'
+if has('nvim')
+    " Does not work: E121: Undefined variable: v:argv
+    " augroup CustomHistory | au!
+    "     au VimEnter * call map(filter(copy(v:argv), {i, v -> i > 0 && v:argv[i - 1] == '-c'}), {_, v -> histadd('cmd', v)})
+    " augroup END
+else
+    augroup CustomHistory | au!
+        au VimEnter * eval v:argv
+            \ ->copy()
+            \ ->filter({i, v -> i > 0 && v:argv[i - 1] == '-c'})
+            \ ->map({_, v -> histadd('cmd', v)})
+    augroup END
+endif
+
 " don't give ins-completion-menu messages
 if has("patch-7.4.314")
     set shortmess+=c
