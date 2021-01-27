@@ -100,7 +100,7 @@ if has('nvim')
     " augroup CustomHistory | au!
     "     au VimEnter * call map(filter(copy(v:argv), {i, v -> i > 0 && v:argv[i - 1] == '-c'}), {_, v -> histadd('cmd', v)})
     " augroup END
-else
+elseif has("patch-8.1.2233")
     augroup CustomHistory | au!
         au VimEnter * eval v:argv
             \ ->copy()
