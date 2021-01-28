@@ -3,6 +3,10 @@
 # When used with vim -> E994. Workaround: call timer_start ...
 # But then selection of a match with "Enter" does not work.
 # Save command in command history: needs autocommand in .vimrc. Does not work in nvim.
+if [ (count $argv) > 0 ]
+    nvim -c "RgRaw $argv"
+    exit 0
+end
 set last_command (string split --max 1 ' ' $history[2])
 set cmd $last_command[1]
 if [ $cmd = 'rg' ]
