@@ -7,8 +7,8 @@ function fish_user_key_bindings
     bind \cf forward-bigword
 
     # jump bigword with Shift+LeftArrow/RightArrow
-    #bind '[1;2D' backward-bigword
-    #bind '[1;2C' forward-bigword
+    bind \e\[1\;2D backward-bigword
+    bind \e\[1\;2C forward-bigword
 
     bind \cq delete-or-exit
     # bind \cp __fish_paginate
@@ -16,8 +16,8 @@ function fish_user_key_bindings
     # bind \ch history-token-search-backward
 
     # Ctrl-Home/End = Home/End
-    bind '[1;5H' beginning-of-line
-    bind '[1;5F' end-of-line
+    bind \e\[1\;5H beginning-of-line
+    bind \e\[1\;5F end-of-line
 
     if type -q fzf_key_bindings
         fzf_key_bindings
