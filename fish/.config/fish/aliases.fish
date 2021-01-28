@@ -83,8 +83,8 @@ abbr kkk '~/bin/start-kmonad-for-all-keyboards-dev.fish de'
 abbr kkkk '~/bin/start-kmonad-for-all-keyboards-slot.fish de'
 abbr s 'xrandr | grep -q 2560x1440 && ~/.screenlayout/only-peaq.sh || ~/.screenlayout/only-laptop.sh'
 # redshift: red=night mode (darker, redish), notred=day mode
-abbr red 'redshift -P -O 3500 -b 0.7'
-abbr notred 'redshift -P -O 6500'
+abbr red 'redshift -P -O 3500 -b 0.7 || redshift -O 3500 -b 0.7'
+abbr notred 'redshift -P -O 6500 || redshift -O 6500'
 abbr ti 'pkill kmonad ; setxkbmap de ; tipp10'
 
 # simulate one or two screens for debugging dwm
