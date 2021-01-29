@@ -16,7 +16,7 @@ run dunst
 # [ $(xrandr | grep -wc connected) -eq 3 ] && ~/.screenlayout/2-externe-acer.sh
 xrandr --output $(xrandr | grep -w connected | head -n 1 | cut -d " " -f1) --brightness 0.7
 # test -f ~/.screenlayout/ext-monitor-acer.sh && ~/.screenlayout/ext-monitor-acer.sh
-test -d /home/max && ~/bin/set-random-wallpaper.bash || feh --bg-fill ~/Pictures/Leo4.jpg
+~/bin/set-wallpaper.bash
 run compton
 # trayer --widthtype request --align right &
 run nm-applet
