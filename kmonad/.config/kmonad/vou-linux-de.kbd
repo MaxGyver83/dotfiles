@@ -60,7 +60,7 @@
   _         ¹    ²    @✔   @✘   @⭐  ¢    ¥    ‚    ‘    ’    _    _
   _         pgup pgdn up   bspc del  @:   7    8    9    @+   @-   S-'
   _         home lft  down rght end  @-   4    5    6    ,    _    @;
-  lsft XX   ins  tab  ret  esc  XX   @\_  1    2    3    .    rsft
+  lsft XX   ins  tab  ret  esc  ret  @\_  1    2    3    .    rsft
                                 0              _         _    _
 )
 

@@ -97,6 +97,7 @@ abbr gd 'git diff'
 abbr gp 'git pull'
 # gh = "git home" (go to the toplevel of the current repo)
 abbr gcm 'git co master'
+abbr cim 'git ci -m "'
 abbr gh 'cd (git rev-parse --show-toplevel)'
 abbr gfm 'git ls-files --modified'
 # git log
