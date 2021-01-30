@@ -1,4 +1,6 @@
 function fish_user_key_bindings
+    # run fish_key_reader and press a key combo to get its representation
+
     # Ctrl-w: delete bigword (p.e. whole path with Ctrl-w, as in bash)
     bind \cw backward-kill-bigword
 
@@ -7,6 +9,7 @@ function fish_user_key_bindings
     bind \cf forward-bigword
 
     # jump bigword with Shift+LeftArrow/RightArrow
+    # (fish default, does work in gnome-terminal and st but not in alacritty)
     bind \e\[1\;2D backward-bigword
     bind \e\[1\;2C forward-bigword
 
