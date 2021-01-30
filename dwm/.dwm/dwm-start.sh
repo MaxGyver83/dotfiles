@@ -11,7 +11,7 @@ while true; do
     xsetroot -name "${mailinfo}${brightness}${battery}${dat}"
     seconds=$(date +%S)
     seconds_to_full_minute=$(( 60 - $seconds ))
-    # echo "$(date): Sleeping for $seconds_to_full_minute seconds." >> ~/.dwm.sleeping.log
+    # echo "$dat: Sleeping for $seconds_to_full_minute seconds." >> ~/.dwm.sleeping.log
     sleep $seconds_to_full_minute
 done &
 
