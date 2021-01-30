@@ -29,7 +29,7 @@ endif
 " mouse for vim selection (=VISUAL mode)
 set mouse=a
 
-set number            " show line numbers
+set number           " show line numbers
 set showcmd          " show command in bottom bar
 set ruler
 set cursorline       " highlight current line
@@ -322,6 +322,11 @@ nnoremap dil ^dg_
 nnoremap val 0v$
 nnoremap vil ^vg_
 noremap <Leader>Y ^"+yg_
+
+noremap <C-Left> b
+noremap <C-Right> w
+noremap <S-Left> B
+noremap <S-Right> W
 
 " Move lines up and down via Ctrl + j or k
 
