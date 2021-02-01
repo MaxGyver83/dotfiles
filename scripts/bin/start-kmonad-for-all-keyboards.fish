@@ -9,6 +9,7 @@ else
     set config ~/.config/kmonad/vou-linux.kbd
     set binary kmonad
 end
+pkill run_forever
 pkill '^kmonad'
 
 echo "Activate KMonad for internal keyboard"
@@ -38,7 +39,8 @@ if test -e $keyb
     set dest "/tmp/kmonad-vou-royal.kbd"
     cp $config $dest
     sed -i 's:/dev/input/by-path/platform-i8042-serio-0-event-kbd:'$keyb':' $dest
-    $binary $dest & ; disown
+    # $binary $dest & ; disown
+    run_forever.fish $binary $dest & ; disown
 end
 
 set keyb /dev/input/(grep -B 8 -A 4 12001 /proc/bus/input/devices | grep RK-Bluetooth -A 4 | grep -oE 'event[0-9]+')
