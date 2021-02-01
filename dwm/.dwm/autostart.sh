@@ -28,7 +28,9 @@ eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
 export SSH_AUTH_SOCK
 
 # start Alacritty with byobu and Firefox if not yet running
-run ~/install/alacritty-0.6 --config-file ~/.config/alacritty/alacritty_dwm_0.6.yml -e byobu
+if ! pgrep -f '/lhome/schimax/install/alacritty --config-file /lhome/schimax/.config/alacritty/alacritty_dwm_0.6.yml -e byobu' ; then
+  run ~/install/alacritty-0.6 --config-file ~/.config/alacritty/alacritty_dwm_0.6.yml -e byobu
+fi
 if ! pgrep -f firefox ; then
   firefox &
   sleep 1
