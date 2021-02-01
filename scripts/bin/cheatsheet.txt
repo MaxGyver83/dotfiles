@@ -1,0 +1,30 @@
+vim
+===
+gi  insert text where insert mode was stopped last time
+
+## jump to position ...
+g;  of last change (my alias: g.)
+g,  of next change (after g;)
+
+`"  when last exiting the current buffer
+`.  where the last change was made (also g.)
+`^  where the cursor was the last time when Insert mode was stopped
+`<  of last selected visual area
+`[  of previously changed or yanked text
+
+[c  jump to previous diff ("change")
+]c  jump to next diff
+
+^]  jump to tag under cursor
+
+:Hi recent files
+
+
+byobu
+=====
+Shift-F1       Show byobu keybindings
+Ctrl-F6        Kill active pane
+Ctrl-Shift-F2  Start new session
+Alt-Up         Next session
+Shift-F12      Toggle byobu keybindings
+F8 / PREFIX-,  Rename window

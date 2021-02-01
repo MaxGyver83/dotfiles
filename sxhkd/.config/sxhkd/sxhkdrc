@@ -14,9 +14,13 @@ super + w
 super + shift + w
     ~/bin/set-random-wallpaper.bash
 
-# start alacritty (with fish)
+# # start alacritty (with fish)
+# super + k
+#     jumpapp alacritty --config-file ~/.config/alacritty/alacritty_dwm.yml -e fish
+
+# show keybindings cheatsheet
 super + k
-    jumpapp alacritty --config-file ~/.config/alacritty/alacritty_dwm.yml -e fish
+    ~/bin/cheatsheet.bash
 
 # start or focus byobu (in alacritty)
 super + b
