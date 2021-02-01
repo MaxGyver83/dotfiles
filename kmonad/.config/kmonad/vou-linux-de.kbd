@@ -60,7 +60,7 @@
   _         ¹    ²    @✔   @✘   @⭐  ¢    ¥    ‚    ‘    ’    _    _
   _         pgup pgdn up   bspc del  @:   7    8    9    @+   @-   S-'
   _         home lft  down rght end  @-   4    5    6    ,    _    @;
-  lsft XX   ins  tab  ret  esc  ret  @\_  1    2    3    .    rsft
+  lsft XX   ins  tab  ret  esc  @👍  @\_  1    2    3    .    rsft
                                 0              _         _    _
 )
 
@@ -232,10 +232,11 @@
   ‘  #(ralt @' @<)  ;; left single quotation mark (‘)
   ’  #(ralt @' @>)  ;; right single quotation mark (’)
 
-  Ü  #(ralt " U)    ;; capital Ü (not necessary in commit b7214c4 or newer)
   ✔  #(ralt y y)    ;; heavy checkmark (✔)
   ✘  #(ralt n n)    ;; heavy ballot (✘)
   ⭐ #(ralt s t)    ;; star (⭐)
+  👍 #(ralt t u)    ;; thumb up (👍)
+  Ü  #(ralt S-2 U)  ;; capital Ü (not necessary in commit b7214c4 or newer)
 )
 
 (defalias
