@@ -94,6 +94,7 @@ abbr x2 'Xephyr +extension RANDR +xinerama -br -ac -noreset -screen 800x600+250+
 # git
 abbr g 'git status'
 abbr gd 'git diff'
+abbr gdd 'git -c "core.pager=delta" diff'
 abbr gp 'git pull'
 # gh = "git home" (go to the toplevel of the current repo)
 abbr gcm 'git co master'
