@@ -100,6 +100,10 @@ ctrl + alt + Print
 ctrl + shift + Print
     sleep 0.2 ; scrot -s '/tmp/%Y-%m-%d %H.%M.%S $wx$h.png' -e 'copyq write image/png - < "$f"'
 
+# activate VOU layout in KMonad
+ctrl + shift + Escape
+    ~/bin/start-kmonad-for-all-keyboards.fish de
+
 # decrease brightness
 XF86MonBrightnessDown
     bash ~/bin/brightness.bash "-"
