@@ -24,6 +24,7 @@ run pasystray
 run blueman-tray
 run copyq
 run sxhkd
+run xbanish -i shift -i control -i mod1 -i mod4
 # ~/bin/beep-on-key.bash enter &
 eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
 export SSH_AUTH_SOCK
