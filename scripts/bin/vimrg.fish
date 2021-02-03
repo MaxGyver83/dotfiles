@@ -3,7 +3,7 @@
 # When used with vim -> E994. Workaround: call timer_start ...
 # But then selection of a match with "Enter" does not work.
 # Save command in command history: needs autocommand in .vimrc. Does not work in nvim.
-if [ (count $argv) > 0 ]
+if [ (count $argv) -gt 0 ]
     nvim -c "RgRaw $argv"
     exit 0
 end
