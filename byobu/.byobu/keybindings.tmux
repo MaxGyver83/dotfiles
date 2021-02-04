@@ -71,7 +71,7 @@ bind -T copy-mode-vi x  send -X cancel
 bind R source ~/.byobu/keybindings.tmux \; display "Reloaded keybindings.tmux!"
 
 # send minimal bash config
-bind b send "bind '\"\\e[A\": history-search-backward' '\"\\e[B\": history-search-forward' '\"\\C-b\": shell-backward-word' '\"\\C-f\": shell-forward-word' 'set completion-ignore-case on' '\"\\t\": menu-complete' '\"\\e[Z\": menu-complete-backward' 'set show-all-if-ambiguous on' 'set menu-complete-display-prefix on' && alias ..='cd ..' && alias ...='cd ../..' && alias ....='cd ../../..' && alias .....='cd ../../../..' && test -f /tmp/.vimrc && alias vim='vim -u /tmp/.vimrc'"
+bind b send "bind '\"\\e[A\": history-search-backward' '\"\\e[B\": history-search-forward' '\"\\e[1;2D\": shell-backward-word' '\"\\e[1;2C\": shell-forward-word' '\"\\C-b\": shell-backward-word' '\"\\C-f\": shell-forward-word' 'set completion-ignore-case on' '\"\\t\": menu-complete' '\"\\e[Z\": menu-complete-backward' 'set show-all-if-ambiguous on' 'set menu-complete-display-prefix on' && alias ..='cd ..' && alias ...='cd ../..' && alias ....='cd ../../..' && alias .....='cd ../../../..' && test -f /tmp/.vimrc && alias vim='vim -u /tmp/.vimrc' && alias vimdiff='vimdiff -u /tmp/.vimrc'"
 
 ###########################################################
 # dwm-inspired tiling pane management
