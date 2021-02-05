@@ -21,6 +21,9 @@ bind -n C-PPage previous-window
 bind -n C-NPage next-window
 bind -n M-a previous-window
 bind -n M-i next-window
+# Shift-Ctrl-PageUp/PageDown: move window left/right
+bind -n S-C-PPage swap-window -d -t:-1
+bind -n S-C-NPage swap-window -d -t:+1
 
 # Unbind Alt-Left and Alt-Right for previous/next window
 unbind -n M-Left
