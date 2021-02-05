@@ -232,7 +232,7 @@
   ‘  #(ralt @' @<)  ;; left single quotation mark (‘)
   ’  #(ralt @' @>)  ;; right single quotation mark (’)
 
-  ✔  #(ralt y y)    ;; heavy checkmark (✔)
+  ✔  #(ralt z z)    ;; heavy checkmark (✔)
   ✘  #(ralt n n)    ;; heavy ballot (✘)
   ⭐ #(ralt s t)    ;; star (⭐)
   👍 #(ralt t u)    ;; thumb up (👍)
