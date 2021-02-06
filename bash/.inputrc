@@ -61,9 +61,11 @@ $if mode=emacs
 "\e\e[C": forward-word
 "\e\e[D": backward-word
 
-# Max: Ctrl+b/f for moving by one WORD (including /, \, -, etc.) instead of one letter
+# Max: Ctrl+b/f or Shift+Left/Right for moving by one WORD (including /, \, -, etc.) instead of one letter
 "\C-f": shell-forward-word
 "\C-b": shell-backward-word
+"\e[1;2D": shell-backward-word
+"\e[1;2C": shell-forward-word
 
 $if term=rxvt
 "\e[7~": beginning-of-line
