@@ -25,7 +25,7 @@ set -g __fish_git_prompt_color_branch
 set -g __fish_git_prompt_showcolorhints true
 
 # add ~/install (AppImages) and nim to PATH
-set PATH $PATH ~/install ~/install/nim-1.4.2/bin
+set PATH ~/install ~/install/nim-1.4.2/bin $PATH
 
 # colored man pages
 set -x LESS_TERMCAP_mb (printf "\033[1;31m")     # begin bold
