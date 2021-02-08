@@ -41,6 +41,10 @@ unbind -n S-Down
 # bind -n M-Up display-panes \; select-pane -t :.-
 # bind -n M-Down display-panes \; select-pane -t :.+
 
+unbind Space
+bind Space next-layout
+bind -n M-Space next-layout
+
 unbind %
 unbind |
 unbind -
@@ -75,6 +79,9 @@ bind R source ~/.byobu/keybindings.tmux \; display "Reloaded keybindings.tmux!"
 
 # send minimal bash config
 bind b send "bind '\"\\e[A\": history-search-backward' '\"\\e[B\": history-search-forward' '\"\\e[1;2D\": shell-backward-word' '\"\\e[1;2C\": shell-forward-word' '\"\\C-b\": shell-backward-word' '\"\\C-f\": shell-forward-word' 'set completion-ignore-case on' '\"\\t\": menu-complete' '\"\\e[Z\": menu-complete-backward' 'set show-all-if-ambiguous on' 'set menu-complete-display-prefix on' && alias ..='cd ..' && alias ...='cd ../..' && alias ....='cd ../../..' && alias .....='cd ../../../..' && test -f /tmp/.vimrc && alias vim='vim -u /tmp/.vimrc' && alias vimdiff='vimdiff -u /tmp/.vimrc'"
+# send minimal bash config (with linebreaks for better readability)
+wrapline="\\\n     "
+bind B send "bind '\"\\e[A\": history-search-backward' $wrapline'\"\\e[B\": history-search-forward' $wrapline'\"\\e[1;2D\": shell-backward-word' $wrapline'\"\\e[1;2C\": shell-forward-word' $wrapline'\"\\C-b\": shell-backward-word' $wrapline'\"\\C-f\": shell-forward-word' $wrapline'set completion-ignore-case on' $wrapline'\"\\t\": menu-complete' $wrapline'\"\\e[Z\": menu-complete-backward' $wrapline'set show-all-if-ambiguous on' $wrapline'set menu-complete-display-prefix on' && \\\nalias ..='cd ..' && alias ...='cd ../..' && alias ....='cd ../../..' && alias .....='cd ../../../..' && \\\ntest -f /tmp/.vimrc && alias vim='vim -u /tmp/.vimrc' && alias vimdiff='vimdiff -u /tmp/.vimrc'"
 
 ###########################################################
 # dwm-inspired tiling pane management
