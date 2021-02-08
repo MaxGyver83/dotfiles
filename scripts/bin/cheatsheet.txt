@@ -12,8 +12,8 @@ g,  of next change (after g;)
 `<  of last selected visual area
 `[  of previously changed or yanked text
 
-[c  jump to previous diff ("change")
-]c  jump to next diff
+[c  jump to previous diff ("change") (my alias: C-l)
+]c  jump to next diff                (my alias: C-h)
 
 ^]  jump to tag under cursor
 
