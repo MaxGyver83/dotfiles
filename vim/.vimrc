@@ -17,11 +17,11 @@ catch /^Vim\%((\a\+)\)\=:E185/
     highlight LineNr     ctermfg=59   ctermbg=234 cterm=NONE
     highlight CursorLine ctermfg=NONE ctermbg=239 cterm=NONE
     highlight Special    ctermfg=172              cterm=bold          guifg=Orange
-    highlight DiffAdd    ctermfg=10   ctermbg=17  cterm=bold gui=none guifg=bg guibg=Red
-    highlight DiffDelete ctermfg=167  ctermbg=bg  cterm=NONE          guifg=#D75F5F guibg=#1C1C1C
-    highlight DiffChange ctermfg=10   ctermbg=17  cterm=bold gui=none guifg=bg guibg=Red
-    highlight DiffText   ctermfg=10   ctermbg=88  cterm=bold gui=none guifg=bg guibg=Red
 endtry
+highlight DiffAdd    ctermfg=10   ctermbg=24  cterm=bold gui=none guifg=bg guibg=Red
+highlight DiffDelete ctermfg=167  ctermbg=bg  cterm=NONE          guifg=#D75F5F guibg=#1C1C1C
+highlight DiffChange ctermfg=10   ctermbg=24  cterm=bold gui=none guifg=bg guibg=Red
+highlight DiffText   ctermfg=10   ctermbg=167 cterm=bold gui=none guifg=bg guibg=Red
 
 " Allow to use Ctrl-s and Ctrl-q as keybinds even when not started from a
 " shell
@@ -296,8 +296,14 @@ nnoremap <Leader>l :20Lex \| call CleanNoNameEmptyBuffers()<cr>
 "noremap <Leader>i :cnext<cr>
 " noremap <C-h> :cprevious<cr>
 " noremap <C-l> :cnext<cr>
-noremap <C-l> [c
-noremap <C-h> ]c
+
+" previous/next difference in vimdiff
+if &diff
+    noremap <C-l> [c
+    noremap <C-h> ]c
+    highlight clear CursorLine
+    highlight CursorLine gui=underline cterm=underline
+endif
 
 " swap ; and , (next/previous match after t, T, f, F)
 nnoremap ; ,
@@ -567,6 +573,9 @@ let g:jedi#rename_command = "<leader>jr"
 " map Ctrl-f to :FZF
 nnoremap <Leader>e :FZF<CR>
 nnoremap <Leader>h :FZF ~<CR>
+
+" find git merge conflict
+nnoremap <leader>gm /\v^\<\<\<\<\<\<\< \|\=\=\=\=\=\=\=$\|\>\>\>\>\>\>\> /<cr>
 
 " vim-fugitive (git support)
 nnoremap <Leader>gs :G<cr>
