@@ -224,6 +224,10 @@ noremap <Leader>b :bd<cr>
 noremap <Leader>q :q<cr>
 nnoremap <C-q> :q<cr>
 
+" start recording a macro with Q instead of q (and unmap q)
+nnoremap Q q
+nnoremap q <Nop>
+
 " delete not into register (use dl for cutting one character into register)
 nnoremap x "_x
 
