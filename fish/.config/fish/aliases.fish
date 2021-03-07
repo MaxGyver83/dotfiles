@@ -86,7 +86,9 @@ abbr s 'xrandr | grep -q 2560x1440 && ~/.screenlayout/peaq-usb.sh || ~/.screenla
 # redshift: red=night mode (darker, redish), notred=day mode
 abbr red 'redshift -P -O 3500 -b 0.7 || redshift -O 3500 -b 0.7'
 abbr notred 'redshift -P -O 6500 || redshift -O 6500'
-abbr ti 'pkill kmonad ; setxkbmap de ; tipp10'
+abbr ti 'pkill run_forever ; pkill kmonad ; setxkbmap de ; tipp10'
+
+alias akku='upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep -E "power|updated|state|energy|time to|perc|capa" | grep -v design'
 
 # simulate one or two screens for debugging dwm
 abbr x1 'Xephyr -br -ac -noreset -screen 800x600+400+80 :1'
