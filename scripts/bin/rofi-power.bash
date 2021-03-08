@@ -5,7 +5,7 @@
 
 # 2016 Oliver Kraitschy - http://okraits.de
 
-OPTIONS="Reboot system\nPower-off system\nLock screen\nKill dwm"
+OPTIONS="Lock screen\nPower-off system\nReboot system\nKill dwm (logout)\nRestart dwm"
 
 # source configuration or use default values
 if [ -f $HOME/.config/rofi-power/config ]; then
@@ -36,6 +36,9 @@ then
         ;;
       Lock)
         png="$(xdg-user-dir PICTURES)/Leo4.png" && test -f "$png" && i3lock -e -f -i "$png" -t || i3lock -e -f -c 333333
+        ;;
+      Restart)
+        pkill -f '^dwm'
         ;;
       Kill)
         pkill dwm
