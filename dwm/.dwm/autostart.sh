@@ -9,7 +9,7 @@ function run {
 
 # numlockx off
 ~/bin/start-kmonad-for-all-keyboards.fish de &
-xset r rate 300 50
+#xset r rate 300 50
 #xinput set-prop 'ETPS/2 Elantech Touchpad' 'libinput Natural Scrolling Enabled' 1
 run dunst
 xrandr | grep -q 2560x1440 && ~/.screenlayout/peaq-usb.sh || ~/.screenlayout/peaq.sh
@@ -17,7 +17,8 @@ xrandr | grep -q 2560x1440 && ~/.screenlayout/peaq-usb.sh || ~/.screenlayout/pea
 xrandr --output $(xrandr | grep -w connected | head -n 1 | cut -d " " -f1) --brightness 0.7
 # test -f ~/.screenlayout/ext-monitor-acer.sh && ~/.screenlayout/ext-monitor-acer.sh
 ~/bin/set-wallpaper.bash
-run compton
+# compton: `--focus...` is needed to not dim the status bar and rofi
+run compton --inactive-dim 0.2 --focus-exclude 'x = 0 && y = 0 && override_redirect = true || class_g = "Rofi"'
 # trayer --widthtype request --align right &
 run nm-applet
 run pasystray
