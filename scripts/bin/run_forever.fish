@@ -6,5 +6,9 @@ while true
     set message (date -Iseconds)": Restarting KMonad ($counter)"
     echo -e \n$message >> ~/.kmonad.loop.log
     notify-send -u low --hint int:transient:1 $message
-    sleep 1s
+    if [ $counter -gt 10 ]
+      sleep 5s
+    else
+      sleep 1s
+    end
 end
