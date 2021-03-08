@@ -36,8 +36,9 @@ super + f
     pgrep -f firefox &> /dev/null && wmctrl -a firefox || firefox
 
 # start alacritty (with fish)
-super + s
-    alacritty --config-file ~/.config/alacritty/alacritty_dwm.yml -e fish
+# super + s
+#     alacritty -e fish
+
 #super + c
 #    ~/install/codium
 #    pgrep codium &> /dev/null && wmctrl -a codium || ~/install/codium
@@ -46,8 +47,8 @@ super + s
 super + p
     pcmanfm
 
-# Zwischenablage
-super + z
+# Aus Zwischenablage einfügen
+super + v
     copyq toggle > /dev/null
 
 # quit (and restart) dwm (defined in dwm's config.h)
@@ -59,11 +60,12 @@ super + alt + k
 
 # reboot
 super + alt + r
-    reboot
+    sudo reboot
 
 # shutdown
 super + alt + s
-    shutdown -h now
+    ~/bin/rofi-power.bash
+    # sudo shutdown -h now
 
 # lock screen
 super + alt + l
