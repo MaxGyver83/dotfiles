@@ -1,0 +1,244 @@
+(defcfg
+  ;; For Linux
+  input  (device-file "/dev/input/by-path/platform-i8042-serio-0-event-kbd")
+  output (uinput-sink "KMonad output"
+    "/bin/sleep 1 && setxkbmap de -option compose:rctrl && xset r rate 300 50")
+
+  ;; For Windows
+  ;; input  (low-level-hook)
+  ;; output (send-event-sink)
+
+  ;; For MacOS
+  ;; input  (iokit-name "my-keyboard-product-string")
+  ;; output (kext)
+
+  ;; Comment this is you want unhandled events not to be emitted
+  fallthrough true
+
+  ;; Set this to false to disable any command-execution in KMonad
+  allow-cmd false
+)
+
+(defsrc
+                                     f6
+  grv       1    2    3    4    5    6    7    8    9    0    -    =
+  tab       q    w    e    r    t    y    u    i    o    p    [    ]
+  caps      a    s    d    f    g    h    j    k    l    ;    '    \
+  lsft 102d z    x    c    v    b    n    m    ,    .    /    rsft
+                               spc             ralt      cmp  rctl
+)
+
+(deflayer level1
+                                     f6
+  grv       1    2    3    4    5    6    7    8    9    0    @-   S-=
+  tab       v    .    @o   u    @ä   q    @gc4 @lsp @h2  f    j    =
+  @22       @c3  @as  @ec  @i4  z    b    @t4  @rc  @ns  @s3  @22  @ß
+  lsft @s2  @z   @xa  @,w  @ü   @ö   p    @dw  @wa  m    k    rsft
+                               spc             ralt      _    _ ;;@ctlc
+)
+
+(deflayer level2
+                                     _
+  @ˇ        °    §    @ℓ   @»   @«   $    @€   @„   @“   @”   @—   ¸
+  S-tab     V    •    O    U    S-@ä Q    G    L    H    F    J    ´
+  _         C    A    E    I    Z    B    T    R    N    S    _    @ß
+  _     XX  Y    X    @-   S-@ü S-@ö P    D    W    M    K    _
+                               S-spc           @lv4      _    _
+)
+
+(deflayer level3
+                                     @qwe
+  _         @¹   @²   @³   @›   @‹   @¢   @¥   @‚   @‘   @’   @—    _
+  _         @@   @%   @{   @}   @^   @!   @<   @>   @=   @&   @€    /
+  _         @|   @`   @kau @kzu @*   @?   @/   @:   @-   @\_   _    @→
+  _    _    @#   @[   @]   @~   @$   @+   S-2  @'   @\   @;    _
+                                _              _         _    _
+)
+
+(deflayer level4
+                                     f6
+  _         @¹   @²   @✔   @✘   @⭐  ¢    ¥    ‚    ‘    ’    _    _
+  _         pgup pgdn up   bspc del  @:   7    8    9    @+   @-   S-'
+  _         home lft  down rght end  @-   4    5    6    ,    _    @;
+  lsft XX   ins  tab  ret  esc  @👍  @\_  1    2    3    .    rsft
+                                0              _         _    _
+)
+
+(deflayer special
+                                           XX
+  XX        XX    XX    XX     XX    XX    XX    XX    XX    XX    XX    XX    XX
+  XX      A-pgup A-pgdn @cpm C-bspc C-del  XX    XX    XX    XX    XX    XX    XX
+  XX      A-lft C-pgup C-tab C-pgdn A-rght XX    XX    XX    XX    XX    XX    XX
+  XX   XX   XX    @pb   @nb    XX    XX    XX    XX    XX    XX    XX    XX
+                               XX                      XX          XX    XX
+)
+
+(deflayer seldom
+                                     XX
+  XX        f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
+  XX        XX   XX   @ö   @ü   XX   XX   XX   XX   @sch XX   XX   XX
+  XX        XX   @ä   @€   j    XX   XX   @/   v    @-   @ß   XX   XX
+  XX   XX   @ß   XX   XX   XX   XX   prnt XX   XX   XX   q    XX
+                               spc             XX        XX   XX
+)
+
+(deflayer qwertz
+                                     _
+  grv       1    2    3    4    5    6    7    8    9    0    @ß   =
+  tab       q    w    e    r    t    y    u    i    o    p    @ü   @+
+  @q3       a    s    d    f    g    h    j    k    l    @ö   @ä   @#
+  lsft @<   z    x    c    v    b    n    m    ,    .    @-   rsft
+                               spc             ralt      cmp  rctl
+)
+
+(deflayer qwertz3
+                                     @vou
+  grv       1    2    3    4    5    6    7    8    9    0    @ß   =
+  tab       q    w    e    r    t    y    u    i    o    p    @ü   @+
+  caps      a    s    d    f    g    h    j    k    l    @ö   @ä   @#
+  lsft @<   z    x    c    v    b    n    m    ,    .    @-   rsft
+                               spc             ralt      cmp  rctl
+)
+
+(defalias
+  ;; Switch to QWERTZ layout (and back)
+  qwe (layer-switch qwertz) ;; Set qwertz as the base layer
+  vou (layer-switch level1) ;; Set vou level1 as the base layer
+
+  q3 (layer-toggle qwertz3)
+
+  ;; Bind lvX to a button that switches to a layer
+  lv2 (layer-toggle level2)
+  lv3 (layer-toggle level3)
+  lv4 (layer-toggle level4)
+  spl (layer-toggle special)
+  slt (layer-toggle seldom)
+  sld (layer-next seldom)
+)
+
+(defalias
+  oo (multi-tap 300 o 300 ö #(o o))
+  ii (multi-tap 300 i ret)
+)
+
+(defalias
+  a (tap-hold 300 a ')
+  o (tap-hold 300 o ;)
+  u (tap-hold 300 u [)
+  z (tap-hold 300 y ß)
+)
+
+(defalias
+  sctl (tap-hold-next-release 500 spc lctl)
+;;  22 (layer-next level2)  ;; easier but does not work for more than one capital letter
+  22 (tap-hold-next-release 500 (layer-next level2) @lv2)
+
+  c3 (tap-hold-next-release 500 c @lv3)
+  as (tap-hold-next-release 500 a lsft)
+  ec (tap-hold-next-release 500 e lctl)
+  i4 (tap-hold-next-release 500 i @lv4)
+  s2 (tap-hold-next-release 500 @sld @slt)
+  xa (tap-hold-next-release 500 x lalt)
+  ,w (tap-hold-next-release 500 , lmet)
+
+  gc4 (tap-hold-next-release 500 g C-@lv4)
+  lsp (tap-hold-next-release 500 l @spl)
+  h2  (tap-hold-next-release 500 h rsft)
+  dw  (tap-hold-next-release 500 d rmet)
+  wa  (tap-hold-next-release 500 w lalt)
+  ks  (tap-hold-next-release 500 k @lv2)
+  t4  (tap-hold-next-release 500 t @lv4)
+  rc  (tap-hold-next-release 500 r lctl)
+  ns  (tap-hold-next-release 500 n rsft)
+  s3  (tap-hold-next-release 500 s @lv3)
+
+  ;; ralt = compose key when tapped, rctl when held down
+  ctlc (tap-hold-next-release 500 cmp rctl)
+)
+
+(defalias
+  ;; vim prev/next buffer
+  pb #(esc S-. b p ret)
+  nb #(esc S-. b n ret)
+  ;; copy mode in byobu
+  cpm #(A-pgup A-pgdn)
+  ;;cpm #(C-e RA-8)
+)
+
+(defalias
+  ;; aliases for German QWERTZ
+  ä '
+  ö ;
+  ü [
+  ß -
+
+  @ RA-q
+  % S-5
+  { RA-7
+  } RA-0
+  ^ #(` space)
+  ! S-1
+  < 102d
+  > S-102d
+  = S-0
+  & S-6
+  € RA-e
+
+  | RA-102d
+  ` #(S-= space)
+  kau S-8
+  kzu S-9
+  * S-]
+  ? S--
+  / S-7
+  : S-.
+  - /
+  \_ S-/
+  → #(rctl @- @>)
+
+  # \
+  [ RA-8
+  ] RA-9
+  ~ RA-]
+  $ S-4
+  + ]
+  ;;" S-2
+  ' S-\
+  \ RA-min
+  ; S-,
+)
+
+(defalias
+  ;; some unicode characters defined in ~/.XCompose
+  ℓ  #(rctl s l)    ;; script small l (ℓ)
+  »  #(rctl @> @>)  ;; guillemot right (»)
+  «  #(rctl @< @<)  ;; guillemot left («)
+  „  #(rctl S-2 ,)  ;; double low-9 quotation mark („)
+  “  #(rctl S-2 @<) ;; left double quotation mark (“)
+  ”  #(rctl S-2 @>) ;; right double quotation mark („)
+  —  #(rctl @- @- @-) ;; em dash (—)
+
+  ;;ˇ  #(rctl spc @<) ;; caron (háček) (ˇ) NOT DEAD
+  ˇ  RA-S-'         ;; dead caron (háček) (ˇ) (=AltGr-Shift-ä) DOESN'T WORK
+  ¹  RA-1           ;; onesuperior (¹)
+  ²  RA-2           ;; twosuperior (²)
+  ³  RA-3           ;; threesuperior (³)
+  ›  #(rctl . @>)   ;; single right-pointing angle quotation mark (›)
+  ‹  #(rctl . @<)   ;; single left-pointing angle quotation mark (‹)
+  ¢  #(rctl c @/)   ;; cent (¢)
+  ¥  #(rctl z @=)   ;; yen (¥)
+  ‚  #(rctl @' ,)   ;; single low-9 quotation mark (‚)
+  ‘  #(rctl @' @<)  ;; left single quotation mark (‘)
+  ’  #(rctl @' @>)  ;; right single quotation mark (’)
+
+  ✔  #(rctl z z)    ;; heavy checkmark (✔)
+  ✘  #(rctl n n)    ;; heavy ballot (✘)
+  ⭐ #(rctl s t)    ;; star (⭐)
+  👍 #(rctl t u)    ;; thumb up (👍)
+  Ü  #(rctl S-2 U)  ;; capital Ü (not necessary in commit b7214c4 or newer)
+)
+
+(defalias
+  sch #(s c h)
+)
+
