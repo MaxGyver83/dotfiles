@@ -41,7 +41,7 @@
                                      _
   @ˇ        °    §    @ℓ   @»   @«   $    @€   @„   @“   @”   @—   ¸
   S-tab     V    •    O    U    S-@ä Q    G    L    H    F    J    ´
-  _         C    A    E    I    Z    B    T    R    N    S    _    ß
+  _         C    A    E    I    Z    B    T    R    N    S    _    @ß
   _     XX  Y    X    @-   S-@ü S-@ö P    D    W    M    K    _
                                S-spc           @lv4      _    _
 )
@@ -77,8 +77,8 @@
                                      XX
   XX        f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
   XX        XX   XX   @ö   @ü   XX   XX   XX   XX   @sch XX   XX   XX
-  XX        XX   @ä   @€   j    XX   XX   XX   v    XX   ß    XX   XX
-  XX   XX   ß    XX   XX   XX   XX   XX   XX   XX   XX   q    XX
+  XX        XX   @ä   @€   j    XX   XX   @/   v    @-   @ß   XX   XX
+  XX   XX   @ß   XX   XX   XX   XX   prnt XX   XX   XX   q    XX
                                spc             XX        XX   XX
 )
 
@@ -185,6 +185,7 @@
   € #(ralt c S-0)
 
   | #(ralt v l)
+;;  | RA-102d
   ` #(S-= space)
   kau S-8
   kzu S-9
@@ -220,7 +221,6 @@
 
   ;;ˇ  #(ralt spc @<) ;; caron (háček) (ˇ) NOT DEAD
   ˇ  RA-S-'         ;; dead caron (háček) (ˇ) (=AltGr-Shift-ä) DOESN'T WORK
-  ;;¹  RA-1         ;; onesuperior (¹) DOESN'T WORK
   ¹  #(grv 1)       ;; onesuperior (¹)
   ²  #(grv 2)       ;; twosuperior (²)
   ³  #(grv 3)       ;; threesuperior (³)
