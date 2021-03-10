@@ -79,9 +79,11 @@ abbr asdf 'xhost &> /dev/null && setxkbmap de koy && xkbcomp -w 0 ~/bin/vou-tabw
 alias vou='setxkbmap de koy && xkbcomp -w 0 ~/bin/vou.xkb $DISPLAY'
 abbr k '~/bin/start-kmonad-for-all-keyboards.fish'
 abbr kk '~/bin/start-kmonad-for-all-keyboards.fish de'
-abbr kkk '~/bin/start-kmonad-for-all-keyboards-dev.fish de'
+# abbr kkk '~/bin/start-kmonad-for-all-keyboards-dev.fish de'
+abbr kkk '~/bin/start-kmonad-for-all-keyboards.fish de2'
 abbr kkkk '~/bin/start-kmonad-for-all-keyboards-slot.fish de'
 abbr qq 'pkill run_forever ; pkill kmonad'
+abbr QQ 'pkill run_forever ; pkill kmonad'
 abbr s 'xrandr | grep -q 2560x1440 && ~/.screenlayout/peaq-usb.sh || ~/.screenlayout/laptop.sh'
 # redshift: red=night mode (darker, redish), notred=day mode
 abbr red 'redshift -P -O 3500 -b 0.7 || redshift -O 3500 -b 0.7'
