@@ -2,6 +2,9 @@
 if test "$argv[1]" = "de"
     set config ~/.config/kmonad/vou-linux-de.kbd
     set binary kmonad
+else if test "$argv[1]" = "de2"
+    set config ~/.config/kmonad/vou-linux-de-rctrl.kbd
+    set binary kmonad
 else if test "$argv[1]" = "test"
     set config ~/.config/kmonad/vou-linux-de.kbd
     set binary ~/repos/kmonad/kmonad
@@ -49,5 +52,6 @@ if string match -q -- "*event*" $keyb
     set dest "/tmp/kmonad-vou-royal-bt.kbd"
     cp $config $dest
     sed -i 's:/dev/input/by-path/platform-i8042-serio-0-event-kbd:'$keyb':' $dest
-    $binary $dest -l debug >> ~/kmonad.log & ; disown
+    # $binary $dest -l debug >> ~/kmonad.log & ; disown
+    run_forever.fish $binary $dest & ; disown
 end
