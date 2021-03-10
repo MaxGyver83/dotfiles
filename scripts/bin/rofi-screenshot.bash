@@ -7,7 +7,7 @@ OPTIONS="Screenshot of whole screen\nScreenshot of active window\nScreenshot of 
 
 LAUNCHER="rofi -width 40 -dmenu -i -p rofi-screenshot"
 SLEEP="sleep 0.2"
-NOTIFICATION='notify-send -u low "$f"'
+NOTIFICATION='echo "$f" && notify-send -u low "$f"'
 FILENAME='%Y-%m-%d %H.%M.%S $wx$h'
 
 option=$(echo -e $OPTIONS | $LAUNCHER | tr -d '\r\n')
