@@ -33,7 +33,8 @@ super + ctrl + b
 
 # start or focus Firefox
 super + f
-    pgrep -f firefox &> /dev/null && wmctrl -a firefox || firefox
+    ~/repos/my-jumpapp/jumpapp firefox
+    # pgrep -f firefox &> /dev/null && wmctrl -a firefox || firefox
 
 # start alacritty (with fish)
 # super + s
@@ -80,6 +81,9 @@ super + F8
     # xrandr | grep -q 2560x1440 && ~/.screenlayout/peaq.sh || ~/.screenlayout/laptop.sh
 
 # screenshot
+super + Print
+    ~/bin/rofi-screenshot.bash
+
 Print
     #xfce4-screenshooter -s $(xdg-user-dir PICTURES)
     sleep 0.2 ; scrot ~/Screenshots/"%Y-%m-%d %H.%M.%S \$wx\$h.png"
