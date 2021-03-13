@@ -33,8 +33,7 @@ super + ctrl + b
 
 # start or focus Firefox
 super + f
-    ~/repos/my-jumpapp/jumpapp firefox
-    # pgrep -f firefox &> /dev/null && wmctrl -a firefox || firefox
+    ~/bin/jumpapp firefox
 
 # start alacritty (with fish)
 # super + s
