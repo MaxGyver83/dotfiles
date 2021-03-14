@@ -122,3 +122,6 @@ bind -n M-S-r select-layout main-vertical \;\
 # Zoom selected pane
 unbind M-m
 bind -n M-m resize-pane -Z
+
+# focus last window
+bind -n M-t last-window
