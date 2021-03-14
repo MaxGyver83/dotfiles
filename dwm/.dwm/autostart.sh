@@ -3,12 +3,13 @@
 function run {
   if ! pgrep -f $1 ;
   then
+    echo Run: $@
     $@&
   fi
 }
 
 # numlockx off
-~/bin/start-kmonad-for-all-keyboards.fish de &
+~/bin/start-kmonad-for-all-keyboards.fish de2 &
 #xset r rate 300 50
 #xinput set-prop 'ETPS/2 Elantech Touchpad' 'libinput Natural Scrolling Enabled' 1
 run dunst
@@ -18,7 +19,7 @@ xrandr --output $(xrandr | grep -w connected | head -n 1 | cut -d " " -f1) --bri
 # test -f ~/.screenlayout/ext-monitor-acer.sh && ~/.screenlayout/ext-monitor-acer.sh
 ~/bin/set-wallpaper.bash
 # compton: `--focus...` is needed to not dim the status bar and rofi
-run compton --inactive-dim 0.2 --focus-exclude 'x = 0 && y = 0 && override_redirect = true || class_g = "Rofi"'
+[ pgrep -f compton ] || compton --inactive-dim 0.2 --focus-exclude 'x = 0 && y = 0 && override_redirect = true || class_g = "Rofi"' &
 # trayer --widthtype request --align right &
 run nm-applet
 run pasystray
