@@ -108,7 +108,7 @@ ctrl + shift + Print
 
 # activate VOU layout in KMonad
 ctrl + shift + Escape
-    ~/bin/start-kmonad-for-all-keyboards.fish de
+    ~/bin/start-kmonad-for-all-keyboards.fish de2
 
 # decrease brightness
 XF86MonBrightnessDown
