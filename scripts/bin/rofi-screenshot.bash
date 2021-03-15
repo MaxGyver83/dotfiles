@@ -3,7 +3,7 @@
 # rofi-screenshot
 # Use rofi to take a screenshot
 
-OPTIONS="Screenshot of whole screen\nScreenshot of active window\nScreenshot of selected region\nScreenshot of active window to /tmp and clipboard\nScreenshot of selected region or window to /tmp and clipboard"
+OPTIONS="Screenshot of whole screen\nScreenshot of active window\nScreenshot of selected region\nScreenshot of active window to /tmp and clipboard\nScreenshot of selected region or window to /tmp and clipboard\nShow screenshots and select one to be copied to clipboard (select with m, quit with q)"
 
 LAUNCHER="rofi -width 40 -dmenu -i -p rofi-screenshot"
 SLEEP="sleep 0.2"
@@ -30,6 +30,9 @@ then
         ;;
       "Screenshot of selected region or window to /tmp and clipboard")
         $SLEEP ; scrot -s /tmp/"$FILENAME Region.png" -e "copyq write image/png - < '\$f' && $NOTIFICATION"
+        ;;
+      "Show screenshots and select one to be copied to clipboard (select with m, quit with q)")
+        xclip -selection clipboard -t image/png -i "$(sxiv -ft ~/Screenshots/* -o)"
         ;;
       *)
         ;;
