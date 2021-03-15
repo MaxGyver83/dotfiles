@@ -19,7 +19,7 @@ xrandr --output $(xrandr | grep -w connected | head -n 1 | cut -d " " -f1) --bri
 # test -f ~/.screenlayout/ext-monitor-acer.sh && ~/.screenlayout/ext-monitor-acer.sh
 ~/bin/set-wallpaper.bash
 # compton: `--focus...` is needed to not dim the status bar and rofi
-[ pgrep -f compton ] || compton --inactive-dim 0.2 --focus-exclude 'x = 0 && y = 0 && override_redirect = true || class_g = "Rofi"' &
+pgrep -f compton > /dev/null 2>&1 || compton --inactive-dim 0.2 --focus-exclude 'x = 0 && y = 0 && override_redirect = true || class_g = "Rofi" || class_g = "Firefox" && argb' &
 # trayer --widthtype request --align right &
 run nm-applet
 run pasystray
