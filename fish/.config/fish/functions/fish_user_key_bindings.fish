@@ -24,5 +24,12 @@ function fish_user_key_bindings
 
     if type -q fzf_key_bindings
         fzf_key_bindings
+        # use Ctrl-g for fzf-cd-widget (like "Go to", default: Alt-c)
+        bind -e \ec
+        bind \cg fzf-cd-widget
+        if bind -M insert > /dev/null 2>&1
+            bind -e -M insert \ec
+            bind -M insert \cg fzf-cd-widget
+        end
     end
 end
