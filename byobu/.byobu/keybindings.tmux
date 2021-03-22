@@ -125,3 +125,6 @@ bind -n M-m resize-pane -Z
 
 # focus last window
 bind -n M-t last-window
+
+# create new window
+bind -n M-c new-window
