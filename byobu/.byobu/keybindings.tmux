@@ -78,7 +78,7 @@ bind -T copy-mode-vi x  send -X cancel
 bind R source ~/.byobu/keybindings.tmux \; display "Reloaded keybindings.tmux!"
 
 # send minimal bash config
-bind b send "bind '\"\\e[A\": history-search-backward' '\"\\e[B\": history-search-forward' '\"\\e[1;2D\": shell-backward-word' '\"\\e[1;2C\": shell-forward-word' 'set completion-ignore-case on' '\"\\t\": menu-complete' '\"\\e[Z\": menu-complete-backward' 'set show-all-if-ambiguous on' 'set menu-complete-display-prefix on' && alias gd='git diff' && test -f /tmp/.vimrc && alias vim='vim -u /tmp/.vimrc' && alias vimdiff='vimdiff -u /tmp/.vimrc'"
+bind b send "bind 'set completion-ignore-case on' '\"\\t\": menu-complete' '\"\\e[Z\": menu-complete-backward' 'set menu-complete-display-prefix on' && alias gd='git diff' && test -f /tmp/.vimrc && alias vim='vim -u /tmp/.vimrc' && alias vimdiff='vimdiff -u /tmp/.vimrc'"
 # send small bash config
 bind B send "bind '\"\\e[A\": history-search-backward' '\"\\e[B\": history-search-forward' '\"\\e[1;2D\": shell-backward-word' '\"\\e[1;2C\": shell-forward-word' '\"\\C-b\": shell-backward-word' '\"\\C-f\": shell-forward-word' 'set completion-ignore-case on' '\"\\t\": menu-complete' '\"\\e[Z\": menu-complete-backward' 'set show-all-if-ambiguous on' 'set menu-complete-display-prefix on' && alias ..='cd ..' && alias ...='cd ../..' && alias ....='cd ../../..' && alias .....='cd ../../../..' && alias gd='git diff' && test -f /tmp/.vimrc && alias vim='vim -u /tmp/.vimrc' && alias vimdiff='vimdiff -u /tmp/.vimrc'"
 
@@ -128,3 +128,6 @@ bind -n M-t last-window
 
 # create new window
 bind -n M-c new-window
+
+# copy line (without leading spaces and newline) into command line
+bind -T copy-mode-vi X send -X back-to-indentation \; send -X begin-selection \; send -X end-of-line \; send -X cursor-left \; send -X copy-pipe-and-cancel "tmux paste-buffer"
