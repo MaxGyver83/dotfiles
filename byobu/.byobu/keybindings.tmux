@@ -128,3 +128,8 @@ bind -n M-t last-window
 
 # create new window
 bind -n M-c new-window
+
+# browse output lines: Activate with Alt-1, go up/down with Alt-2/3
+bind -n M-1 run '~/bin/tmux-save-output.sh'
+bind -n M-2 run '~/bin/tmux-increase-line-number.sh && ~/bin/tmux-paste-output-line.sh'
+bind -n M-3 run '~/bin/tmux-decrease-line-number.sh && ~/bin/tmux-paste-output-line.sh'
