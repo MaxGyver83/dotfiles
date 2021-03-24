@@ -1,6 +1,6 @@
 # dotfiles
 
-My bash, fish, vim, neovim, IdeaVim, surfingkeys, alacritty, Qtile config files and scripts for changing the keyboard layout. These files are organized in such a way that they can be installed with GNU Stow. Stow creates links to the dotfiles from this repo in `$HOME` (or its subfolders).
+My bash, fish, vim, neovim, IdeaVim, VSCodium, surfingkeys, alacritty, KMonad config files and scripts for changing the keyboard layout. These files are organized in such a way that they can be installed with GNU Stow. Stow creates links to the dotfiles from this repo in `$HOME` (or its subfolders).
 
 ```sh
 sudo apt-get install stow
@@ -22,7 +22,7 @@ stow surfingkeys
 stow scripts
 ```
 
-If this repo is located somewhere else, pass the destination directory explicitely, for example:
+If this repo is located somewhere else, pass the destination directory explicitly, for example:
 
 ```sh
 stow -t $HOME vim
@@ -89,7 +89,7 @@ git clone --depth 1 https://github.com/dense-analysis/ale.git
 For dwm, install its dependencies and other useful tools:
 
 ```sh
-sudo apt install suckless-tools sxhkd rofi dunst pcmanfm xfce4-screenshooter i3lock compton wmctrl pavucontrol pasystray scrot copyq
+sudo apt install suckless-tools sxhkd rofi dunst pcmanfm i3lock compton wmctrl pavucontrol pasystray scrot copyq
 ```
 
 `suckless-tools` includes `dmenu`. This can also be cloned and built from source.
