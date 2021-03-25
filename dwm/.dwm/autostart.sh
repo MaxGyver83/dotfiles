@@ -23,7 +23,7 @@ pgrep -f compton > /dev/null 2>&1 || compton --inactive-dim 0.2 --focus-exclude 
 # trayer --widthtype request --align right &
 run nm-applet
 run pasystray
-run blueman-manager
+run blueman-applet
 run copyq
 run sxhkd
 run xbanish -i shift -i control -i mod1 -i mod4
