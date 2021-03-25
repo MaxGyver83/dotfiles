@@ -161,8 +161,8 @@
   pb #(esc S-. b p ret)
   nb #(esc S-. b n ret)
   ;; copy mode in byobu
-  cpm #(A-pgup A-pgdn)
-  ;;cpm #(C-e RA-8)
+  ;;cpm #(A-pgup A-pgdn)
+  cpm #(C-e RA-8)
 )
 
 (defalias
