@@ -51,8 +51,8 @@ set list             " show non-printable chars
 
 " file type dependent
 autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2
-autocmd FileType groovy set colorcolumn=120
-autocmd FileType python set colorcolumn=72,80
+autocmd FileType groovy setlocal colorcolumn=120 shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType python setlocal colorcolumn=72,80
 " Autocompletion for python3 (currently replaced by jedi-vim)
 " if has('python3')
     " autocmd FileType python set omnifunc=python3complete#Complete
@@ -586,6 +586,9 @@ nnoremap <Leader>gs :G<cr>
 nnoremap <Leader>gd :Gdiff<cr>
 nnoremap <Leader>gb :Gblame<cr>
 nnoremap <Leader>gg :Ggrep --color 
+
+" vim-fubitive (Bitbucket)
+let g:fubitive_domain_pattern = 'athena\.daimler\.com/bitbucket'
 
 " gitgutter
 let g:gitgutter_sign_column_always = 1
