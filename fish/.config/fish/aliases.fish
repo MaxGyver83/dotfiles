@@ -59,6 +59,7 @@ abbr hg 'history | grep'
 alias notes='search_in_notes.sh'
 
 abbr v 'vim'
+alias vv='vim -c "normal '\''0"'
 abbr n 'nvim'
 abbr rr 'ranger'
 alias feh='feh --scale-down --auto-zoom --auto-rotate'
