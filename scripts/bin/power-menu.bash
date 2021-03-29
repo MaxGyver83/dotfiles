@@ -28,7 +28,7 @@ case $key in
   r) systemctl reboot ;;
   s) systemctl poweroff ;;
   l) png="$(xdg-user-dir PICTURES)/Leo4.png" && test -f "$png" && i3lock -n -e -f -i "$png" -t || i3lock -n -e -f -c 333333 ;;
-  q) pkill -f '^dwm' ;;
-  k) pkill dwm ;;
+  k) pkill -f '^dwm' ;;
+  e) pkill dwm ;;
   *) echo Canceled. ;;
 esac
