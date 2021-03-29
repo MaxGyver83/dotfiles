@@ -17,6 +17,7 @@ Active window
 Selected region
 active window (/tmp + clipboard)
 selected region or window (/tmp + clipboard)
+OCR region (to clipboard)
 gallery of screenshots: Select one to be copied to clipboard (`mq`)
 '
 
@@ -35,6 +36,7 @@ case $key in
   S) $SLEEP ; scrot -s ~/Screenshots/"$FILENAME Region.png" -e "$NOTIFICATION" ;;
   a) $SLEEP ; scrot -u /tmp/"$FILENAME Window.png" -e "copyq write image/png - < '\$f' && $NOTIFICATION" ;;
   s) $SLEEP ; scrot -s /tmp/"$FILENAME Region.png" -e "copyq write image/png - < '\$f' && $NOTIFICATION" ;;
+  o | O) $SLEEP ; ~/bin/ocr-region-to-clipboard.bash && notify-send "Copied to clipboard:" "$(xsel -bo)" ;;
   g) xclip -selection clipboard -t image/png -i "$(sxiv -ft ~/Screenshots/* -o)" ;;
   *) echo Canceled. ;;
 esac
