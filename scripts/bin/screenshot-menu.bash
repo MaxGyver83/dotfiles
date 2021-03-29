@@ -3,7 +3,7 @@
 # when called with option -w, run this script in a new alacritty window
 if [ $# -ge 1 ] && [ "$1" = "-w" ]; then
   pid=$(pgrep -f "alacritty -t 'Screenshot menu'")
-  test -z $pid && WINIT_X11_SCALE_FACTOR=1.0 alacritty -t "Screenshot menu" -o "window.dimensions.columns=30" -o "window.dimensions.lines=8" -e "$0" || kill $pid
+  test -z $pid && WINIT_X11_SCALE_FACTOR=1.0 alacritty -t "Screenshot menu" -o "window.dimensions.columns=50" -o "window.dimensions.lines=10" -e "$0" || kill $pid
   exit 0
 fi
 
