@@ -65,7 +65,8 @@ super + alt + r
 
 # shutdown
 super + alt + s
-    ~/bin/rofi-power.bash
+    ~/bin/power-menu.bash -w
+    # ~/bin/rofi-power.bash
     # sudo shutdown -h now
 
 # lock screen
@@ -75,6 +76,9 @@ super + alt + l
 super + shift + z
     png="$(xdg-user-dir PICTURES)/Leo4.png" && test -f "$png" && i3lock -e -f -i "$png" -t || i3lock -e -f -c 333333
 
+super + 8
+    ~/bin/screen-menu.bash -w
+
 # check connected displays
 super + F8
     ~/bin/try-next-screenlayout.bash
@@ -82,7 +86,8 @@ super + F8
 
 # screenshot
 super + Print
-    ~/bin/rofi-screenshot.bash
+    ~/bin/screenshot-menu.bash -w
+    # ~/bin/rofi-screenshot.bash
 
 Print
     #xfce4-screenshooter -s $(xdg-user-dir PICTURES)
