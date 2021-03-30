@@ -31,12 +31,12 @@ echo -e "Select an option:\n$options"
 read -rsn1 key
 
 case $key in
-  W) $SLEEP ; scrot ~/Screenshots/"$FILENAME Screen.png" -e "$NOTIFICATION" ;;
-  A) $SLEEP ; scrot -u ~/Screenshots/"$FILENAME Window.png" -e "$NOTIFICATION" ;;
-  S) $SLEEP ; scrot -s ~/Screenshots/"$FILENAME Region.png" -e "$NOTIFICATION" ;;
-  a) $SLEEP ; scrot -u /tmp/"$FILENAME Window.png" -e "copyq write image/png - < '\$f' && $NOTIFICATION" ;;
-  s) $SLEEP ; scrot -s /tmp/"$FILENAME Region.png" -e "copyq write image/png - < '\$f' && $NOTIFICATION" ;;
+  W) $SLEEP ; nohup scrot ~/Screenshots/"$FILENAME Screen.png" -e "$NOTIFICATION" & ;;
+  A) $SLEEP ; nohup scrot -u ~/Screenshots/"$FILENAME Window.png" -e "$NOTIFICATION" & ;;
+  S) $SLEEP ; nohup scrot -s ~/Screenshots/"$FILENAME Region.png" -e "$NOTIFICATION" & ;;
+  a) $SLEEP ; nohup scrot -u /tmp/"$FILENAME Window.png" -e "copyq write image/png - < '\$f' && $NOTIFICATION" & ;;
+  s) $SLEEP ; nohup scrot -s /tmp/"$FILENAME Region.png" -e "copyq write image/png - < '\$f' && $NOTIFICATION" & ;;
   o | O) $SLEEP ; ~/bin/ocr-region-to-clipboard.bash && notify-send "Copied to clipboard:" "$(xsel -bo)" ;;
-  g) xclip -selection clipboard -t image/png -i "$(sxiv -ft ~/Screenshots/* -o)" ;;
+  g) xclip -selection clipboard -t image/png -i "$(ls -t ~/Screenshots/*.png /tmp/20*.png | sxiv -ft -i -o)" ;;
   *) echo Canceled. ;;
 esac
