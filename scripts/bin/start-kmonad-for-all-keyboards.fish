@@ -13,6 +13,7 @@ else
     set binary kmonad
 end
 pkill run_forever
+pkill try_three_times
 pkill '^kmonad'
 
 echo "Activate KMonad for internal keyboard"
