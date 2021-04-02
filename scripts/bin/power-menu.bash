@@ -8,11 +8,11 @@ if [ $# -ge 1 ] && [ "$1" = "-w" ]; then
 fi
 
 options='
-reboot
-shutdown
 lock screen
 kill dwm (=restart)
 exit dwm (logout)
+reboot
+shutdown
 '
 
 # print first letter in red at the beginning of each line
@@ -25,10 +25,10 @@ echo -e "Select an option:\n$options"
 read -rsn1 key
 
 case $key in
-  r) systemctl reboot ;;
-  s) systemctl poweroff ;;
   l) png="$(xdg-user-dir PICTURES)/Leo4.png" && test -f "$png" && i3lock -n -e -f -i "$png" -t || i3lock -n -e -f -c 333333 ;;
   k) pkill -f '^dwm' ;;
   e) pkill dwm ;;
+  r) systemctl reboot ;;
+  s) systemctl poweroff ;;
   *) echo Canceled. ;;
 esac
