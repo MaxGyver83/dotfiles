@@ -3,8 +3,9 @@
 show_help() {
   echo "Arguments:
   -c|--clipboard   Save screenshot in /tmp and copy into clipboard
-  -r|--region      Select region for screenshot
+  -s|--screen      Take screenshot of all screens
   -w|--window      Take screenshot of active window
+  -r|--region      Select region for screenshot
   -o|--ocr         Select region, do OCR and copy recognized text to clipboard
   -g|--gallery     Select a screenshot (from ~/Screenshots and /tmp) to copy into clipboard
 "
@@ -13,8 +14,9 @@ show_help() {
 while [[ "$#" > 0 ]]; do case $1 in
   -h|--help) show_help; exit 0;shift;;
   -c|--clipboard) CLIPBOARD=1;shift;;
-  -r|--region) REGION=1;shift;;
-  -w|--window) WINDOW=1;shift;;
+  -s|--screen) PARAM=''  ; TYPE='Screen'; shift;;
+  -w|--window) PARAM='-u'; TYPE='Window'; shift;;
+  -r|--region) PARAM='-s'; TYPE='Region'; shift;;
   -o|--ocr) OCR=1;shift;;
   -g|--gallery) GALLERY=1;shift;;
   *) show_help; echo "Unknown parameter passed: $1"; exit 1; shift; shift;;
@@ -29,14 +31,6 @@ elif [ "$OCR" = 1 ]; then
   ~/bin/ocr-region-to-clipboard.bash && notify-send "Copied to clipboard:" "$(xsel -bo)"
 
 else
-  if [ "$REGION" = 1 ]; then
-    PARAM='-s' ; TYPE='Region'
-  elif [ "$WINDOW" = 1 ]; then
-    PARAM='-u' ; TYPE='Window'
-  else
-    PARAM=''   ; TYPE='Screen'
-  fi
-
   FILENAME='%Y-%m-%d %H.%M.%S $wx$h '$TYPE.png
   NOTIFICATION='echo "$f" && notify-send -u low "$f"'
   if [ "$CLIPBOARD" = 1 ]; then

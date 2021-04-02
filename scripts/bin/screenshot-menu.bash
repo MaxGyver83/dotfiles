@@ -7,38 +7,32 @@ if [ $# -ge 1 ] && [ "$1" = "-w" ]; then
   exit 0
 fi
 
-SLEEP='sleep 0.2'
-NOTIFICATION='echo "$f" && notify-send -u low "$f"'
-FILENAME='%Y-%m-%d %H.%M.%S $wx$h'
-
 options='
-Whole screen
-Active window
-Selected region
-active window (/tmp + clipboard)
-selected region or window (/tmp + clipboard)
-OCR region (to clipboard)
-gallery of screenshots: Select one to be copied to clipboard (`mq`)
+S All screen
+W Active window
+R Select region
+s All screens
+w Active window (/tmp + clipboard)
+r Select region or window (/tmp + clipboard)
+o OCR region (to clipboard)
+g Gallery of screenshots: Select one to be copied to clipboard (`mq`)
 '
 
-# print first letter in red at the beginning of each line
+# print first letter of each line bold and in red
 bold=$(tput bold)
 red=$(tput setaf 1)
 normal=$(tput sgr0)
-options=$(echo "$options" | sed -e "s/\(^.\)/${red}${bold}\1${normal} \1/")
+options=$(echo "$options" | sed -e "s/\(^.\)/${red}${bold}\1${normal}/")
 
 echo -e "Select an option:\n$options"
 read -rsn1 key
 
-sleep 0.1
-
 case $key in
-  W) nohup ~/bin/screenshot.bash & ;;
-  A) nohup ~/bin/screenshot.bash -w & ;;
-  S) nohup ~/bin/screenshot.bash -r & ;;
-  a) nohup ~/bin/screenshot.bash -w -c & ;;
-  s) nohup ~/bin/screenshot.bash -r -c & ;;
-  o | O) nohup ~/bin/screenshot.bash -o & ;;
+  S|W|R) nohup ~/bin/screenshot.bash -${key,,} & ;;
+  s|w|r) nohup ~/bin/screenshot.bash -$key -c & ;;
+  o|O) nohup ~/bin/screenshot.bash -o & ;;
   g) nohup ~/bin/screenshot.bash -g & ;;
   *) echo Canceled. > /tmp/nohup.out ;;
 esac
+
+sleep 0.1
