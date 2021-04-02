@@ -24,7 +24,7 @@ super + k
 
 # start or focus byobu (in alacritty)
 super + b
-    ~/bin/jumpapp ~/install/alacritty -e byobu
+    ~/bin/jumpapp -t byobu ~/install/alacritty -e byobu
     # alacritty --config-file ~/.config/alacritty/alacritty_dwm.yml -e byobu
     # pgrep -f byobu &> /dev/null && wmctrl -a byobu || ~/install/alacritty --config-file ~/.config/alacritty/alacritty_dwm_0.6.yml -e byobu
 
