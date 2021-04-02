@@ -3,7 +3,7 @@
 # when called with option -w, run this script in a new alacritty window
 if [ $# -ge 1 ] && [ "$1" = "-w" ]; then
   pid=$(pgrep -f "alacritty -t 'Screenshot menu'")
-  test -z $pid && WINIT_X11_SCALE_FACTOR=1.0 alacritty -t "Screenshot menu" -o "window.dimensions.columns=50" -o "window.dimensions.lines=10" -e "$0" || kill $pid
+  test -z $pid && WINIT_X11_SCALE_FACTOR=1.0 alacritty -t "Screenshot menu" -o "window.dimensions.columns=50" -o "window.dimensions.lines=11" -e "$0" >> ~/log/screenshot-menu.log 2>&1 || kill $pid
   exit 0
 fi
 
@@ -30,13 +30,15 @@ options=$(echo "$options" | sed -e "s/\(^.\)/${red}${bold}\1${normal} \1/")
 echo -e "Select an option:\n$options"
 read -rsn1 key
 
+sleep 0.1
+
 case $key in
-  W) $SLEEP ; nohup scrot ~/Screenshots/"$FILENAME Screen.png" -e "$NOTIFICATION" & ;;
-  A) $SLEEP ; nohup scrot -u ~/Screenshots/"$FILENAME Window.png" -e "$NOTIFICATION" & ;;
-  S) $SLEEP ; nohup scrot -s ~/Screenshots/"$FILENAME Region.png" -e "$NOTIFICATION" & ;;
-  a) $SLEEP ; nohup scrot -u /tmp/"$FILENAME Window.png" -e "copyq write image/png - < '\$f' && $NOTIFICATION" & ;;
-  s) $SLEEP ; nohup scrot -s /tmp/"$FILENAME Region.png" -e "copyq write image/png - < '\$f' && $NOTIFICATION" & ;;
-  o | O) $SLEEP ; ~/bin/ocr-region-to-clipboard.bash && notify-send "Copied to clipboard:" "$(xsel -bo)" ;;
-  g) xclip -selection clipboard -t image/png -i "$(ls -t ~/Screenshots/*.png /tmp/20*.png | sxiv -ft -i -o)" ;;
-  *) echo Canceled. ;;
+  W) nohup ~/bin/screenshot.bash & ;;
+  A) nohup ~/bin/screenshot.bash -w & ;;
+  S) nohup ~/bin/screenshot.bash -r & ;;
+  a) nohup ~/bin/screenshot.bash -w -c & ;;
+  s) nohup ~/bin/screenshot.bash -r -c & ;;
+  o | O) nohup ~/bin/screenshot.bash -o & ;;
+  g) nohup ~/bin/screenshot.bash -g & ;;
+  *) echo Canceled. > /tmp/nohup.out ;;
 esac
