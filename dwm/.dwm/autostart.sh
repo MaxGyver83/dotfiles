@@ -9,7 +9,7 @@ function run {
 }
 
 # numlockx off
-~/bin/start-kmonad-for-all-keyboards.fish de2 &
+~/bin/start-kmonad.fish --keyboard all &
 #xset r rate 300 50
 #xinput set-prop 'ETPS/2 Elantech Touchpad' 'libinput Natural Scrolling Enabled' 1
 run dunst
