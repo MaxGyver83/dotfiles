@@ -69,6 +69,7 @@ git clone https://github.com/sukima/vim-tiddlywiki.git
 git clone https://github.com/junegunn/fzf.vim.git
 git clone https://github.com/jesseleite/vim-agriculture.git
 git clone https://github.com/itchyny/lightline.vim.git
+git clone https://github.com/editorconfig/editorconfig-vim.git
 git clone --recursive https://github.com/davidhalter/jedi-vim.git
 
 mkdir -p ~/.vim/pack/plugins/opt/
