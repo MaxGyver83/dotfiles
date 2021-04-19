@@ -17,7 +17,7 @@ end
 if test -n "$_flag_test"
     set binary ~/repos/kmonad/kmonad
 else
-    set binary kmonad
+    set binary ~/install/kmonad
 end
 
 if test -n "$_flag_config"
@@ -28,7 +28,7 @@ end
 
 if test "$_flag_keyboard" = "all" || string match -q -i "*$_flag_keyboard*" "internal"
     echo "Kill KMonad for internal keyboard"
-    pkill -f "^$binary $config"
+    pkill -f "kmonad $config"
     if test -z "$_flag_stop"
         echo "Activate KMonad for internal keyboard"
         $binary $config & ; disown
@@ -53,11 +53,12 @@ if string match -q -- "*event*" $RK61
 end
 
 for i in (seq (count $devices))
+    test -e $devices[$i] || continue
     test "$_flag_keyboard" = "all" || string match -q -i "*$_flag_keyboard*" "$names[$i]" || continue
 
     echo "Kill KMonad for "$names[$i]
     set dest "/tmp/kmonad-vou-"(string replace -a ' ' '-' $names[$i])".kbd"
-    pkill -f "^$binary $dest"
+    pkill -f "kmonad $dest"
     if test -z "$_flag_stop"
         cp $config $dest
         sed -i 's:/dev/input/by-path/platform-i8042-serio-0-event-kbd:'$devices[$i]':' $dest
