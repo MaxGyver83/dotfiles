@@ -1,3 +1,9 @@
+status is-interactive || exit 0
+
+# add ~/install (AppImages) and nim to PATH
+fish_add_path -p ~/install
+fish_add_path -a ~/install/nim-1.4.2/bin
+
 # load aliases
 if [ -f $HOME/.config/fish/aliases.fish ]
   source $HOME/.config/fish/aliases.fish
@@ -23,9 +29,6 @@ set fish_color_autosuggestion 888888
 
 set -g __fish_git_prompt_color_branch
 set -g __fish_git_prompt_showcolorhints true
-
-# add ~/install (AppImages) and nim to PATH
-set PATH ~/install ~/install/nim-1.4.2/bin $PATH
 
 # colored man pages
 set -x LESS_TERMCAP_mb (printf "\033[1;31m")     # begin bold
