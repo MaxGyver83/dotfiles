@@ -26,5 +26,6 @@ Shift-F1       Show byobu keybindings
 Ctrl-F6        Kill active pane
 Ctrl-Shift-F2  Start new session
 Alt-Up         Next session
+Shift-F7       Open output in vim
 Shift-F12      Toggle byobu keybindings
 F8 / PREFIX-,  Rename window
