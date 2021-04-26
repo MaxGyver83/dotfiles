@@ -41,7 +41,7 @@ map('•', 'R'); // tab right
 map('A', 'S'); // back in history
 map('E', 'D'); // forward in history
 
-map('<Ctrl-.>', '<Ctrl-6>'); // go to last active tab
+// map('<Ctrl-.>', '<Ctrl-6>'); // go to last active tab
 
 mapkey('p', '#0enter ephemeral PassThrough mode to temporarily suppress SurfingKeys', function() {
     Normal.passThrough(1500);
