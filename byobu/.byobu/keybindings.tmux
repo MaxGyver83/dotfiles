@@ -127,7 +127,7 @@ bind -n M-m resize-pane -Z
 bind -n M-t last-window
 
 # create new window
-bind -n M-c new-window
+bind -n M-c new-window -c "#{pane_current_path}"
 
 # copy line (without leading spaces and newline) into command line
 bind -T copy-mode-vi X send -X back-to-indentation \; send -X begin-selection \; send -X end-of-line \; send -X cursor-left \; send -X copy-pipe-and-cancel "tmux paste-buffer"
