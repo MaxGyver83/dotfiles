@@ -248,7 +248,9 @@ nnoremap <Leader>R R<C-r>"<ESC>
 " search selection with *
 xnoremap * <ESC>/<C-r>*<cr>
 " search word under cursor expanding the selection with leader *
-xnoremap <Leader>* *
+"xnoremap <Leader>* *
+" search word under cursor in all files in working directory using FZF + ripgrep
+nnoremap <silent> <Leader>* :Rg <C-R><C-W><CR>
 
 " search and replace in whole file
 nnoremap <Leader>s :% s/\v//g<left><left><left>
