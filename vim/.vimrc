@@ -49,6 +49,9 @@ set autoindent       " indent new lines
 set listchars=tab:\|_ " show tabs as |_
 set list             " show non-printable chars
 
+" Workaround for bug https://github.com/vim/vim/issues/7742
+"autocmd VimEnter * if exists('#FileExplorer') | exe 'au! FileExplorer *' | endif
+
 " file type dependent
 autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType groovy setlocal colorcolumn=120 shiftwidth=2 tabstop=2 softtabstop=2
@@ -562,6 +565,9 @@ set rtp+=~/workspace/fzf
 " mucomplete
 let g:mucomplete#enable_auto_at_startup = 1
 let g:mucomplete#always_use_completeopt = 1
+# deactivate because of a bug in vim-fish: https://github.com/dag/vim-fish/issues/50
+autocmd FileType fish let g:mucomplete#enable_auto_at_startup = 0
+autocmd FileType fish let g:mucomplete#always_use_completeopt = 0
 
 " jedi-vim
 " let g:jedi#popup_on_dot = 0
@@ -606,6 +612,9 @@ let g:tiddlywiki_no_mappings=1
 
 " DidYouMean
 " let g:dym_use_fzf = 1
+
+" EditorConfig
+let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
 
 " vim-lightline
 set laststatus=2
