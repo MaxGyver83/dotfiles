@@ -51,8 +51,10 @@ alias words='rg -N \'Emit.*Press\' ~/kmonad.log | sed \'s/Emitting: Press //\' |
 
 abbr acs 'apt-cache search'
 abbr sai 'sudo apt install'
-abbr ap 'apt policy'
+abbr sau 'sudo apt update'
+abbr alu 'apt list --upgradable'
 abbr ali 'apt list --installed'
+abbr ap 'apt policy'
 abbr nh 'sudo nethogs wlp2s0 -v 3'
 abbr hg 'history | grep'
 
