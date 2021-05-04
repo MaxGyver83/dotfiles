@@ -565,7 +565,7 @@ set rtp+=~/workspace/fzf
 " mucomplete
 let g:mucomplete#enable_auto_at_startup = 1
 let g:mucomplete#always_use_completeopt = 1
-# deactivate because of a bug in vim-fish: https://github.com/dag/vim-fish/issues/50
+" deactivate because of a bug in vim-fish: https://github.com/dag/vim-fish/issues/50
 autocmd FileType fish let g:mucomplete#enable_auto_at_startup = 0
 autocmd FileType fish let g:mucomplete#always_use_completeopt = 0
 
@@ -601,6 +601,9 @@ let g:fubitive_domain_pattern = 'athena\.daimler\.com/bitbucket'
 " gitgutter
 let g:gitgutter_sign_column_always = 1
 
+" editorconfig: ensure that this plugin works well with fugitive
+let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
+
 " ale
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_python_pyflakes_executable = 'pyflakes3'
@@ -612,9 +615,6 @@ let g:tiddlywiki_no_mappings=1
 
 " DidYouMean
 " let g:dym_use_fzf = 1
-
-" EditorConfig
-let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
 
 " vim-lightline
 set laststatus=2
