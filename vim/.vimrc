@@ -582,9 +582,11 @@ let g:jedi#usages_command = "<leader>jn"
 let g:jedi#completions_command = "<C-Space>"
 let g:jedi#rename_command = "<leader>jr"
 
-" map Ctrl-f to :FZF
-nnoremap <Leader>e :FZF<CR>
-nnoremap <Leader>h :FZF ~<CR>
+" open/search file in current/working/home/root directory with FZF
+nnoremap <Leader>ec :FZF %:p:h<CR>
+nnoremap <Leader>ew :FZF<CR>
+nnoremap <Leader>eh :FZF ~<CR>
+nnoremap <Leader>er :FZF /<CR>
 
 " find git merge conflict
 nnoremap <leader>gm /\v^\<\<\<\<\<\<\< \|\=\=\=\=\=\=\=$\|\>\>\>\>\>\>\> /<cr>
