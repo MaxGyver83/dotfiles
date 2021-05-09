@@ -9,19 +9,21 @@ syntax enable       " enable syntax highlighting
 "set background=dark
 " Color scheme
 " (I like molokai, solarized, badwolf, afterglow, happy_hacking, minimalist)
-try
-    colorscheme minimalist
-catch /^Vim\%((\a\+)\)\=:E185/
-    " alternative if minimalist is not installed
-    colorscheme torte
-    highlight LineNr     ctermfg=59   ctermbg=234 cterm=NONE
-    highlight CursorLine ctermfg=NONE ctermbg=239 cterm=NONE
-    highlight Special    ctermfg=172              cterm=bold          guifg=Orange
-endtry
-highlight DiffAdd    ctermfg=10   ctermbg=24  cterm=bold gui=none guifg=bg guibg=Red
-highlight DiffDelete ctermfg=167  ctermbg=bg  cterm=NONE          guifg=#D75F5F guibg=#1C1C1C
-highlight DiffChange ctermfg=10   ctermbg=24  cterm=bold gui=none guifg=bg guibg=Red
-highlight DiffText   ctermfg=10   ctermbg=167 cterm=bold gui=none guifg=bg guibg=Red
+if &term != 'cygwin'
+    try
+        colorscheme minimalist
+    catch /^Vim\%((\a\+)\)\=:E185/
+        " alternative if minimalist is not installed
+        colorscheme torte
+        highlight LineNr     ctermfg=59   ctermbg=234 cterm=NONE
+        highlight CursorLine ctermfg=NONE ctermbg=239 cterm=NONE
+        highlight Special    ctermfg=172              cterm=bold          guifg=Orange
+    endtry
+    highlight DiffAdd    ctermfg=10   ctermbg=24  cterm=bold gui=none guifg=bg guibg=Red
+    highlight DiffDelete ctermfg=167  ctermbg=bg  cterm=NONE          guifg=#D75F5F guibg=#1C1C1C
+    highlight DiffChange ctermfg=10   ctermbg=24  cterm=bold gui=none guifg=bg guibg=Red
+    highlight DiffText   ctermfg=10   ctermbg=167 cterm=bold gui=none guifg=bg guibg=Red
+endif
 
 " Allow to use Ctrl-s and Ctrl-q as keybinds even when not started from a
 " shell
