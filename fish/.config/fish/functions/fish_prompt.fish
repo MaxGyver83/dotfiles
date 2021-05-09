@@ -81,7 +81,11 @@ function fish_prompt --description 'Prompt ausgeben'
     # set_color normal
     # PWD
     set_color $color_cwd
-    echo -n \n(uname -n):(prompt_pwd)
+    if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]
+        echo -n \n(uname -n):(prompt_pwd)
+    else
+        echo -n \n(prompt_pwd)
+    end
     set_color normal
 
     printf '%s ' (__fish_vcs_prompt)
