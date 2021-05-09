@@ -34,6 +34,7 @@ alias rr='ranger'
 alias batp='bat --style=plain'
 
 # git
+alias g='git status'
 alias gd='git diff'
 alias gp='git pull'
 # gh = "git home" (go to the toplevel of the current repo)
@@ -48,3 +49,8 @@ alias gitunmerged='git branch --no-merged master'
 
 alias caei='xhost &> /dev/null && setxkbmap de -option || sudo loadkeys de'
 alias asdf='xhost &> /dev/null && setxkbmap de koy && xkbcomp -w 0 ~/bin/vou-tabwin.xkb $DISPLAY || sudo loadkeys ~/bin/vou.map'
+
+if [ "$TERM" = cygwin ]; then
+  alias nvim='~/Downloads/Neovim/bin/nvim-qt.exe'
+  alias nvimdiff='~/Downloads/Neovim/bin/nvim-qt.exe -- -d'
+fi
