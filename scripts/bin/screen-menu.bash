@@ -30,5 +30,8 @@ case $key in
   P) ~/.screenlayout/laptop-peaq-usb.sh ;;
   a) ~/.screenlayout/acer.sh ;;
   A) ~/.screenlayout/laptop-acer.sh ;;
-  *) echo Canceled. ;;
+  *) echo Canceled. ; exit 1 ;;
 esac
+
+# reset background image
+~/.fehbg
