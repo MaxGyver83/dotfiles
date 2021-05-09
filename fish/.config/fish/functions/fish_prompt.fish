@@ -81,7 +81,7 @@ function fish_prompt --description 'Prompt ausgeben'
     # set_color normal
     # PWD
     set_color $color_cwd
-    echo -n \n(prompt_pwd)
+    echo -n \n(uname -n):(prompt_pwd)
     set_color normal
 
     printf '%s ' (__fish_vcs_prompt)
