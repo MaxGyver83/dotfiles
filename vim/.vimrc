@@ -332,6 +332,10 @@ nnoremap <expr> <Up> (v:count == 0 ? 'gk' : 'k')
 vnoremap <expr> <Down> (v:count == 0 ? 'gj' : 'j')
 vnoremap <expr> <Up> (v:count == 0 ? 'gk' : 'k')
 
+" move by 10 lines
+noremap <C-b> 10gk
+noremap <C-f> 10gj
+
 " make Y yank till end of line (as proposed in `:help Y`)
 map Y y$
 
