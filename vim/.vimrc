@@ -152,7 +152,7 @@ endif
 " use a bar as cursor in insert mode, underline in replace mode
 " https://stackoverflow.com/a/42118416/4121487
 " Does not work in JuiceSSH (Android) (TERM=linux)
-if !has('nvim') && has("patch-7.4.687") && &term != 'linux'
+if !has('nvim') && has("patch-7.4.687") && &term != 'linux' && &term != 'win32'
     let &t_SI = "\e[6 q"
     let &t_SR = "\e[4 q"
     let &t_EI = "\e[2 q"
