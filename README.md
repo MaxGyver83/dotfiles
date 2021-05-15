@@ -56,7 +56,7 @@ git clone https://github.com/tpope/vim-surround.git
 git clone https://github.com/tpope/vim-repeat.git
 git clone https://github.com/tpope/vim-commentary.git
 git clone https://github.com/inkarkat/vim-ReplaceWithRegister.git
-git clone https://github.com/justinmk/vim-sneak.git
+git clone https://github.com/easymotion/vim-easymotion.git
 git clone https://github.com/lifepillar/vim-mucomplete.git
 git clone https://github.com/tpope/vim-vinegar.git
 git clone https://github.com/tpope/vim-fugitive.git
@@ -81,6 +81,7 @@ git clone https://github.com/jacquesbh/vim-showmarks.git
 git clone https://github.com/tpope/vim-characterize.git
 git clone https://github.com/kana/vim-textobj-user.git
 git clone https://github.com/kana/vim-textobj-line.git
+git clone https://github.com/justinmk/vim-sneak.git
 git clone https://github.com/Raimondi/delimitMate.git
 git clone --depth 1 https://github.com/dense-analysis/ale.git
 ```
