@@ -297,7 +297,7 @@ nnoremap <Leader>t <C-^>
 " toggle window
 nnoremap <Leader>k <C-w><C-w>
 
-nnoremap <Leader>l :20Lex \| call CleanNoNameEmptyBuffers()<cr>
+" nnoremap <Leader>l :20Lex \| call CleanNoNameEmptyBuffers()<cr>
 
 " surround in <kbd> tags
 " xnoremap <Leader>k <Plug>VSurround<kbd>
@@ -309,9 +309,9 @@ nnoremap <Leader>l :20Lex \| call CleanNoNameEmptyBuffers()<cr>
 " noremap <C-l> :cnext<cr>
 
 " previous/next difference in vimdiff
+nnoremap <C-l> [c
+nnoremap <C-h> ]c
 if &diff
-    noremap <C-l> [c
-    noremap <C-h> ]c
     highlight clear CursorLine
     highlight CursorLine gui=underline cterm=underline
 endif
@@ -542,16 +542,25 @@ nmap <Leader>8 <Plug>BufTabLine.Go(8)
 nmap <Leader>9 <Plug>BufTabLine.Go(9)
 nmap <Leader>0 <Plug>BufTabLine.Go(10)
 
-" swap ; and , (next/previous match after s, S)
-nmap ; <Plug>SneakPrevious
-nmap , <Plug>SneakNext
-vmap ; <Plug>SneakPrevious
-vmap , <Plug>SneakNext
-"let g:sneak#s_next = 1
-" vim-sneak case-insensitive
-let g:sneak#use_ic_scs = 1
-" turn off search highlight and sneak highlight
-nnoremap <Leader><Space> :nohlsearch \| call sneak#cancel()<CR>
+"" swap ; and , (next/previous match after s, S)
+"nmap ; <Plug>SneakPrevious
+"nmap , <Plug>SneakNext
+"vmap ; <Plug>SneakPrevious
+"vmap , <Plug>SneakNext
+""let g:sneak#s_next = 1
+"let g:sneak#label = 1
+"" vim-sneak case-insensitive
+"let g:sneak#use_ic_scs = 1
+"" turn off search highlight and sneak highlight
+"nnoremap <Leader><Space> :nohlsearch \| call sneak#cancel()<CR>
+
+" EasyMotion
+let g:EasyMotion_keys = 'iterancyb.ouglhfzx,pdwmks'
+let g:EasyMotion_smartcase = 1
+nmap s <Plug>(easymotion-overwin-f2)
+map <Leader>l <Plug>(easymotion-bd-jk)
+map <Leader><Leader>, <Plug>(easymotion-next)
+nnoremap <Leader>n :nohlsearch<CR>
 
 " make vim-CtrlXA work well with vim-speeddating
 nmap <Plug>SpeedDatingFallbackUp   <Plug>(CtrlXA-CtrlA)
@@ -559,6 +568,7 @@ nmap <Plug>SpeedDatingFallbackDown <Plug>(CtrlXA-CtrlX)
 
 " use fzf (FuzzyFinder) in vim
 set rtp+=~/workspace/fzf
+nmap <Leader>h :History<CR>
 
 " " autocompletion with supertab
 " let g:SuperTabClosePreviewOnPopupClose = 1
