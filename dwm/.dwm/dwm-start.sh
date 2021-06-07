@@ -4,7 +4,7 @@
 while true; do
     ~/.dwm/update-status.bash
 
-    seconds=$(date +%S)
+    seconds=$(date +%-S)
     seconds_to_full_minute=$(( 60 - $seconds ))
     # echo "$dat: Sleeping for $seconds_to_full_minute seconds." >> ~/.dwm.sleeping.log
     sleep $seconds_to_full_minute
