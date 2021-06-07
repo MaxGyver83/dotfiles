@@ -129,6 +129,8 @@ abbr br 'git rev-parse --abbrev-ref HEAD | tr -d \n | xclip -sel clip'
 # for git 2.22 and newer:
 # abbr br 'git branch --show-current | tr -d \n | xclip -sel clip'
 
+abbr cr 'crontab -l | grep --color=never "^[^#]"'
+
 # source work related / private stuff (not part of the dotfiles repo)
 if [ -f $HOME/.config/fish/local.fish ]
   source $HOME/.config/fish/local.fish
