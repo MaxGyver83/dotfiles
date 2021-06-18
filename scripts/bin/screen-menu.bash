@@ -28,8 +28,8 @@ case $key in
   l) ~/.screenlayout/laptop.sh ;;
   p) ~/.screenlayout/peaq-usb.sh ;;
   P) ~/.screenlayout/laptop-peaq-usb.sh ;;
-  a) ~/.screenlayout/acer.sh ;;
-  A) ~/.screenlayout/laptop-acer.sh ;;
+  a) ~/.screenlayout/2x-acer.sh ;;
+  A) ~/.screenlayout/laptop-2x-acer.sh ;;
   *) echo Canceled. ; exit 1 ;;
 esac
 
