@@ -6,6 +6,7 @@ abbr ..... 'cd ../../../..'
 alias ll='ls -halF'
 alias la='ls -A'
 alias l='ls -CF'
+abbr lll 'll -t | head -n 10'
 
 abbr ff 'fzf'
 
