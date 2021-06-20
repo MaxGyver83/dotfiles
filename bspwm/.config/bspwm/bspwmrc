@@ -1,0 +1,39 @@
+#! /bin/sh
+
+num_mon=$(bspc query -M | wc -l)
+if [ $num_mon = 1 ]; then
+  bspc monitor -d term web other
+else
+  bspc monitor primary -d 1 2
+  bspc monitor next -d 3 4
+fi
+
+bspc config border_width         3
+bspc config focused_border_color '#FF0000'
+bspc config active_border_color  '#0000FF'
+bspc config window_gap          12
+
+bspc config split_ratio          0.52
+bspc config borderless_monocle   true
+bspc config gapless_monocle      true
+bspc config single_monocle       true
+
+bspc config remove_disabled_monitors true
+
+bspc rule -a Firefox desktop='^2'
+bspc rule -a Chromium desktop='^2'
+bspc rule -a Gimp desktop='^3' state=floating follow=on
+bspc rule -a 'Alacritty:*:Calendar' state=floating follow=on
+bspc rule -a 'Alacritty:*:Cheatsheet' state=floating follow=on
+bspc rule -a 'Alacritty:*:Power menu' state=floating follow=on
+bspc rule -a 'Alacritty:*:Screenshot menu' state=floating follow=on
+bspc rule -a 'Alacritty:*:Screen menu' state=floating follow=on
+bspc rule -a 'st-256color:*:vim' state=floating follow=on
+bspc rule -a mplayer2 state=floating
+bspc rule -a Kupfer.py focus=on
+bspc rule -a Screenkey manage=off
+
+pgrep -x panel > /dev/null || cd ~/.config/bspwm/panel && ./panel &
+pgrep -x sxhkd > /dev/null || sxhkd -c ~/.config/sxhkd/bspwm_sxhkdrc &
+
+~/.config/bspwm/autostart.sh > ~/.bspwm.log

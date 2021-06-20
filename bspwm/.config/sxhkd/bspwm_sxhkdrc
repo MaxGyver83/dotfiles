@@ -1,0 +1,260 @@
+#
+# wm independent hotkeys
+#
+
+# start rofi
+super + r
+    rofi -show run
+
+# set random wallpaper
+super + shift + w
+    ~/bin/set-random-wallpaper.bash
+
+# show keybindings cheatsheet
+super + k
+    ~/bin/cheatsheet.bash
+
+# start or focus byobu (in alacritty)
+super + b
+    ~/bin/jumpapp -t byobu ~/install/alacritty -e byobu
+    # alacritty --config-file ~/.config/alacritty/alacritty_dwm.yml -e byobu
+    # pgrep -f byobu &> /dev/null && wmctrl -a byobu || ~/install/alacritty --config-file ~/.config/alacritty/alacritty_dwm_0.6.yml -e byobu
+
+# start or focus Firefox
+super + f
+    ~/bin/jumpapp firefox
+
+# make sxhkd reload its configuration files:
+# super + Escape
+# 	pkill -USR1 -x sxhkd
+
+# start pcmanfm (File Manager)
+super + p
+    pcmanfm
+
+# Aus Zwischenablage einfügen
+super + v
+    copyq toggle > /dev/null
+
+# shutdown
+super + alt + s
+    ~/bin/power-menu.bash -w
+
+# lock screen
+super + alt + l
+    png="$(xdg-user-dir PICTURES)/Leo4.png" && test -f "$png" && i3lock -e -f -i "$png" -t || i3lock -e -f -c 333333
+# lock screen
+super + shift + z
+    png="$(xdg-user-dir PICTURES)/Leo4.png" && test -f "$png" && i3lock -e -f -i "$png" -t || i3lock -e -f -c 333333
+
+super + 8
+    ~/bin/screen-menu.bash -w
+
+# check connected displays
+super + F8
+    ~/bin/try-next-screenlayout.bash
+    # xrandr | grep -q 2560x1440 && ~/.screenlayout/peaq.sh || ~/.screenlayout/laptop.sh
+
+# screenshot
+super + Print
+    ~/bin/screenshot-menu.bash -w
+    # ~/bin/rofi-screenshot.bash
+
+Print
+    #xfce4-screenshooter -s $(xdg-user-dir PICTURES)
+    sleep 0.2 ; scrot ~/Screenshots/"%Y-%m-%d %H.%M.%S \$wx\$h.png"
+
+# screenshot of active window
+alt + Print
+    sleep 0.2 ; scrot -u ~/Screenshots/"%Y-%m-%d %H.%M.%S \$wx\$h.png"
+    #xfce4-screenshooter -w -s $(xdg-user-dir PICTURES)
+
+# screenshot of selected region
+shift + Print
+    sleep 0.2 ; scrot -s ~/Screenshots/"%Y-%m-%d %H.%M.%S \$wx\$h.png"
+    #xfce4-screenshooter -r -s $(xdg-user-dir PICTURES)
+
+# screenshot of active window to /tmp and clipboard
+ctrl + alt + Print
+    sleep 0.2 ; scrot -u '/tmp/%Y-%m-%d %H.%M.%S $wx$h.png' -e 'copyq write image/png - < "$f"'
+
+# screenshot of selected region or window to /tmp and clipboard
+ctrl + shift + Print
+    sleep 0.2 ; scrot -s '/tmp/%Y-%m-%d %H.%M.%S $wx$h.png' -e 'copyq write image/png - < "$f"'
+
+# activate VOU layout in KMonad
+ctrl + shift + Escape
+    ~/bin/start-kmonad.fish --keyboard all
+
+# decrease brightness
+XF86MonBrightnessDown
+    bash ~/bin/brightness.bash "-"
+
+# increase brightness
+XF86MonBrightnessUp
+    bash ~/bin/brightness.bash "+"
+
+# mute audio
+XF86AudioMute
+    bash ~/bin/volume.bash
+
+# lower volume
+XF86AudioLowerVolume
+    bash ~/bin/volume.bash "-"
+
+# raise volume
+XF86AudioRaiseVolume
+    bash ~/bin/volume.bash "+"
+
+#
+# bspwm hotkeys
+#
+
+# terminal emulator
+super + shift + Return
+	alacritty -e fish
+
+# program launcher
+super + @space
+	dmenu_run
+
+# quit/restart bspwm
+super + alt + {q,r}
+	bspc {quit,wm -r}
+
+# close and kill
+super + {_,shift + }c
+	bspc node -{c,k}
+
+# alternate between the tiled and monocle layout
+super + m
+	bspc desktop -l next
+
+# send the newest marked node to the newest preselected node
+super + y
+	bspc node newest.marked.local -n newest.!automatic.local
+
+# swap the current node and the biggest window
+super + Return
+	bspc node -s biggest.window.local
+
+#
+# state/flags
+#
+
+# set the window state
+# super + {t,shift + t,s,f}
+# 	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+# super + {q,shift + t,shift + f,shift + m}
+# 	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+super + shift + f
+	bspc node -t ~floating
+
+# set the node flags
+super + ctrl + {m,x,y,z}
+	bspc node -g {marked,locked,sticky,private}
+
+#
+# focus/swap
+#
+
+# focus the node in the given direction
+# super + {a,e,o,i}
+# 	bspc node -f {west,south,north,east}
+# super + shift + {a,e,o,i}
+# 	bspc node -s {west,south,north,east} --follow
+
+super + {e,o}
+	bspc node -f {next.local.window,prev.local.leaf}
+super + shift + {e,o}
+	bspc node -s {next.local.leaf,prev.local.leaf} --follow
+
+# focus the node for the given path jump
+# super + {p,b,comma,period}
+# 	bspc node -f @{parent,brother,first,second}
+# super + {p,b}
+# 	bspc node -f @{parent,brother}
+
+# focus the next/previous window in the current desktop
+# super + {_,shift + }c
+# 	bspc node -f {next,prev}.local.!hidden.window
+
+# focus the last window in the current desktop
+super + t
+	bspc node -f last.window
+
+# focus the next/previous desktop in the current monitor
+super + {x,comma}
+	bspc monitor -f {prev,next}
+# send to the given monitor
+super + shift + {x,comma}
+	bspc node -m {prev,next} --follow
+
+# focus the last node/desktop
+super + {grave,Tab}
+	bspc {node,desktop} -f last
+
+# focus the older or newer node in the focus history
+super + {l,h}
+	bspc wm -h off; \
+	bspc node {older,newer} -f; \
+	bspc wm -h on
+
+# focus the given desktop
+super + {1-6}
+	bspc desktop -f '^{1-6}'
+# focus the previous/next desktop
+super + {a,i}
+	bspc desktop -f {prev,next}
+
+# send to the given desktop
+super + shift + {1-6}
+	bspc node -d '^{1-6}' --follow
+super + shift + {a,i}
+	bspc node -d {prev,next} --follow
+
+#
+# preselect
+#
+
+# preselect the direction
+# super + ctrl + {a,e,o,i}
+	# bspc node -p {west,south,north,east}
+
+# preselect the ratio
+# super + ctrl + {1-9}
+	# bspc node -o 0.{1-9}
+
+# cancel the preselection for the focused node
+# super + ctrl + space
+	# bspc node -p cancel
+
+# cancel the preselection for the focused desktop
+# super + ctrl + shift + space
+	# bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
+
+#
+# move/resize
+#
+
+super + {period,u,equal}
+    bspc node -f @parent && bspc node -r {-0.05,+0.05,0.5} && bspc node -f last
+super + shift + {period,u,equal}
+    bspc node -f @parent/parent && bspc node -r {-0.05,+0.05,0.5} && bspc node -f last
+
+# expand a window by moving one of its side outward
+super + alt + {a,e,o,i}
+	bspc node -z {left -50 0,bottom 0 50,top 0 -50,right 50 0}
+
+# contract a window by moving one of its side inward
+super + alt + shift + {a,e,o,i}
+	bspc node -z {right -50 0,top 0 50,bottom 0 -50,left 50 0}
+
+# move a floating window
+super + {Left,Down,Up,Right}
+	bspc node -v {-50 0,0 50,0 -50,50 0}
+
+super + d
+    bspc node @parent --rotate 90
+super + shift + d
+    bspc node @parent/parent --rotate 90
