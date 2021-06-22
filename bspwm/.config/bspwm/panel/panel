@@ -23,7 +23,8 @@ xtitle -sf 'T%s\n' > "$PANEL_FIFO" &
 #clock -sf 'S%a %H:%M' > "$PANEL_FIFO" &
 while true; do
   # wm="${wm}%{F${FG}}%{B${BG}}%{U${UL}}%{+u}%{A:bspc desktop -f ${name}:} ${name} %{A}%{B-}%{F-}%{-u}"
-  date "+S%%{A:~/bin/calendar.bash:}%a %F %R%%{A}"
+  # date "+S%%{A:~/bin/calendar.bash:}%a %F %R%%{A}"
+  date '+S%a %F %R'
   seconds=$(date +%-S)
   seconds_to_full_minute=$(( 60 - $seconds ))
   sleep $seconds_to_full_minute
