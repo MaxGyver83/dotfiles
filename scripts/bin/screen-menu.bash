@@ -26,8 +26,8 @@ read -rsn1 key
 
 case $key in
   l) ~/.screenlayout/laptop.sh ;;
-  p) ~/.screenlayout/peaq-usb.sh ;;
-  P) ~/.screenlayout/laptop-peaq-usb.sh ;;
+  p) ~/.screenlayout/peaq.sh ;;
+  P) ~/.screenlayout/laptop-peaq.sh ;;
   a) ~/.screenlayout/2x-acer.sh ;;
   A) ~/.screenlayout/laptop-2x-acer.sh ;;
   *) echo Canceled. ; exit 1 ;;
