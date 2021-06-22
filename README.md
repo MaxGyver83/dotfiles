@@ -115,3 +115,28 @@ Build dwm:
 cd ~/repos/dwm/
 sudo make clean install
 ```
+
+## bspwm
+
+Install dependencies (probably this list is not complete):
+
+```sh
+sudo apt install libxcb-xinerama0-dev libxcb-icccm4-dev libxcb-ewmh-dev
+```
+
+Clone these repos:
+
+```sh
+cd ~/repos
+git clone https://github.com/baskerville/bspwm.git
+git clone https://github.com/baskerville/xdo.git
+git clone https://github.com/baskerville/xtitle.git
+git clone https://github.com/LemonBoy/bar.git
+git clone https://github.com/sargon/trayer-srg.git
+```
+
+and install from source (`make && sudo make install`).
+
+```sh
+stow -vv scripts sxhkd dunst bspwm
+```
