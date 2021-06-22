@@ -5,7 +5,13 @@
 
 # 2016 Oliver Kraitschy - http://okraits.de
 
-OPTIONS="Lock screen\nPower-off system\nReboot system\nKill dwm (logout)\nRestart dwm"
+wmctrl -m | grep -q bspwm && WM=bspwm || WM=dwm
+
+if [ $WM = bspwm ]; then
+  OPTIONS="Lock screen\nPower-off system\nReboot system\nQuit bspwm (logout)\nRestart bspwm"
+else
+  OPTIONS="Lock screen\nPower-off system\nReboot system\nKill dwm (logout)\nRestart dwm"
+fi
 
 # source configuration or use default values
 if [ -f $HOME/.config/rofi-power/config ]; then
@@ -38,10 +44,10 @@ then
         png="$(xdg-user-dir PICTURES)/Leo4.png" && test -f "$png" && i3lock -e -f -i "$png" -t || i3lock -e -f -c 333333
         ;;
       Restart)
-        pkill -f '^dwm'
+        [ $WM = bspwm ] && bspc wm -r || pkill -f '^dwm'
         ;;
-      Kill)
-        pkill dwm
+      Kill|Quit)
+        [ $WM = bspwm ] && bspc quit || pkill dwm
         ;;
       # Suspend)
       #   $($USE_LOCKER) && "$LOCKER"; systemctl suspend
