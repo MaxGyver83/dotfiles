@@ -15,8 +15,11 @@ wmctrl -m | grep -q bspwm && WM=bspwm
 #xset r rate 300 50
 #xinput set-prop 'ETPS/2 Elantech Touchpad' 'libinput Natural Scrolling Enabled' 1
 run dunst
-xrandr | grep -q 2560x1440 && ~/.screenlayout/peaq-usb.sh || ~/.screenlayout/peaq.sh
-[ $(xrandr | grep -wc connected) -eq 3 ] && ~/.screenlayout/2-externe-acer.sh
+if [ "$WM" != bspwm ]; then
+  xrandr | grep -q 2560x1440 && ~/.screenlayout/peaq.sh
+  [ $(xrandr | grep -wc connected) -eq 3 ] && ~/.screenlayout/2-externe-acer.sh
+fi
+# set first (=laptop) display to 70% brightness
 xrandr --output $(xrandr | grep -w connected | head -n 1 | cut -d " " -f1) --brightness 0.7
 # test -f ~/.screenlayout/ext-monitor-acer.sh && ~/.screenlayout/ext-monitor-acer.sh
 ~/bin/set-wallpaper.bash
