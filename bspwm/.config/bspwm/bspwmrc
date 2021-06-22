@@ -1,12 +1,10 @@
 #! /bin/sh
 
-num_mon=$(bspc query -M | wc -l)
-if [ $num_mon = 1 ]; then
-  bspc monitor -d term web other
-else
-  bspc monitor primary -d 1 2
-  bspc monitor next -d 3 4
-fi
+bspc config remove_unplugged_monitors true
+bspc config remove_disabled_monitors true
+
+xrandr | grep -q 2560x1440 && ~/.screenlayout/peaq.sh
+[ $(xrandr | grep -wc connected) -eq 3 ] && ~/.screenlayout/2-externe-acer.sh
 
 bspc config border_width         3
 bspc config focused_border_color '#FF0000'
@@ -17,8 +15,6 @@ bspc config split_ratio          0.52
 bspc config borderless_monocle   true
 bspc config gapless_monocle      true
 bspc config single_monocle       true
-
-bspc config remove_disabled_monitors true
 
 bspc rule -a Firefox desktop='^2'
 bspc rule -a Chromium desktop='^2'
@@ -33,7 +29,8 @@ bspc rule -a mplayer2 state=floating
 bspc rule -a Kupfer.py focus=on
 bspc rule -a Screenkey manage=off
 
-pgrep -x panel > /dev/null || cd ~/.config/bspwm/panel && ./panel &
+# pkill -x panel > /dev/null ; cd ~/.config/bspwm/panel && ./panel &
+~/.config/bspwm/restart-bspwmpanel.sh &
 pgrep -x sxhkd > /dev/null || sxhkd -c ~/.config/sxhkd/bspwm_sxhkdrc &
 
 ~/.config/bspwm/autostart.sh > ~/.bspwm.log
