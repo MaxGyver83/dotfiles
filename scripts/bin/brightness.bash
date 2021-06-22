@@ -2,6 +2,8 @@
 
 monitor_xpos=$(xdotool getactivewindow getwindowgeometry | grep Position | grep -o '[0-9]*,' | sed 's/,//')
 active_monitor=$(xrandr | grep -w connected | grep "+$monitor_xpos+" | head -n 1 | cut -d " " -f1)
+# use primary monitor as fallback
+[ -z $active_monitor ] && active_monitor=$(xrandr | grep -w 'connected primary' | head -n 1 | cut -d " " -f1)
 BRIGHT=$(stdbuf -o0 xrandr --verbose | grep "^$active_monitor" -A 5 | awk '/Brightness/ { print $2; exit }')
 
 STEP=0.1
