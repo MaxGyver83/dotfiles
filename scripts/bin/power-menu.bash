@@ -7,6 +7,17 @@ if [ $# -ge 1 ] && [ "$1" = "-w" ]; then
   exit 0
 fi
 
+wmctrl -m | grep -q bspwm && WM=bspwm || WM=dwm
+
+if [ $WM = bspwm ]; then
+options='
+lock screen
+kill bspwm (restart)
+exit bspwm (logout)
+reboot
+shutdown
+'
+else
 options='
 lock screen
 kill dwm (=restart)
@@ -14,6 +25,7 @@ exit dwm (logout)
 reboot
 shutdown
 '
+fi
 
 # print first letter in red at the beginning of each line
 bold=$(tput bold)
@@ -26,8 +38,8 @@ read -rsn1 key
 
 case $key in
   l) png="$(xdg-user-dir PICTURES)/Leo4.png" && test -f "$png" && i3lock -n -e -f -i "$png" -t || i3lock -n -e -f -c 333333 ;;
-  k) pkill -f '^dwm' ;;
-  e) pkill dwm ;;
+  k) [ $WM = bspwm ] && bspc wm -r || pkill -f '^dwm' ;;
+  e) [ $WM = bspwm ] && { pkill -x panel ; bspc quit; } || pkill dwm ;;
   r) systemctl reboot ;;
   s) systemctl poweroff ;;
   *) echo Canceled. ;;
