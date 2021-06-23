@@ -75,6 +75,7 @@ git clone --recursive https://github.com/davidhalter/jedi-vim.git
 mkdir -p ~/.vim/pack/plugins/opt/
 cd ~/.vim/pack/plugins/opt/
 git clone https://github.com/ap/vim-css-color.git
+git clone https://github.com/chrisbra/Colorizer.git
 git clone https://github.com/godlygeek/tabular.git
 git clone https://github.com/airblade/vim-gitgutter.git
 git clone https://github.com/jacquesbh/vim-showmarks.git
