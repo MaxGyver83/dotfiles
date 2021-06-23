@@ -23,7 +23,7 @@ xrandr --output $(xrandr | grep -w connected | head -n 1 | cut -d " " -f1) --bri
 # run trayer only in bspwm
 [ "$WM" = bspwm ] && run trayer --edge top --align right --margin 220 --widthtype request --height 28 --tint 0x292b2e --transparent true --expand true --SetDockType true --alpha 0
 # compton: `--focus...` is needed to not dim the status bar and rofi
-pgrep -f compton > /dev/null 2>&1 || compton --inactive-dim 0.2 --focus-exclude 'x = 0 && y = 0 && override_redirect = true || class_g = "Rofi" || class_g = "Firefox" && argb' &
+pgrep -f compton > /dev/null 2>&1 || compton &
 run nm-applet
 run pasystray
 run blueman-applet
