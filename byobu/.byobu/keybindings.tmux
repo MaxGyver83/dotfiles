@@ -79,6 +79,9 @@ bind -T copy-mode-vi x  send -X cancel
 # reload this file
 bind R source ~/.byobu/keybindings.tmux \; display "Reloaded keybindings.tmux!"
 
+# open buffer in vim (replace with something without an F-key)
+bind -n M-P capture-pane -S -32768 \; save-buffer "$BYOBU_RUN_DIR/printscreen" \; delete-buffer \; new-window -n "PRINTSCREEN" "$BYOBU_EDITOR $BYOBU_RUN_DIR/printscreen"
+
 # send minimal bash config
 bind b send "bind 'set completion-ignore-case on' '\"\\t\": menu-complete' '\"\\e[Z\": menu-complete-backward' 'set menu-complete-display-prefix on' && alias gd='git diff' && test -f /tmp/.vimrc && alias vim='vim -u /tmp/.vimrc' && alias vimdiff='vimdiff -u /tmp/.vimrc'"
 # send small bash config
@@ -107,6 +110,8 @@ bind -n M-o select-pane -t :.-
 # Resize pane
 bind -n M-l resize-pane -L 2
 bind -n M-h resize-pane -R 2
+bind -n M-L resize-pane -U 2
+bind -n M-H resize-pane -D 2
 
 # Rotate counterclockwise/clockwise
 bind -n M-, rotate-window -U \; select-pane -t 1
