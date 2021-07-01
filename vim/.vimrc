@@ -603,6 +603,9 @@ nnoremap <Leader>ec :FZF %:p:h<CR>
 nnoremap <Leader>ew :FZF<CR>
 nnoremap <Leader>eh :FZF ~<CR>
 nnoremap <Leader>er :FZF /<CR>
+" open/search file by word under cursor in working/home directory with FZF
+nnoremap <Leader>fw :call fzf#vim#files('', {'options':'--query '.expand('<cword>')})<CR>
+nnoremap <Leader>fh :call fzf#vim#files('~', {'options':'--query '.expand('<cword>')})<CR>
 
 " find git merge conflict
 nnoremap <leader>gm /\v^\<\<\<\<\<\<\< \|\=\=\=\=\=\=\=$\|\>\>\>\>\>\>\> /<cr>
