@@ -604,16 +604,18 @@ nnoremap <Leader>ew :FZF<CR>
 nnoremap <Leader>eh :FZF ~<CR>
 nnoremap <Leader>er :FZF /<CR>
 " open/search file by word under cursor in working/home directory with FZF
-nnoremap <Leader>fw :call fzf#vim#files('', {'options':'--query '.expand('<cword>')})<CR>
+" I use <Leader>g... for git functions but in this case <Leader>gf makes more
+" sense because this function is analog to vim's gf
+nnoremap <Leader>gf :call fzf#vim#files('', {'options':'--query '.expand('<cword>')})<CR>
 nnoremap <Leader>fh :call fzf#vim#files('~', {'options':'--query '.expand('<cword>')})<CR>
 
 " find git merge conflict
-nnoremap <leader>gm /\v^\<\<\<\<\<\<\< \|\=\=\=\=\=\=\=$\|\>\>\>\>\>\>\> /<cr>
+nnoremap <Leader>gm /\v^\<\<\<\<\<\<\< \|\=\=\=\=\=\=\=$\|\>\>\>\>\>\>\> /<cr>
 
 " vim-fugitive (git support)
 nnoremap <Leader>gs :G<cr>
 nnoremap <Leader>gd :Gdiff<cr>
-nnoremap <Leader>gb :Gblame<cr>
+nnoremap <Leader>gb :Git blame<cr>
 nnoremap <Leader>gg :Ggrep --color 
 
 " vim-fubitive (Bitbucket)
