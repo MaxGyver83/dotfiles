@@ -18,6 +18,8 @@ elif [ "$1" = '-' ]; then
     if [ "$(echo "$NEWBRIGHT < 0.1" | bc)" -eq 1 ]; then
         NEWBRIGHT='0.1'
     fi
+elif [ "$1" = 'max' ] || [ "$1" = 'full' ]; then
+    NEWBRIGHT='1.0'
 else
     echo $BRIGHT
     exit 0
