@@ -250,6 +250,9 @@ xnoremap <Leader>r "_c<C-r>"<ESC>
 " overwrite with yanked text
 nnoremap <Leader>R R<C-r>"<ESC>
 
+" search working directory with ripgrep
+nnoremap <silent> <Leader>/ :Rg
+
 " search selection with *
 xnoremap * <ESC>/<C-r>*<cr>
 " search word under cursor expanding the selection with leader *
