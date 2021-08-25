@@ -120,7 +120,7 @@ bind -n M-x rotate-window -D \; select-pane -t 1
 # Focus selected pane
 # bind -n M-d swap-pane -d -s :. -t :.1 # \; select-pane -t :.1
 bind -n M-w swap-pane -s :. -t !
-bind -n M-t if-shell "[ $(tmux display -p '#P') = '1' ]" "swap-pane -d -s :. -t :.1" "swap-pane -s :. -t !"
+# bind -n M-t if-shell "[ $(tmux display -p '#P') = '1' ]" "swap-pane -d -s :. -t :.1" "swap-pane -s :. -t !"
 
 # Refresh layout
 bind -n M-S-r select-layout main-vertical \;\
