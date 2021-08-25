@@ -15,8 +15,11 @@ wmctrl -m | grep -q bspwm && WM=bspwm
 #xset r rate 300 50
 #xinput set-prop 'ETPS/2 Elantech Touchpad' 'libinput Natural Scrolling Enabled' 1
 run dunst
-xrandr | grep -q 2560x1440 && ~/.screenlayout/peaq.sh
-[ $(xrandr | grep -wc connected) -eq 3 ] && ~/.screenlayout/2-externe-acer.sh
+if [ "$WM" != bspwm ]; then
+  xrandr | grep -q 2560x1440 && ~/.screenlayout/peaq.sh
+  [ $(xrandr | grep -wc connected) -eq 3 ] && ~/.screenlayout/2x-acer.sh
+fi
+# set first (=laptop) display to 70% brightness
 xrandr --output $(xrandr | grep -w connected | head -n 1 | cut -d " " -f1) --brightness 0.7
 # test -f ~/.screenlayout/ext-monitor-acer.sh && ~/.screenlayout/ext-monitor-acer.sh
 ~/bin/set-wallpaper.bash
@@ -30,7 +33,7 @@ run blueman-applet
 run copyq
 # start sxhkd if not running bspwm
 [ "$WM" = bspwm ] || run sxhkd
-run xbanish -i shift -i control -i mod1 -i mod4
+# run xbanish -i shift -i control -i mod1 -i mod4
 # ~/bin/beep-on-key.bash enter &
 eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
 export SSH_AUTH_SOCK
