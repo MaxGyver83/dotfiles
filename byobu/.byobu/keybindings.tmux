@@ -15,6 +15,8 @@ bind e send-prefix
 unbind C-a
 bind C-e last-window
 
+bind x confirm-before kill-pane
+
 # Ctrl-PageUp/PageDown for previous/next window
 # needs to be unset in terminator
 bind -n C-PPage previous-window
