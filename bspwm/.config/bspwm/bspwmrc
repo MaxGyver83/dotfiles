@@ -4,7 +4,7 @@ bspc config remove_unplugged_monitors true
 bspc config remove_disabled_monitors true
 
 xrandr | grep -q 2560x1440 && ~/.screenlayout/peaq.sh
-[ $(xrandr | grep -wc connected) -eq 3 ] && ~/.screenlayout/2-externe-acer.sh
+[ $(xrandr | grep -wc connected) -eq 3 ] && ~/.screenlayout/2x-acer.sh
 
 bspc config border_width         3
 bspc config focused_border_color '#FF0000'
