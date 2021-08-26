@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 function run {
-  if ! pgrep -f $1 ;
+  if ! pgrep -f "$1" ;
   then
     echo Run: $@
     $@&
@@ -38,12 +38,11 @@ run copyq
 eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
 export SSH_AUTH_SOCK
 
-# start Alacritty with byobu and Firefox if not yet running
-if ! pgrep -f "$HOME/install/alacritty -e byobu" ; then
-  run ~/install/alacritty -e byobu
-fi
+# start st with byobu and Firefox if not yet running
+run 'st -e byobu'
 if ! pgrep -f firefox ; then
   firefox &
   sleep 1
+  echo "Focus byobu:"
   wmctrl -a byobu
 fi
