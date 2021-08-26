@@ -49,6 +49,8 @@ set -x EDITOR vim
 
 set -x BYOBU_EDITOR vim
 
+ulimit -c 1000000
+
 if type -q fzf
     # also find hidden files with FZF
     #set -x FZF_DEFAULT_COMMAND "find ."
