@@ -23,6 +23,12 @@ if &term != 'cygwin'
     highlight DiffDelete ctermfg=167  ctermbg=bg  cterm=NONE          guifg=#D75F5F guibg=#1C1C1C
     highlight DiffChange ctermfg=10   ctermbg=24  cterm=bold gui=none guifg=bg guibg=Red
     highlight DiffText   ctermfg=10   ctermbg=167 cterm=bold gui=none guifg=bg guibg=Red
+    " patches / diff files
+    autocmd FileType diff syntax    match diffAddedButRemoved "^+-.*"
+    autocmd FileType diff highlight diffAddedButRemoved ctermfg=101   |
+                        \ highlight diffAdded           ctermfg=green |
+                        \ highlight diffRemoved         ctermfg=red   |
+                        \ highlight diffLine            ctermfg=blue
 endif
 
 " Allow to use Ctrl-s and Ctrl-q as keybinds even when not started from a
@@ -55,7 +61,7 @@ set list             " show non-printable chars
 "autocmd VimEnter * if exists('#FileExplorer') | exe 'au! FileExplorer *' | endif
 
 " file type dependent
-autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType html,css setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType groovy setlocal colorcolumn=120 shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType python setlocal colorcolumn=72,80
 " Autocompletion for python3 (currently replaced by jedi-vim)
@@ -288,6 +294,9 @@ nnoremap <silent><C-Down> :call search('\%' . virtcol('.') . 'v\S', 'W')<CR>
 autocmd FileType python nnoremap <Leader>x :w !python3<cr>
 " execute selection in python
 autocmd FileType python xnoremap <Leader>x :w !python3<cr>
+
+" compile and run a rust project
+autocmd FileType rust nnoremap <Leader>x :w !cargo run<cr>
 
 autocmd FileType groovy nnoremap <Leader>x :w \| !groovy %<cr>
 
