@@ -302,6 +302,9 @@ autocmd FileType groovy nnoremap <Leader>x :w \| !groovy %<cr>
 
 " open file with xdg-open
 nnoremap <Leader>o :!xdg-open % &<cr>
+" fix gx command (maybe <leader>o can be used for something else then?)
+nnoremap gx :!xdg-open <cWORD> &<CR><CR>
+" nmap gx :silent execute "!xdg-open " . shellescape("<cWORD>")<CR>
 
 " toggle buffer
 nnoremap <Leader>t <C-^>
