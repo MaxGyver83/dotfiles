@@ -30,7 +30,7 @@ super + b
 
 # start new byobu session (in separate alacritty window)
 super + ctrl + b
-    ~/install/alacritty --config-file ~/.config/alacritty/alacritty_dwm_0.6.yml -e byobu -S session-$(date +%H%M%S)
+    ~/install/alacritty -e byobu -S session-$(date +%H%M%S)
 
 # start or focus Firefox
 super + f
@@ -115,22 +115,38 @@ ctrl + shift + Print
 ctrl + shift + Escape
     ~/bin/start-kmonad.fish --keyboard all
 
+
+super + 5
+    ~/bin/brightness "-"
+
+super + 6
+    ~/bin/brightness "+"
+
+super + 9
+    ~/bin/volume.bash
+
+super + minus
+    ~/bin/volume.bash "-"
+
+super + dead_grave
+    ~/bin/volume.bash "+"
+
 # decrease brightness
 XF86MonBrightnessDown
-    bash ~/bin/brightness.bash "-"
+    ~/bin/brightness "-"
 
 # increase brightness
 XF86MonBrightnessUp
-    bash ~/bin/brightness.bash "+"
+    ~/bin/brightness "+"
 
 # mute audio
 XF86AudioMute
-    bash ~/bin/volume.bash
+    ~/bin/volume.bash
 
 # lower volume
 XF86AudioLowerVolume
-    bash ~/bin/volume.bash "-"
+    ~/bin/volume.bash "-"
 
 # raise volume
 XF86AudioRaiseVolume
-    bash ~/bin/volume.bash "+"
+    ~/bin/volume.bash "+"
