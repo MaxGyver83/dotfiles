@@ -11,6 +11,8 @@ options='
 l Laptop only
 p Peaq only
 P Peaq + Laptop
+d Dell only
+D Dell + Laptop
 a Acers only
 A Acers + Laptop
 '
@@ -28,6 +30,8 @@ case $key in
   l) ~/.screenlayout/laptop.sh ;;
   p) ~/.screenlayout/peaq.sh ;;
   P) ~/.screenlayout/laptop-peaq.sh ;;
+  d) ~/.screenlayout/dell.sh ;;
+  D) ~/.screenlayout/laptop-dell.sh ;;
   a) ~/.screenlayout/2x-acer.sh ;;
   A) ~/.screenlayout/laptop-2x-acer.sh ;;
   *) echo Canceled. ; exit 1 ;;
