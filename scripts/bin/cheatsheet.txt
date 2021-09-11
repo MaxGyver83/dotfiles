@@ -21,6 +21,13 @@ g,  of next change (after g;)
 
 :g!/xxx\|yyy/d  delete all lines not containing 'xxx' or 'yyy'
 
+tmux
+====
+PREFIX :killp (or x) Kill active pane
+PREFIX :new          Start new session
+PREFIX )             Next session
+Alt-Shift-p          Open output in vim
+PREFIX ,             Rename window
 
 byobu
 =====

@@ -1,6 +1,6 @@
 # dotfiles
 
-My bash, fish, vim, neovim, IdeaVim, VSCodium, surfingkeys, alacritty, KMonad config files and scripts for changing the keyboard layout. These files are organized in such a way that they can be installed with GNU Stow. Stow creates links to the dotfiles from this repo in `$HOME` (or its subfolders).
+My bash, fish, tmux, byobu, vim, neovim, IdeaVim, VSCodium, surfingkeys, alacritty, KMonad config files and scripts for changing the keyboard layout. These files are organized in such a way that they can be installed with GNU Stow. Stow creates links to the dotfiles from this repo in `$HOME` (or its subfolders).
 
 ```sh
 sudo apt-get install stow
@@ -13,6 +13,7 @@ git clone git@github.com:MaxGyver83/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
 stow fish
 stow bash
+stow tmux
 stow byobu
 stow vim
 stow nvim
