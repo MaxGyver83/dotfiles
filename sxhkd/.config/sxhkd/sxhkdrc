@@ -1,6 +1,6 @@
 # show all shortcuts in rofi
-super + shift + e
-    shortcuts.bash rofi
+# super + shift + e
+#     shortcuts.bash rofi
 
 # start rofi
 super + r
@@ -14,23 +14,22 @@ super + w
 super + shift + w
     ~/bin/set-random-wallpaper.bash
 
-# # start alacritty (with fish)
-# super + k
-#     jumpapp alacritty --config-file ~/.config/alacritty/alacritty_dwm.yml -e fish
-
 # show keybindings cheatsheet
 super + k
     ~/bin/cheatsheet.bash
 
-# start or focus byobu (in alacritty)
+# start or focus tmux (in st)
 super + b
-    ~/bin/jumpapp -t byobu ~/install/alacritty -e byobu
+    tmux has-session -t 0 && ~/bin/jumpapp -t tmux st -e 'tmux a -t 0' || st -e tmux
+    # ~/bin/jumpapp -t byobu st -e byobu
+    # ~/bin/jumpapp -t byobu ~/install/alacritty -e byobu
     # alacritty --config-file ~/.config/alacritty/alacritty_dwm.yml -e byobu
     # pgrep -f byobu &> /dev/null && wmctrl -a byobu || ~/install/alacritty --config-file ~/.config/alacritty/alacritty_dwm_0.6.yml -e byobu
 
-# start new byobu session (in separate alacritty window)
+# start new tmux session (in separate st window)
 super + ctrl + b
-    ~/install/alacritty -e byobu -S session-$(date +%H%M%S)
+    st -e "tmux new -s session-$(date +%H%M%S)"
+    # ~/install/alacritty -e byobu -S session-$(date +%H%M%S)
 
 # start or focus Firefox
 super + f

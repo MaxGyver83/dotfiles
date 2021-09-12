@@ -39,11 +39,11 @@ run copyq
 eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
 export SSH_AUTH_SOCK
 
-# start st with byobu and Firefox if not yet running
-run 'st -e byobu'
+# start st with tmux and Firefox if not yet running
+tmux has-session -t 0 && run 'st -e tmux a -t 0' || st -e tmux
 if ! pgrep -f firefox ; then
   firefox &
   sleep 1
-  echo "Focus byobu:"
-  wmctrl -a byobu
+  echo "Focus tmux:"
+  wmctrl -a tmux
 fi
