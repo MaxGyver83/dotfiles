@@ -44,6 +44,7 @@ fi
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
     xterm-color|*-256color) color_prompt=yes;;
+    screen) color_prompt=yes;;
 esac
 
 # uncomment for a colored prompt, if the terminal has the capability; turned
@@ -124,7 +125,7 @@ function git_color_DE {
 }
 
 function git_branch {
-  local git_status="$(git status 2> /dev/null)"
+  local git_status="$(LC_ALL=C git status 2> /dev/null)"
   local on_branch="On branch ([^${IFS}]*)"
   local on_commit="HEAD detached at ([^${IFS}]*)"
 
@@ -137,37 +138,19 @@ function git_branch {
   fi
 }
 
-function git_branch_DE {
-  local git_status="$(git status 2> /dev/null)"
-  local on_branch="Auf Branch ([^${IFS}]*)"
-  local on_commit="HEAD losgelöst bei ([^${IFS}]*)"
-
-  if [[ $git_status =~ $on_branch ]]; then
-    local branch=${BASH_REMATCH[1]}
-    echo "($branch)"
-  elif [[ $git_status =~ $on_commit ]]; then
-    local commit=${BASH_REMATCH[1]}
-    echo "($commit)"
-  fi
-}
-
 if [ "$color_prompt" = yes ]; then
+    [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ] && HOSTINFO="$USER@$HOSTNAME: "
     #PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
     #PS1='\n${debian_chroot:+($debian_chroot)}\[\033[01;34m\]\w\[\033[00m\]\$ '
-    PS1='\n${debian_chroot:+($debian_chroot)}\[\033[01;34m\]\w\[\033[00m\]'
-    if [ "$lang" = de ]; then
-        PS1+=" \[\$(git_color_DE)\]"             # colors git status
-        PS1+="\$(git_branch_DE)"                 # prints current branch
-    else
-        PS1+=" \[\$(git_color)\]"                # colors git status
-        PS1+="\$(git_branch)"                    # prints current branch
-    fi
+    PS1='\n${debian_chroot:+($debian_chroot)}'"$HOSTINFO"'\[\033[01;34m\]\w\[\033[00m\]'
+    PS1+=" \[\$(git_color)\]"                    # colors git status
+    PS1+="\$(git_branch)"                        # prints current branch
     #PS1+="\[$COLOR_BLUE\]\$\[$COLOR_RESET\] "   # '#' for root, else '$'
     PS1+="\[$COLOR_RESET\]\$ "                   # '#' for root, else '$'
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
-unset color_prompt force_color_prompt
+unset color_prompt force_color_prompt HOSTINFO
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
