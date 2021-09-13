@@ -51,6 +51,15 @@ set -x BYOBU_EDITOR vim
 
 ulimit -c 1000000
 
+# activate stderred
+if not string match -q "*$HOME/repos/stderred/build/libstderred.so*" $LD_PRELOAD
+    if test -z $LD_PRELOAD
+        set -x LD_PRELOAD "$HOME/repos/stderred/build/libstderred.so"
+    else
+        set -x LD_PRELOAD "$HOME/repos/stderred/build/libstderred.so:$LD_PRELOAD"
+    end
+end
+
 if type -q fzf
     # also find hidden files with FZF
     #set -x FZF_DEFAULT_COMMAND "find ."
