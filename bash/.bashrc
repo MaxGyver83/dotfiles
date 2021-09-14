@@ -97,27 +97,13 @@ COLOR_WHITE="\033[0;37m"
 COLOR_RESET="\033[0m"
 
 function git_color {
-  local git_status="$(git status 2> /dev/null)"
+  local git_status="$(LC_ALL=C git status 2> /dev/null)"
 
   if [[ ! $git_status =~ "working tree clean" ]]; then
     echo -e $COLOR_RED
   elif [[ $git_status =~ "Your branch is ahead of" ]]; then
     echo -e $COLOR_YELLOW
   elif [[ $git_status =~ "nothing to commit" ]]; then
-    echo -e $COLOR_GREEN
-  else
-    echo -e $COLOR_OCHRE
-  fi
-}
-
-function git_color_DE {
-  local git_status="$(git status 2> /dev/null)"
-
-  if [[ ! $git_status =~ "Arbeitsverzeichnis unverändert" ]]; then
-    echo -e $COLOR_RED
-  elif [[ $git_status =~ Ihr\ Branch\ ist\ .*\ Commits?\ vor ]]; then
-    echo -e $COLOR_YELLOW
-  elif [[ $git_status =~ "nichts zu committen" ]]; then
     echo -e $COLOR_GREEN
   else
     echo -e $COLOR_OCHRE
@@ -139,18 +125,24 @@ function git_branch {
 }
 
 if [ "$color_prompt" = yes ]; then
+    # original prompt
+    # PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+
+    # show green ✔ if last command was successful, otherwise show red ✘
+    PS1="\n\$(if [ \$? == 0 ]; then echo \"\[${COLOR_GREEN}\]✔\"; else echo \"\[${COLOR_RED}\]✘\"; fi)\[$COLOR_RESET\] "
+    # check if I'm connected via SSH
     [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ] && HOSTINFO="$USER@$HOSTNAME: "
-    #PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-    #PS1='\n${debian_chroot:+($debian_chroot)}\[\033[01;34m\]\w\[\033[00m\]\$ '
-    PS1='\n${debian_chroot:+($debian_chroot)}'"$HOSTINFO"'\[\033[01;34m\]\w\[\033[00m\]'
-    PS1+=" \[\$(git_color)\]"                    # colors git status
-    PS1+="\$(git_branch)"                        # prints current branch
-    #PS1+="\[$COLOR_BLUE\]\$\[$COLOR_RESET\] "   # '#' for root, else '$'
-    PS1+="\[$COLOR_RESET\]\$ "                   # '#' for root, else '$'
+    PS1+="$HOSTINFO"                            # add host info
+    # add the default part: current path in bold blue letters
+    PS1+='${debian_chroot:+($debian_chroot)}\[\033[01;34m\]\w\[\033[00m\]'
+    PS1+=" \[\$(git_color)\]"                   # colors git status
+    PS1+="\$(git_branch)"                       # prints current branch
+    PS1+="\[$COLOR_BLUE\]\$\[$COLOR_RESET\] "   # '#' for root, else '$'
+    unset HOSTINFO
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
-unset color_prompt force_color_prompt HOSTINFO
+unset color_prompt force_color_prompt
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
@@ -255,4 +247,15 @@ export FZF_ALT_C_COMMAND="fd --type d --hidden --follow --exclude .git"
 export FZF_DEFAULT_OPTS="--exact --color fg:-1,bg:-1,hl:#fa9a2d,fg+:3,hl+:#fa9a2d,info:150,prompt:110,spinner:150,pointer:167,marker:174"
 export FZF_CTRL_T_OPTS="--preview 'bat --style=numbers --line-range :60 --color=always {}'"
 
+# activate stderred
+if test -f "$HOME/repos/stderred/build/libstderred.so"; then
+    export STDERRED_BLACKLIST='^(git)$'
+    export LD_PRELOAD="$HOME/repos/stderred/build/libstderred.so${LD_PRELOAD:+:$LD_PRELOAD}"
+fi
+
+# disable terminal freeze "scroll lock" with Ctrl-s (unlocking with Ctrl-q btw.)
 stty -ixon
+
+if [ -f ~/.bash_local ]; then
+    source ~/.bash_local
+fi
