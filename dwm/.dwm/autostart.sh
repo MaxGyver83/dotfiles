@@ -8,6 +8,10 @@ function run {
   fi
 }
 
+# Get rid of some dbind warnings.
+# See https://unix.stackexchange.com/a/230442/305474
+export NO_AT_BRIDGE=1
+
 wmctrl -m | grep -q bspwm && WM=bspwm
 
 # numlockx off
@@ -40,7 +44,7 @@ eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
 export SSH_AUTH_SOCK
 
 # start st with tmux and Firefox if not yet running
-tmux has-session -t 0 && run 'st -e tmux a -t 0' || st -e tmux
+tmux has-session -t 0 && run 'st -e tmux a -t 0' || st -e tmux &
 if ! pgrep -f firefox ; then
   firefox &
   sleep 1
