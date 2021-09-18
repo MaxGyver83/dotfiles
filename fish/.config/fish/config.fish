@@ -52,12 +52,14 @@ set -x BYOBU_EDITOR vim
 ulimit -c 1000000
 
 # activate stderred
-set -x STDERRED_BLACKLIST '^(git)$'
-if not string match -q "*$HOME/repos/stderred/build/libstderred.so*" $LD_PRELOAD
-    if test -z $LD_PRELOAD
-        set -x LD_PRELOAD "$HOME/repos/stderred/build/libstderred.so"
-    else
-        set -x LD_PRELOAD "$HOME/repos/stderred/build/libstderred.so:$LD_PRELOAD"
+if test -f "$HOME/repos/stderred/build/libstderred.so"
+    set -x STDERRED_BLACKLIST '^(git)$'
+    if not string match -q "*$HOME/repos/stderred/build/libstderred.so*" $LD_PRELOAD
+        if test -z $LD_PRELOAD
+            set -x LD_PRELOAD "$HOME/repos/stderred/build/libstderred.so"
+        else
+            set -x LD_PRELOAD "$HOME/repos/stderred/build/libstderred.so:$LD_PRELOAD"
+        end
     end
 end
 
