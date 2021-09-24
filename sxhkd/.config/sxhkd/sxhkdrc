@@ -114,6 +114,9 @@ ctrl + shift + Print
 ctrl + shift + Escape
     ~/bin/start-kmonad.fish --keyboard all
 
+# release CapsLock (if active)
+ctrl + shift + 1
+    xset -q | grep -qE 'Caps Lock: *on' && xdotool key Caps_Lock
 
 super + 5
     ~/bin/brightness "-"
