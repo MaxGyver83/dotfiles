@@ -20,7 +20,7 @@ super + k
 
 # start or focus tmux (in st)
 super + b
-    tmux has-session -t 0 && ~/bin/jumpapp -t tmux st -e 'tmux a -t 0' || st -e tmux
+    if tmux has-session -t 0 ; then ~/bin/jumpapp -t tmux st -e tmux a -t 0 || st -e 'tmux a -t 0' ; else st -e tmux; fi
     # ~/bin/jumpapp -t byobu st -e byobu
     # ~/bin/jumpapp -t byobu ~/install/alacritty -e byobu
     # alacritty --config-file ~/.config/alacritty/alacritty_dwm.yml -e byobu
@@ -70,10 +70,10 @@ super + alt + s
 
 # lock screen
 super + alt + l
-    png="$(xdg-user-dir PICTURES)/Leo4.png" && test -f "$png" && i3lock -e -f -i "$png" -t || i3lock -e -f -c 333333
+    png="$(xdg-user-dir PICTURES)/Leo5_2560x1440.png" && test -f "$png" && i3lock -e -f -i "$png" -t || i3lock -e -f -c 333333
 # lock screen
 super + shift + z
-    png="$(xdg-user-dir PICTURES)/Leo4.png" && test -f "$png" && i3lock -e -f -i "$png" -t || i3lock -e -f -c 333333
+    png="$(xdg-user-dir PICTURES)/Leo5_2560x1440.png" && test -f "$png" && i3lock -e -f -i "$png" -t || i3lock -e -f -c 333333
 
 super + 8
     ~/bin/screen-menu.bash -w
