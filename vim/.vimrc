@@ -409,6 +409,21 @@ map <F2> :mksession! ~/.vim_session<cr>
 " And load session with F3
 map <F3> :source ~/.vim_session<cr>
 
+" Markdown formatting
+nmap <leader>m0 :s/\v^#+ *//e<CR>
+nmap <leader>m1 :s/\v^#+ *//e<CR>0i#<space><ESC>
+nmap <leader>m2 :s/\v^#+ *//e<CR>0i##<space><ESC>
+nmap <leader>m3 :s/\v^#+ *//e<CR>0i###<space><ESC>
+nmap <leader>m4 :s/\v^#+ *//e<CR>0i####<space><ESC>
+nmap <leader>mi ysiW_
+nmap <leader>mb ysiW*.
+nmap <leader>mm ysiW`
+nmap <leader>mM o```<ESC><up>O```
+nmap <leader>ml ysiW]%a()<left>
+xmap <leader>mi S_
+xmap <leader>mb S*gvS*
+xmap <leader>ml S]%a()<left>
+
 " remap unused umlauts
 nmap ä ;
 nmap ü [
