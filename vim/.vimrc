@@ -364,10 +364,21 @@ nnoremap val 0v$
 nnoremap vil ^vg_
 noremap <Leader>Y ^"+yg_
 
+if !has('gui_running') && &term =~ '^\%(screen\|tmux\)' && !has('nvim')
+  " Enable modified arrow keys, see  :help xterm-modifier-keys
+  execute "silent! set <xUp>=\<Esc>[@;*A"
+  execute "silent! set <xDown>=\<Esc>[@;*B"
+  execute "silent! set <xRight>=\<Esc>[@;*C"
+  execute "silent! set <xLeft>=\<Esc>[@;*D"
+endif
+
+" swap C-Arrow and S-Arrow because in gedit/Firefox/fish C-Arrow jumps a word (not a WORD)
 noremap <C-Left> b
 noremap <C-Right> w
 noremap <S-Left> B
 noremap <S-Right> W
+inoremap <S-Left> <C-o>B
+inoremap <S-Right> <C-o>W
 
 " Move lines up and down via Ctrl + j or k
 
