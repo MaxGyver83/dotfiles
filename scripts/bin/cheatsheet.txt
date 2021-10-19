@@ -21,6 +21,16 @@ g,  of next change (after g;)
 
 :g!/xxx\|yyy/d  delete all lines not containing 'xxx' or 'yyy'
 
+:set spell  start spell check
+]s  jump to next misspelled word
+zg  add word under the cursor as a good word to spellfile
+zG  add word under the cursor as a good word to temporary wordlist
+
+C-]  follow link in vim help
+
+:copen  open window with list of matches
+:cn     next match (helpgrep)
+
 tmux
 ====
 PREFIX :killp (or x) Kill active pane
