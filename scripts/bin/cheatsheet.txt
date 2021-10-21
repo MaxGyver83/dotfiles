@@ -26,6 +26,9 @@ g,  of next change (after g;)
 zg  add word under the cursor as a good word to spellfile
 zG  add word under the cursor as a good word to temporary wordlist
 
+:helpgrep xxx  Search string 'xxx' in help
+:Help[tags]    Search help tags with fzf
+
 C-]  follow link in vim help
 
 :copen  open window with list of matches
