@@ -368,7 +368,7 @@ nnoremap vil ^vg_
 noremap <Leader>Y ^"+yg_
 
 if !has('gui_running') && &term =~ '^\%(screen\|tmux\)' && !has('nvim')
-  " Enable modified arrow keys, see  :help xterm-modifier-keys
+  " Enable modified arrow keys, see `:help xterm-modifier-keys`
   execute "silent! set <xUp>=\<Esc>[@;*A"
   execute "silent! set <xDown>=\<Esc>[@;*B"
   execute "silent! set <xRight>=\<Esc>[@;*C"
@@ -536,6 +536,11 @@ function! TrimWhitespace()
 endfunction
 command! TrimWhitespace call TrimWhitespace()
 
+function! Sum()
+    :'<,'>w !awk '{s+=$1} END {print s}'
+endfunction
+command! Sum :<C-U>call Sum()
+
 function! MakeHtmlReadyForEmail()
     " delete javascript block
     %s/<script\_.*<\/script>//ge
@@ -662,9 +667,6 @@ nnoremap <Leader>gd :Gdiff<cr>
 nnoremap <Leader>gb :Git blame<cr>
 nnoremap <Leader>gg :Ggrep --color 
 
-" vim-fubitive (Bitbucket)
-let g:fubitive_domain_pattern = 'athena\.daimler\.com/bitbucket'
-
 " gitgutter
 let g:gitgutter_sign_column_always = 1
 
@@ -689,3 +691,10 @@ set noshowmode
 let g:lightline = {
     \ 'colorscheme': 'wombat',
     \ }
+
+" try loading machine-specific settings
+try
+  source ~/.vimrc_local
+catch
+  " No such file? No problem; just ignore it.
+endtry
