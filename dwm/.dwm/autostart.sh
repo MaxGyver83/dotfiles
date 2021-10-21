@@ -43,6 +43,15 @@ run copyq
 eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
 export SSH_AUTH_SOCK
 
+( export TERM=dumb
+if [[ "$(hostname)" == c* ]]; then
+  # when at home and eth0 is up, disable wlan0 and start vpn
+  if iwgetid | grep -q Yippie && ip -4 a | grep -q 'eth0.*state UP'; then
+    nmcli d disconnect wlan0
+    /lhome/schimax/bin/vpn
+  fi
+fi ) &
+
 # start st with tmux and Firefox if not yet running
 tmux has-session -t 0 && run 'st -e tmux a -t 0' || st -e tmux &
 if ! pgrep -f firefox ; then
