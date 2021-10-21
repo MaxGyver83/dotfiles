@@ -51,6 +51,10 @@ set -x BYOBU_EDITOR vim
 
 ulimit -c 1000000
 
+if test -f "$HOME/.config/ripgrep/ripgreprc"
+    set -x RIPGREP_CONFIG_PATH "$HOME/.config/ripgrep/ripgreprc"
+end
+
 # activate stderred
 if test -f "$HOME/repos/stderred/build/libstderred.so"
     set -x STDERRED_BLACKLIST '^(git)$'
