@@ -74,6 +74,9 @@ autocmd BufRead,BufNewFile **/kmonad/*.kbd setlocal filetype=clojure
 autocmd BufRead,BufNewFile **/dwm.c set autoindent noexpandtab tabstop=4 shiftwidth=4
 autocmd BufRead,BufNewFile *.js.tid set filetype=javascript noexpandtab tabstop=4 shiftwidth=4
 
+" disable MUcomplete for fish and for git commit messages
+autocmd BufEnter * if &ft ==# 'gitcommit' || &ft ==# 'fish' | MUcompleteAutoOff | else | MUcompleteAutoOn | endif
+
 " recognize tmux config files
 autocmd BufRead,BufNewFile *.tmux set filetype=tmux
 autocmd BufRead,BufNewFile /usr/share/X11/xkb/* set syntax=javascript
