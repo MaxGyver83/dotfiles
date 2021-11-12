@@ -15,8 +15,6 @@ abbr fif 'find . -type f -iname'
 abbr fid 'find . -type d -iname'
 alias fd='fdfind'
 
-abbr df 'df -h'
-
 abbr du1 'du -h -d1'
 abbr du0 'du -h -d0'
 abbr grn 'grep -rn'
@@ -63,7 +61,7 @@ alias notes='search_in_notes.sh'
 
 abbr v 'vim'
 alias vv='vim -c "normal '\''0"'
-abbr n 'nvim'
+#abbr n 'nvim'
 abbr rr 'ranger'
 alias feh='feh --scale-down --auto-zoom --auto-rotate'
 
