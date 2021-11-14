@@ -564,6 +564,15 @@ function! MakeHtmlReadyForEmail()
     w! /tmp/email.html
 endfunction
 
+function! s:DiffWithSaved()
+  let filetype=&ft
+  diffthis
+  vnew | r # | normal! 1Gdd
+  diffthis
+  exe "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
+endfunction
+command! DiffSaved call s:DiffWithSaved()
+
 " Switch to insert mode if file is empty
 function InsertIfEmpty()
     if line('$') == 1 && col('$') == 1
