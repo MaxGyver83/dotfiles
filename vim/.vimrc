@@ -327,9 +327,9 @@ nnoremap <Leader>k <C-w><C-w>
 " noremap <C-h> :cprevious<cr>
 " noremap <C-l> :cnext<cr>
 
-" previous/next difference in vimdiff, previous/next error in ALE (if loaded) or quickfix error otherwise
-nnoremap <expr> <C-l> &diff ? '[c' : exists("g:ale_linters") ? ':ALEPrevious<CR>' : ':cp<CR>'
-nnoremap <expr> <C-h> &diff ? ']c' : exists("g:ale_linters") ? ':ALENext<CR>' : ':cn<CR>'
+" previous/next misspelled word, previous/next difference in vimdiff, previous/next error in ALE (if loaded) or quickfix error otherwise
+nnoremap <expr> <C-l> &spell ? '[s' : &diff ? '[c' : exists("g:ale_linters") ? ':ALEPrevious<CR>' : ':cp<CR>'
+nnoremap <expr> <C-h> &spell ? ']s' : &diff ? ']c' : exists("g:ale_linters") ? ':ALENext<CR>' : ':cn<CR>'
 if &diff
     highlight clear CursorLine
     highlight CursorLine gui=underline cterm=underline
