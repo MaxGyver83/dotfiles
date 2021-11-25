@@ -503,6 +503,7 @@ iab kb <kbd></kbd><C-o>F<<BS>
 " auto complete closing HTML tag
 iab </ </<C-X><C-O><Del><Del>
 iab pr printf("\n");
+iab fpr fprintf(stderr, "\n");
 " inoremap ae ä
 " inoremap oo ö
 " inoremap uu ü
