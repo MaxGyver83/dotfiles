@@ -682,6 +682,12 @@ nnoremap <Leader>gd :Gdiff<cr>
 nnoremap <Leader>gb :Git blame<cr>
 nnoremap <Leader>gg :Ggrep --color 
 
+" ale
+nnoremap <Leader>ae :ALEEnable<cr>
+nnoremap <Leader>at :ALEToggle<cr>
+nnoremap <Leader>al :ALELint<cr>
+nnoremap <Leader>ad :ALEDetail<cr>
+
 " gitgutter
 let g:gitgutter_sign_column_always = 1
 
