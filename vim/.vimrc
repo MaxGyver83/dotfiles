@@ -688,6 +688,13 @@ let g:gitgutter_sign_column_always = 1
 " editorconfig: ensure that this plugin works well with fugitive
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
 
+" any-jump
+let g:any_jump_disable_default_keybindings = 1
+" Jump to definition under cursor
+nnoremap <leader>j :AnyJump<CR>
+" Visual mode: jump to selected text in visual mode
+xnoremap <leader>j :AnyJumpVisual<CR>
+
 " ale
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_python_pyflakes_executable = 'pyflakes3'
