@@ -304,6 +304,9 @@ autocmd FileType rust nnoremap <Leader>x :w !cargo run<cr>
 
 autocmd FileType groovy nnoremap <Leader>x :w \| !groovy %<cr>
 
+" repeat last command in previous tmux pane
+autocmd FileType c,cpp nnoremap <Leader>x :silent call system('tmux lastp \; send up \; send enter \; lastp')<cr>
+
 " open file with xdg-open
 nnoremap <Leader>o :!xdg-open % &<cr>
 " fix gx command (maybe <leader>o can be used for something else then?)
