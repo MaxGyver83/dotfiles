@@ -34,6 +34,8 @@ C-]  follow link in vim help
 :copen  open window with list of matches
 :cn     next match (helpgrep)
 
+:il[ist] xxx  Search 'xxx' in all included headers (C/C++)
+
 tmux
 ====
 PREFIX :killp (or x) Kill active pane
@@ -41,13 +43,3 @@ PREFIX :new          Start new session
 PREFIX )             Next session
 Alt-Shift-p          Open output in vim
 PREFIX ,             Rename window
-
-byobu
-=====
-Shift-F1                      Show byobu keybindings
-Shift-F12                     Toggle byobu keybindings
-Ctrl-F6        PREFIX :killp  Kill active pane
-Ctrl-Shift-F2  PREFIX :new    Start new session
-Alt-Up         PREFIX )       Next session
-Shift-F7       Alt-Shift-p    Open output in vim
-F8             PREFIX ,       Rename window
