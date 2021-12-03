@@ -1,6 +1,6 @@
 # dotfiles
 
-My bash, fish, tmux, byobu, vim, neovim, IdeaVim, VSCodium, surfingkeys, alacritty, KMonad config files and scripts for changing the keyboard layout. These files are organized in such a way that they can be installed with GNU Stow. Stow creates links to the dotfiles from this repo in `$HOME` (or its subfolders).
+My vim, bash, fish, tmux, sxhkd, surfingkeys, Docker, KMonad config files and scripts for changing the keyboard layout. These files are organized in such a way that they can be installed with GNU Stow. Stow creates links to the dotfiles from this repo in `$HOME` (or its subfolders).
 
 ```sh
 sudo apt-get install stow
@@ -14,12 +14,11 @@ cd ~/.dotfiles
 stow fish
 stow bash
 stow tmux
-stow byobu
 stow vim
-stow nvim
-stow ideavim
-stow alacritty
+stow sxhkd
 stow surfingkeys
+stow kmonad
+stow editorconfig
 stow scripts
 ```
 
@@ -118,7 +117,7 @@ cd ~/repos/dwm/
 sudo make clean install
 ```
 
-## bspwm
+## bspwm (outdated)
 
 Install dependencies (probably this list is not complete):
 
