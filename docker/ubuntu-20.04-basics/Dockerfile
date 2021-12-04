@@ -7,15 +7,25 @@ RUN apt-get update && apt-get install -y \
   git \
   stow \
   vim \
-  fish \
   fzf \
   fd-find \
   ripgrep \
+  tmux \
   build-essential \
   ipython3 \
   python3-pip \
   python3-pudb \
+  gettext-base \
+  man-db \
   && rm -rf /var/lib/apt/lists/*
+# gettext-base and man-db for fish
+
+# get fish
+RUN cd /tmp \
+    && wget https://launchpad.net/~fish-shell/+archive/ubuntu/release-3/+files/fish-common_3.3.1-1~focal_all.deb \
+    && wget https://launchpad.net/~fish-shell/+archive/ubuntu/release-3/+files/fish_3.3.1-1~focal_amd64.deb \
+    && dpkg -i fish-common_3.3.1-1~focal_all.deb fish_3.3.1-1~focal_amd64.deb \
+    && rm fish-common_3.3.1-1~focal_all.deb fish_3.3.1-1~focal_amd64.deb
 
 # get bat
 RUN cd /tmp \
@@ -29,3 +39,9 @@ RUN cd /tmp \
     && chmod +x sd-v0.7.6-x86_64-unknown-linux-gnu \
     && mv sd-v0.7.6-x86_64-unknown-linux-gnu /usr/bin/sd
 
+# (shallow) clone my dotfiles repo
+RUN git clone --depth 1 https://github.com/MaxGyver83/dotfiles.git ~/.dotfiles
+
+# run stow (linking my dotfiles)
+RUN mv ~/.bashrc ~/.bashrc_bak ; mkdir ~/.config \
+    && cd ~/.dotfiles && stow bash fish tmux scripts
