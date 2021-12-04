@@ -44,4 +44,7 @@ RUN git clone --depth 1 https://github.com/MaxGyver83/dotfiles.git ~/.dotfiles
 
 # run stow (linking my dotfiles)
 RUN mv ~/.bashrc ~/.bashrc_bak ; mkdir ~/.config \
-    && cd ~/.dotfiles && stow bash fish tmux scripts
+    && cd ~/.dotfiles && stow bash fish tmux scripts vim
+
+# will be used in .tmux.conf
+ENV IN_DOCKER=1
