@@ -32,7 +32,7 @@ jesseleite/vim-agriculture
 editorconfig/editorconfig-vim
 dag/vim-fish
 sukima/vim-tiddlywiki
-davidhalter/jedi-vim  # Python autocompletion
+davidhalter/jedi-vim,recursive  # Python autocompletion
 MTDL9/vim-log-highlighting
 
 # other
@@ -69,7 +69,7 @@ will133/vim-dirdiff
 
 function clone_repo {
     sleep 0.1
-    cd "$1" && git clone "$2" 2> /dev/null
+    cd "$1" && git clone $3 "$2" 2> /dev/null
 }
 
 for types in start opt; do
@@ -82,6 +82,9 @@ for types in start opt; do
     plugins=$types[@]
     for plugin in "${!plugins}"; do
         echo "  $plugin"
+        # if $plugin contains a comma, save part after first comma as $params
+        [[ $plugin == *,* ]] && params="--"${plugin#*,} || params=
+        plugin=${plugin%%,*}  # keep part before first comma
         folder=${plugin##*/}
         folder=${folder%.git}
         dest_path="$HOME/.vim/pack/plugins/$types/$folder"
@@ -91,7 +94,7 @@ for types in start opt; do
         else
             url=https://github.com/"$plugin".git
         fi
-        clone_repo "$dir" "$url" &
+        clone_repo "$dir" "$url" "$params" &
     done
 done
 echo -e "\nDownloading..."
