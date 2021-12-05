@@ -1,0 +1,99 @@
+#!/bin/bash
+
+start=(
+# improve visualization
+ap/vim-buftabline
+itchyny/lightline.vim
+
+# git related
+tpope/vim-fugitive
+tpope/vim-rhubarb
+airblade/vim-gitgutter
+
+# text editing
+tpope/vim-surround
+tpope/vim-repeat
+tpope/vim-commentary
+tpope/vim-speeddating
+Konfekt/vim-CtrlXA
+inkarkat/vim-ReplaceWithRegister
+lifepillar/vim-mucomplete
+kshenoy/vim-signature
+godlygeek/tabular
+easymotion/vim-easymotion
+
+# open, find and search files
+EinfachToll/DidYouMean
+tpope/vim-vinegar
+junegunn/fzf.vim
+jesseleite/vim-agriculture
+
+# file type support
+editorconfig/editorconfig-vim
+dag/vim-fish
+sukima/vim-tiddlywiki
+davidhalter/jedi-vim  # Python autocompletion
+MTDL9/vim-log-highlighting
+
+# other
+guns/xterm-color-table.vim
+)
+
+opt=(
+# color themes
+lifepillar/vim-solarized8
+manasthakur/papercolor-theme
+
+# file type support
+mwgkgk/kmonad-vim
+cespare/vim-toml
+# rust-lang/rust.vim
+
+# other
+dense-analysis/ale  # linting
+chrisbra/Colorizer  # preview colors
+ap/vim-css-color  # preview colors
+Raimondi/delimitMate  # automatic closing of quotes, parenthesis, brackets
+junegunn/gv.vim  # git commit browser
+tpope/vim-characterize  # unicode character metadata
+xolox/vim-colorscheme-switcher
+jacquesbh/vim-showmarks
+pechorin/any-jump.vim
+will133/vim-dirdiff
+# kana/vim-textobj-line
+# kana/vim-textobj-user
+# balanceiskey/vim-framer-syntax
+# justinmk/vim-sneak
+# frazrepo/vim-rainbow  # colored brackets
+)
+
+function clone_repo {
+    sleep 0.1
+    cd "$1" && git clone "$2" 2> /dev/null
+}
+
+for types in start opt; do
+    dir="$HOME/.vim/pack/plugins/$types/"
+    echo -e "\n$dir"
+    mkdir -p "$dir"
+    cd "$dir"
+    # workaround for iterating over an array using indirect reference
+    # see https://stackoverflow.com/questions/11180714/how-to-iterate-over-an-array-using-indirect-reference
+    plugins=$types[@]
+    for plugin in "${!plugins}"; do
+        echo "  $plugin"
+        folder=${plugin##*/}
+        folder=${folder%.git}
+        dest_path="$HOME/.vim/pack/plugins/$types/$folder"
+        [ -d "$dest_path" ] && echo "Folder $folder does already exist" && continue
+        if [[ "$plugin" == http* ]]; then
+            url="$plugin"
+        else
+            url=https://github.com/"$plugin".git
+        fi
+        clone_repo "$dir" "$url" &
+    done
+done
+echo -e "\nDownloading..."
+wait
+echo "Done."

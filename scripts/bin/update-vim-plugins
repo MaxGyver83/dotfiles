@@ -1,0 +1,11 @@
+#!/bin/sh
+mkdir -p ~/log
+logfile=~/log/update-vim-plugins.log
+printf "\n###################\n" >> "$logfile"
+date "+%Y-%m-%d %H:%M:%S" >> "$logfile"
+for p in ~/.vim/pack/plugins/start/* ~/.vim/pack/plugins/opt/*; do
+    printf "\n$p\n"
+    cd $p
+    git rev-parse --short HEAD
+    git pull
+done | tee -a "$logfile"
