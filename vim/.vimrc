@@ -542,6 +542,11 @@ function! TrimWhitespace()
 endfunction
 command! TrimWhitespace call TrimWhitespace()
 
+function! GitHub()
+    :execute ':!xdg-open https://github.com/' . shellescape(expand('<cWORD>'))
+endfunction
+command! GitHub call GitHub()
+
 function! Sum()
     :'<,'>w !awk '{s+=$1} END {print s}'
 endfunction
