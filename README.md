@@ -9,17 +9,10 @@ sudo apt-get install stow
 At first, back up the original dotfiles. Then clone this repository into your home directory:
 
 ```sh
+mkdir -p ~/.config/fish ~/.vim ~/bin
 git clone git@github.com:MaxGyver83/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
-stow fish
-stow bash
-stow tmux
-stow vim
-stow sxhkd
-stow surfingkeys
-stow kmonad
-stow editorconfig
-stow scripts
+stow -v fish bash tmux vim sxhkd surfingkeys kmonad editorconfig scripts
 ```
 
 If this repo is located somewhere else, pass the destination directory explicitly, for example:
@@ -48,44 +41,13 @@ Also recommended:
 
 I use vim8's integrated package manager. So some plugins need to be cloned into `~/.vim/pack/plugins/start/` or `~/.vim/pack/plugins/opt/`.
 
-```sh
-mkdir -p ~/.vim/pack/plugins/start/
-cd ~/.vim/pack/plugins/start/
-git clone https://github.com/ap/vim-buftabline.git
-git clone https://github.com/tpope/vim-surround.git
-git clone https://github.com/tpope/vim-repeat.git
-git clone https://github.com/tpope/vim-commentary.git
-git clone https://github.com/inkarkat/vim-ReplaceWithRegister.git
-git clone https://github.com/easymotion/vim-easymotion.git
-git clone https://github.com/lifepillar/vim-mucomplete.git
-git clone https://github.com/tpope/vim-vinegar.git
-git clone https://github.com/tpope/vim-fugitive.git
-git clone https://github.com/kshenoy/vim-signature.git
-git clone https://github.com/Konfekt/vim-CtrlXA.git
-git clone https://github.com/tpope/vim-speeddating.git
-git clone https://github.com/EinfachToll/DidYouMean.git
-git clone https://github.com/dag/vim-fish.git
-git clone https://github.com/sukima/vim-tiddlywiki.git
-git clone https://github.com/junegunn/fzf.vim.git
-git clone https://github.com/jesseleite/vim-agriculture.git
-git clone https://github.com/itchyny/lightline.vim.git
-git clone https://github.com/editorconfig/editorconfig-vim.git
-git clone --recursive https://github.com/davidhalter/jedi-vim.git
+Install plugins with [install-vim-plugins](scripts/bin/install-vim-plugins). This script itself contains the list of plugins to be installed:
 
-mkdir -p ~/.vim/pack/plugins/opt/
-cd ~/.vim/pack/plugins/opt/
-git clone https://github.com/ap/vim-css-color.git
-git clone https://github.com/chrisbra/Colorizer.git
-git clone https://github.com/godlygeek/tabular.git
-git clone https://github.com/airblade/vim-gitgutter.git
-git clone https://github.com/jacquesbh/vim-showmarks.git
-git clone https://github.com/tpope/vim-characterize.git
-git clone https://github.com/kana/vim-textobj-user.git
-git clone https://github.com/kana/vim-textobj-line.git
-git clone https://github.com/justinmk/vim-sneak.git
-git clone https://github.com/Raimondi/delimitMate.git
-git clone --depth 1 https://github.com/dense-analysis/ale.git
+```sh
+~/bin/install-vim-plugins
 ```
+
+Update vim plugins with [update-vim-plugins](scripts/bin/update-vim-plugins).
 
 ## dwm
 
