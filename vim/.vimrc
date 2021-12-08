@@ -688,7 +688,7 @@ nnoremap <Leader>gb :Git blame<cr>
 nnoremap <Leader>gg :Ggrep --color 
 
 " ale
-nnoremap <Leader>ae :ALEEnable<cr>
+nnoremap <Leader>ae :pa ale \| ALEEnable \| ALELint<cr>
 nnoremap <Leader>at :ALEToggle<cr>
 nnoremap <Leader>al :ALELint<cr>
 nnoremap <Leader>ad :ALEDetail<cr>
@@ -708,6 +708,8 @@ xnoremap <leader>j :AnyJumpVisual<CR>
 
 " ale
 let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_insert_leave = 0
+let g:ale_lint_on_enter = 0
 let g:ale_python_pyflakes_executable = 'pyflakes3'
 let g:ale_python_pylint_executable = 'pylint3'
 let g:ale_fixers = {'python': ['black']}
