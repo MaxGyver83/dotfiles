@@ -48,7 +48,7 @@
 
 (deflayer level3
                                      @qwe
-  _         @¹   @²   @³   @›   @‹   @¢   @¥   @‚   @‘   @’   @—    _
+  XX        f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
   _         @@   @%   @{   @}   @^   @!   @<   @>   @=   @&   @€    /
   _         @|   @`   @kau @kzu @*   @?   @/   @:   @-   @\_   _    @→
   _    _    @#   @[   @]   @~   @$   @+   S-2  @'   @\   @;    _
@@ -114,6 +114,7 @@
   spl (layer-toggle special)
   slt (layer-toggle seldom)
   sld (layer-next seldom)
+  nlv3 (layer-next level3)
 )
 
 (defalias
@@ -137,7 +138,7 @@
   as (tap-hold-next-release 500 a lsft)
   ec (tap-hold-next-release 500 e lctl)
   i4 (tap-hold-next-release 500 i @lv4)
-  s2 (tap-hold-next-release 500 @sld @slt)
+  s2 (tap-hold-next-release 500 @nlv3 @lv3)
   xa (tap-hold-next-release 500 x lalt)
   ,w (tap-hold-next-release 500 , lmet)
 
