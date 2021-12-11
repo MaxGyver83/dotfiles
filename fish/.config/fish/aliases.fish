@@ -59,6 +59,11 @@ abbr hg 'history | grep'
 
 alias notes='search_in_notes.sh'
 
+abbr pl 'patool list'
+abbr px 'patool extract'
+abbr pc 'patool create'
+abbr pd 'patool diff'
+
 abbr v 'vim'
 alias vv='vim -c "normal '\''0"'
 #abbr n 'nvim'
