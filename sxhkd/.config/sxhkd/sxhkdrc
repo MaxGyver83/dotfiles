@@ -110,6 +110,10 @@ ctrl + alt + Print
 ctrl + shift + Print
     sleep 0.2 ; scrot -s '/tmp/%Y-%m-%d %H.%M.%S $wx$h.png' -e 'copyq write image/png - < "$f"'
 
+# pick emoji
+super + alt + e
+    PYTHONPATH=~/repos/rofimoji/src python3 -m picker.rofimoji
+
 # activate VOU layout in KMonad
 ctrl + shift + Escape
     ~/bin/start-kmonad.fish --keyboard all
@@ -130,8 +134,14 @@ super + 9
 super + minus
     ~/bin/volume.bash "-"
 
+super + shift + minus
+    ~/bin/volume.bash "-" 2
+
 super + dead_grave
     ~/bin/volume.bash "+"
+
+super + shift + dead_grave
+    ~/bin/volume.bash "+" 2
 
 # decrease brightness
 XF86MonBrightnessDown
@@ -152,3 +162,4 @@ XF86AudioLowerVolume
 # raise volume
 XF86AudioRaiseVolume
     ~/bin/volume.bash "+"
+
