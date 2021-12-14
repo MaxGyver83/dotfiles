@@ -14,6 +14,7 @@ airblade/vim-gitgutter
 tpope/vim-surround
 tpope/vim-repeat
 tpope/vim-commentary
+tpope/vim-abolish
 tpope/vim-speeddating
 Konfekt/vim-CtrlXA
 inkarkat/vim-ReplaceWithRegister
@@ -21,6 +22,7 @@ lifepillar/vim-mucomplete
 kshenoy/vim-signature
 godlygeek/tabular
 easymotion/vim-easymotion
+chaoren/vim-wordmotion
 
 # open, find and search files
 EinfachToll/DidYouMean
