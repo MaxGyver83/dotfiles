@@ -683,10 +683,10 @@ nnoremap <Leader>fh :call fzf#vim#files('~', {'options':'--query '.expand('<cwor
 nnoremap <Leader>gm /\v^\<\<\<\<\<\<\< \|\=\=\=\=\=\=\=$\|\>\>\>\>\>\>\> /<cr>
 
 " vim-fugitive (git support)
-nnoremap <Leader>gs :G<cr>
+nnoremap <Leader>gg :G<cr>
 nnoremap <Leader>gd :Gdiff<cr>
 nnoremap <Leader>gb :Git blame<cr>
-nnoremap <Leader>gg :Ggrep --color 
+nnoremap <Leader>go :GBrowse<cr>
 
 " ale
 nnoremap <Leader>ae :pa ale \| ALEEnable \| ALELint<cr>
