@@ -110,9 +110,13 @@ ctrl + alt + Print
 ctrl + shift + Print
     sleep 0.2 ; scrot -s '/tmp/%Y-%m-%d %H.%M.%S $wx$h.png' -e 'copyq write image/png - < "$f"'
 
-# pick emoji
+# pick emoji (https://github.com/fdw/rofimoji)
 super + alt + e
     PYTHONPATH=~/repos/rofimoji/src python3 -m picker.rofimoji
+
+# pick unicode symbol (https://github.com/jeremija/unipicker)
+shift + alt + u
+    unipicker --command "rofi -dmenu -font 'mono 24' -width 1900" --copy-command "xclip -sel clip"
 
 # activate VOU layout in KMonad
 ctrl + shift + Escape
