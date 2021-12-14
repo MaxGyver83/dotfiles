@@ -1,0 +1,28 @@
+# EditorConfig is awesome: https://EditorConfig.org
+
+# Top-most EditorConfig file.
+root = true
+
+# Unix-style newlines with a newline ending every file
+[*]
+end_of_line = lf
+insert_final_newline = true
+
+[*.{h,c,cpp,py,sh,bash,fish,html,css}]
+trim_trailing_whitespace = true
+
+[*.{h,c,cpp}]
+indent_style = tab
+indent_size = 4
+
+[*.py]
+indent_style = space
+indent_size = 4
+
+[*.{sh,bash,fish}]
+indent_style = space
+indent_size = 4
+
+[*.{html,css}]
+indent_style = space
+indent_size = 2
