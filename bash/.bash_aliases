@@ -40,6 +40,13 @@ alias gp='git pull'
 # gh = "git home" (go to the toplevel of the current repo)
 alias gh='cd $(git rev-parse --show-toplevel)'
 # git log
+alias gl='git log'
+# git log compact
+alias glc='git log --pretty="%C(Yellow)%h   %C(reset)%ai (%C(Green)%cr%C(reset))%x09 %C(reset)%s %C(Red)%d%C(reset)" --decorate=full'
+alias glch='git --no-pager log --pretty="%C(Yellow)%h   %C(reset)%ai (%C(Green)%cr%C(reset))%x09 %C(reset)%s %C(Red)%d%C(reset)" --decorate=full -n 10'
+# git log compact [with] names
+alias glcn='git log --pretty="%C(Yellow)%h  %C(reset)%ai (%C(Green)%cr%C(reset))%x09 %C(Cyan)%an: %C(reset)%s"'
+alias glcnh='git --no-pager log --pretty="%C(Yellow)%h  %C(reset)%ai (%C(Green)%cr%C(reset))%x09 %C(Cyan)%an: %C(reset)%s" -n 10'
 alias gitlog='git log --oneline --graph --decorate'
 alias gitlogs='git log --oneline --graph --decorate --stat'
 alias gitloga='git log --oneline --graph --decorate --all'
