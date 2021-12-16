@@ -15,21 +15,19 @@ g,  of next change (after g;)
 [c  jump to previous diff ("change") (my alias: C-l)
 ]c  jump to next diff                (my alias: C-h)
 
-^]  jump to tag under cursor
+C-] jump to tag under cursor (or follow link in vim help)
 
 :Hi recent files
 
 :g!/xxx\|yyy/d  delete all lines not containing 'xxx' or 'yyy'
 
 :set spell  start spell check
-]s  jump to next misspelled word
+]s  jump to next misspelled word (my alias: C-h)
 zg  add word under the cursor as a good word to spellfile
 zG  add word under the cursor as a good word to temporary wordlist
 
 :helpgrep xxx  Search string 'xxx' in help
 :Help[tags]    Search help tags with fzf
-
-C-]  follow link in vim help
 
 :copen  open window with list of matches
 :cn     next match (helpgrep)
@@ -43,3 +41,4 @@ PREFIX :new          Start new session
 PREFIX )             Next session
 Alt-Shift-p          Open output in vim
 PREFIX ,             Rename window
+PREFIX :swapw -t 2   Swap current window with window 2
