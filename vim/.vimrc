@@ -63,7 +63,7 @@ set list             " show non-printable chars
 " file type dependent
 autocmd FileType html,css setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType groovy setlocal colorcolumn=120 shiftwidth=2 tabstop=2 softtabstop=2
-autocmd FileType python setlocal colorcolumn=72,80
+autocmd FileType python setlocal colorcolumn=72,80,100
 " Autocompletion for python3 (currently replaced by jedi-vim)
 " if has('python3')
     " autocmd FileType python set omnifunc=python3complete#Complete
