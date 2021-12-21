@@ -713,6 +713,9 @@ let g:ale_lint_on_insert_leave = 0
 let g:ale_lint_on_enter = 0
 let g:ale_python_pyflakes_executable = 'pyflakes3'
 let g:ale_python_pylint_executable = 'pylint3'
+let g:ale_linters = {
+    \ 'python': ['pycodestyle', 'pylint3'],
+    \ }
 let g:ale_fixers = {'python': ['black']}
 
 " TiddlyWiki
