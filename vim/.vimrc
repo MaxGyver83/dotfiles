@@ -638,7 +638,7 @@ nmap <Plug>SpeedDatingFallbackDown <Plug>(CtrlXA-CtrlX)
 
 " use fzf (FuzzyFinder) in vim
 set rtp+=~/workspace/fzf
-nmap <Leader>h :History<CR>
+nmap <Leader>hi :History<CR>
 
 " " autocompletion with supertab
 " let g:SuperTabClosePreviewOnPopupClose = 1
@@ -673,11 +673,16 @@ nnoremap <Leader>ec :FZF %:p:h<CR>
 nnoremap <Leader>ew :FZF<CR>
 nnoremap <Leader>eh :FZF ~<CR>
 nnoremap <Leader>er :FZF /<CR>
+nnoremap <Leader>eb :Buffers<CR>
+nnoremap <Leader>el :BLines<CR>
 " open/search file by word under cursor in working/home directory with FZF
 " I use <Leader>g... for git functions but in this case <Leader>gf makes more
 " sense because this function is analog to vim's gf
 nnoremap <Leader>gf :call fzf#vim#files('', {'options':'--query '.expand('<cword>')})<CR>
 nnoremap <Leader>fh :call fzf#vim#files('~', {'options':'--query '.expand('<cword>')})<CR>
+" toggle between .c and .h files
+nnoremap <expr> <Leader>et expand('%:e') == 'h' ? ':e %:r.c<CR>' : expand('%:e') == 'c' ? ':e %:r.h<CR>' : ':echo "Neither a c nor an h file."<CR>'
+
 
 " find git merge conflict
 nnoremap <Leader>gm /\v^\<\<\<\<\<\<\< \|\=\=\=\=\=\=\=$\|\>\>\>\>\>\>\> /<cr>
