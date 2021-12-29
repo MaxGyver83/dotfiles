@@ -330,9 +330,9 @@ nnoremap <Leader>k <C-w><C-w>
 " noremap <C-h> :cprevious<cr>
 " noremap <C-l> :cnext<cr>
 
-" previous/next misspelled word, previous/next difference in vimdiff, previous/next error in ALE (if loaded) or quickfix error otherwise
-nnoremap <expr> <C-l> &spell ? '[s' : &diff ? '[c' : exists("g:ale_linters") ? ':ALEPrevious<CR>' : ':cp<CR>'
-nnoremap <expr> <C-h> &spell ? ']s' : &diff ? ']c' : exists("g:ale_linters") ? ':ALENext<CR>' : ':cn<CR>'
+" previous/next misspelled word, previous/next difference in vimdiff, previous/next error in ALE (if loaded) or previous/next hunk (gitgutter) otherwise
+nmap <expr> <C-l> &spell ? '[s' : &diff ? '[c' : (exists("g:ale_enabled") && g:ale_enabled==1) ? ':ALEPrevious<CR>' : '<Plug>(GitGutterPrevHunk)'
+nmap <expr> <C-h> &spell ? ']s' : &diff ? ']c' : (exists("g:ale_enabled") && g:ale_enabled==1) ? ':ALENext<CR>' : '<Plug>(GitGutterNextHunk)'
 if &diff
     highlight clear CursorLine
     highlight CursorLine gui=underline cterm=underline
