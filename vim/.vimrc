@@ -726,6 +726,9 @@ let g:tiddlywiki_no_mappings=1
 " DidYouMean
 " let g:dym_use_fzf = 1
 
+" vim-wordmotion
+let g:wordmotion_extra = ['^#define\>', '^#ifdef\>']
+
 " vim-lightline
 set laststatus=2
 set noshowmode
