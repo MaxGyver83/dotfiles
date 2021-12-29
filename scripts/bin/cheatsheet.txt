@@ -34,6 +34,11 @@ zG  add word under the cursor as a good word to temporary wordlist
 
 :il[ist] xxx  Search 'xxx' in all included headers (C/C++)
 
+␣hp  preview hunk
+␣hu  undo hunk
+␣hs  stage hunk
+
+
 tmux
 ====
 PREFIX :killp (or x) Kill active pane
