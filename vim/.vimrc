@@ -333,6 +333,9 @@ nnoremap <Leader>k <C-w><C-w>
 " previous/next misspelled word, previous/next difference in vimdiff, previous/next error in ALE (if loaded) or previous/next hunk (gitgutter) otherwise
 nmap <expr> <C-l> &spell ? '[s' : &diff ? '[c' : (exists("g:ale_enabled") && g:ale_enabled==1) ? ':ALEPrevious<CR>' : '<Plug>(GitGutterPrevHunk)'
 nmap <expr> <C-h> &spell ? ']s' : &diff ? ']c' : (exists("g:ale_enabled") && g:ale_enabled==1) ? ':ALENext<CR>' : '<Plug>(GitGutterNextHunk)'
+" or previous/next C function otherwise
+" '?\(\(if\\|for\\|while\\|switch\\|catch\)\_s*\)\@64<!(\_[^)]*)\_[^;{}()]*\zs{<CR>'
+" '/\(\(if\\|for\\|while\\|switch\\|catch\)\_s*\)\@64<!(\_[^)]*)\_[^;{}()]*\zs{<CR>'
 if &diff
     highlight clear CursorLine
     highlight CursorLine gui=underline cterm=underline
@@ -718,6 +721,9 @@ let g:ale_lint_on_insert_leave = 0
 let g:ale_lint_on_enter = 0
 let g:ale_python_pyflakes_executable = 'pyflakes3'
 let g:ale_python_pylint_executable = 'pylint3'
+let g:ale_linters = {
+    \ 'python': ['pycodestyle', 'pylint3'],
+    \ }
 let g:ale_fixers = {'python': ['black']}
 
 " TiddlyWiki
