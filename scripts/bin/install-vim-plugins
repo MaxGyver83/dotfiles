@@ -23,6 +23,7 @@ kshenoy/vim-signature
 godlygeek/tabular
 easymotion/vim-easymotion
 chaoren/vim-wordmotion
+ludovicchabant/vim-gutentags
 
 # open, find and search files
 EinfachToll/DidYouMean
