@@ -5,7 +5,7 @@ Hints.characters = 'caeiybtrnsoughzx,dwm';
 settings.hintAlign = "right";
 
 settings.blacklistPattern = /groups.google.com/i;
-unmapAllExcept(['f', 'af', 'gf','q', 'i', 'yy', 'H', 'S', 'D', 'E', 'R', 'e', 'd', ';e', '<Ctrl-6>', '?']);
+unmapAllExcept(['f', 'af', 'gf', 'gu', 'gU', 'q', 'i', 'yy', 'H', 'S', 'D', 'E', 'R', 'e', 'd', ';e', '<Ctrl-6>', '?']);
 //unmap('r'); // Ctrl-r / F5
 //unmap('x'); // Ctrl-w
 
