@@ -40,6 +40,9 @@ set -x LESS_TERMCAP_us (printf "\033[1;32m")     # begin underline
 set -x LESS_TERMCAP_ue (printf "\033[0m")        # reset underline
 set -x GROFF_NO_SGR 1                            # for konsole and gnome-terminal
 
+# colors for exa
+set -x EXA_COLORS 'nm=38;5;172:ng=38;5;199:uu=37:un=31'
+
 set -x BAT_PAGER ''
 set -x BAT_THEME TwoDark
 
