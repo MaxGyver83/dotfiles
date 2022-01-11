@@ -111,9 +111,10 @@ abbr gdd 'git -c "core.pager=delta" diff'
 abbr gds 'git -c "core.pager=delta" -c "delta.features=side-by-side" diff'
 abbr gdt 'git difftool'
 abbr gp 'git pull'
-# gh = "git home" (go to the toplevel of the current repo)
+abbr gc 'git clone'
 abbr gcm 'git co master'
 abbr cim 'git ci -m "'
+# gh = "git home" (go to the toplevel of the current repo)
 abbr gh 'cd (git rev-parse --show-toplevel)'
 abbr gfm 'git ls-files --modified'
 # git log
