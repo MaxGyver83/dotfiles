@@ -1,4 +1,4 @@
-function vssh --description 'Copy ~/.vimrc to /tmp/.vimrc of host before ssh'
-    scp ~/.vimrc $argv:/tmp/.vimrc
+function vssh --description 'Copy ~/.vimrc and ~/.tmux.conf to /tmp/ of host before ssh'
+    scp ~/.vimrc ~/.tmux.conf $argv:/tmp/
     ssh $argv
 end
