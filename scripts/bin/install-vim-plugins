@@ -17,6 +17,7 @@ tpope/vim-commentary
 tpope/vim-abolish
 tpope/vim-speeddating
 Konfekt/vim-CtrlXA
+tommcdo/vim-exchange
 inkarkat/vim-ReplaceWithRegister
 lifepillar/vim-mucomplete
 kshenoy/vim-signature
