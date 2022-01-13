@@ -4,6 +4,7 @@ start=(
 # improve visualization
 ap/vim-buftabline
 itchyny/lightline.vim
+machakann/vim-highlightedyank
 
 # git related
 tpope/vim-fugitive
