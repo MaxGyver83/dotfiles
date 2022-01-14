@@ -742,6 +742,11 @@ let g:lightline = {
     \ 'colorscheme': 'wombat',
     \ }
 
+" vim-highlightedyank
+set clipboard-=autoselect
+let g:highlightedyank_highlight_duration = 500
+highlight HighlightedyankRegion ctermbg=229 ctermfg=none cterm=none
+
 " try loading machine-specific settings
 try
   source ~/.vimrc_local
