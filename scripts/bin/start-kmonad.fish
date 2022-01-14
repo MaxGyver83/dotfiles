@@ -6,7 +6,7 @@ if test -z "$_flag_keyboard"
 Usage:  start-kmonad.fish OPTIONS
 
 OPTIONS:
-  -k, --keyboard  For example: all, internal, Dell, Jelly, Royal, bluetooth [mandatory]
+  -k, --keyboard  For example: all, internal, Dell, Jelly, Royal, Keychron, bluetooth [mandatory]
   -c, --config    KMonad config file [default: ~/.config/kmonad/vou-linux-de-rctrl.kbd]
   -s, --stop      Stop KMonad for the given keyboard
   -t, --test      Run ~/repos/kmonad/kmonad (instead of kmonad from PATH)
@@ -38,12 +38,14 @@ end
 set devices \
 /dev/input/by-id/usb-Telink_Wireless_Receiver-if01-event-kbd \
 /dev/input/by-id/usb-413c_Dell_KB216_Wired_Keyboard-event-kbd \
-/dev/input/by-id/usb-SONiX_USB_DEVICE-event-kbd
+/dev/input/by-id/usb-SONiX_USB_DEVICE-event-kbd \
+/dev/input/by-id/usb-Keychron_Keychron_K6-event-kbd
 
 set names \
 'Jelly Comb keyboard' \
 'Dell keyboard' \
-'Royal Kludge keyboard'
+'Royal Kludge keyboard' \
+'Keychron K6'
 
 # check if Royal Kludge RK61 is available over bluetooth
 set RK61 /dev/input/(grep -B 8 -A 4 12001 /proc/bus/input/devices | grep RK-Bluetooth -A 4 | grep -oE 'event[0-9]+')
