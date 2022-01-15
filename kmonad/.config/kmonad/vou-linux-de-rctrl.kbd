@@ -31,15 +31,15 @@
 (deflayer level1
                                      f6
   grv       1    2    3    4    5    6    7    8    9    0    @-   S-=
-  tab       v    .    @o   u    @ä   q    @gc4 @lsp @h2  f    j    =
+  tab       v    .    o    u    @ä   q    @gc4 @lsp @h2  f    j    =
   @22       @c3  @as  @ec  @i4  z    b    @t4  @rc  @ns  @s3  @22  @ß
-  lsft @s2  @z   @xa  @,w  @ü   @ö   p    @dw  @wa  m    k    rsft
+  lsft @s2  z    @xa  @,w  @ü   @ö   p    @dw  @wa  m    k    rsft
                                spc             ralt      _    _ ;;@ctlc
 )
 
 (deflayer level2
                                      _
-  @ˇ        °    §    @ℓ   @»   @«   $    @€   @„   @“   @”   @—   ¸
+  @ˇ        @°   @§   @ℓ   @»   @«   $    @€   @„   @“   @”   @—   ¸
   S-tab     V    •    O    U    S-@ä Q    G    L    H    F    J    ´
   _         C    A    E    I    Z    B    T    R    N    S    _    @ß
   _     XX  Y    X    @-   S-@ü S-@ö P    D    W    M    K    _
@@ -69,18 +69,18 @@
   XX        XX    XX    XX     XX    XX    XX    XX    XX    XX    XX    XX    XX
   XX      A-pgup A-pgdn @cpm C-bspc C-del  XX    XX    XX    XX    XX    XX    XX
   XX      A-lft C-pgup C-tab C-pgdn A-rght XX    XX    XX    XX    XX    XX    XX
-  XX   XX  A-@#   @pb   @nb    XX    XX    XX    XX    XX    XX    XX    XX
+  XX   XX  A-@#   @pb   @nb    XX    XX  M-prnt  XX    XX    XX    XX    XX
                                XX                      XX          XX    XX
 )
 
-(deflayer seldom
-                                     XX
-  XX        f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
-  XX        XX   XX   @ö   @ü   XX   XX   XX   XX   @sch XX   XX   XX
-  XX        XX   @ä   @€   j    XX   XX   @/   v    @-   @ß   XX   XX
-  XX   XX   @ß   XX   XX   XX   XX   prnt XX   XX   XX   q    XX
-                               spc             XX        XX   XX
-)
+;; (deflayer seldom
+;;                                      XX
+;;   XX        f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
+;;   XX        XX   XX   @ö   @ü   XX   XX   XX   XX   @sch XX   XX   XX
+;;   XX        XX   @ä   @€   j    XX   XX   @/   v    @-   @ß   XX   XX
+;;   XX   XX   @ß   XX   XX   XX   XX   prnt XX   XX   XX   q    XX
+;;                                spc             XX        XX   XX
+;; )
 
 (deflayer qwertz
                                      _
@@ -112,8 +112,8 @@
   lv3 (layer-toggle level3)
   lv4 (layer-toggle level4)
   spl (layer-toggle special)
-  slt (layer-toggle seldom)
-  sld (layer-next seldom)
+  ;; slt (layer-toggle seldom)
+  ;; sld (layer-next seldom)
   nlv3 (layer-next level3)
 )
 
@@ -122,12 +122,12 @@
   ii (multi-tap 300 i ret)
 )
 
-(defalias
-  a (tap-hold 300 a ')
-  o (tap-hold 300 o ;)
-  u (tap-hold 300 u [)
-  z (tap-hold 300 y ß)
-)
+;; (defalias
+;;   a (tap-hold 300 a ')
+;;   o (tap-hold 300 o ;)
+;;   u (tap-hold 300 u [)
+;;   z (tap-hold 300 y -)
+;; )
 
 (defalias
   sctl (tap-hold-next-release 500 spc lctl)
@@ -161,9 +161,8 @@
   ;; vim prev/next buffer
   pb #(esc S-. b p ret)
   nb #(esc S-. b n ret)
-  ;; copy mode in byobu
-  ;;cpm #(A-pgup A-pgdn)
-  cpm #(C-e RA-8)
+  ;; copy mode in tmux/byobu
+  cpm #(C-e RA-8) ;; C-e ]
 )
 
 (defalias
@@ -184,6 +183,8 @@
   = S-0
   & S-6
   € RA-e
+  ° S-`
+  § S-3
 
   | RA-102d
   ` #(S-= space)
@@ -239,7 +240,6 @@
   Ü  #(rctl S-2 U)  ;; capital Ü (not necessary in commit b7214c4 or newer)
 )
 
-(defalias
-  sch #(s c h)
-)
-
+;; (defalias
+;;   sch #(s c h)
+;; )
