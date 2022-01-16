@@ -30,19 +30,19 @@
 
 (deflayer level1
                                      f6
-  grv       1    2    3    4    5    6    7    8    9    0    @-   S-=
-  tab       v    .    o    u    @ä   q    @gc4 @lsp @h2  f    j    =
-  @22       @c3  @as  @ec  @i4  z    b    @t4  @rc  @ns  @s3  @22  @ß
-  lsft @s2  z    @xa  @,w  @ü   @ö   p    @dw  @wa  m    k    rsft
+  grv       1    2    3    4    5    6    7    8    9    0    @-   S-@´
+  tab       v    .    o    u    @ä   q    @gc4 @lsp @h2  f    j    @´
+  @22       @c3  @as  @ec  @i4  @y   b    @t4  @rc  @ns  @s3  @22  @ß
+  lsft @s2  @z   @xa  @,w  @ü   @ö   p    @dw  @wa  m    k    rsft
                                spc             ralt      _    _ ;;@ctlc
 )
 
 (deflayer level2
                                      _
   @ˇ        @°   @§   @ℓ   @»   @«   $    @€   @„   @“   @”   @—   ¸
-  S-tab     V    •    O    U    S-@ä Q    G    L    H    F    J    ´
-  _         C    A    E    I    Z    B    T    R    N    S    _    @ß
-  _     XX  Y    X    @-   S-@ü S-@ö P    D    W    M    K    _
+  S-tab     V    •    O    U    S-@ä Q    G    L    H    F    J    S-@´
+  _         C    A    E    I    S-@y B    T    R    N    S    _    @ẞ
+  _     XX  S-@z X    @-   S-@ü S-@ö P    D    W    M    K    _
                                S-spc           @lv4      _    _
 )
 
@@ -171,6 +171,9 @@
   ö ;
   ü [
   ß -
+  y z
+  z y
+  ẞ RA-S-- ;; DOESN'T WORK
 
   @ RA-q
   % S-5
@@ -185,6 +188,7 @@
   € RA-e
   ° S-`
   § S-3
+  ´ =
 
   | RA-102d
   ` #(S-= space)
