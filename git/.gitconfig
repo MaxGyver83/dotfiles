@@ -9,5 +9,3 @@
 [color "status"]
 	changed = red bold
     untracked = red bold
-[core]
-	excludesfile = ~/.gitignore
