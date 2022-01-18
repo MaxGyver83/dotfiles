@@ -750,6 +750,9 @@ set clipboard-=autoselect
 let g:highlightedyank_highlight_duration = 500
 highlight HighlightedyankRegion ctermbg=229 ctermfg=none cterm=none
 
+" vim-gutentags
+let g:gutentags_ctags_exclude = ['virtual_envs']
+
 " try loading machine-specific settings
 try
   source ~/.vimrc_local
