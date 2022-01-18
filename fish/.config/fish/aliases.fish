@@ -7,7 +7,8 @@ alias ll='ls -hAlF'
 alias la='ls -A'
 alias l='ls -CF'
 abbr lll 'll -t | head -n 10'
-alias ee='exa -alF --git --color-scale'
+alias ee='exa -alF --color-scale'
+alias eg='exa -alF --color-scale --git'
 
 abbr ff 'fzf'
 
