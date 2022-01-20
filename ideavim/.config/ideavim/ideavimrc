@@ -1,6 +1,8 @@
 set surround
 set commentary
 set ideajoin
+set exchange
+set easymotion
 
 nnoremap ; ,
 nnoremap , ;
@@ -8,8 +10,8 @@ vnoremap ; ,
 vnoremap , ;
 
 " leader is space
-let mapleader=" "
-nnoremap <leader><space> :nohlsearch<CR>
+let mapleader="\<Space>"
+nnoremap <leader>n :nohlsearch<CR>
 "noremap <Leader>y "+y
 "noremap <Leader>d "+d
 "noremap <Leader>p "+p
@@ -18,6 +20,12 @@ map <leader>y :action $Copy<CR>
 map <leader>d :action $Cut<CR>
 map <leader>p :action $Paste<CR>
 "map <leader>a :action $SelectAll<CR>
+map <leader>b <Action>(CloseContent)
+map <leader>w <Action>(SaveAll)
+
+let g:EasyMotion_keys = 'iterancyb.ouglhfzx,pdwmks'
+let g:EasyMotion_smartcase = 1
+nmap s <Plug>(easymotion-s2)
 
 "delete not into register (use dl for cutting one character into register)
 nnoremap x "_x
@@ -29,7 +37,8 @@ set ignorecase      " make search case-insensitive by default (word\C → case s
 set smartcase       " make search case-sensitive if word contains uppercase letter
 set incsearch       " search as characters are entered
 set hlsearch        " highlight matches
+set scrolloff=2
 
 " edit ideavim config
-nnoremap <leader>vv :e ~/.ideavimrc<CR>
-nnoremap <leader>vr :source ~/.ideavimrc<CR>
+nnoremap <leader>vv :e ~/.config/ideavim/ideavimrc<CR>
+nnoremap <leader>vr :source ~/.config/ideavim/ideavimrc<CR>
