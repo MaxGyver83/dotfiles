@@ -49,8 +49,8 @@ RUN cd /tmp \
 # (shallow) clone my dotfiles repo
 RUN git clone --depth 1 https://github.com/MaxGyver83/dotfiles.git ~/.dotfiles
 
-# run stow (linking my dotfiles)
-RUN mv ~/.bashrc ~/.bashrc_bak ; mkdir -p ~/.config ~/.vim ~/bin \
+# run stow (linking my dotfiles) and create other useful directories
+RUN mv ~/.bashrc ~/.bashrc_bak ; mkdir -p ~/.config ~/.vim ~/bin ~/.vim/pack/plugins/start ~/.vim/pack/plugins/opt ~/repos \
     && cd ~/.dotfiles && stow bash fish tmux scripts vim
 
 WORKDIR /root
