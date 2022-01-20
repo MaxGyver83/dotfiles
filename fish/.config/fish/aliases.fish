@@ -121,12 +121,19 @@ abbr gh 'cd (git rev-parse --show-toplevel)'
 abbr gfm 'git ls-files --modified'
 # git log
 abbr gl 'git log'
+
+set hash_date_reldate '%C(Yellow)%h   %C(reset)%ai (%C(Green)%cr%C(reset))%x09 %C(reset)'
+set author '%C(Cyan)%an: %C(reset)'
+set message_refs '%s %C(Red)%d%C(reset)'
+set format_short {$hash_date_reldate}{$message_refs}
+set format_names {$hash_date_reldate}{$author}{$message_refs}
 # git log compact
-alias glc='git log --pretty="%C(Yellow)%h   %C(reset)%ai (%C(Green)%cr%C(reset))%x09 %C(reset)%s %C(Red)%d%C(reset)" --decorate=full'
-alias glch='git --no-pager log --pretty="%C(Yellow)%h   %C(reset)%ai (%C(Green)%cr%C(reset))%x09 %C(reset)%s %C(Red)%d%C(reset)" --decorate=full -n 10'
+alias glc='git log --pretty="'$format_short'" --decorate'
+alias glch='git --no-pager log --pretty="'$format_short'" --decorate -n 10'
 # git log compact [with] names
-alias glcn='git log --pretty="%C(Yellow)%h  %C(reset)%ai (%C(Green)%cr%C(reset))%x09 %C(Cyan)%an: %C(reset)%s"'
-alias glcnh='git --no-pager log --pretty="%C(Yellow)%h  %C(reset)%ai (%C(Green)%cr%C(reset))%x09 %C(Cyan)%an: %C(reset)%s" -n 10'
+alias glcn='git log --pretty="'$format_names'" --decorate'
+alias glcnh='git --no-pager log --pretty="'$format_names'" --decorate -n 10'
+
 alias gitlog='git log --oneline --graph --decorate'
 alias gitlogs='git log --oneline --graph --decorate --stat'
 alias gitloga='git log --oneline --graph --decorate --all'
