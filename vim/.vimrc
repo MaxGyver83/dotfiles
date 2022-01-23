@@ -597,6 +597,12 @@ endfunction
 
 "autocmd VimEnter * call InsertIfEmpty()
 
+function! LightlineCharcode() abort
+  let line = getline('.')
+  let col = col('.')
+  return col - 1 < len(line) ? printf('C:%02x', char2nr(matchstr(line[(col - 1):], '^.'))) : 'C:  '
+endfunction
+
 "-------------------
 " related to plugins
 "-------------------
@@ -746,8 +752,13 @@ let g:lightline = {
     \ 'colorscheme': 'wombat',
     \ 'active': {
     \   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'absolutepath', 'modified' ] ],
+    \ },
+    \ 'component_function': {
+    \   'charcode': 'LightlineCharcode'
     \ }
     \ }
+" uncomment for showing the current character's hex code
+"let g:lightline.active.right = [ [ 'lineinfo' ], [ 'percent', 'charcode' ], [ 'fileformat', 'fileencoding', 'filetype' ] ]
 
 " vim-highlightedyank
 set clipboard-=autoselect
