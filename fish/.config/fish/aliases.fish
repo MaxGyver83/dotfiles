@@ -122,7 +122,7 @@ abbr gfm 'git ls-files --modified'
 # git log
 abbr gl 'git log'
 
-set hash_date_reldate '%C(Yellow)%h   %C(reset)%ai (%C(Green)%cr%C(reset))%x09 %C(reset)'
+set hash_date_reldate '%C(Yellow)%h   %C(reset)%ai %<(14)(%C(Green)%cr%C(reset))%x09 %C(reset)'
 set author '%C(Cyan)%an: %C(reset)'
 set message_refs '%s %C(Red)%d%C(reset)'
 set format_short {$hash_date_reldate}{$message_refs}
