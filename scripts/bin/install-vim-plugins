@@ -73,6 +73,13 @@ will133/vim-dirdiff
 # frazrepo/vim-rainbow  # colored brackets
 )
 
+COLOR_RED="\033[1;31m"
+COLOR_YELLOW="\033[0;33m"
+COLOR_GREEN="\033[0;32m"
+COLOR_GRAY="\033[0;38;5;240m"
+BOLD="\033[1m"
+RESET="\033[0m"
+
 function clone_repo {
     sleep 0.1
     cd "$1" && git clone $3 "$2" 2> /dev/null
@@ -80,21 +87,22 @@ function clone_repo {
 
 for types in start opt; do
     dir="$HOME/.vim/pack/plugins/$types/"
-    echo -e "\n$dir"
+    echo -e "\n${BOLD}$dir${RESET}"
     mkdir -p "$dir"
     cd "$dir"
     # workaround for iterating over an array using indirect reference
     # see https://stackoverflow.com/questions/11180714/how-to-iterate-over-an-array-using-indirect-reference
     plugins=$types[@]
     for plugin in "${!plugins}"; do
-        echo "  $plugin"
+        printf "  $plugin "
         # if $plugin contains a comma, save part after first comma as $params
         [[ $plugin == *,* ]] && params="--"${plugin#*,} || params=
         plugin=${plugin%%,*}  # keep part before first comma
         folder=${plugin##*/}
         folder=${folder%.git}
         dest_path="$HOME/.vim/pack/plugins/$types/$folder"
-        [ -d "$dest_path" ] && echo "Folder $folder does already exist" && continue
+        [ -d "$dest_path" ] && echo -e "${COLOR_GRAY}Folder $folder does already exist${RESET}" && continue
+        echo -e "${COLOR_GREEN}Installing '$folder'...${RESET}"
         if [[ "$plugin" == http* ]]; then
             url="$plugin"
         else
