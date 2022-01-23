@@ -658,6 +658,9 @@ let g:mucomplete#always_use_completeopt = 1
 autocmd FileType fish let g:mucomplete#enable_auto_at_startup = 0
 autocmd FileType fish let g:mucomplete#always_use_completeopt = 0
 
+" minisnip
+let g:minisnip_trigger = '<C-z>'
+
 " jedi-vim
 " let g:jedi#popup_on_dot = 0
 let g:jedi#show_call_signatures = "0"

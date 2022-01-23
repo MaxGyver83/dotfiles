@@ -26,6 +26,7 @@ godlygeek/tabular
 easymotion/vim-easymotion
 chaoren/vim-wordmotion
 ludovicchabant/vim-gutentags
+joereynolds/vim-minisnip
 
 # open, find and search files
 EinfachToll/DidYouMean
