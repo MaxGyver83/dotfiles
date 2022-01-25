@@ -350,6 +350,10 @@ xnoremap , ;
 " Map g. as an alias for g;
 nnoremap g. g;
 
+" swap C-] and C-t
+nnoremap <C-]> <C-t>
+nnoremap <C-t> <C-]>
+
 " move vertically by visual line
 " if a count is given, ignore wrapped lines
 nnoremap <expr> <Down> (v:count == 0 ? 'gj' : 'j')
