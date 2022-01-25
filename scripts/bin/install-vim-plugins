@@ -23,10 +23,14 @@ inkarkat/vim-ReplaceWithRegister
 lifepillar/vim-mucomplete
 kshenoy/vim-signature
 godlygeek/tabular
+joereynolds/vim-minisnip
+rstacruz/vim-closer
+
+# navigation
 easymotion/vim-easymotion
+unblevable/quick-scope
 chaoren/vim-wordmotion
 ludovicchabant/vim-gutentags
-joereynolds/vim-minisnip
 
 # open, find and search files
 EinfachToll/DidYouMean
