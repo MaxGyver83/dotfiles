@@ -716,6 +716,7 @@ nnoremap <Leader>ae :pa ale \| ALEEnable \| ALELint<cr>
 nnoremap <Leader>at :ALEToggle<cr>
 nnoremap <Leader>al :ALELint<cr>
 nnoremap <Leader>ad :ALEDetail<cr>
+nnoremap <Leader>ai :ALEInfo<cr>
 
 " gitgutter
 let g:gitgutter_sign_column_always = 1
