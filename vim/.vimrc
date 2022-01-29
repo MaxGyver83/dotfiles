@@ -692,7 +692,7 @@ nnoremap <Leader>eh :FZF ~<CR>
 nnoremap <Leader>er :FZF /<CR>
 nnoremap <Leader>eb :Buffers<CR>
 nnoremap <Leader>el :BLines<CR>
-nnoremap <Leader>es :RgRaw -g '!tags' -s 
+nnoremap <Leader>es :RgRaw -g '!tags' -s ''<left>
 " open/search file by word under cursor in working/home directory with FZF
 " I use <Leader>g... for git functions but in this case <Leader>gf makes more
 " sense because this function is analog to vim's gf
