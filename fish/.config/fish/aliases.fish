@@ -44,6 +44,9 @@ abbr lcs 'eval $history[1] | yank -- xsel -b'
 abbr lcsl 'eval $history[1] | yank -l -- xsel -b'
 # rv = open vim with last ripgrep search
 alias rv='~/bin/vimrg.fish'
+# start vim and open vim-fugitive's git status
+# (and close the empty buffer and jump to the first unstaged file)
+alias vg='vim +G +"%bd|e#" +/Unstaged +nohls +"norm! j"'
 
 
 # not escaped: rg -N 'Emit.*Press' ~/kmonad.log | sed 's/Emitting: Press //' | tr '\n' ' ' | sed 's/<\(.\)>/\1/g' | sed "s/<sft> '/\"/g" | sed 's/<spc>/\n/g' | sed '/pgup\|lft\|rght\|up/d' | sed 's/<ralt> " u/ü/' | sed 's/<ralt> " o/ö/' | sed 's/<ralt> " a/ä/' | sed 's/<sft> \([a-z]\)/\U\1/g' | sed 's/<sft> \(.\)/⇧\1/g' | rg '<bks>'
