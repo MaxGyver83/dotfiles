@@ -253,7 +253,7 @@ nnoremap <Leader>d "_d
 nnoremap <Leader>v viw
 nnoremap <Leader>V viW
 
-" replace word/selection with yanked text
+" replace word/selection with yanked text (without yanking the replaced text)
 nnoremap <Leader>r "_ciw<C-r>"<ESC>
 xnoremap <Leader>r "_c<C-r>"<ESC>
 
@@ -303,7 +303,7 @@ autocmd FileType python xnoremap <Leader>x :w !python3<cr>
 " compile and run a rust project
 autocmd FileType rust nnoremap <Leader>x :w !cargo run<cr>
 
-autocmd FileType groovy nnoremap <Leader>x :w \| !groovy %<cr>
+autocmd FileType groovy nnoremap <Leader>x :w \| !env JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64 groovy %<cr>
 
 " repeat last command in previous tmux pane
 autocmd FileType c,cpp nnoremap <Leader>x :silent call system('tmux lastp \; send up \; send enter \; lastp')<cr>
@@ -453,8 +453,10 @@ xmap <leader>ml S]%a()<left>
 
 " remap unused umlauts
 nmap ä ;
-nmap ü [
-nmap ö ]
+" nmap ü [
+" nmap ö ]
+noremap ü 10gk
+noremap ö 10gj
 nmap ß @
 
 nnoremap j k
@@ -701,6 +703,10 @@ nnoremap <Leader>fh :call fzf#vim#files('~', {'options':'--query '.expand('<cwor
 " toggle between .c and .h files
 nnoremap <expr> <Leader>et expand('%:e') == 'h' ? ':e %:r.c<CR>' : expand('%:e') == 'c' ? ':e %:r.h<CR>' : ':echo "Neither a c nor an h file."<CR>'
 
+
+" jump to the next function
+nnoremap <silent> <Leader>ff :call
+  \ search('\(\(if\\|for\\|while\\|switch\\|catch\)\_s*\)\@64<!(\_[^)]*)\_[^;{}()]*\zs{', "w")<CR>
 
 " find git merge conflict
 nnoremap <Leader>gm /\v^\<\<\<\<\<\<\< \|\=\=\=\=\=\=\=$\|\>\>\>\>\>\>\> /<cr>
