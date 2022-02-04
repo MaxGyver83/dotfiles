@@ -25,6 +25,11 @@ kshenoy/vim-signature
 godlygeek/tabular
 joereynolds/vim-minisnip
 rstacruz/vim-closer
+kana/vim-textobj-user
+kana/vim-textobj-line
+kana/vim-textobj-function
+sgur/vim-textobj-parameter
+beloglazov/vim-textobj-quotes
 
 # navigation
 easymotion/vim-easymotion
@@ -70,8 +75,6 @@ xolox/vim-colorscheme-switcher
 jacquesbh/vim-showmarks
 pechorin/any-jump.vim
 will133/vim-dirdiff
-# kana/vim-textobj-line
-# kana/vim-textobj-user
 # balanceiskey/vim-framer-syntax
 # justinmk/vim-sneak
 # frazrepo/vim-rainbow  # colored brackets
