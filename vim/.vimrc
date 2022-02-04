@@ -369,16 +369,6 @@ noremap <C-f> 10gj
 " make Y yank till end of line (as proposed in `:help Y`)
 map Y y$
 
-" yank, delete or select line without line break
-" (replaces plugins vim-textobj-line and vim-textobj-user)
-nnoremap yal 0y$
-nnoremap yil ^yg_
-nnoremap dal 0d$
-nnoremap dil ^dg_
-nnoremap val 0v$
-nnoremap vil ^vg_
-noremap <Leader>Y ^"+yg_
-
 if !has('gui_running') && &term =~ '^\%(screen\|tmux\)' && !has('nvim')
   " Enable modified arrow keys, see `:help xterm-modifier-keys`
   execute "silent! set <xUp>=\<Esc>[@;*A"
