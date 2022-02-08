@@ -92,6 +92,7 @@ function clone_repo {
     cd "$1" && git clone $3 "$2" 2> /dev/null
 }
 
+installation_count=0
 for types in start opt; do
     dir="$HOME/.vim/pack/plugins/$types/"
     echo -e "\n${BOLD}$dir${RESET}"
@@ -109,6 +110,7 @@ for types in start opt; do
         folder=${folder%.git}
         dest_path="$HOME/.vim/pack/plugins/$types/$folder"
         [ -d "$dest_path" ] && echo -e "${COLOR_GRAY}Folder $folder does already exist${RESET}" && continue
+        ((installation_count++))
         echo -e "${COLOR_GREEN}Installing '$folder'...${RESET}"
         if [[ "$plugin" == http* ]]; then
             url="$plugin"
@@ -118,6 +120,7 @@ for types in start opt; do
         clone_repo "$dir" "$url" "$params" &
     done
 done
-echo -e "\nDownloading..."
+echo
+[ $installation_count -gt 0 ] && echo "Downloading..."
 wait
 echo "Done."
