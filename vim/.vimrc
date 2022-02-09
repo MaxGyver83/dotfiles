@@ -517,9 +517,9 @@ iab fpr fprintf(stderr, "\n");
 
 let @k = 'ysiw<kbd>'
 
-"----------
-" functions
-"----------
+"---------------------
+" functions / commands
+"---------------------
 
 function! ClearRegisters()
     let regs='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/-"' | let i=0 | while (i<strlen(regs)) | exec 'let @'.regs[i].'=""' | let i=i+1 | endwhile | unlet regs
@@ -599,6 +599,13 @@ function! LightlineCharcode() abort
   let col = col('.')
   return col - 1 < len(line) ? printf('C:%02x', char2nr(matchstr(line[(col - 1):], '^.'))) : 'C:  '
 endfunction
+
+command! FZFFunctionTagFile if !empty(tagfiles()) | call fzf#run({
+\   'source': "cat " . tagfiles()[0] . ' | grep "' . expand('%:@') . '"' . " | grep -P '\tf\t' | sed -e '/^\\!/d;s/\t.*//' ". ' |  uniq',
+\   'sink':   'tag',
+\   'options':  '+m',
+\   'bottom':     60,
+\ }) | else | echo 'No tags' | endif
 
 "-------------------
 " related to plugins
@@ -682,6 +689,7 @@ nnoremap <Leader>ec :FZF %:p:h<CR>
 nnoremap <Leader>ew :FZF<CR>
 nnoremap <Leader>eh :FZF ~<CR>
 nnoremap <Leader>er :FZF /<CR>
+nnoremap <Leader>ef :FZFFunctionTagFile<CR>
 nnoremap <Leader>eb :Buffers<CR>
 nnoremap <Leader>el :BLines<CR>
 nnoremap <Leader>es :RgRaw -g '!tags' -s ''<left>
