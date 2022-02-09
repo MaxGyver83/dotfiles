@@ -71,6 +71,10 @@ for i in (seq (count $devices))
     if test -z "$_flag_stop"
         cp $config $dest
         sed -i 's:/dev/input/by-path/platform-i8042-serio-0-event-kbd:'$devices[$i]':' $dest
+        if string match -q -- "Keychron K6*" $names[$i]
+            # swap "home" and "del" key: replace second occurrence of "home del" with "del home"
+            sed -i '0,/home del/! {0,/home del/ s/home del/del home/}' $dest
+        end
         echo "Activate KMonad for "$names[$i]
         $binary $dest -l debug >> ~/kmonad.log 2>&1 & ; disown
         # $binary $dest -l debug

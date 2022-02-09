@@ -25,7 +25,7 @@
   tab       q    w    e    r    t    y    u    i    o    p    [    ]
   caps      a    s    d    f    g    h    j    k    l    ;    '    \
   lsft 102d z    x    c    v    b    n    m    ,    .    /    rsft
-                               spc             ralt      cmp  rctl
+                               spc             ralt      cmp  rctl  home del
 )
 
 (deflayer level1
@@ -34,7 +34,7 @@
   tab       v    .    o    u    @ä   q    @gc4 @lsp @h2  f    j    @´
   @22       @c3  @as  @ec  @i4  @y   b    @t4  @rc  @ns  @s3  @22  @ß
   lsft @s2  @z   @xa  @,w  @ü   @ö   p    @dw  @wa  m    k    rsft
-                               spc             ralt      _    _ ;;@ctlc
+                               spc             ralt      _    _  home del ;;@ctlc
 )
 
 (deflayer level2
@@ -43,7 +43,7 @@
   S-tab     V    •    O    U    S-@ä Q    G    L    H    F    J    S-@´
   _         C    A    E    I    S-@y B    T    R    N    S    _    @ẞ
   _     XX  S-@z X    @-   S-@ü S-@ö P    D    W    M    K    _
-                               S-spc           @lv4      _    _
+                               S-spc           @lv4      _    _  home del
 )
 
 (deflayer level3
@@ -52,7 +52,7 @@
   _         @@   @%   @{   @}   @^   @!   @<   @>   @=   @&   @€    /
   _         @|   @`   @kau @kzu @*   @?   @/   @:   @-   @\_   _    @→
   _    _    @#   @[   @]   @~   @$   @+   S-2  @'   @\   @;    _
-                                _              _         _    _
+                                _              _         _    _  home del
 )
 
 (deflayer level4
@@ -61,7 +61,7 @@
   _         pgup pgdn up   bspc del  @:   7    8    9    @+   @-   S-'
   _         home lft  down rght end  @-   4    5    6    ,    _    @;
   lsft XX   ins  tab  ret  esc  @👍  @\_  1    2    3    .    rsft
-                                0              _         _    _
+                                0              _         _    _  home del
 )
 
 (deflayer special
@@ -70,7 +70,7 @@
   XX      A-pgup A-pgdn @cpm C-bspc C-del  XX    XX    XX    XX    XX    XX    XX
   XX      A-lft C-pgup C-tab C-pgdn A-rght XX    XX    XX    XX    XX    XX    XX
   XX   XX  A-@#   @pb   @nb    XX    XX  M-prnt  XX    XX    XX    XX    XX
-                               XX                      XX          XX    XX
+                               XX                      XX          XX    XX  home del
 )
 
 ;; (deflayer seldom
@@ -79,7 +79,7 @@
 ;;   XX        XX   XX   @ö   @ü   XX   XX   XX   XX   @sch XX   XX   XX
 ;;   XX        XX   @ä   @€   j    XX   XX   @/   v    @-   @ß   XX   XX
 ;;   XX   XX   @ß   XX   XX   XX   XX   prnt XX   XX   XX   q    XX
-;;                                spc             XX        XX   XX
+;;                                spc             XX        XX   XX  home del
 ;; )
 
 (deflayer qwertz
@@ -88,7 +88,7 @@
   tab       q    w    e    r    t    y    u    i    o    p    @ü   @+
   @q3       a    s    d    f    g    h    j    k    l    @ö   @ä   @#
   lsft @<   z    x    c    v    b    n    m    ,    .    @-   rsft
-                               spc             ralt      cmp  rctl
+                               spc             ralt      cmp  rctl  home del
 )
 
 (deflayer qwertz3
@@ -97,7 +97,7 @@
   tab       q    w    e    r    t    y    u    i    o    p    @ü   @+
   caps      a    s    d    f    g    h    j    k    l    @ö   @ä   @#
   lsft @<   z    x    c    v    b    n    m    ,    .    @-   rsft
-                               spc             ralt      cmp  rctl
+                               spc             ralt      cmp  rctl  home del
 )
 
 (defalias
