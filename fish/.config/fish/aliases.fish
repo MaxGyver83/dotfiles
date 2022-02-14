@@ -15,13 +15,14 @@ abbr ff 'fzf'
 abbr fi 'find . -iname'
 abbr fif 'find . -type f -iname'
 abbr fid 'find . -type d -iname'
-type -q fdfind && alias fd='fdfind'
+type -q fd || begin; type -q fdfind && alias fd='fdfind'; end
 
 abbr du1 'du -h -d1'
 abbr du0 'du -h -d0'
 abbr grn 'grep -rn'
 abbr grni 'grep -rni'
 abbr wlan 'nmcli d wifi'
+abbr ncdu 'ncdu --color=dark'
 
 abbr xo 'xdg-open'
 
