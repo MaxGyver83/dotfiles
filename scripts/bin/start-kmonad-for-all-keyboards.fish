@@ -1,4 +1,6 @@
 #!/usr/bin/fish
+
+contains ~/install $fish_user_paths || set -Up fish_user_paths ~/install
 if test "$argv[1]" = "de"
     set config ~/.config/kmonad/vou-linux-de.kbd
     set binary kmonad
