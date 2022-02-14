@@ -29,7 +29,9 @@ kana/vim-textobj-user
 kana/vim-textobj-line
 kana/vim-textobj-function
 sgur/vim-textobj-parameter
+rhysd/vim-textobj-word-column
 beloglazov/vim-textobj-quotes
+MaxGyver83/vim-textobj-brace
 
 # navigation
 easymotion/vim-easymotion
