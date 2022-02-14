@@ -10,6 +10,10 @@ while true; do
     sleep $seconds_to_full_minute
 done &
 
+# fix for bug with floating windows and Java programs
+export _JAVA_AWT_WM_NONREPARENTING=1
+#export AWT_TOOLKIT=MToolkit
+
 # start dwm
 while true; do
     # Log stderror to a file
