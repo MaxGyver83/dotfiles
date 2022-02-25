@@ -33,7 +33,7 @@
   grv       1    2    3    4    5    6    7    8    9    0    @-   S-@´
   tab       v    .    o    u    @ä   q    @gc4 @lsp @h2  f    j    @´
   @22       @c3  @as  @ec  @i4  @y   b    @t4  @rc  @ns  @s3  @22  @ß
-  lsft @s2  @z   @xa  @,w  @ü   @ö   p    @dw  @wa  m    k    rsft
+  lsft @s2  @zca @xa  @,w  @ü   @ö   p    @dw  @wa  @mca k    rsft
                                spc             ralt      _    _  home del ;;@ctlc
 )
 
@@ -139,6 +139,7 @@
   ec (tap-hold-next-release 500 e lctl)
   i4 (tap-hold-next-release 500 i @lv4)
   s2 (tap-hold-next-release 500 @nlv3 @lv3)
+  zca (tap-hold-next-release 500 y C-lalt)
   xa (tap-hold-next-release 500 x lalt)
   ,w (tap-hold-next-release 500 , lmet)
 
@@ -147,6 +148,7 @@
   h2  (tap-hold-next-release 500 h rsft)
   dw  (tap-hold-next-release 500 d rmet)
   wa  (tap-hold-next-release 500 w lalt)
+  mca (tap-hold-next-release 500 m C-lalt)
   ks  (tap-hold-next-release 500 k @lv2)
   t4  (tap-hold-next-release 500 t @lv4)
   rc  (tap-hold-next-release 500 r lctl)
