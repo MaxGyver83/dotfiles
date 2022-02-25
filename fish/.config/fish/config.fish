@@ -2,7 +2,8 @@ status is-interactive || exit 0
 
 # add ~/install (AppImages) and nim to PATH
 fish_add_path -p ~/install
-fish_add_path -a ~/install/nim-1.4.2/bin
+fish_add_path -a ~/.local/bin
+fish_add_path -a ~/bin
 
 # load aliases
 if [ -f $HOME/.config/fish/aliases.fish ]
