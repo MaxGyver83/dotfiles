@@ -17,7 +17,7 @@ end
 if test -n "$_flag_test"
     set binary ~/repos/kmonad/kmonad
 else
-    set binary ~/install/kmonad
+    set binary kmonad
 end
 
 if test -n "$_flag_config"
