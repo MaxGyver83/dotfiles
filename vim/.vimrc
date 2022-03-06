@@ -650,7 +650,7 @@ nmap <Plug>SpeedDatingFallbackUp   <Plug>(CtrlXA-CtrlA)
 nmap <Plug>SpeedDatingFallbackDown <Plug>(CtrlXA-CtrlX)
 
 " use fzf (FuzzyFinder) in vim
-set rtp+=~/workspace/fzf
+set rtp+=~/repos/fzf
 nmap <Leader>hi :History<CR>
 
 " " autocompletion with supertab
@@ -777,6 +777,7 @@ highlight HighlightedyankRegion ctermbg=229 ctermfg=none cterm=none
 
 " vim-gutentags
 let g:gutentags_ctags_exclude = ['virtual_envs']
+let g:gutentags_exclude_project_root = ['/usr/local', '/home/max/.password-store']
 
 " quick-scope
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
