@@ -60,6 +60,11 @@ abbr sau 'sudo apt update'
 abbr alu 'apt list --upgradable'
 abbr ali 'apt list --installed'
 abbr ap 'apt policy'
+
+abbr sps 'sudo pacman -S'
+abbr spss 'sudo pacman -Ss'
+abbr syu 'sudo pacman -Syu'
+
 abbr nh 'sudo nethogs wlp2s0 -v 3'
 abbr hg 'history | grep'
 
@@ -84,6 +89,7 @@ abbr cv 'vim ~/.vimrc'
 abbr cf 'vim ~/.config/fish/config.fish'
 abbr ca 'vim ~/.config/fish/aliases.fish'
 abbr cs 'vim ~/.config/sxhkd/sxhkdrc'
+abbr ct 'vim ~/.tmux.conf'
 abbr ck 'vim ~/.config/kmonad/vou-linux-de-rctrl.kbd'
 abbr td 'vim ~/dev/gta_local/max/todo/todo.md'
 
