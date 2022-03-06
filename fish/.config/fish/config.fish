@@ -69,6 +69,8 @@ if test -f "$HOME/repos/stderred/build/libstderred.so"
             set -x LD_PRELOAD "$HOME/repos/stderred/build/libstderred.so:$LD_PRELOAD"
         end
     end
+    # unset LD_PRELOAD before running gpg because of https://github.com/sickill/stderred/issues/85
+    alias gpg='LD_PRELOAD= command gpg'
 end
 
 if type -q fzf
