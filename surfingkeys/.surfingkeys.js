@@ -1,10 +1,17 @@
 // These settings are optimized for the VOU keyboard layout:
 // https://maximilian-schillinger.de/vou-layout.html
 
-Hints.characters = 'caeiybtrnsoughzx,dwm';
-settings.hintAlign = "right";
+const {
+    mapkey,
+    map,
+    unmap,
+    unmapAllExcept,
+    vmap,
+    vunmap,
+    Hints,
+} = api;
 
-settings.blacklistPattern = /groups.google.com/i;
+settings.blocklistPattern = /groups.google.com/i;
 unmapAllExcept(['f', 'af', 'gf', 'gu', 'gU', 'q', 'i', 'yy', 'H', 'S', 'D', 'E', 'R', 'e', 'd', ';e', '<Ctrl-6>', '?']);
 //unmap('r'); // Ctrl-r / F5
 //unmap('x'); // Ctrl-w
@@ -46,6 +53,9 @@ map('E', 'D'); // forward in history
 mapkey('p', '#0enter ephemeral PassThrough mode to temporarily suppress SurfingKeys', function() {
     Normal.passThrough(1500);
 });
+
+Hints.setCharacters('caeiybtrnsoughzx,dwm');
+settings.hintAlign = "right";
 
 
 // set theme
