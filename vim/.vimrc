@@ -261,7 +261,7 @@ xnoremap <Leader>r "_c<C-r>"<ESC>
 nnoremap <Leader>R R<C-r>"<ESC>
 
 " search working directory with ripgrep
-nnoremap <silent> <Leader>/ :Rg
+nnoremap <Leader>/ :Rg<space>
 
 " search selection with *
 xnoremap * <ESC>/<C-r>*<cr>
@@ -685,6 +685,7 @@ let g:jedi#completions_command = "<C-Space>"
 let g:jedi#rename_command = "<leader>jr"
 
 " open/search file in current/working/home/root directory with FZF
+" mnemonic: e like in `:e[dit]`
 nnoremap <Leader>ec :FZF %:p:h<CR>
 nnoremap <Leader>ew :FZF<CR>
 nnoremap <Leader>eh :FZF ~<CR>
@@ -692,6 +693,8 @@ nnoremap <Leader>er :FZF /<CR>
 nnoremap <Leader>ef :FZFFunctionTagFile<CR>
 nnoremap <Leader>eb :Buffers<CR>
 nnoremap <Leader>el :BLines<CR>
+" o like in `:oldfiles`
+nnoremap <Leader>eo :History<CR>
 nnoremap <Leader>es :RgRaw -g '!tags' -s ''<left>
 " open/search file by word under cursor in working/home directory with FZF
 " I use <Leader>g... for git functions but in this case <Leader>gf makes more
@@ -745,6 +748,7 @@ let g:ale_linters = {
     \ 'python': ['pycodestyle', 'pylint3'],
     \ }
 let g:ale_fixers = {'python': ['black']}
+highlight ALEWarning ctermbg=red ctermfg=none cterm=none
 
 " TiddlyWiki
 let g:tiddlywiki_no_mappings=1
