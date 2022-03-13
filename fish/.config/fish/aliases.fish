@@ -5,8 +5,9 @@ abbr ..... 'cd ../../../..'
 
 alias ll='ls -hAlF'
 alias la='ls -A'
-alias l='ls -CF'
+# alias l='ls -CF'
 abbr lll 'll -t | head -n 10'
+type -q exa && alias l='exa -alF --color-scale' || alias l='ls -CF'
 alias ee='exa -alF --color-scale'
 alias eg='exa -alF --color-scale --git'
 
@@ -71,13 +72,14 @@ abbr hg 'history | grep'
 alias notes='search_in_notes.sh'
 
 abbr pl 'patool list'
+abbr pe 'patool extract'
 abbr px 'patool extract'
 abbr pc 'patool create'
 abbr pd 'patool diff'
 
-abbr v 'vim'
+abbr v 'nvim'
 alias vv='vim -c "normal '\''0"'
-#abbr n 'nvim'
+abbr n 'nvim'
 abbr rr 'ranger'
 alias feh='feh --scale-down --auto-zoom --auto-rotate'
 
