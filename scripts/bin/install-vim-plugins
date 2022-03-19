@@ -54,6 +54,7 @@ MTDL9/vim-log-highlighting
 
 # other
 guns/xterm-color-table.vim
+ojroques/vim-oscyank
 )
 
 opt=(

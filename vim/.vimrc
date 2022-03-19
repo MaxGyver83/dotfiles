@@ -786,6 +786,12 @@ let g:gutentags_exclude_project_root = ['/usr/local', '/home/max/.password-store
 " quick-scope
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
+" vim-oscyank
+if $SSH_CLIENT != "" || $SSH_TTY != ""
+  vnoremap <leader>y :OSCYank<CR>
+  nmap <leader>y <Plug>OSCYank
+endif
+
 " try loading machine-specific settings
 try
   source ~/.vimrc_local
