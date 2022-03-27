@@ -722,6 +722,7 @@ nnoremap <Leader>go :GBrowse<cr>
 nnoremap <Leader>ae :pa ale \| ALEEnable \| ALELint<cr>
 nnoremap <Leader>at :ALEToggle<cr>
 nnoremap <Leader>al :ALELint<cr>
+nnoremap <Leader>af :ALEFix<cr>
 nnoremap <Leader>ad :ALEDetail<cr>
 nnoremap <Leader>ai :ALEInfo<cr>
 
