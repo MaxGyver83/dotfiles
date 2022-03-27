@@ -44,8 +44,8 @@ abbr lc 'eval $history[1] -- xsel -b'
 abbr lcs 'eval $history[1] | yank -- xsel -b'
 # lcsl = last command, select line
 abbr lcsl 'eval $history[1] | yank -l -- xsel -b'
-# rv = open vim with last ripgrep search
-alias rv='~/bin/vimrg.fish'
+# vr = open vim with last ripgrep search
+alias vr='~/bin/vimrg.fish'
 # start vim and open vim-fugitive's git status
 # (and close the empty buffer and jump to the first unstaged file)
 alias vg='vim +G +"%bd|e#" +"norm gU"'
