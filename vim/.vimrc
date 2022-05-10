@@ -264,7 +264,7 @@ nnoremap <Leader>R R<C-r>"<ESC>
 nnoremap <Leader>/ :Rg<space>
 
 " search selection with *
-xnoremap * <ESC>/<C-r>*<cr>
+" xnoremap * <ESC>/<C-r>*<cr>
 " search word under cursor expanding the selection with leader *
 "xnoremap <Leader>* *
 " search word under cursor in all files in working directory using FZF + ripgrep
@@ -606,6 +606,21 @@ command! FZFFunctionTagFile if !empty(tagfiles()) | call fzf#run({
 \   'options':  '+m',
 \   'bottom':     60,
 \ }) | else | echo 'No tags' | endif
+
+" https://github.com/godlygeek/vim-files/blob/master/plugin/vsearch.vim
+" Visual mode search
+function! s:VSetSearch()
+  let temp = @@
+  norm! gvy
+  let @/ = '\V' . substitute(escape(@@, '\'), '\n', '\\n', 'g')
+  " Use this line instead of the above to match matches spanning across lines
+  "let @/ = '\V' . substitute(escape(@@, '\'), '\_s\+', '\\_s\\+', 'g')
+  call histadd('/', substitute(@/, '[?/]', '\="\\%d".char2nr(submatch(0))', 'g'))
+  let @@ = temp
+endfunction
+
+vnoremap * :<C-u>call <SID>VSetSearch()<CR>/<CR>
+vnoremap # :<C-u>call <SID>VSetSearch()<CR>?<CR>
 
 "-------------------
 " related to plugins
