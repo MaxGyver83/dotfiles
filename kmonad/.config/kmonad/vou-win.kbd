@@ -51,7 +51,7 @@
 
 (deflayer level3
                                      @qwe
-  _         ¹    ²    ³    ›    ‹    ¢    ¥    ‚    ‘    ’    _    _
+  XX        f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
   _         @    %    {    }    ^    !    <    >    =    &    €    /
   _         |    `    \(   \)   *    ?    /    :    -    \_   _    →
   _    _    #    [    ]    ~    $    +    S-'  '    \    ;    _
@@ -64,6 +64,24 @@
   _         pgup pgdn up   bspc del  :    7    8    9    +    -    S-'
   _         home lft  down rght end  -    4    5    6    ,    _    ;
   lsft XX   ins  tab  ret  esc  _    _    1    2    3    .    rsft
+                                0              _         _    _
+)
+
+(deflayer level4-left-hand
+                                     f6
+  _         ¹    ²    3    4    5    ¢    ¥    ‚    ‘    ’    _    _
+  _         pgup pgdn up   bspc del  XX   XX   XX   XX   XX   -    S-'
+  _         home lft  down rght end  XX   XX   XX   XX   XX   _    ;
+  lsft XX   ins  tab  ret  esc  _    XX   XX   XX   XX   XX   rsft
+                                0              _         _    _
+)
+
+(deflayer level4-right-hand
+                                     f6
+  _         ¹    ²    3    4    5    ¢    ¥    ‚    ‘    ’    _    _
+  _         XX   XX   XX   XX   XX   :    7    8    9    +    -    S-'
+  _         XX   XX   XX   XX   XX   -    4    5    6    ,    _    ;
+  lsft XX   XX   XX   XX   XX   XX   _    1    2    3    .    rsft
                                 0              _         _    _
 )
 
@@ -81,7 +99,7 @@
   XX        XX    XX    XX     XX    XX    XX    XX    XX    XX    XX    XX    XX
   XX      A-S-v   XX    @cpm C-bspc C-del  XX    XX    XX    XX    XX    XX    XX
   XX      A-lft C-pgup  XX   C-pgdn A-rght XX   A-tab  XX    XX    XX    XX    XX
-  XX   XX   XX    @pb   @nb    XX    XX    XX    XX    XX    XX    XX    XX
+  XX   XX   XX    XX    XX     XX    XX    XX    XX    XX    XX    XX    XX
                                XX                      XX          XX    XX
 )
 
@@ -123,10 +141,13 @@
   lv2 (layer-toggle level2)
   lv3 (layer-toggle level3)
   lv4 (layer-toggle level4)
+  lv4l (layer-toggle level4-left-hand)
+  lv4r (layer-toggle level4-right-hand)
   spl (layer-toggle special)
   win (layer-toggle windows)
   slt (layer-toggle seldom)
   sld (layer-next seldom)
+  nlv3 (layer-next level3)
 ;;  a (tap-hold 300 a ä)
 ;;  o (tap-hold 300 o ö)
 ;;  u (tap-hold 300 u ü)
@@ -141,18 +162,18 @@
   c3 (tap-hold-next-release 500 c @lv3)
   as (tap-hold-next-release 500 a lsft)
   ec (tap-hold-next-release 500 e lctl)
-  i4 (tap-hold-next-release 500 i @lv4)
-  s2 (tap-hold-next-release 500 @sld @slt)
+  i4 (tap-hold-next-release 500 i @lv4r)
+  s2 (tap-hold-next-release 500 @nlv3 @lv3)
   xa (tap-hold-next-release 500 x lalt)
   ,w (tap-hold-next-release 500 , @win)
 
-  gc4 (tap-hold-next-release 500 g C-@lv4)
+  gc4 (tap-hold-next-release 500 g C-@lv4l)
   lsp (tap-hold-next-release 500 l @spl)
   h2  (tap-hold-next-release 500 h rsft)
   dw  (tap-hold-next-release 500 d @win)
   wa  (tap-hold-next-release 500 w lalt)
   ks  (tap-hold-next-release 500 k @lv2)
-  t4  (tap-hold-next-release 500 t @lv4)
+  t4  (tap-hold-next-release 500 t @lv4l)
   rc  (tap-hold-next-release 500 r lctl)
   ns  (tap-hold-next-release 500 n rsft)
   s3  (tap-hold-next-release 500 s @lv3)
@@ -166,7 +187,7 @@
   pb #(esc : b p ret)
   nb #(esc : b n ret)
   ;; copy mode in byobu
-  cpm #(A-pgup A-pgdn)
+  cpm #(C-e [)
 )
 
 ;;(defalias
