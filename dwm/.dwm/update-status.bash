@@ -8,8 +8,11 @@ active_monitor=$(xrandr | grep -w connected | grep "+$monitor_xpos+" | head -n 1
 brightness_percent=$(echo $(xrandr --verbose | grep "^$active_monitor" -A 5 | awk '/Brightness/ { print $2; exit }')'*100' | bc | sed 's/\.00\?//')
 [ $brightness_percent = 100 ] && brightness="" || brightness=☀"${brightness_percent}%, "
 
-battery_charge_level=$(cat /sys/class/power_supply/BAT0/capacity)
-[ $battery_charge_level = 100 ] && battery="" || battery=⎓"${battery_charge_level}%, "
+battery=""
+if test -f /sys/class/power_supply/BAT0/capacity ; then
+  battery_charge_level=$(cat /sys/class/power_supply/BAT0/capacity)
+  [ $battery_charge_level = 100 ] || battery=⎓"${battery_charge_level}%, "
+fi
 
 dat=$(date "+%a %F %R")
 
