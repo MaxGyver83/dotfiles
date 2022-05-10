@@ -71,7 +71,7 @@
                                            XX
   XX        XX    XX    XX     XX    XX    XX    XX    XX    XX    XX    XX    XX
   XX      A-pgup A-pgdn @cpm C-bspc C-del  XX    XX    XX    XX    XX    XX    XX
-  XX      A-lft C-pgup  XX   C-pgdn A-rght XX    XX    XX    XX    XX    XX    XX
+  XX      A-lft C-pgup C-tab C-pgdn A-rght XX    XX    XX    XX    XX    XX    XX
   XX   XX   XX    @pb   @nb    XX    XX    XX    XX    XX    XX    XX    XX
                                XX                      XX          XX    XX
 )
@@ -79,7 +79,7 @@
 (deflayer windows
                                            XX
   XX        XX    XX    XX     XX    XX    XX    XX    XX    XX    XX    XX    XX
-  XX      A-pgup A-pgdn @cpm C-bspc C-del  XX    XX    XX    XX    XX    XX    XX
+  XX      A-S-v   XX    @cpm C-bspc C-del  XX    XX    XX    XX    XX    XX    XX
   XX      A-lft C-pgup  XX   C-pgdn A-rght XX   A-tab  XX    XX    XX    XX    XX
   XX   XX   XX    @pb   @nb    XX    XX    XX    XX    XX    XX    XX    XX
                                XX                      XX          XX    XX
@@ -173,7 +173,7 @@
 ;;  ;; some unicode characters defined in ~/.XCompose
 ;;  ℓ  #(ralt s l)  ;; script small l (ℓ)
 ;;  Ü  #(ralt " U)  ;; capital Ü (not necessary in commit b7214c4 or newer)
-;;y✔  #(ralt y y)  ;; heavy checkmark (✔)
+;;  ✔  #(ralt y y)  ;; heavy checkmark (✔)
 ;;  ✘  #(ralt n n)  ;; heavy ballot (✘)
 ;;  ⭐ #(ralt s t)  ;; star (⭐)
 ;;)
