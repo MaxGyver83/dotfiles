@@ -74,6 +74,9 @@ $if term=rxvt
 "\eOd": backward-word
 $endif
 
+# edit command line in vim
+"\ev": edit-and-execute-command
+
 # for non RH/Debian xterm, can't hurt for RH/Debian xterm
 # "\eOH": beginning-of-line
 # "\eOF": end-of-line
