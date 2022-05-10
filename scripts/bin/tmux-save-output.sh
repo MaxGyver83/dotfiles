@@ -5,6 +5,7 @@ tmux capture-pane -p \
   | awk /./ \
   | awk '{$1=$1;print}' \
   | sed -E 's/^.*?▶ *//' \
+  | sed -E 's/^(✔|✘).*//' \
   | awk /./ \
   | sed /^\(ansi/d \
   | sed -E 's/^[dl-][r-][w-][x-][^[:space:]]+ ([^[:space:]]+ ){7}//' \
