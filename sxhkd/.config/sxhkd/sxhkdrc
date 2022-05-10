@@ -118,6 +118,9 @@ super + alt + e
 shift + alt + u
     unipicker --command "rofi -dmenu -font 'mono 24' -width 1900" --copy-command "xclip -sel clip"
 
+super + alt + i
+    ~/bin/snippets.sh
+
 # activate VOU layout in KMonad
 ctrl + shift + Escape
     ~/bin/start-kmonad.fish --keyboard all
