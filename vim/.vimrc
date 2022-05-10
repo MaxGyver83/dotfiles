@@ -668,6 +668,9 @@ nmap <Plug>SpeedDatingFallbackDown <Plug>(CtrlXA-CtrlX)
 set rtp+=~/repos/fzf
 nmap <Leader>hi :History<CR>
 
+" search command history
+nmap <Leader>: :History:<CR>
+
 " " autocompletion with supertab
 " let g:SuperTabClosePreviewOnPopupClose = 1
 " " try omnifunc first, then normal autocompletion
