@@ -131,7 +131,7 @@ if [ "$color_prompt" = yes ]; then
     # show green ✔ if last command was successful, otherwise show red ✘
     PS1="\n\$(if [ \$? == 0 ]; then echo \"\[${COLOR_GREEN}\]✔\"; else echo \"\[${COLOR_RED}\]✘\"; fi)\[$COLOR_RESET\] "
     # check if I'm connected via SSH
-    [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ] && HOSTINFO="$USER@$HOSTNAME: "
+    [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ] || [ -f /.dockerenv ] && HOSTINFO="$USER@$HOSTNAME:"
     PS1+="$HOSTINFO"                            # add host info
     # add the default part: current path in bold blue letters
     PS1+='${debian_chroot:+($debian_chroot)}\[\033[01;34m\]\w\[\033[00m\]'
