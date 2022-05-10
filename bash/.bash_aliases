@@ -11,7 +11,7 @@ alias eg='exa -alF --color-scale --git'
 alias f='find . -iname'
 alias fif='find . -type f -iname'
 alias fid='find . -type d -iname'
-command -v fd &> /dev/null || { type -q fdfind && alias fd='fdfind'; }
+command -v fd &> /dev/null || { command -v fdfind &> /dev/null && alias fd='fdfind'; }
 
 alias df='df -h'
 
