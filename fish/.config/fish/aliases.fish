@@ -5,11 +5,9 @@ abbr ..... 'cd ../../../..'
 
 alias ll='ls -hAlF'
 alias la='ls -A'
-# alias l='ls -CF'
 abbr lll 'll -t | head -n 10'
 type -q exa && alias l='exa -alF --color-scale' || alias l='ls -CF'
-alias ee='exa -alF --color-scale'
-alias eg='exa -alF --color-scale --git'
+alias lg='exa -alF --color-scale --git'
 
 abbr ff 'fzf'
 
@@ -44,12 +42,6 @@ abbr lc 'eval $history[1] -- xsel -b'
 abbr lcs 'eval $history[1] | yank -- xsel -b'
 # lcsl = last command, select line
 abbr lcsl 'eval $history[1] | yank -l -- xsel -b'
-# vr = open vim with last ripgrep search
-alias vr='~/bin/vimrg.fish'
-# start vim and open vim-fugitive's git status
-# (and close the empty buffer and jump to the first unstaged file)
-alias vg='vim +G +"%bd|e#" +"norm gU"'
-
 
 # not escaped: rg -N 'Emit.*Press' ~/kmonad.log | sed 's/Emitting: Press //' | tr '\n' ' ' | sed 's/<\(.\)>/\1/g' | sed "s/<sft> '/\"/g" | sed 's/<spc>/\n/g' | sed '/pgup\|lft\|rght\|up/d' | sed 's/<ralt> " u/ü/' | sed 's/<ralt> " o/ö/' | sed 's/<ralt> " a/ä/' | sed 's/<sft> \([a-z]\)/\U\1/g' | sed 's/<sft> \(.\)/⇧\1/g' | rg '<bks>'
 alias typos='rg -N \'Emit.*Press\' ~/kmonad.log | sed \'s/Emitting: Press //\' | tr \'\\n\' \' \' | sed \'s/<\\(.\\)>/\\1/g\' | sed "s/<sft> \'/\\"/g" | sed \'s/<spc>/\\n/g\' | sed \'/pgup\\|lft\\|rght\\|up/d\' | sed \'s/<ralt> " u/ü/g\' | sed \'s/<ralt> " o/ö/g\' | sed \'s/<ralt> " a/ä/g\' | sed \'s/<ralt> s s/ß/g\' | sed \'s/<sft> \\([a-z]\\)/\\U\\1/g\' | sed \'s/<sft> \\(.\\)/⇧\\1/g\' | rg \'<bks>\''
@@ -77,9 +69,17 @@ abbr px 'patool extract'
 abbr pc 'patool create'
 abbr pd 'patool diff'
 
-abbr v 'nvim'
-alias vv='vim -c "normal '\''0"'
+set VIM 'nvim'
+abbr v "$VIM"
+abbr vim "$VIM"
+alias vv=$VIM' -c "normal '\''0"'
 abbr n 'nvim'
+# vr = open vim with last ripgrep search
+alias vr='~/bin/vimrg.fish'
+# start vim and open vim-fugitive's git status
+# (and close the empty buffer and jump to the first unstaged file)
+alias vg=$VIM' +G +"%bd|e#" +"norm gU"'
+
 abbr rr 'ranger'
 alias feh='feh --scale-down --auto-zoom --auto-rotate'
 
@@ -87,14 +87,14 @@ alias feh='feh --scale-down --auto-zoom --auto-rotate'
 alias batp='bat -pp'
 alias batl='bat --pager="less"'
 
-abbr cv 'vim ~/.vimrc'
-abbr cf 'vim ~/.config/fish/config.fish'
-abbr ca 'vim ~/.config/fish/aliases.fish'
-abbr cl 'vim ~/.config/fish/local.fish'
-abbr cs 'vim ~/.config/sxhkd/sxhkdrc'
-abbr ct 'vim ~/.tmux.conf'
-abbr ck 'vim ~/.config/kmonad/vou-linux-de-rctrl.kbd'
-abbr td 'vim ~/dev/gta_local/max/todo/todo.md'
+abbr cv "$VIM ~/.vimrc"
+abbr cf "$VIM ~/.config/fish/config.fish"
+abbr ca "$VIM ~/.config/fish/aliases.fish"
+abbr cl "$VIM ~/.config/fish/local.fish"
+abbr cs "$VIM ~/.config/sxhkd/sxhkdrc"
+abbr ct "$VIM ~/.tmux.conf"
+abbr ck "$VIM ~/.config/kmonad/vou-linux-de-rctrl.kbd"
+abbr td "$VIM ~/dev/gta_local/max/todo/todo.md"
 
 abbr caei 'pkill kmonad ; xhost &> /dev/null && setxkbmap de -option || sudo loadkeys de'
 abbr asdf 'xhost &> /dev/null && setxkbmap de koy && xkbcomp -w 0 ~/bin/vou-tabwin.xkb $DISPLAY || sudo loadkeys ~/bin/vou.map'
@@ -127,6 +127,8 @@ abbr gds 'git -c "core.pager=delta" -c "delta.features=side-by-side" diff'
 abbr gdt 'git difftool'
 abbr gp 'git pull'
 abbr gps 'git push'
+# git push upstream
+abbr gpsu 'git push --set-upstream origin (git rev-parse --abbrev-ref HEAD)'
 abbr gc 'git clone'
 abbr gcm 'git co master'
 abbr cim 'git ci -m "'
@@ -154,6 +156,8 @@ alias gitloga='git log --oneline --graph --decorate --all'
 abbr gitunpushed 'git log ..@{u}'
 abbr gitunmerged 'git branch --no-merged master'
 alias gb "git for-each-ref --sort=committerdate refs/remotes/origin/ --format='%(HEAD) %(color:red)%(objectname:short)%(color:reset) %(color:yellow)%(refname:short)%(color:reset)  %(contents:subject)  %(color:cyan)%(authorname)%(color:reset) (%(color:green)%(committerdate:relative)%(color:reset))'"
+# current branch
+abbr br 'git rev-parse --abbrev-ref HEAD'
 # copy current branch name into clipboard
 abbr cpbr 'git rev-parse --abbrev-ref HEAD | tr -d \n | xclip -sel clip'
 # for git 2.22 and newer:
