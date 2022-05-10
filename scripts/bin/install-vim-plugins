@@ -51,6 +51,7 @@ dag/vim-fish
 sukima/vim-tiddlywiki
 davidhalter/jedi-vim,recursive  # Python autocompletion
 MTDL9/vim-log-highlighting
+justinmk/vim-syntax-extra  # improved syntax highlighting for C
 
 # other
 guns/xterm-color-table.vim
