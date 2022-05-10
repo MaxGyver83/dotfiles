@@ -19,6 +19,7 @@ C-] jump to tag under cursor (or follow link in vim help)
 
 :Hi recent files
 
+:g/xxx\|yyy/d   delete all lines containing 'xxx' or 'yyy'
 :g!/xxx\|yyy/d  delete all lines not containing 'xxx' or 'yyy'
 
 :set spell  start spell check
