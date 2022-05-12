@@ -20,7 +20,7 @@ HISTSIZE=1000
 HISTFILESIZE=10000
 
 # Aufruf von forget löscht den letzten History-Eintrag
-function forget() {
+forget() {
    echo "Deleting line $(expr $( history | tail -n 1 | grep -oP '^ *\d+' ) - 1) from history"
    history -d $(expr $( history | tail -n 1 | grep -oP '^ *\d+' ) - 1);
 }
@@ -96,7 +96,7 @@ COLOR_BLUE="\033[0;34m"
 COLOR_WHITE="\033[0;37m"
 COLOR_RESET="\033[0m"
 
-function git_color {
+git_color() {
   local git_status="$(LC_ALL=C git status 2> /dev/null)"
 
   if [[ ! $git_status =~ "working tree clean" ]]; then
@@ -110,7 +110,7 @@ function git_color {
   fi
 }
 
-function git_branch {
+git_branch() {
   local git_status="$(LC_ALL=C git status 2> /dev/null)"
   local on_branch="On branch ([^${IFS}]*)"
   local on_commit="HEAD detached at ([^${IFS}]*)"
@@ -213,21 +213,21 @@ export EDITOR=vim
 PATH=$PATH:~/install
 
 # use locate to find a file in home directory and highlight matches
-function locateh () {
+locateh() {
   # case sensitive
   locate ${HOME}/\*"$1"\* | grep "${1/\*/.\*}"
 }
 
-function locatehi () {
+locatehi() {
   # case insensitive
   locate -i ${HOME}/\*"$1"\* | grep -i "${1/\*/.\*}"
 }
 
 # mkdir and cd into it
-mkcd () { mkdir -p -- "$1" && cd -P -- "$1" ; }
+mkcd() { mkdir -p -- "$1" && cd -P -- "$1" ; }
 
 # copy ~/.vimrc to /tmp/.vimrc of host before ssh into it
-function vssh() {
+vssh() {
   scp ~/.vimrc $1:/tmp/.vimrc
   ssh $1
 }
