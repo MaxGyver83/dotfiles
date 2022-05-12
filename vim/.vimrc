@@ -1,5 +1,7 @@
 set nocompatible            " be iMproved, required
 set hidden                  " allow leaving a buffer unsaved when switching to another one
+set exrc                    " read .exrc file in working directory
+set secure
 
 filetype plugin on
 runtime macros/matchit.vim
@@ -63,7 +65,9 @@ set list             " show non-printable chars
 " file type dependent
 autocmd FileType html,css setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType groovy setlocal colorcolumn=120 shiftwidth=2 tabstop=2 softtabstop=2
-autocmd FileType python setlocal colorcolumn=72,80,100
+autocmd FileType python setlocal colorcolumn=72,80,100 | nmap gca A  # | nmap gco o# | nmap gcO O# 
+autocmd FileType c nmap gca A // | nmap gco o// | nmap gcO O// 
+
 " Autocompletion for python3 (currently replaced by jedi-vim)
 " if has('python3')
     " autocmd FileType python set omnifunc=python3complete#Complete
