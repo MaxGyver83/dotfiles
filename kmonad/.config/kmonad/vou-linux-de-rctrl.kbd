@@ -66,7 +66,7 @@
 
 (deflayer special
                                            XX
-  XX        XX    XX    XX     XX    XX    XX    XX    XX    XX    XX    XX    XX
+  XX       @7up  @7dwn  XX     XX    XX    XX    XX    XX    XX    XX    XX    XX
   XX      A-pgup A-pgdn @cpm C-bspc C-del  XX    XX    XX    XX    XX    XX    XX
   XX      A-lft C-pgup C-tab C-pgdn A-rght XX    XX    XX    XX    XX    XX    XX
   XX   XX  A-@#   @pb   @nb    XX    XX  M-prnt  XX    XX    XX    XX    XX
@@ -164,7 +164,10 @@
   pb #(esc S-. b p ret)
   nb #(esc S-. b n ret)
   ;; copy mode in tmux/byobu
-  cpm #(C-e RA-8) ;; C-e ]
+  cpm #(C-e RA-8) ;; C-e [
+  ;; 7 times up/down
+  7up #(up up up up up up up)
+  7dwn #(down down down down down down down)
 )
 
 (defalias
