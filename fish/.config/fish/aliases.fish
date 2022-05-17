@@ -15,6 +15,7 @@ abbr fi 'find . -iname'
 abbr fif 'find . -type f -iname'
 abbr fid 'find . -type d -iname'
 type -q fd || begin; type -q fdfind && alias fd='fdfind'; end
+abbr fda 'fd -HI'
 
 abbr du1 'du -h -d1'
 abbr du0 'du -h -d0'
