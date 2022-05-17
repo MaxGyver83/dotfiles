@@ -12,6 +12,7 @@ alias f='find . -iname'
 alias fif='find . -type f -iname'
 alias fid='find . -type d -iname'
 command -v fd &> /dev/null || { command -v fdfind &> /dev/null && alias fd='fdfind'; }
+alias fda='fd -HI'
 
 alias df='df -h'
 
