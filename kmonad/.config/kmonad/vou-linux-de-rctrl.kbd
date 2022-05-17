@@ -64,6 +64,24 @@
                                 0              _         _    _  home del
 )
 
+(deflayer level4-left-hand
+                                     f6
+  _         @¹   @²   @✔   @✘   @⭐  ¢    ¥    ‚    ‘    ’    _    _
+  _         pgup pgdn up   bspc del  XX   XX   XX   XX   XX   @-   S-'
+  _         home lft  down rght end  XX   XX   XX   XX   XX   _    @;
+  lsft XX   ins  tab  ret  esc  @👍  XX   XX   XX   XX   XX   rsft
+                                0              _         _    _  home del
+)
+
+(deflayer level4-right-hand
+                                     f6
+  _         @¹   @²   @✔   @✘   @⭐  ¢    ¥    ‚    ‘    ’    _    _
+  _         XX   XX   XX   XX   XX   @:   7    8    9    @+   @-   S-'
+  _         XX   XX   XX   XX   XX   @-   4    5    6    ,    _    @;
+  lsft XX   XX   XX   XX   XX   XX   @\_  1    2    3    .    rsft
+                                0              _         _    _  home del
+)
+
 (deflayer special
                                            XX
   XX       @7up  @7dwn  XX     XX    XX    XX    XX    XX    XX    XX    XX    XX
@@ -111,6 +129,8 @@
   lv2 (layer-toggle level2)
   lv3 (layer-toggle level3)
   lv4 (layer-toggle level4)
+  lv4l (layer-toggle level4-left-hand)
+  lv4r (layer-toggle level4-right-hand)
   spl (layer-toggle special)
   ;; slt (layer-toggle seldom)
   ;; sld (layer-next seldom)
@@ -137,20 +157,20 @@
   c3 (tap-hold-next-release 500 c @lv3)
   as (tap-hold-next-release 500 a lsft)
   ec (tap-hold-next-release 500 e lctl)
-  i4 (tap-hold-next-release 500 i @lv4)
+  i4 (tap-hold-next-release 500 i @lv4r)
   s2 (tap-hold-next-release 500 @nlv3 @lv3)
   zca (tap-hold-next-release 500 y C-lalt)
   xa (tap-hold-next-release 500 x lalt)
   ,w (tap-hold-next-release 500 , lmet)
 
-  gc4 (tap-hold-next-release 500 g C-@lv4)
+  gc4 (tap-hold-next-release 500 g C-@lv4l)
   lsp (tap-hold-next-release 500 l @spl)
   h2  (tap-hold-next-release 500 h rsft)
   dw  (tap-hold-next-release 500 d rmet)
   wa  (tap-hold-next-release 500 w lalt)
   mca (tap-hold-next-release 500 m C-lalt)
   ks  (tap-hold-next-release 500 k @lv2)
-  t4  (tap-hold-next-release 500 t @lv4)
+  t4  (tap-hold-next-release 500 t @lv4l)
   rc  (tap-hold-next-release 500 r lctl)
   ns  (tap-hold-next-release 500 n rsft)
   s3  (tap-hold-next-release 500 s @lv3)
