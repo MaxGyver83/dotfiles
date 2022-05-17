@@ -23,6 +23,7 @@ abbr grn 'grep -rn'
 abbr grni 'grep -rni'
 abbr wlan 'nmcli d wifi'
 abbr ncdu 'ncdu --color=dark'
+abbr rgf 'rg --fixed-strings'
 
 abbr xo 'xdg-open'
 
@@ -73,6 +74,7 @@ abbr pd 'patool diff'
 set VIM 'nvim'
 abbr v "$VIM"
 abbr vim "$VIM"
+abbr vimdiff "$VIM -d"
 alias vv=$VIM' -c "normal '\''0"'
 abbr n 'nvim'
 # vr = open vim with last ripgrep search
@@ -85,8 +87,12 @@ abbr rr 'ranger'
 alias feh='feh --scale-down --auto-zoom --auto-rotate'
 
 # bat: default: line numbers, no pager
-alias batp='bat -pp'
-alias batl='bat --pager="less"'
+# no decorations, no pager
+abbr batp 'bat -pp'
+# bat with pager
+abbr batl 'bat --pager="less"'
+# bat with pager, scroll to end
+abbr bate 'bat --pager="less +G"'
 
 abbr cv "$VIM ~/.vimrc"
 abbr cf "$VIM ~/.config/fish/config.fish"
