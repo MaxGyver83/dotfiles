@@ -52,6 +52,8 @@ $if mode=emacs
 # "\e[6~": history-search-forward
 "\e[A": history-search-backward
 "\e[B": history-search-forward
+"\eOA": history-search-backward
+"\eOB": history-search-forward
 
 # mappings for Ctrl-left-arrow and Ctrl-right-arrow for word moving
 "\e[1;5C": forward-word
