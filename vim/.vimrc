@@ -721,8 +721,10 @@ nnoremap <Leader>es :RgRaw -g '!tags' -s ''<left>
 " open/search file by word under cursor in working/home directory with FZF
 " I use <Leader>g... for git functions but in this case <Leader>gf makes more
 " sense because this function is analog to vim's gf
-xnoremap <Leader>gf :<C-U>exec ":call fzf#vim#files('', {'options':'--query "expand('<cword>')"'})"<CR>
-xnoremap <Leader>fh :<C-U>exec ":call fzf#vim#files('~', {'options':'--query "expand('<cword>')"'})"<CR>
+nnoremap <Leader>gf :<C-U>exec ":call fzf#vim#files('', {'options':'--query "expand('<cword>')"'})"<CR>
+xnoremap <Leader>gf "ty \| :<C-U>exec ":call fzf#vim#files('', {'options':'--query <C-R>t'})"<CR>
+nnoremap <Leader>fh :<C-U>exec ":call fzf#vim#files('~', {'options':'--query "expand('<cword>')"'})"<CR>
+xnoremap <Leader>fh "ty \| :<C-U>exec ":call fzf#vim#files('~', {'options':'--query <C-R>t'})"<CR>
 " toggle between .c and .h files
 nnoremap <expr> <Leader>et expand('%:e') == 'h' ? ':e %:r.c<CR>' : expand('%:e') == 'c' ? ':e %:r.h<CR>' : ':echo "Neither a c nor an h file."<CR>'
 
