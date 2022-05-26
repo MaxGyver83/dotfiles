@@ -700,7 +700,7 @@ let g:jedi#show_call_signatures = "0"
 let g:jedi#goto_command = "<leader>jd"
 let g:jedi#goto_assignments_command = "<leader>jg"
 let g:jedi#goto_stubs_command = "<leader>js"
-let g:jedi#goto_definitions_command = ""
+let g:jedi#goto_definitions_command = "<leader>jD"
 let g:jedi#documentation_command = "K"
 let g:jedi#usages_command = "<leader>jn"
 let g:jedi#completions_command = "<C-Space>"
@@ -749,6 +749,9 @@ nnoremap <Leader>al :ALELint<cr>
 nnoremap <Leader>af :ALEFix<cr>
 nnoremap <Leader>ad :ALEDetail<cr>
 nnoremap <Leader>ai :ALEInfo<cr>
+nnoremap <Leader>ag :ALEGoToDefinition<cr>
+nnoremap <Leader>ar :ALEFindReferences<cr>
+nnoremap <Leader>ah :ALEHover<cr>
 
 " gitgutter
 let g:gitgutter_sign_column_always = 1
@@ -770,9 +773,9 @@ let g:ale_lint_on_enter = 0
 let g:ale_python_pyflakes_executable = 'pyflakes3'
 let g:ale_python_pylint_executable = 'pylint3'
 let g:ale_linters = {
-    \ 'python': ['pycodestyle', 'pylint3'],
+    \ 'python': ['pycodestyle', 'pylint3', 'pylsp'],
     \ }
-let g:ale_fixers = {'python': ['black']}
+let g:ale_fixers = {'python': ['black', 'isort']}
 highlight ALEWarning ctermbg=red ctermfg=none cterm=none
 
 " TiddlyWiki
