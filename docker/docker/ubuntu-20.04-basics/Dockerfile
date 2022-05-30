@@ -18,8 +18,9 @@ RUN apt-get update && apt-get install -y \
   locales \
   gettext-base \
   man-db \
+  libpcre2-32-0 \
   && rm -rf /var/lib/apt/lists/*
-# gettext-base and man-db for fish
+# gettext-base, man-db and libpcre2-32-0 for fish
 
 # Set the locale
 RUN sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && locale-gen
@@ -29,16 +30,15 @@ ENV LC_ALL en_US.UTF-8
 
 # get fish
 RUN cd /tmp \
-    && wget https://launchpad.net/~fish-shell/+archive/ubuntu/release-3/+files/fish-common_3.3.1-1~focal_all.deb \
-    && wget https://launchpad.net/~fish-shell/+archive/ubuntu/release-3/+files/fish_3.3.1-1~focal_amd64.deb \
-    && dpkg -i fish-common_3.3.1-1~focal_all.deb fish_3.3.1-1~focal_amd64.deb \
-    && rm fish-common_3.3.1-1~focal_all.deb fish_3.3.1-1~focal_amd64.deb
+    && wget https://launchpad.net/~fish-shell/+archive/ubuntu/release-3/+files/fish_3.4.1-1~focal_amd64.deb \
+    && dpkg -i fish_3.4.1-1~focal_amd64.deb \
+    && rm fish_3.4.1-1~focal_amd64.deb
 
 # get bat
 RUN cd /tmp \
-    && wget https://github.com/sharkdp/bat/releases/download/v0.18.3/bat_0.18.3_amd64.deb \
-    && dpkg -i bat_0.18.3_amd64.deb \
-    && rm bat_0.18.3_amd64.deb
+    && wget https://github.com/sharkdp/bat/releases/download/v0.21.0/bat_0.21.0_amd64.deb \
+    && dpkg -i bat_0.21.0_amd64.deb \
+    && rm bat_0.21.0_amd64.deb
 
 # get sd
 RUN cd /tmp \
@@ -51,7 +51,7 @@ RUN git clone --depth 1 https://github.com/MaxGyver83/dotfiles.git ~/.dotfiles
 
 # run stow (linking my dotfiles) and create other useful directories
 RUN mv ~/.bashrc ~/.bashrc_bak ; mkdir -p ~/.config ~/.vim ~/bin ~/.vim/pack/plugins/start ~/.vim/pack/plugins/opt ~/repos \
-    && cd ~/.dotfiles && stow bash fish tmux scripts vim
+    && cd ~/.dotfiles && stow bash fish tmux ripgrep scripts vim
 
 WORKDIR /root
 
