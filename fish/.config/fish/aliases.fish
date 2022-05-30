@@ -88,11 +88,13 @@ alias feh='feh --scale-down --auto-zoom --auto-rotate'
 
 # bat: default: line numbers, no pager
 # no decorations, no pager
-abbr batp 'bat -pp'
+alias batp='bat -pp'
 # bat with pager
-abbr batl 'bat --pager="less"'
+alias batl='bat --pager="less"'
 # bat with pager, scroll to end
-abbr bate 'bat --pager="less +G"'
+alias bate='bat --pager="less +G"'
+# bat with pager, header, line numbers
+# alias batc='bat --paging=always --pager="less -R"'
 
 abbr cv "$VIM ~/.vimrc"
 abbr cf "$VIM ~/.config/fish/config.fish"
@@ -106,13 +108,10 @@ abbr td "$VIM ~/dev/gta_local/max/todo/todo.md"
 abbr caei 'pkill kmonad ; xhost &> /dev/null && setxkbmap de -option || sudo loadkeys de'
 abbr asdf 'xhost &> /dev/null && setxkbmap de koy && xkbcomp -w 0 ~/bin/vou-tabwin.xkb $DISPLAY || sudo loadkeys ~/bin/vou.map'
 alias vou='setxkbmap de koy && xkbcomp -w 0 ~/bin/vou.xkb $DISPLAY'
-abbr kkk '~/bin/start-kmonad-for-all-keyboards.fish'
-abbr kk '~/bin/start-kmonad-for-all-keyboards.fish de'
-# abbr kkk '~/bin/start-kmonad-for-all-keyboards-dev.fish de'
-abbr k '~/bin/start-kmonad-for-all-keyboards.fish de2'
-abbr kkkk '~/bin/start-kmonad-for-all-keyboards-slot.fish de'
-abbr qq 'pkill try_three_times ; pkill run_forever ; pkill kmonad'
-abbr QQ 'pkill try_three_times ; pkill run_forever ; pkill kmonad'
+abbr k '~/bin/start-kmonad.fish -k all'
+abbr m 'pkill kmonad ; unbuffer ./keyboard-layouts --device "/dev/input/by-id/usb-Keychron_Keychron_K6-event-kbd" | tee ~/log/keyboard-layouts-(date "+%Y-%m-%d %H.%M.%S").log'
+abbr qq 'pkill try_three_times ; pkill run_forever ; pkill kmonad ; pkill keyboard-layouts'
+abbr QQ 'pkill try_three_times ; pkill run_forever ; pkill kmonad ; pkill keyboard-layouts'
 abbr s 'xrandr | grep -q 2560x1440 && ~/.screenlayout/peaq-usb.sh || ~/.screenlayout/laptop.sh'
 # redshift: red=night mode (darker, redish), notred=day mode
 abbr red 'redshift -P -O 3500 -b 0.7 || redshift -O 3500 -b 0.7'
