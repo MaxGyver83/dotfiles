@@ -626,6 +626,25 @@ endfunction
 vnoremap * :<C-u>call <SID>VSetSearch()<CR>/<CR>
 vnoremap # :<C-u>call <SID>VSetSearch()<CR>?<CR>
 
+" when gf fails, try again without the first character
+" because p.e. in Azure pipelines '/file' might be a relative path
+function! GoToFile()
+    try
+        normal gf
+    catch
+        let x=expand("<cfile>")
+        if x[0] == '/'
+            echo x . ' not found. Opening ' . x[1:] . ' instead.'
+            let x=x[1:]
+            if !empty(glob(x))
+                execute "edit" x
+            endif
+        endif
+    endtry
+endfunction
+
+noremap gf :call GoToFile()<CR>
+
 "-------------------
 " related to plugins
 "-------------------
