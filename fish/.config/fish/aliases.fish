@@ -81,7 +81,7 @@ abbr n 'nvim'
 alias vr='~/bin/vimrg.fish'
 # start vim and open vim-fugitive's git status
 # (and close the empty buffer and jump to the first unstaged file)
-alias vg=$VIM' +G +"%bd|e#" +"norm gU"'
+alias vg=$VIM' +G +"silent %bd|e#" +"norm gU"'
 
 abbr rr 'ranger'
 alias feh='feh --scale-down --auto-zoom --auto-rotate'
