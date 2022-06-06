@@ -186,8 +186,8 @@ let mapleader="\<Space>"   " leader is space
 " show buffer list and select by number
 nnoremap gb :ls<CR>:b<Space>
 
-" insert line and return to normal mode
-nnoremap <Return> o<Esc>
+" insert line and return to normal mode (except in quickfix window)
+nnoremap <expr> <CR> &buftype ==# 'quickfix' ? "\<CR>" : 'o<Esc>'
 
 " yank/cut/paste to/from system clipboard
 noremap <Leader>y "+y
