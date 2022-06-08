@@ -727,6 +727,7 @@ let g:jedi#rename_command = "<leader>jr"
 
 " open/search file in current/working/home/root directory with FZF
 " mnemonic: e like in `:e[dit]`
+nnoremap <Leader>ee :e<CR>
 nnoremap <Leader>ec :FZF %:p:h<CR>
 nnoremap <Leader>ew :FZF<CR>
 nnoremap <Leader>eh :FZF ~<CR>
