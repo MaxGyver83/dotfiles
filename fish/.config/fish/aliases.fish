@@ -97,6 +97,7 @@ alias bate='bat --pager="less +G"'
 # alias batc='bat --paging=always --pager="less -R"'
 
 abbr cv "$VIM ~/.vimrc"
+abbr cn "$VIM ~/.config/nvim/init.vim"
 abbr cf "$VIM ~/.config/fish/config.fish"
 abbr ca "$VIM ~/.config/fish/aliases.fish"
 abbr cl "$VIM ~/.config/fish/local.fish"
