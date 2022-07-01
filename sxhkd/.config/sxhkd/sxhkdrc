@@ -137,19 +137,19 @@ super + 6
     ~/bin/brightness "+"
 
 super + 9
-    ~/bin/volume.bash
+    ~/bin/volume.sh
 
 super + minus
-    ~/bin/volume.bash "-"
+    ~/bin/volume.sh "-"
 
 super + shift + minus
-    ~/bin/volume.bash "-" 2
+    ~/bin/volume.sh "-" 2
 
 super + dead_grave
-    ~/bin/volume.bash "+"
+    ~/bin/volume.sh "+"
 
 super + shift + dead_grave
-    ~/bin/volume.bash "+" 2
+    ~/bin/volume.sh "+" 2
 
 # decrease brightness
 XF86MonBrightnessDown
@@ -161,13 +161,13 @@ XF86MonBrightnessUp
 
 # mute audio
 XF86AudioMute
-    ~/bin/volume.bash
+    ~/bin/volume.sh
 
 # lower volume
 XF86AudioLowerVolume
-    ~/bin/volume.bash "-"
+    ~/bin/volume.sh "-"
 
 # raise volume
 XF86AudioRaiseVolume
-    ~/bin/volume.bash "+"
+    ~/bin/volume.sh "+"
 

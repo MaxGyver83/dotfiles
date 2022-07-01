@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 BRIGHT=$(stdbuf -o0 xrandr --verbose | awk '/Brightness/ { print $2; exit }')
 
