@@ -645,7 +645,7 @@ function! GoToFile()
     endtry
 endfunction
 
-noremap gf :call GoToFile()<CR>
+noremap gF :call GoToFile()<CR>
 
 "-------------------
 " related to plugins
