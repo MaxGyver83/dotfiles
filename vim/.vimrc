@@ -277,6 +277,8 @@ nnoremap <silent> <Leader>* :RgRaw -g '!tags' -ws <C-R><C-W><CR>
 
 " search and replace in whole file
 nnoremap <Leader>s :% s/\v//g<left><left><left>
+" search and replace selection in whole file
+xnoremap <Leader>s "vy:% s/\v<C-R>v/<C-R>v/g<left><left>
 
 " print value of environment variable under cursor
 nnoremap <Leader>z l?\$<cr>v/\$[a-zA-Z{}_]\+/e<cr>"vy:echo <C-R>v<cr>
