@@ -334,8 +334,8 @@ nnoremap <Leader>k <C-w><C-w>
 " previous/next result (after vimgrep)
 "noremap <Leader>e :cprevious<cr>
 "noremap <Leader>i :cnext<cr>
-" noremap <C-h> :cprevious<cr>
-" noremap <C-l> :cnext<cr>
+noremap <C-p> :cprevious<cr>
+noremap <C-n> :cnext<cr>
 
 " previous/next misspelled word, previous/next difference in vimdiff, previous/next error in ALE (if loaded) or previous/next hunk (gitgutter) otherwise
 nmap <expr> <C-l> &spell ? '[s' : &diff ? '[c' : (exists("g:ale_enabled") && g:ale_enabled==1) ? ':ALEPrevious<CR>' : '<Plug>(GitGutterPrevHunk)'
