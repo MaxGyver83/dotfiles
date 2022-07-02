@@ -12,7 +12,7 @@ const {
 } = api;
 
 settings.blocklistPattern = /groups.google.com/i;
-unmapAllExcept(['f', 'af', 'gf', 'gu', 'gU', 'q', 'i', 'yy', 'H', 'S', 'D', 'E', 'R', 'e', 'd', ';e', '<Ctrl-6>', '?']);
+unmapAllExcept(['f', 'af', 'gf', 'gu', 'gU', 'q', 'i', 'yy', 'v', 'H', 'S', 'D', 'E', 'R', 'e', 'd', ';e', '<Ctrl-6>', '?']);
 //unmap('r'); // Ctrl-r / F5
 //unmap('x'); // Ctrl-w
 
@@ -46,6 +46,7 @@ map(',', 'd'); // scroll down (up='e')
 
 map('V', 'E'); // tab left
 map('•', 'R'); // tab right
+map(':', 'R'); // tab right
 map('A', 'S'); // back in history
 map('E', 'D'); // forward in history
 
