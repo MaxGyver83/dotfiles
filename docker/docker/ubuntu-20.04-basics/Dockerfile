@@ -11,6 +11,8 @@ RUN apt-get update && apt-get install -y \
   fd-find \
   ripgrep \
   tmux \
+  unzip \
+  jq \
   build-essential \
   ipython3 \
   python3-pip \
@@ -30,9 +32,9 @@ ENV LC_ALL en_US.UTF-8
 
 # get fish
 RUN cd /tmp \
-    && wget https://launchpad.net/~fish-shell/+archive/ubuntu/release-3/+files/fish_3.4.1-1~focal_amd64.deb \
-    && dpkg -i fish_3.4.1-1~focal_amd64.deb \
-    && rm fish_3.4.1-1~focal_amd64.deb
+    && wget https://launchpad.net/~fish-shell/+archive/ubuntu/release-3/+files/fish_3.5.0-1~focal_amd64.deb \
+    && dpkg -i fish_3.5.0-1~focal_amd64.deb \
+    && rm fish_3.5.0-1~focal_amd64.deb
 
 # get bat
 RUN cd /tmp \
