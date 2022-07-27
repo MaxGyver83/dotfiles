@@ -140,8 +140,8 @@ abbr gc 'git clone'
 abbr gcm 'git co master'
 abbr cim 'git ci -m "'
 abbr gch 'git co HEAD --'
-# gh = "git home" (go to the toplevel of the current repo)
-abbr gh 'cd (git rev-parse --show-toplevel)'
+# gr = "git root" (go to the toplevel of the current repo)
+abbr gr 'cd (git rev-parse --show-toplevel)'
 abbr gfm 'git ls-files --modified'
 abbr gfc 'git diff --name-only --diff-filter=U'
 # git log
