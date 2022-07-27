@@ -4,14 +4,14 @@ alias ....='cd ../../..'
 alias .....='cd ../../../..'
 
 alias lll='ll -t | head -n 10'
-command -v exa &> /dev/null && alias l='exa -alF --color-scale' || alias l='ls -CF'
+command -v exa > /dev/null 2>&1 && alias l='exa -alF --color-scale' || alias l='ls -CF'
 alias ee='exa -alF --color-scale'
 alias eg='exa -alF --color-scale --git'
 
 alias f='find . -iname'
 alias fif='find . -type f -iname'
 alias fid='find . -type d -iname'
-command -v fd &> /dev/null || { command -v fdfind &> /dev/null && alias fd='fdfind'; }
+command -v fd > /dev/null 2>&1 || { command -v fdfind > /dev/null 2>&1 && alias fd='fdfind'; }
 alias fda='fd -HI'
 
 alias df='df -h'
@@ -37,7 +37,7 @@ alias alu='apt list --upgradable'
 alias ali='apt list --installed'
 alias nh='sudo nethogs wlp2s0 -v 3'
 alias hg='history | grep'
-alias titlecase=$'rename \'s/(\S+)/\u\L$1/g\''
+alias titlecase='perl-rename "s/(\S+)/\u\L\$1/g"'
 
 alias pl='patool list'
 alias pe='patool extract'
@@ -91,8 +91,8 @@ alias cpbr='git rev-parse --abbrev-ref HEAD | tr -d \n | xclip -sel clip'
 
 alias cr='crontab -l | grep --color=never "^[^#]"'
 
-alias caei='xhost &> /dev/null && setxkbmap de -option || sudo loadkeys de'
-alias asdf='xhost &> /dev/null && setxkbmap de koy && xkbcomp -w 0 ~/bin/vou-tabwin.xkb $DISPLAY || sudo loadkeys ~/bin/vou.map'
+alias caei='xhost > /dev/null 2>&1 && setxkbmap de -option || sudo loadkeys de'
+alias asdf='xhost > /dev/null 2>&1 && setxkbmap de koy && xkbcomp -w 0 ~/bin/vou-tabwin.xkb $DISPLAY || sudo loadkeys ~/bin/vou.map'
 
 if [ "$TERM" = cygwin ]; then
   alias nvim='~/Downloads/Neovim/bin/nvim-qt.exe'
