@@ -247,12 +247,6 @@ export FZF_ALT_C_COMMAND="fd --type d --hidden --follow --exclude .git"
 export FZF_DEFAULT_OPTS="--exact --color fg:-1,bg:-1,hl:#fa9a2d,fg+:3,hl+:#fa9a2d,info:150,prompt:110,spinner:150,pointer:167,marker:174"
 export FZF_CTRL_T_OPTS="--preview 'bat --style=numbers --line-range :60 --color=always {}'"
 
-# activate stderred
-if test -f "$HOME/repos/stderred/build/libstderred.so"; then
-    export STDERRED_BLACKLIST='^(git)$'
-    export LD_PRELOAD="$HOME/repos/stderred/build/libstderred.so${LD_PRELOAD:+:$LD_PRELOAD}"
-fi
-
 # disable terminal freeze "scroll lock" with Ctrl-s (unlocking with Ctrl-q btw.)
 stty -ixon
 
