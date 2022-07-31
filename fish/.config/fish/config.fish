@@ -59,26 +59,6 @@ if test -f "$HOME/.config/ripgrep/ripgreprc"
     set -x RIPGREP_CONFIG_PATH "$HOME/.config/ripgrep/ripgreprc"
 end
 
-# activate stderred
-if test -f "$HOME/repos/stderred/build/libstderred.so"
-    set -x STDERRED_BLACKLIST '^(git)$'
-    if not string match -q "*$HOME/repos/stderred/build/libstderred.so*" $LD_PRELOAD
-        if test -z $LD_PRELOAD
-            set -x LD_PRELOAD "$HOME/repos/stderred/build/libstderred.so"
-        else
-            set -x LD_PRELOAD "$HOME/repos/stderred/build/libstderred.so:$LD_PRELOAD"
-        end
-    end
-    # unset LD_PRELOAD before running gpg because of https://github.com/sickill/stderred/issues/85
-    alias gpg='LD_PRELOAD= command gpg'
-    alias pass='LD_PRELOAD= command pass'
-    alias mksh='LD_PRELOAD= command mksh'
-    alias oksh='LD_PRELOAD= command oksh'
-    alias dash='LD_PRELOAD= command dash'
-    alias yash='LD_PRELOAD= command yash'
-    alias vis='LD_PRELOAD= command vis'
-end
-
 if type -q fzf
     # also find hidden files with FZF
     #set -x FZF_DEFAULT_COMMAND "find ."
