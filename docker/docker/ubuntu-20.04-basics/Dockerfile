@@ -1,6 +1,7 @@
 FROM ubuntu:20.04
 
 RUN apt-get update && apt-get install -y \
+  sudo \
   wget \
   curl \
   tree \
@@ -48,6 +49,11 @@ RUN cd /tmp \
     && chmod +x sd-v0.7.6-x86_64-unknown-linux-gnu \
     && mv sd-v0.7.6-x86_64-unknown-linux-gnu /usr/bin/sd
 
+# add user "docker"
+RUN useradd -m docker && echo "docker:docker" | chpasswd && adduser docker sudo
+USER docker
+WORKDIR /home/docker
+
 # (shallow) clone my dotfiles repo
 RUN git clone --depth 1 https://github.com/MaxGyver83/dotfiles.git ~/.dotfiles
 
@@ -55,7 +61,7 @@ RUN git clone --depth 1 https://github.com/MaxGyver83/dotfiles.git ~/.dotfiles
 RUN mv ~/.bashrc ~/.bashrc_bak ; mkdir -p ~/.config ~/.vim ~/bin ~/.vim/pack/plugins/start ~/.vim/pack/plugins/opt ~/repos \
     && cd ~/.dotfiles && stow bash fish tmux ripgrep scripts vim
 
-WORKDIR /root
-
 # will be used in .tmux.conf
 ENV IN_DOCKER=1
+
+CMD /usr/bin/fish
