@@ -1,6 +1,6 @@
 status is-interactive || exit 0
 
-# add ~/install (AppImages) and nim to PATH
+# add ~/install (AppImages) to PATH
 fish_add_path -p ~/install
 fish_add_path -a ~/.local/bin
 fish_add_path -a ~/bin
