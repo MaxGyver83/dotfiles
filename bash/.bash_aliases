@@ -1,31 +1,37 @@
+exists() {
+  command -v "$1" > /dev/null 2>&1 ;
+}
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
 
 alias lll='ll -t | head -n 10'
-command -v exa > /dev/null 2>&1 && alias l='exa -alF --color-scale' || alias l='ls -CF'
+exists exa && alias l='exa -alF --color-scale' || alias l='ls -CF'
 alias ee='exa -alF --color-scale'
 alias eg='exa -alF --color-scale --git'
 
 alias f='find . -iname'
 alias fif='find . -type f -iname'
 alias fid='find . -type d -iname'
-command -v fd > /dev/null 2>&1 || { command -v fdfind > /dev/null 2>&1 && alias fd='fdfind'; }
+exists fd || { exists fdfind && alias fd='fdfind'; }
 alias fda='fd -HI'
-
-alias df='df -h'
 
 alias du1='du -h -d1'
 alias du0='du -h -d0'
 alias grn='grep -rn'
 alias grni='grep -rni'
+alias wlan='nmcli d wifi'
+alias ncdu='ncdu --color=dark'
+alias rgf='rg --fixed-strings'
 
 alias xo='xdg-open'
 
+exists ncal && alias cal='ncal -bwM3' || alias cal='cal -3'
+
 alias rsyncp='rsync --info=progress2 -ah'
 
-alias manc='PAGER="most" man'
+exists most && alias manc='PAGER=most man'
 alias y='yank'
 alias cb='xclip -sel clip'
 alias vou='setxkbmap de koy && xkbcomp ~/bin/vou.xkb $DISPLAY'
@@ -35,6 +41,12 @@ alias sai='sudo apt install'
 alias sau='sudo apt update'
 alias alu='apt list --upgradable'
 alias ali='apt list --installed'
+alias ap='apt policy'
+
+alias sps='sudo pacman -S'
+alias spss='sudo pacman -Ss'
+alias syu='sudo pacman -Syu'
+
 alias nh='sudo nethogs wlp2s0 -v 3'
 alias hg='history | grep'
 alias titlecase='perl-rename "s/(\S+)/\u\L\$1/g"'
@@ -45,18 +57,25 @@ alias px='patool extract'
 alias pc='patool create'
 alias pd='patool diff'
 
-alias v='nvim'
-alias vv="nvim -c \"normal '0\""
+exists nvim && VIM='nvim' || VIM='vim'
+alias v=$VIM
+alias vv="$VIM -c \"normal '0\""
 alias n='nvim'
+# start vim and open vim-fugitive's git status
+# (and close the empty buffer and jump to the first unstaged file)
+alias vg="$VIM +G +'silent %bd|e#' +'norm gU'"
+
 alias rr='ranger'
 alias batp='bat --style=plain'
 
-alias cv='vim ~/.vimrc'
-alias cf='vim ~/.config/fish/config.fish'
-alias ca='vim ~/.config/fish/aliases.fish'
-alias cs='vim ~/.config/sxhkd/sxhkdrc'
-alias ct='vim ~/.tmux.conf'
-alias ck='vim ~/.config/kmonad/vou-linux-de-rctrl.kbd'
+alias cv="$VIM ~/.vimrc"
+alias cn="$VIM ~/.config/nvim/init.vim"
+alias cf="$VIM ~/.config/fish/config.fish"
+alias ca="$VIM ~/.config/fish/aliases.fish"
+alias cs="$VIM ~/.config/sxhkd/sxhkdrc"
+alias ct="$VIM ~/.tmux.conf"
+alias ck="$VIM ~/.config/kmonad/vou-linux-de-rctrl.kbd"
+alias td="$VIM ~/dev/gta_local/max/todo/todo.md"
 
 # git
 alias g='git status'
@@ -98,3 +117,5 @@ if [ "$TERM" = cygwin ]; then
   alias nvim='~/Downloads/Neovim/bin/nvim-qt.exe'
   alias nvimdiff='~/Downloads/Neovim/bin/nvim-qt.exe -- -d'
 fi
+
+unset -f exists
