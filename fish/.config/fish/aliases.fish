@@ -27,13 +27,13 @@ abbr rgf 'rg --fixed-strings'
 
 abbr xo 'xdg-open'
 
-abbr cal 'ncal -bwM3'
+type -q ncal && abbr cal 'ncal -bwM3' || abbr cal 'cal -3'
 
 abbr rsyncp 'rsync --info=progress2 -ah'
 
 abbr nw '(ls -Art | tail -n 1)'
 
-abbr manc 'set PAGER most; man'
+type -q most && abbr manc 'set PAGER most; man'
 abbr y 'yank'
 abbr cb 'xclip -sel clip'
 # get last non-empty line from previous output and paste it into command line (in tmux/byobu)
@@ -71,7 +71,7 @@ abbr px 'patool extract'
 abbr pc 'patool create'
 abbr pd 'patool diff'
 
-set VIM 'nvim'
+type -q nvim && set VIM 'nvim' || set VIM 'vim'
 abbr v "$VIM"
 abbr vim "$VIM"
 abbr vimdiff "$VIM -d"
