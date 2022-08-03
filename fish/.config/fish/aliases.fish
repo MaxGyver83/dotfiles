@@ -5,8 +5,13 @@ abbr ..... 'cd ../../../..'
 
 alias ll='ls -hAlF'
 alias la='ls -A'
-abbr lll 'll -t | head -n 10'
-type -q exa && alias l='exa -alF --color-scale' || alias l='ls -CF'
+if type -q exa
+    alias l='exa -alF --color-scale'
+    abbr lll 'exa -l -s age --color=always | head -n 10'
+else
+    alias l='ls -CF'
+    abbr lll 'll -t --color=always | tail -n +2 | head -n 10'
+end
 alias lg='exa -alF --color-scale --git'
 
 abbr ff 'fzf'
