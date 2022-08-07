@@ -14,8 +14,10 @@ done &
 export _JAVA_AWT_WM_NONREPARENTING=1
 #export AWT_TOOLKIT=MToolkit
 
+mkdir -p ~/log
+
 # start dwm
 while true; do
     # Log stderror to a file
-    dwm &> ~/.dwm.log
+    dwm > ~/log/dwm.log 2>&1
 done

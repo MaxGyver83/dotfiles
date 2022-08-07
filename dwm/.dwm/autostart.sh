@@ -1,9 +1,13 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
-function run {
+timestamp() {
+  date "+%Y-%m-%d %H:%M:%S.%3N"
+}
+
+run() {
   if ! pgrep -f "$1" ;
   then
-    echo Run: $@
+    echo $(timestamp) Run: $@
     $@&
   fi
 }
@@ -27,7 +31,7 @@ fi
 # set first (=laptop) display to 70% brightness
 xrandr --output $(xrandr | grep -w connected | head -n 1 | cut -d " " -f1) --brightness 0.7
 # test -f ~/.screenlayout/ext-monitor-acer.sh && ~/.screenlayout/ext-monitor-acer.sh
-~/bin/set-wallpaper.bash
+run /bin/sh ~/bin/set-wallpaper.bash
 # run trayer only in bspwm
 [ "$WM" = bspwm ] && run trayer --edge top --align right --margin 220 --widthtype request --height 28 --tint 0x292b2e --transparent true --expand true --SetDockType true --alpha 0
 # compton: `--focus...` is needed to not dim the status bar and rofi
@@ -57,8 +61,11 @@ if ! pgrep '^st$' ; then
   tmux has-session -t 0 && run 'st -e tmux a -t 0' || st -e tmux &
 fi
 if ! pgrep -f firefox ; then
+  echo "$(timestamp) Start Firefox"
   firefox &
+  echo "$(timestamp) Sleep for 1 second"
   sleep 1
-  echo "Focus tmux:"
+  echo "$(timestamp) Focus tmux:"
   wmctrl -a tmux
 fi
+echo "$(timestamp) autostart.sh done"
