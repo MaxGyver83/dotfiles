@@ -6,10 +6,16 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
 
-alias lll='ll -t | head -n 10'
-exists exa && alias l='exa -alF --color-scale' || alias l='ls -CF'
-alias ee='exa -alF --color-scale'
-alias eg='exa -alF --color-scale --git'
+alias la='ls -A'
+alias ll='ls -alF'
+if exists exa; then
+  alias l='exa -alF --color-scale'
+  alias lll='exa -l -s age --color=always | head -n 10'
+else
+  alias l='ls -CF'
+  alias lll='ll -t | head -n 10'
+fi
+alias lg='exa -alF --color-scale --git'
 
 alias f='find . -iname'
 alias fif='find . -type f -iname'
