@@ -1,0 +1,4 @@
+PS1='\n\w $ '
+test -f /.dockerenv && PS1='\n\h:\w $ '
+
+test -f ~/.bash_aliases && source ~/.bash_aliases || alias ll='ls -hAlF'
