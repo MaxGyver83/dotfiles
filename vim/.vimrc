@@ -771,6 +771,7 @@ nnoremap <Leader>gg :G<cr>
 nnoremap <Leader>gd :Gdiff<cr>
 nnoremap <Leader>gb :Git blame<cr>
 nnoremap <Leader>go :GBrowse<cr>
+xnoremap <Leader>go :'<,'>GBrowse<cr>
 nnoremap <Leader>gpl :Git pull<cr>
 nnoremap <Leader>gps :Git push<cr>
 
