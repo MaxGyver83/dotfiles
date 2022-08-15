@@ -629,8 +629,10 @@ endfunction
 vnoremap * :<C-u>call <SID>VSetSearch()<CR>/<CR>
 vnoremap # :<C-u>call <SID>VSetSearch()<CR>?<CR>
 
-" when gf fails, try again without the first character
-" because p.e. in Azure pipelines '/file' might be a relative path
+" When gf fails, try again without the first character
+" because p.e. in Azure pipelines '/project/file' might be a relative path.
+" If this fails, too, try opening 'file' (because the working directory might
+" be '/project')
 function! GoToFile()
     try
         normal gf
@@ -641,6 +643,11 @@ function! GoToFile()
             let x=x[1:]
             if !empty(glob(x))
                 execute "edit" x
+            else
+                let x=substitute(x, '.\{-}/', '', '')
+                if !empty(glob(x))
+                    execute "edit" x
+                endif
             endif
         endif
     endtry
