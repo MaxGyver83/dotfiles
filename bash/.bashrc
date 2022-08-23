@@ -140,7 +140,12 @@ if [ "$color_prompt" = yes ]; then
     PS1+="\[$COLOR_BLUE\]\$\[$COLOR_RESET\] "   # '#' for root, else '$'
     unset HOSTINFO
 else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+    PS1="\n\$(if [ \$? == 0 ]; then echo \"✔\"; else echo \"✘\"; fi) "
+    # check if I'm connected via SSH
+    [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ] || [ -f /.dockerenv ] && HOSTINFO="$USER@$HOSTNAME:"
+    PS1+="$HOSTINFO"                            # add host info
+    PS1+='${debian_chroot:+($debian_chroot)}\w$ '
+    unset HOSTINFO
 fi
 unset color_prompt force_color_prompt
 
