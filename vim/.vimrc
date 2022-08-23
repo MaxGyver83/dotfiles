@@ -637,16 +637,21 @@ function! GoToFile()
     try
         normal gf
     catch
-        let x=expand("<cfile>")
-        if x[0] == '/'
-            echo x . ' not found. Opening ' . x[1:] . ' instead.'
-            let x=x[1:]
+        let path = expand("<cfile>")
+        if path[0] == '/'
+            let x = path[1:]
+            echo path . ' not found. Opening ' . x . ' instead.'
             if !empty(glob(x))
                 execute "edit" x
             else
-                let x=substitute(x, '.\{-}/', '', '')
+                let x = substitute(x, '.\{-}/', '', '')
                 if !empty(glob(x))
                     execute "edit" x
+                else
+                    let x = '..' . path
+                    if !empty(glob(x))
+                        execute "edit" x
+                    endif
                 endif
             endif
         endif
