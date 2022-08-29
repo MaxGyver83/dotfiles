@@ -8,6 +8,22 @@ case $- in
       *) return;;
 esac
 
+remove_from_path_if_symlink() {
+    if [[ -L $1 ]] \
+        && [[ $(realpath $1) == /usr/bin ]] \
+        && [[ $PATH == *:$1:* || $PATH == $1:* ]] \
+        && [[ $PATH == *:/usr/bin:* ]]
+    then
+        # remove $1 from middle of $PATH
+        PATH="${PATH//:$1:/:}"
+        # remove $1 from beginning of $PATH
+        PATH="${PATH#$1:}"
+    fi
+}
+
+remove_from_path_if_symlink /sbin
+remove_from_path_if_symlink /bin
+
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
