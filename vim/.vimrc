@@ -118,6 +118,11 @@ autocmd BufWinLeave * call clearmatches()
 highlight NoBreakWhitespace ctermbg=blue guibg=blue
 autocmd Syntax * syn match NoBreakWhitespace / \| \|­/
 
+augroup autocom
+    autocmd!
+    autocmd VimLeave * :mksession ~/.autosession.vim
+augroup END
+
 " add command to history when I do: vim -c 'RgRaw ...'
 if has('nvim')
     " Does not work: E121: Undefined variable: v:argv
