@@ -645,17 +645,17 @@ function! GoToFile()
         let path = expand("<cfile>")
         if path[0] == '/'
             let x = path[1:]
-            echo path . ' not found. Opening ' . x . ' instead.'
+            echo 'Not found. Opening ' . x . ' instead.'
             if !empty(glob(x))
-                execute "edit" x
+                silent execute "edit" x
             else
                 let x = substitute(x, '.\{-}/', '', '')
                 if !empty(glob(x))
-                    execute "edit" x
+                    silent execute "edit" x
                 else
                     let x = '..' . path
                     if !empty(glob(x))
-                        execute "edit" x
+                        silent execute "edit" x
                     endif
                 endif
             endif
