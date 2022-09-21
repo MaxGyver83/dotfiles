@@ -95,6 +95,9 @@ set hlsearch         " highlight matches
 " don't consider 007 an octal number when de-/increasing using Ctrl-x/Ctrl-a
 set nrformats-=octal
 
+" enable jumping to file with 'gf' in such a line: logfile=/home/max/file.log
+set isfname-==
+
 " show at least three lines before/after current line
 set scrolloff=3
 
