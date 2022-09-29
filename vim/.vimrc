@@ -234,6 +234,7 @@ xnoremap <Leader>ce :TOhtml \| call MakeHtmlReadyForEmail() \| exe 'w !xclip -se
 
 " show diff between buffer and saved file
 nnoremap <Leader>i :w !diff --color % -<cr>
+nnoremap <Leader>I :DiffSaved<cr>
 
 " scroll line up with C-u
 nnoremap <C-u> <C-e>
