@@ -607,6 +607,23 @@ function InsertIfEmpty()
     endif
 endfunction
 
+function! CompareLogs()
+    " Strip timestamps of raw pipeline log
+    %s/\v^2022[-:.0-9TZ]+ //g
+    " Replace other timestamps
+    %s/\v\d+:\d+:\d+\.\d+/xx:xx:xx.yyy/g
+    " Strip color codes (use "Ctrl-v Esc" to generate "^[")
+    %s/\v\[\d+m//g
+    " Delete uninteresting lines
+    g/^Ensuring.*rules are compiled/d
+    g/^Loading rules/d
+
+    TrimWhitespace
+    " Remove duplicate empty lines
+    %!cat -s
+endfunction
+command! CompareLogs call CompareLogs()
+
 "autocmd VimEnter * call InsertIfEmpty()
 
 function! LightlineCharcode() abort
