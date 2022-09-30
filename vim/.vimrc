@@ -123,7 +123,7 @@ autocmd Syntax * syn match NoBreakWhitespace / \| \|­/
 
 augroup autocom
     autocmd!
-    autocmd VimLeave * :mksession ~/.autosession.vim
+    autocmd VimLeave * :mksession! ~/.autosession.vim
 augroup END
 
 " add command to history when I do: vim -c 'RgRaw ...'
@@ -440,6 +440,7 @@ xnoremap <S-Up> :m '<-2<CR>gv=gv
 map <F2> :mksession! ~/.vim_session<cr>
 " And load session with F3
 map <F3> :source ~/.vim_session<cr>
+map <F4> :source ~/.autosession.vim<cr>
 
 " Markdown formatting
 nnoremap <leader>m0 :s/\v^#+ *//e<CR>
