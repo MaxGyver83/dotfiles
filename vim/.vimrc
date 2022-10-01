@@ -437,9 +437,10 @@ xnoremap <S-Up> :m '<-2<CR>gv=gv
 
 " Sessions
 " Quick write session with F2
-map <F2> :mksession! ~/.vim_session<cr>
+map <F2> :mksession! ~/.session.vim<cr>
 " And load session with F3
-map <F3> :source ~/.vim_session<cr>
+map <F3> :source ~/.session.vim<cr>
+" Load automatically saved session with F4
 map <F4> :source ~/.autosession.vim<cr>
 
 " Markdown formatting
