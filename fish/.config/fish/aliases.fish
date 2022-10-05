@@ -181,6 +181,8 @@ abbr cr 'crontab -l | grep --color=never "^[^#]"'
 
 abbr simpleprompt 'function fish_prompt; echo \n(prompt_pwd)\ ▶\ ; end'
 
+abbr tmux-display 'set -x DISPLAY "$(tmux show-env | sed -n s/^DISPLAY=//p)"'
+
 # source work related / private stuff (not part of the dotfiles repo)
 if [ -f $HOME/.config/fish/local.fish ]
   source $HOME/.config/fish/local.fish
