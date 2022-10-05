@@ -74,6 +74,7 @@ autocmd FileType c nmap gca A // | nmap gco o// | nmap gcO O//
 " endif
 autocmd FileType mail setlocal nojoinspaces formatoptions=watqc
 autocmd BufRead,BufNewFile ~/Documents/notes/*.txt setlocal syntax=sh
+autocmd BufRead,BufNewFile **/conanfile.txt setlocal filetype=toml
 autocmd BufRead,BufNewFile **/kmonad/*.kbd setlocal filetype=clojure
 autocmd BufRead,BufNewFile **/dwm.c set autoindent noexpandtab tabstop=4 shiftwidth=4
 autocmd BufRead,BufNewFile *.js.tid set filetype=javascript noexpandtab tabstop=4 shiftwidth=4
