@@ -25,7 +25,7 @@ wmctrl -m | grep -q bspwm && WM=bspwm
 run dunst
 if [ "$WM" != bspwm ]; then
   xrandr | grep -q 2560x1440 && ~/.screenlayout/peaq.sh
-  xrandr | grep -q 3440x1440 && ~/.screenlayout/dell.sh
+  xrandr | grep -q 3840x2160 && ~/.screenlayout/dell.sh
   [ $(xrandr | grep -wc connected) -eq 3 ] && ~/.screenlayout/2x-acer.sh
 fi
 # set first (=laptop) display to 70% brightness
