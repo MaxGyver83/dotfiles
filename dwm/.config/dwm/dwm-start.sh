@@ -2,7 +2,7 @@
 
 # dwm statusbar - show current date and time
 while true; do
-    ~/.dwm/update-status.bash
+    ~/.config/dwm/update-status.bash
 
     seconds=$(date +%-S)
     seconds_to_full_minute=$(( 60 - $seconds ))
