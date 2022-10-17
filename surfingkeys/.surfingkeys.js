@@ -56,7 +56,7 @@ mapkey('p', '#0enter ephemeral PassThrough mode to temporarily suppress SurfingK
     Normal.passThrough(1500);
 });
 
-Hints.setCharacters('iterancyb.oughzx,pdwmks');
+Hints.setCharacters('caeiybtrnsoughzx,dwm');
 settings.hintAlign = "right";
 
 
