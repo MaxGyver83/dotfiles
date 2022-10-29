@@ -80,6 +80,7 @@ autocmd FileType mail setlocal nojoinspaces formatoptions=watqc
 autocmd BufRead,BufNewFile ~/Documents/notes/*.txt setlocal syntax=sh
 autocmd BufRead,BufNewFile **/conanfile.txt setlocal filetype=toml
 autocmd BufRead,BufNewFile **/kmonad/*.kbd setlocal filetype=clojure
+autocmd BufRead,BufNewFile /tmp/*.kbd setlocal filetype=clojure
 autocmd BufRead,BufNewFile **/dwm.c set autoindent noexpandtab tabstop=4 shiftwidth=4
 autocmd BufRead,BufNewFile *.js.tid set filetype=javascript noexpandtab tabstop=4 shiftwidth=4
 autocmd BufRead,BufNewFile *.h,*.c set filetype=c
@@ -285,7 +286,6 @@ nnoremap <Leader>/ :Rg<space>
 " xnoremap * <ESC>/<C-r>*<cr>
 "xnoremap <Leader>* *
 " search word under cursor in all files in working directory using FZF + ripgrep
-" nnoremap <silent> <Leader>* :Rg <C-R><C-W><CR>
 nnoremap <silent> <Leader>* :RgRaw -g '!tags' -ws <C-R><C-W><CR>
 " search selection in all files in working directory using FZF + ripgrep
 xnoremap <silent> <Leader>* :<BS><BS><BS><BS><BS>RgRaw -g '!tags' -ws <C-R><C-W><CR>
@@ -879,7 +879,7 @@ let g:highlightedyank_highlight_duration = 500
 highlight HighlightedyankRegion ctermbg=229 ctermfg=none cterm=none
 
 " vim-gutentags
-let g:gutentags_ctags_exclude = ['virtual_envs']
+let g:gutentags_ctags_exclude = ['virtual_envs', '.ccls-cache']
 let g:gutentags_exclude_project_root = ['/usr/local', '/home/max/.password-store']
 
 " quick-scope
