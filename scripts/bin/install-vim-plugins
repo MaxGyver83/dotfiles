@@ -17,6 +17,7 @@ tpope/vim-repeat
 tpope/vim-commentary
 tpope/vim-abolish
 tpope/vim-speeddating
+tpope/vim-sleuth
 Konfekt/vim-CtrlXA
 tommcdo/vim-exchange
 inkarkat/vim-ReplaceWithRegister
