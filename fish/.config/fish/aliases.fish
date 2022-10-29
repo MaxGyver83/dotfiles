@@ -101,7 +101,7 @@ alias bate='bat --pager="less +G"'
 # bat with pager, header, line numbers
 # alias batc='bat --paging=always --pager="less -R"'
 
-abbr rich 'python -m rich.markdown'
+abbr rich 'python -m rich.markdown -c'
 
 abbr cv "$VIM ~/.vimrc"
 abbr cn "$VIM ~/.config/nvim/init.vim"
