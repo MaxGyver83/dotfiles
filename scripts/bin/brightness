@@ -1,45 +1,73 @@
 #!/bin/sh
 
+timestamp() { date "+%Y-%m-%d %H:%M:%S.%3N"; }
+
+exists() { command -v "$1" > /dev/null 2>&1 ; }
+
+set_hardware_brightness() {
+    case "$1" in
+    +)          light -A 10 ;;
+    -)          light -U 10 ;;
+    max|full)   light -S 100 ;;
+    [1-9][0-9]) light -S "$1" ;;
+    [1-9])      light -S "$1" ;;
+    *)          light -G; exit 0 ;;
+    esac
+
+    notify-send -t 500 $(light -G | sed -E 's/\.0+//')"% (hardware)"
+}
+
+set_xrandr_brightness() {
+    BRIGHT=$(stdbuf -o0 xrandr --verbose | grep "^$active_monitor" -A 5 | awk '/Brightness/ { print $2; exit }')
+    STEP=0.1
+
+    case "$1" in
+    +)
+        NEWBRIGHT=$(echo "$BRIGHT + $STEP" | bc)
+        if [ "$(echo "$NEWBRIGHT > 1.0" | bc)" -eq 1 ]; then
+            NEWBRIGHT='1.0'
+        fi
+        ;;
+    -)
+        NEWBRIGHT=$(echo "$BRIGHT - $STEP" | bc)
+        if [ "$(echo "$NEWBRIGHT < 0.1" | bc)" -eq 1 ]; then
+            NEWBRIGHT='0.1'
+        fi
+        ;;
+    max|full)
+        NEWBRIGHT='1.0'
+        ;;
+    [1-9][0-9])
+        NEWBRIGHT="0.$1"
+        ;;
+    [1-9])
+        NEWBRIGHT="0.$1"
+        ;;
+    *)
+        echo $BRIGHT
+        exit 0
+        ;;
+    esac
+
+    # first_monitor=$(xrandr | grep -w connected | head -n 1 | cut -d " " -f1)
+    # xrandr --output "$first_monitor" --brightness "$NEWBRIGHT"
+
+    xrandr --output "$active_monitor" --brightness "$NEWBRIGHT"
+    notify-send -t 500 $(echo "$NEWBRIGHT * 100" | bc | sed -E 's/\.0+//')"% (xrandr)"
+}
+
+
 monitor_xpos=$(xdotool getactivewindow getwindowgeometry | grep Position | grep -o '[0-9]*,' | sed 's/,//')
 active_monitor=$(xrandr | grep -w connected | grep "+$monitor_xpos+" | head -n 1 | cut -d " " -f1)
 # use primary monitor as fallback
 [ -z $active_monitor ] && active_monitor=$(xrandr | grep -w 'connected primary' | head -n 1 | cut -d " " -f1)
-BRIGHT=$(stdbuf -o0 xrandr --verbose | grep "^$active_monitor" -A 5 | awk '/Brightness/ { print $2; exit }')
 
-STEP=0.1
+if [ "$(hostname)" = 'max-laptop' ] && [ "$active_monitor" = 'eDP-1' ] && exists light ; then
+    echo "Set hardware brightness"
+    set_hardware_brightness "$1"
+else
+    echo "Set xrandr brightness"
+    set_xrandr_brightness "$1"
+fi
 
-case "$1" in
-+)
-    NEWBRIGHT=$(echo "$BRIGHT + $STEP" | bc)
-    if [ "$(echo "$NEWBRIGHT > 1.0" | bc)" -eq 1 ]; then
-        NEWBRIGHT='1.0'
-    fi
-    ;;
--)
-    NEWBRIGHT=$(echo "$BRIGHT - $STEP" | bc)
-    if [ "$(echo "$NEWBRIGHT < 0.1" | bc)" -eq 1 ]; then
-        NEWBRIGHT='0.1'
-    fi
-    ;;
-max|full)
-    NEWBRIGHT='1.0'
-    ;;
-[1-9][0-9])
-    NEWBRIGHT="0.$1"
-    ;;
-[1-9])
-    NEWBRIGHT="0.$1"
-    ;;
-*)
-    echo $BRIGHT
-    exit 0
-    ;;
-esac
-
-# first_monitor=$(xrandr | grep -w connected | head -n 1 | cut -d " " -f1)
-# xrandr --output "$first_monitor" --brightness "$NEWBRIGHT"
-
-xrandr --output "$active_monitor" --brightness "$NEWBRIGHT"
-
-notify-send -t 500 $(echo "$NEWBRIGHT * 100" | bc | sed -E 's/\.0+//')"%"
-bash ~/.dwm/update-status.bash
+bash ~/.config/dwm/update-status.bash
