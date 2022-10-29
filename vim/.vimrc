@@ -13,7 +13,11 @@ syntax enable       " enable syntax highlighting
 " (I like molokai, solarized, badwolf, afterglow, happy_hacking, minimalist)
 if &term != 'cygwin'
     try
-        colorscheme minimalist
+        if empty(glob('/tmp/st-light'))
+            colorscheme minimalist
+        else
+            colorscheme PaperColor
+        endif
     catch /^Vim\%((\a\+)\)\=:E185/
         " alternative if minimalist is not installed
         colorscheme torte
