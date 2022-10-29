@@ -1,9 +1,9 @@
 #!/bin/bash
-notmuch help &> /dev/null && mailinfo="✉$(notmuch search tag:unread | wc -l), " || mailinfo=""
+# notmuch help &> /dev/null && mailinfo="✉$(notmuch search tag:unread | wc -l), " || mailinfo=""
 
 if test -f ~/bin/toggle_bluetooth_profile_WH-XB910N.sh ; then
   headset_profile="$(~/bin/toggle_bluetooth_profile_WH-XB910N.sh --status)"
-  [ -n "$headset_profile" ] && headset_profile="${headset_profile}, "
+  [ "$headset_profile" ] && headset_profile="${headset_profile}, "
 fi
 
 [ "$USER" = schimax ] && network=$(~/bin/check_network.bash)", " || network=""
