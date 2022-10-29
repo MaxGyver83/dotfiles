@@ -5,6 +5,14 @@ fish_add_path -p ~/install
 fish_add_path -a ~/.local/bin
 fish_add_path -a ~/bin
 
+# delete /bin and /sbin from PATH when they are just symlinks
+if [ -L /bin ] && contains /usr/bin $PATH && set -l ind (contains -i -- /bin $PATH)
+    set -e PATH[$ind]
+end
+if [ -L /sbin ] && contains /usr/sbin $PATH && set -l ind (contains -i -- /sbin $PATH)
+    set -e PATH[$ind]
+end
+
 # load aliases
 if [ -f $HOME/.config/fish/aliases.fish ]
   source $HOME/.config/fish/aliases.fish
@@ -95,13 +103,16 @@ if status is-interactive
     end
 
     if set -q is_simple_terminal
-        tput smkx ^/dev/null
+        tput smkx 2>/dev/null
         function fish_enable_keypad_transmit --on-event fish_postexec
-            tput smkx ^/dev/null
+            # see https://www.reddit.com/r/suckless/comments/svssz0/my_st_returns_tput_unknown_terminfo_capability/
+            # tput smkx 2>/dev/null
+            tput smkx
         end
 
         function fish_disable_keypad_transmit --on-event fish_preexec
-            tput rmkx ^/dev/null
+            #tput rmkx 2>/dev/null
+            tput rmkx
         end
     end
 end
