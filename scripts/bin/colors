@@ -1,0 +1,25 @@
+#!/bin/bash
+
+print_color() {
+    c=$((i+column))
+    color_string=$(printf %11s colour$c)
+    printf "\x1b[38;5;${c}m${color_string}\x1b[0m "
+}
+
+# 16 base colors
+for i in {0..15..8}; do
+    for column in {0..7}; do print_color; done
+    printf "\n"
+done
+
+# 6x6x6 RGB colors
+for i in {16..231..6}; do
+    for column in {0..5}; do print_color; done
+    printf "\n"
+done
+
+# 24 shades of gray
+for i in {232..255..8}; do
+    for column in {0..7}; do print_color; done
+    printf "\n"
+done
