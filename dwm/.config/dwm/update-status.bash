@@ -10,7 +10,7 @@ fi
 
 monitor_xpos=$(xdotool getactivewindow getwindowgeometry | grep Position | grep -o '[0-9]*,' | sed 's/,//')
 active_monitor=$(xrandr | grep -w connected | grep "+$monitor_xpos+" | head -n 1 | cut -d " " -f1)
-brightness_percent=$(echo $(xrandr --verbose | grep "^$active_monitor" -A 5 | awk '/Brightness/ { print $2; exit }')'*100' | bc | sed 's/\.00\?//')
+brightness_percent=$(xrandr --verbose | grep "^$active_monitor" -A 5 | awk '/Brightness/ { printf "%.0f\n", $2 * 100; exit }')
 [ $brightness_percent = 100 ] && brightness="" || brightness=☀"${brightness_percent}%, "
 
 battery=""
