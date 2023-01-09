@@ -1,4 +1,5 @@
-set runtimepath+=~/.vim/pack/plugins/start/vim-commentary,~/.vim/pack/plugins/start/vim-sneak,~/.vim/pack/plugins/start/vim-surround
+set runtimepath+=~/.vim/pack/plugins/start/vim-commentary,~/.vim/pack/plugins/start/vim-surround,~/.vim/autoload,~/.local/share/nvim/plugged/hop.nvim
+let &packpath = &runtimepath
 
 set hidden           " allow leaving a buffer unsaved when switching to another one
 set ignorecase       " make search case-insensitive by default (word\C → case sens.)
@@ -175,13 +176,16 @@ function! MakeHtmlReadyForEmail()
     w! /tmp/email.html
 endfunction
 
-" swap ; and , (next/previous match after s, S)
-nmap ; <Plug>SneakPrevious
-nmap , <Plug>SneakNext
-vmap ; <Plug>SneakPrevious
-vmap , <Plug>SneakNext
-"let g:sneak#s_next = 1
-" vim-sneak case-insensitive
-let g:sneak#use_ic_scs = 1
-" turn off search highlight and sneak highlight
-nnoremap <Leader><Space> :nohlsearch \| call sneak#cancel()<CR>
+source ~/.vim/autoload/plug.vim
+
+call plug#begin('~/.vim/autoload/plug.vim')
+Plug 'phaazon/hop.nvim'
+call plug#end()
+
+lua << EOF
+require'hop'.setup {
+  keys = 'iterancyb.ouglhfzx,pdwmks',
+}
+EOF
+
+nmap s :HopChar2<CR>
