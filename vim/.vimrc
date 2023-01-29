@@ -492,18 +492,19 @@ if !has('nvim')
     execute "set <A-.>=\e."
 endif
 
+if has('nvim')
+    tnoremap <Esc> <C-\><C-n>
+    tnoremap <A-b> <C-\><C-N><C-w>h
+    tnoremap <A-t> <C-\><C-N><C-w>j
+    tnoremap <A-r> <C-\><C-N><C-w>k
+    tnoremap <A-n> <C-\><C-N><C-w>l
+endif
 if has("patch-8.0.0")
-    if has('nvim')
-        tnoremap <A-b> <C-\><C-N><C-w>h
-        tnoremap <A-t> <C-\><C-N><C-w>j
-        tnoremap <A-r> <C-\><C-N><C-w>k
-        tnoremap <A-n> <C-\><C-N><C-w>l
-    else
-        tnoremap <A-b> <C-w>h
-        tnoremap <A-t> <C-w>j
-        tnoremap <A-r> <C-w>k
-        tnoremap <A-n> <C-w>l
-    endif
+    tnoremap <Esc> <C-\><C-n>
+    tnoremap <A-b> <C-w>h
+    tnoremap <A-t> <C-w>j
+    tnoremap <A-r> <C-w>k
+    tnoremap <A-n> <C-w>l
 endif
 inoremap <A-b> <C-\><C-N><C-w>h
 inoremap <A-t> <C-\><C-N><C-w>j
