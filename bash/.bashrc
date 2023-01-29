@@ -21,8 +21,15 @@ remove_from_path_if_symlink() {
     fi
 }
 
+prepend_to_path() {
+    [ -d "$1" ] && [[ $PATH != *$1* ]] && PATH="$1:$PATH"
+}
+
 remove_from_path_if_symlink /sbin
 remove_from_path_if_symlink /bin
+
+prepend_to_path $HOME/.local/bin
+prepend_to_path $HOME/install
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
@@ -59,8 +66,7 @@ fi
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
-    xterm-color|*-256color) color_prompt=yes;;
-    screen) color_prompt=yes;;
+    screen|xterm-color|*-256color) color_prompt=yes; export COLORTERM=truecolor;;
 esac
 
 # uncomment for a colored prompt, if the terminal has the capability; turned
@@ -173,6 +179,7 @@ xterm*|rxvt*)
 *)
     ;;
 esac
+PROMPT_COMMAND='echo -ne "\e]0;$USER@$HOSTNAME:${PWD/$HOME/\~}\a"'
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
@@ -230,9 +237,6 @@ export GROFF_NO_SGR=1                  # for konsole and gnome-terminal
 
 export EDITOR=vim
 
-# add ~/install to PATH
-PATH=$PATH:~/install
-
 # use locate to find a file in home directory and highlight matches
 locateh() {
   # case sensitive
@@ -251,6 +255,11 @@ mkcd() { mkdir -p -- "$1" && cd -P -- "$1" ; }
 vssh() {
   scp ~/.vimrc $1:/tmp/.vimrc
   ssh $1
+}
+
+tere() {
+  local result=$(~/.local/bin/tere "$@")
+  [ -n "$result" ] && cd -- "$result"
 }
 
 [ -f ~/workspace/z/z.sh ] && source ~/workspace/z/z.sh
