@@ -3,9 +3,16 @@
 	st = status
 	ci = commit
 	br = branch
+[diff]
+	colorMoved = default
+	tool = vimdiff
 [color "diff"]
 	old = red bold
 	new = green bold
 [color "status"]
 	changed = red bold
-    untracked = red bold
+	untracked = red bold
+[init]
+	defaultBranch = main
+[delta]
+	syntax-scheme = zenburn
