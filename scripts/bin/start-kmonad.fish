@@ -55,7 +55,7 @@ if string match -q -- "*event*" $RK61
 end
 
 # check if Keychron K6 is available over bluetooth
-set KCK6 /dev/input/(grep -B 8 -A 4 12001 /proc/bus/input/devices | grep "Keychron K6" -A 4 | grep -oE 'event[0-9]+')
+set KCK6 /dev/input/(grep -B 8 -A 4 12001f /proc/bus/input/devices | grep "Keychron K6" -A 4 | grep -oE 'event[0-9]+')
 if string match -q -- "*event*" $KCK6
     set --append devices $KCK6
     set --append names 'Keychron K6 keyboard over bluetooth'
