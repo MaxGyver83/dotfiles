@@ -1,10 +1,16 @@
 #!/bin/sh
+COLOR_BLUE="\033[0;34m"
+BOLD="\033[1m"
+RESET="\033[0m"
+
 mkdir -p ~/log
 logfile=~/log/update-vim-plugins.log
 printf "\n###################\n" >> "$logfile"
 date "+%Y-%m-%d %H:%M:%S" >> "$logfile"
 for p in ~/.vim/pack/plugins/start/* ~/.vim/pack/plugins/opt/*; do
-    printf "\n$p "
+    dir="$(dirname $p)"
+    plugin="$(basename $p)"
+    printf "\n$dir/${COLOR_BLUE}${BOLD}${plugin}${RESET} "
     cd $p
     git rev-parse --short HEAD
     git pull
