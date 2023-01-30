@@ -32,16 +32,18 @@ ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 
 # get fish
-RUN cd /tmp \
-    && wget https://launchpad.net/~fish-shell/+archive/ubuntu/release-3/+files/fish_3.5.0-1~focal_amd64.deb \
-    && dpkg -i fish_3.5.0-1~focal_amd64.deb \
-    && rm fish_3.5.0-1~focal_amd64.deb
+RUN ver=3.6.0-1 \
+    && cd /tmp \
+    && wget https://launchpad.net/~fish-shell/+archive/ubuntu/release-3/+files/fish_${ver}~focal_amd64.deb \
+    && dpkg -i fish_${ver}~focal_amd64.deb \
+    && rm fish_${ver}~focal_amd64.deb
 
 # get bat
-RUN cd /tmp \
-    && wget https://github.com/sharkdp/bat/releases/download/v0.21.0/bat_0.21.0_amd64.deb \
-    && dpkg -i bat_0.21.0_amd64.deb \
-    && rm bat_0.21.0_amd64.deb
+RUN ver=0.22.1 \
+    && cd /tmp \
+    && wget https://github.com/sharkdp/bat/releases/download/v${ver}/bat_${ver}_amd64.deb \
+    && dpkg -i bat_${ver}_amd64.deb \
+    && rm bat_${ver}_amd64.deb
 
 # get sd
 RUN cd /tmp \
