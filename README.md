@@ -2,15 +2,19 @@
 
 My vim, bash, fish, tmux, sxhkd, surfingkeys, Docker, KMonad config files and scripts for changing the keyboard layout. These files are organized in such a way that they can be installed with GNU Stow. Stow creates links to the dotfiles from this repo in `$HOME` (or its subfolders).
 
+Notes to myself:
+
 ```sh
 sudo apt-get install stow
+# or
+sudo pacman -S stow
 ```
 
 At first, back up the original dotfiles. Then clone this repository into your home directory:
 
 ```sh
 mkdir -p ~/.config/fish ~/.vim ~/bin
-git clone git@github.com:MaxGyver83/dotfiles.git ~/.dotfiles
+git clone https://github.com/MaxGyver83/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
 stow -v fish bash tmux vim sxhkd surfingkeys kmonad editorconfig scripts
 ```
@@ -36,6 +40,7 @@ This fish setup will work best with these programs installed:
 Also recommended:
 
 * [**z** (for fish)](https://github.com/jethrokuan/z) via [**fisher**](https://github.com/jorgebucaran/fisher).
+* [**bass**](https://github.com/edc/bass) via [**fisher**](https://github.com/jorgebucaran/fisher).
 
 ## vim
 
@@ -59,7 +64,7 @@ sudo apt install suckless-tools sxhkd rofi dunst pcmanfm i3lock compton wmctrl p
 
 `suckless-tools` includes `dmenu`. This can also be cloned and built from source.
 
-Then clone dwm:
+Then clone my custom dwm repository:
 
 ```sh
 cd ~/repos
@@ -103,3 +108,7 @@ and install from source (`make && sudo make install`).
 ```sh
 stow -vv scripts sxhkd dunst bspwm
 ```
+
+## Not used anymore (and probably outdated)
+
+alacritty, byobu, qtile
