@@ -1,5 +1,9 @@
 #!/usr/bin/env sh
 
+exists() {
+  command -v "$1" > /dev/null 2>&1
+}
+
 timestamp() {
   date "+%Y-%m-%d %H:%M:%S.%3N"
 }
@@ -34,8 +38,12 @@ fi
 # xrandr --output $(xrandr | grep -w connected | head -n 1 | cut -d " " -f1) --brightness 0.7
 # test -f ~/.screenlayout/ext-monitor-acer.sh && ~/.screenlayout/ext-monitor-acer.sh
 run /bin/sh ~/bin/set-wallpaper.bash
-# compton: `--focus...` is needed to not dim the status bar and rofi
-run picom
+if exists picom ; then
+  run picom
+elif exists compton ; then
+  # compton: `--focus...` is needed to not dim the status bar and rofi
+  run compton
+fi
 run nm-applet
 run pasystray
 run blueman-applet
