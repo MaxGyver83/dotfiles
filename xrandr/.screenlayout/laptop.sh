@@ -1,2 +1,17 @@
 #!/bin/sh
-xrandr --output HDMI-1-2 --off --output HDMI-1-1 --off --output eDP-1-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DP-1-1-3 --off --output DP-1-1-2 --off --output DP-1-1-1 --off --output DP-1-2 --off --output DP-1-1 --off
+connected_devices="$(xrandr | awk '/ conn/{print $1}')"
+
+case "$connected_devices" in
+*eDP1*) laptop=eDP1;;
+*eDP-1*) laptop=eDP-1;;
+*) echo "Couldn't identify laptop screen!"; exit 1;;
+esac
+
+external_devices="$(echo "$connected_devices" | grep -v $laptop)"
+
+command="xrandr --output $laptop --primary --mode 1920x1080 --pos 0x0 --rotate normal"
+for device in $external_devices ; do
+    command="$command --output $device --off"
+done
+
+$command
