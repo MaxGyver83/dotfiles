@@ -10,7 +10,8 @@ font:
     style: Italic
   size: 14.0
 
-background_opacity: 0.92
+window:
+  opacity: 0.92
 
 key_bindings:
   - { key: F11,      mods: none,          action: ToggleFullscreen }
