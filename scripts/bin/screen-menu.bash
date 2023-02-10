@@ -30,7 +30,7 @@ case $key in
   l) ~/.screenlayout/laptop.sh ;;
   p) ~/.screenlayout/peaq.sh ;;
   P) ~/.screenlayout/laptop-peaq.sh ;;
-  d) ~/.screenlayout/dell.sh ;;
+  d) ~/.screenlayout/layout.sh external 4K;;
   D) ~/.screenlayout/laptop-dell.sh ;;
   a) ~/.screenlayout/2x-acer.sh ;;
   A) ~/.screenlayout/laptop-2x-acer.sh ;;
@@ -38,4 +38,4 @@ case $key in
 esac
 
 # reset background image
-~/.fehbg
+[ -f ~/.fehbg ] && ~/.fehbg
