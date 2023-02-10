@@ -18,6 +18,29 @@ mkdir -p ~/log
 
 # start dwm
 while true; do
+    if xrandr | grep -q 3840x2160
+    then
+        # HiDPI settings for the 4k display in the office
+        dpi='Xft.dpi: 150rofi.dpi: 150'
+        devPixelsPerPx=1.1
+    elif xrandr | grep -q 2560x1440
+    then
+        # Peaq (32 inch, WQHD)
+        dpi=''
+        devPixelsPerPx=1.2
+    else
+        # (office) laptop display
+        dpi=''
+        devPixelsPerPx=1.3
+    fi
+    echo "$dpi" > ~/.Xresources
+    if test -e ~/.mozilla/firefox/5c2gkmrd.default-release
+    then
+        echo "user_pref(\"layout.css.devPixelsPerPx\", \"$devPixelsPerPx\");" > ~/.mozilla/firefox/5c2gkmrd.default-release/user.js
+        # Change manually (no restart of Firefox required):
+        # Ctrl-Shift-k → Services.prefs.setStringPref("layout.css.devPixelsPerPx", "1.1");
+    fi
+    xrdb ~/.Xresources
     # Log stderror to a file
     dwm > ~/log/dwm.log 2>&1
 done
