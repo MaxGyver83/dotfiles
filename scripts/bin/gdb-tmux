@@ -1,0 +1,13 @@
+#!/bin/sh
+
+[ -z "$TMUX" ] && echo "Not in tmux!" && exit 1
+
+if [ $(tmux list-panes | wc -l) = 1 ]; then
+    tmux split-window -h
+else
+    tmux select-pane -l
+fi
+other_tty=$(tmux display -p '#{pane_tty}')
+tmux select-pane -l
+
+gdb -q -ex "tty $other_tty" "$@"
