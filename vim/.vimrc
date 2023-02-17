@@ -31,9 +31,11 @@ if &term != 'cygwin'
     highlight DiffText   ctermfg=10   ctermbg=167 cterm=bold gui=none guifg=bg guibg=Red
     " patches / diff files
     autocmd FileType diff syntax    match diffAddedButRemoved "^+-.*"
+    syntax match diffAdded /✔/
+    syntax match diffRemoved /✘/
+    highlight diffAdded   ctermfg=green
+    highlight diffRemoved ctermfg=red
     autocmd FileType diff highlight diffAddedButRemoved ctermfg=101   |
-                        \ highlight diffAdded           ctermfg=green |
-                        \ highlight diffRemoved         ctermfg=red   |
                         \ highlight diffLine            ctermfg=blue
 endif
 
@@ -71,6 +73,7 @@ autocmd FileType html,css setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType groovy setlocal colorcolumn=120 shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType python setlocal colorcolumn=72,80,100 | nmap gca A  # | nmap gco o# | nmap gcO O# 
 autocmd FileType c nmap gca A // | nmap gco o// | nmap gcO O// 
+autocmd FileType cpp setlocal omnifunc=
 
 " Autocompletion for python3 (currently replaced by jedi-vim)
 " if has('python3')
@@ -291,9 +294,9 @@ nnoremap <silent> <Leader>* :RgRaw -g '!tags' -ws <C-R><C-W><CR>
 xnoremap <silent> <Leader>* :<BS><BS><BS><BS><BS>RgRaw -g '!tags' -ws <C-R><C-W><CR>
 
 " search and replace in whole file
-nnoremap <Leader>s :% s/\v//g<left><left><left>
+nnoremap <Leader>s :% s#\v##g<left><left><left>
 " search and replace selection in whole file
-xnoremap <Leader>s "vy:% s/\v<C-R>v/<C-R>v/g<left><left>
+xnoremap <Leader>s "vy:% s#\v<C-R>v#<C-R>v#g<left><left>
 
 " print value of environment variable under cursor
 nnoremap <Leader>z l?\$<cr>v/\$[a-zA-Z{}_]\+/e<cr>"vy:echo <C-R>v<cr>
@@ -795,7 +798,7 @@ xnoremap <Leader>gf "ty \| :<C-U>exec ":call fzf#vim#files('', {'options':'--que
 nnoremap <Leader>fh :<C-U>exec ":call fzf#vim#files('~', {'options':'--query "expand('<cword>')"'})"<CR>
 xnoremap <Leader>fh "ty \| :<C-U>exec ":call fzf#vim#files('~', {'options':'--query <C-R>t'})"<CR>
 " toggle between .c and .h files
-nnoremap <expr> <Leader>et expand('%:e') == 'h' ? ':e %:r.c<CR>' : expand('%:e') == 'c' ? ':e %:r.h<CR>' : ':echo "Neither a c nor an h file."<CR>'
+nnoremap <expr> <Leader>et expand('%:e') == 'h' ? ':e %:r.c<CR>' : expand('%:e') == 'c' ? ':e %:r.h<CR>' : expand('%:e') == 'hpp' ? ':e **/%:t:r.cpp<CR>' : expand('%:e') == 'cpp' ? ':e **/%:t:r.hpp<CR>' :':echo "Not a c[pp] or h[pp] file."<CR>'
 
 
 " jump to the next function
