@@ -27,10 +27,11 @@ export NO_AT_BRIDGE=1
 run dunst
 echo "$(timestamp) Switch to external screen (if available)"
 if [ "$(hostname)" = 'max-laptop' ]; then
-  [ "$(head -1 /sys/class/drm/card0-DP-1/modes)" = '2560x1440' ] && ~/.screenlayout/peaq.sh
-else
-  xrandr | grep -q 2560x1440 && ~/.screenlayout/peaq.sh
-  xrandr | grep -q 3840x2160 && ~/.screenlayout/dell.sh
+  [ "$(head -1 /sys/class/drm/card0-DP-1/modes)" = '2560x1440' ] && ~/.screenlayout/layout.sh external
+elif xrandr | grep -q 3840x2160 ; then
+  ~/.screenlayout/layout.sh external 4K
+elif xrandr | grep -q 2560x1440 ; then
+  ~/.screenlayout/layout.sh external
   # [ $(xrandr | grep -wc connected) -eq 3 ] && ~/.screenlayout/2x-acer.sh
 fi
 # echo "$(timestamp) Set first (=laptop) display to 70% brightness"

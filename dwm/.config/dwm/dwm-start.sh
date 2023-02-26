@@ -21,7 +21,7 @@ while true; do
     if xrandr | grep -q 3840x2160
     then
         # HiDPI settings for the 4k display in the office
-        dpi='Xft.dpi: 150rofi.dpi: 150'
+        dpi=$'Xft.dpi: 150\nrofi.dpi: 150'
         devPixelsPerPx=1.1
     elif xrandr | grep -q 2560x1440
     then
