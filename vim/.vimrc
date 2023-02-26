@@ -128,7 +128,7 @@ autocmd BufWinLeave * call clearmatches()
 " also highlight no-break spaces (U+00A0) and narrow no-break spaces (U+202F),
 " and soft hyphen (U+00AD)
 highlight NoBreakWhitespace ctermbg=blue guibg=blue
-autocmd Syntax * syn match NoBreakWhitespace / \| \|­/
+autocmd Syntax,BufWinEnter * syn match NoBreakWhitespace / \| \|­/
 
 augroup autocom
     autocmd!
@@ -849,8 +849,10 @@ let g:ale_python_pyflakes_executable = 'pyflakes3'
 let g:ale_python_pylint_executable = 'pylint3'
 let g:ale_linters = {
     \ 'python': ['pycodestyle', 'pylint3', 'pylsp'],
+    \ 'cpp': ['clangtidy', 'cppcheck', 'cpplint'],
     \ }
 let g:ale_fixers = {'python': ['black', 'isort']}
+let g:ale_cpp_cpplint_options = '--filter=-legal/copyright,-whitespace/line_length,-whitespace/blank_line'
 highlight ALEWarning ctermbg=red ctermfg=none cterm=none
 
 " TiddlyWiki
