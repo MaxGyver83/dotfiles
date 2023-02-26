@@ -17,6 +17,7 @@ activate() {
 }
 
 connected_devices="$(xrandr | awk '/ conn/{print $1}')"
+available_devices="$(xrandr | awk '/connected [0-9]/{print $1}')"
 
 case "$connected_devices" in
 *eDP1*) laptop=eDP1;;
@@ -24,7 +25,8 @@ case "$connected_devices" in
 *) laptop=;;
 esac
 
-external_devices="$(echo "$connected_devices" | grep -v $laptop)"
+external_devices="$(echo "$connected_devices
+$available_devices" | grep -v $laptop)"
 
 case "$1" in
 laptop) [ $laptop ] && activate "$laptop";;
