@@ -38,6 +38,8 @@ abbr rsyncp 'rsync --info=progress2 -ah'
 
 abbr nw '(ls -Art | tail -n 1)'
 
+alias extract-latest 'bass source ~/bin/extract-latest'
+
 type -q most && abbr manc 'set PAGER most; man'
 abbr y 'yank'
 abbr cb 'xclip -sel clip'
