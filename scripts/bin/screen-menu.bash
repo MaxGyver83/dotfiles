@@ -28,9 +28,9 @@ read -rsn1 key
 
 case $key in
   l) ~/.screenlayout/laptop.sh ;;
-  p) ~/.screenlayout/peaq.sh ;;
+  p) ~/.screenlayout/layout.sh external ;;
   P) ~/.screenlayout/laptop-peaq.sh ;;
-  d) ~/.screenlayout/layout.sh external 4K;;
+  d) ~/.screenlayout/layout.sh external 4K ;;
   D) ~/.screenlayout/laptop-dell.sh ;;
   a) ~/.screenlayout/2x-acer.sh ;;
   A) ~/.screenlayout/laptop-2x-acer.sh ;;
