@@ -1,0 +1,9 @@
+#!/bin/bash
+cd ~/Downloads || exit 1
+latest_archive="$(ls -t *.{zip,gz,xz} | head -n 1)"
+[ -z "$latest_archive" ] && exit 1
+# remove ending
+folder_name="${latest_archive%.*}"
+[ -d "$folder_name" ] && rm -rf "$folder_name"
+patool extract "$latest_archive"
+cd "$folder_name"
