@@ -143,6 +143,7 @@ abbr gdd 'git -c "core.pager=delta" -c "delta.syntax-scheme=zenburn" diff'
 abbr gds 'git -c "core.pager=delta" -c "delta.features=side-by-side" -c "delta.syntax-scheme=zenburn" diff'
 abbr gdt 'git difftool'
 abbr gp 'git pull'
+abbr gpa 'git pull --autostash'
 abbr gps 'git push'
 # git push upstream
 abbr gpsu 'git push --set-upstream origin (git rev-parse --abbrev-ref HEAD)'
@@ -188,7 +189,7 @@ abbr cr 'crontab -l | grep --color=never "^[^#]"'
 
 abbr simpleprompt 'function fish_prompt; echo \n(prompt_pwd)\ ▶\ ; end'
 
-abbr tmux-display 'set -x DISPLAY "$(tmux show-env | sed -n s/^DISPLAY=//p)"'
+alias disp 'echo "before: $DISPLAY"; set -x DISPLAY "$(tmux show-env | sed -n s/^DISPLAY=//p)"; echo "now:    $DISPLAY"'
 
 # source work related / private stuff (not part of the dotfiles repo)
 if [ -f $HOME/.config/fish/local.fish ]
