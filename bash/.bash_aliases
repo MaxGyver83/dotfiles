@@ -31,6 +31,9 @@ alias wlan='nmcli d wifi'
 alias ncdu='ncdu --color=dark'
 alias rgf='rg --fixed-strings'
 
+alias path='echo $PATH | tr : "\n"'
+alias pypath='echo $PYTHONPATH | tr : "\n"'
+
 alias xo='xdg-open'
 
 exists ncal && alias cal='ncal -bwM3' || alias cal='cal -3'
@@ -115,6 +118,8 @@ alias gitunmerged='git branch --no-merged master'
 alias cpbr='git rev-parse --abbrev-ref HEAD | tr -d \n | xclip -sel clip'
 
 alias cr='crontab -l | grep --color=never "^[^#]"'
+
+alias disp='echo "before: $DISPLAY"; export DISPLAY="$(tmux show-env | sed -n s/^DISPLAY=//p)"; echo "now:    $DISPLAY"'
 
 alias caei='xhost > /dev/null 2>&1 && setxkbmap de -option || sudo loadkeys de'
 alias asdf='xhost > /dev/null 2>&1 && setxkbmap de koy && xkbcomp -w 0 ~/bin/vou-tabwin.xkb $DISPLAY || sudo loadkeys ~/bin/vou.map'
