@@ -189,7 +189,7 @@ abbr cr 'crontab -l | grep --color=never "^[^#]"'
 
 abbr simpleprompt 'function fish_prompt; echo \n(prompt_pwd)\ ▶\ ; end'
 
-alias disp 'echo "before: $DISPLAY"; set -x DISPLAY "$(tmux show-env | sed -n s/^DISPLAY=//p)"; echo "now:    $DISPLAY"'
+alias disp 'bass source ~/bin/update-DISPLAY.sh'
 
 # source work related / private stuff (not part of the dotfiles repo)
 if [ -f $HOME/.config/fish/local.fish ]
