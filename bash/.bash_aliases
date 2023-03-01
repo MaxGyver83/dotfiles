@@ -119,7 +119,7 @@ alias cpbr='git rev-parse --abbrev-ref HEAD | tr -d \n | xclip -sel clip'
 
 alias cr='crontab -l | grep --color=never "^[^#]"'
 
-alias disp='echo "before: $DISPLAY"; export DISPLAY="$(tmux show-env | sed -n s/^DISPLAY=//p)"; echo "now:    $DISPLAY"'
+alias disp='. ~/bin/update-DISPLAY.sh'
 
 alias caei='xhost > /dev/null 2>&1 && setxkbmap de -option || sudo loadkeys de'
 alias asdf='xhost > /dev/null 2>&1 && setxkbmap de koy && xkbcomp -w 0 ~/bin/vou-tabwin.xkb $DISPLAY || sudo loadkeys ~/bin/vou.map'
