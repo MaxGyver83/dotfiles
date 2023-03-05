@@ -8,7 +8,9 @@ activate() {
     else
         command="$command --auto"
     fi
-    other_devices="$(echo "$connected_devices" | grep -v $1)"
+    # printf "\nConnected:\n${connected_devices}\n"
+    other_devices="$(echo "$connected_devices" | grep -v -w $1)"
+    # printf "\nOther:\n${other_devices}\n"
     for device in $other_devices ; do
         command="$command --output $device --off"
     done
@@ -26,7 +28,11 @@ case "$connected_devices" in
 esac
 
 external_devices="$(echo "$connected_devices
-$available_devices" | grep -v $laptop)"
+$available_devices" | grep -v -w $laptop)"
+
+# printf "Connected:\n${connected_devices}\n"
+# printf "\nAvailable:\n${available_devices}\n"
+# printf "\nExternal:\n${external_devices}\n\n"
 
 case "$1" in
 laptop) [ $laptop ] && activate "$laptop";;
