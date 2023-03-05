@@ -86,6 +86,8 @@ alias ct="$VIM ~/.tmux.conf"
 alias ck="$VIM ~/.config/kmonad/vou-linux-de-rctrl.kbd"
 alias td="$VIM ~/dev/gta_local/max/todo/todo.md"
 
+alias akku='upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep -E "power|updated|state|energy|time to|perc|capa" | grep -v design'
+
 # git
 alias g='git status'
 alias gd='git diff'
