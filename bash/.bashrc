@@ -237,6 +237,18 @@ export GROFF_NO_SGR=1                  # for konsole and gnome-terminal
 
 export EDITOR=vim
 
+export HOST="${HOST:-"$(hostname)"}"
+case "$HOST" in
+  LE-*) MACHINE=work/station ;;
+  LR-*) MACHINE=work/laptop ;;
+  lap*) MACHINE=home/laptop ;;
+  *pi1) MACHINE=home/raspi1 ;;
+  *pi3) MACHINE=home/raspi3 ;;
+  *gen) MACHINE=ionos/vps ;;
+  *)    MACHINE="$HOST" ;;
+esac
+export MACHINE
+
 # use locate to find a file in home directory and highlight matches
 locateh() {
   # case sensitive
