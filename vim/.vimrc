@@ -672,7 +672,7 @@ vnoremap # :<C-u>call <SID>VSetSearch()<CR>?<CR>
 " be '/project')
 function! GoToFile()
     try
-        normal gf
+        normal! gf
     catch
         let path = expand("<cfile>")
         if path[0] == '/'
@@ -695,7 +695,7 @@ function! GoToFile()
     endtry
 endfunction
 
-noremap gF :call GoToFile()<CR>
+noremap gf :call GoToFile()<CR>
 
 "-------------------
 " related to plugins
