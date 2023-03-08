@@ -241,7 +241,7 @@ export HOST="${HOST:-"$(hostname)"}"
 case "$HOST" in
   LE-*) MACHINE=work/station ;;
   LR-*) MACHINE=work/laptop ;;
-  lap*) MACHINE=home/laptop ;;
+  max*) MACHINE=home/laptop ;;
   *pi1) MACHINE=home/raspi1 ;;
   *pi3) MACHINE=home/raspi3 ;;
   *gen) MACHINE=ionos/vps ;;
