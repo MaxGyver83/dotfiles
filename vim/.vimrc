@@ -803,7 +803,8 @@ nnoremap <expr> <Leader>et expand('%:e') == 'h' ? ':e %:r.c<CR>' : expand('%:e')
 
 " jump to the next function
 nnoremap <silent> <Leader>ff :call
-  \ search('\(\(if\\|for\\|while\\|switch\\|catch\)\_s*\)\@64<!(\_[^)]*)\_[^;{}()]*\zs{', "w")<CR>
+  \ search('\(\(if\\|for\\|while\\|switch\\|catch\)\_s*\)\@64<!(\_[^)]*)\_[^;{}()]*\zs{', "w")<CR>zt
+autocmd BufRead,BufNewFile *.py nnoremap <silent> <Leader>ff :call search('^def ', "w")<CR>zt
 
 " find git merge conflict
 nnoremap <Leader>gm /\v^\<\<\<\<\<\<\< \|\=\=\=\=\=\=\=$\|\>\>\>\>\>\>\> /<cr>
@@ -849,7 +850,7 @@ let g:ale_python_pyflakes_executable = 'pyflakes3'
 let g:ale_python_pylint_executable = 'pylint3'
 let g:ale_linters = {
     \ 'python': ['pycodestyle', 'pylint3', 'pylsp'],
-    \ 'cpp': ['clangtidy', 'cppcheck', 'cpplint'],
+    \ 'cpp': ['clangtidy', 'cppcheck', 'cpplint', 'clangd'],
     \ }
 let g:ale_fixers = {'python': ['black', 'isort']}
 let g:ale_cpp_cpplint_options = '--filter=-legal/copyright,-whitespace/line_length,-whitespace/blank_line'
@@ -896,6 +897,11 @@ if $SSH_CLIENT != "" || $SSH_TTY != ""
   vnoremap <leader>y :OSCYank<CR>
   nmap <leader>y <Plug>OSCYank
 endif
+
+" termdebug
+packadd termdebug
+let g:termdebug_wide=1
+noremap <silent> <leader>gt :Termdebug<cr>
 
 " try loading machine-specific settings
 try
