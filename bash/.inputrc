@@ -31,6 +31,14 @@ set menu-complete-display-prefix on
 # Max: enable case-insensitive tab completion
 set completion-ignore-case on
 
+# Max
+$if gdb
+    R: "\C-a\C-kserver return\n"
+    N: "\C-a\C-kserver next\n"
+    S: "\C-a\C-kserver step\n"
+    C: "\C-a\C-kserver continue\n"
+$endif
+
 # some defaults / modifications for the emacs mode
 $if mode=emacs
 
