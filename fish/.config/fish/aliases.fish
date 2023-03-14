@@ -59,6 +59,7 @@ alias words='rg -N \'Emit.*Press\' ~/kmonad.log | sed \'s/Emitting: Press //\' |
 abbr acs 'apt-cache search'
 abbr sai 'sudo apt install'
 abbr sau 'sudo apt update'
+abbr saU 'sudo apt upgrade'
 abbr alu 'apt list --upgradable'
 abbr ali 'apt list --installed'
 abbr ap 'apt policy'
