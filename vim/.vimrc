@@ -119,7 +119,7 @@ set backspace=indent,eol,start
 " set language for spell checking to German and English (activate with :set spell)
 set spelllang=de,en
 
-" highlight trailing whitespaces (but do not in insert mode)
+" highlight trailing whitespaces (except when typing at the end of a line)
 highlight ExtraWhitespace ctermbg=red guibg=red
 autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
 autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
@@ -128,7 +128,7 @@ autocmd BufWinLeave * call clearmatches()
 " also highlight no-break spaces (U+00A0) and narrow no-break spaces (U+202F),
 " and soft hyphen (U+00AD)
 highlight NoBreakWhitespace ctermbg=blue guibg=blue
-autocmd Syntax,BufWinEnter * syn match NoBreakWhitespace / \| \|­/
+autocmd BufWinEnter,InsertLeave * match NoBreakWhitespace / \| \|­/
 
 augroup autocom
     autocmd!
@@ -850,9 +850,14 @@ let g:ale_python_pyflakes_executable = 'pyflakes3'
 let g:ale_python_pylint_executable = 'pylint3'
 let g:ale_linters = {
     \ 'python': ['pycodestyle', 'pylint3', 'pylsp'],
+    \ 'c': ['cc', 'clangtidy', 'clangd'],
     \ 'cpp': ['clangtidy', 'cppcheck', 'cpplint', 'clangd'],
     \ }
-let g:ale_fixers = {'python': ['black', 'isort']}
+let g:ale_fixers = {
+    \ 'python': ['black', 'isort'],
+    \ 'c': ['astyle'],
+    \ }
+let g:ale_c_clangtidy_options = '-std=c99 -pedantic'
 let g:ale_cpp_cpplint_options = '--filter=-legal/copyright,-whitespace/line_length,-whitespace/blank_line'
 highlight ALEWarning ctermbg=red ctermfg=none cterm=none
 
