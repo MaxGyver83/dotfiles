@@ -1,0 +1,36 @@
+#!/bin/sh
+if [ "$1" = '-h' ] || [ "$1" = '--help' ]; then
+    echo "Usage:
+ctags_for_includes                : Create tags all C(++) files in current directory and write to 'tags-external'
+ctags_for_includes --list|--info  : List headers found by 'gcc -M'
+ctags_for_includes --errors       : List headers 'gcc -M' couldn't find
+"
+    exit 0
+fi
+
+code_files="$(fd -ec -eh -ecpp -ehpp)"
+
+if [ "$1" = "--errors" ]; then
+    shift
+    gcc -M $code_files 1>/dev/null
+    find_includes "$@" 1>/dev/null
+
+elif [ "$1" = "--list" ] || [ "$1" = "--info" ]; then
+    shift
+    gcc -M $code_files 2>/dev/null \
+      | tr ' \\' '\n' \
+      | grep -v '\.o:[ \t]*$' \
+      | grep '\S' \
+      | sort -u
+    find_includes "$@"
+
+else
+    gcc -M $code_files 2>/dev/null \
+      | tr ' \\' '\n' \
+      | grep -v '\.o:[ \t]*$' \
+      | grep '\S' \
+      | sort -u \
+      | grep '^/' \
+      | ctags -o tags-external -L -
+    find_includes "$@" | ctags -a -o tags-external -L -
+fi

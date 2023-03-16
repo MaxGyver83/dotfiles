@@ -1,0 +1,39 @@
+#!/bin/sh
+if [ "$1" = '-h' ] || [ "$1" = '--help' ]; then
+    echo "Usage:
+find_includes [directory ...]
+
+Get all non-system header files listed in C/C++ files of the current directory
+and search for them in the given directories and list all matches.
+"
+    exit 0
+fi
+
+git_root="$(git rev-parse --show-toplevel)"
+directory_list="$(echo "$git_root $@")"
+not_found=""
+
+search_file() {
+    file="$1"
+    # echo "File = $file"
+    matches="$(fd -p "$file" $directory_list)"
+    if [ "$matches" ]; then
+        echo "$matches" | head -n 1
+        return 0
+    fi
+    not_found="${not_found}$file
+"
+    return 1
+}
+
+relative_paths="$(list_includes --raw)"
+
+for file in $relative_paths ; do
+    search_file "$file"
+done
+
+if [ "$not_found" ]; then
+    >&2 echo "
+No matches for:
+$not_found"
+fi
