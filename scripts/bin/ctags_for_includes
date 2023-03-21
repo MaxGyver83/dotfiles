@@ -25,6 +25,7 @@ elif [ "$1" = "--list" ] || [ "$1" = "--info" ]; then
       | grep -v '\.o:[ \t]*$' \
       | grep '\S' \
       | sort -u
+    echo
     find_includes "$@"
 
 else
