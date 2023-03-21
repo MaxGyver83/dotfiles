@@ -8,12 +8,19 @@ list_includes --raw          : List all include file names except system headers
     exit 0
 fi
 
-includes="$(rg -tc -tcpp --no-filename '#include' | sed 's: *//.*$::' | sort -u)"
+# find lines with '#include', trim, remove comment lines, remove trailing comments, sort unique
+includes="$(rg -tc -tcpp --no-filename '#include' \
+    | awk '{$1=$1;print}' | grep -v '^/[\*/]' \
+    | sed 's: */[/\*].*$::' | sort -u)"
 
 if [ "$1" = '--raw' ]; then
-    echo "$includes" | grep -Ev '<[^/]+>' | sed -E -e 's/ *#include +//' -e 's/.(.*)./\1/' | sort -u
+    echo "$includes" | grep -Ev '<[^/]+>' \
+        | sed -E -e 's/ *#include +//' -e 's/.(.*)./\1/' \
+        | sed 's:\.\./::g' | sort -u
+
 elif [ "$1" = '--skip-system' ]; then
     echo "$includes" | grep -Ev '<[^/]+>'
+
 else
     echo "$includes"
 fi
