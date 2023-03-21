@@ -60,6 +60,7 @@ Galicarnax/vim-regex-syntax  # syntax highlighting for regexs
 # other
 guns/xterm-color-table.vim
 ojroques/vim-oscyank
+thinca/vim-localrc
 )
 
 opt=(
