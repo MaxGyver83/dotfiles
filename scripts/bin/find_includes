@@ -9,8 +9,13 @@ and search for them in the given directories and list all matches.
     exit 0
 fi
 
+cwd="$(realpath "$(pwd)")"
 git_root="$(git rev-parse --show-toplevel)"
-directory_list="$(echo "$git_root $@")"
+if [ "$git_root" = "$cwd" ]; then
+    directory_list="$(echo "$@")"
+else
+    directory_list="$(echo "$git_root $@")"
+fi
 not_found=""
 
 search_file() {
@@ -18,7 +23,7 @@ search_file() {
     # echo "File = $file"
     matches="$(fd -p "$file" $directory_list)"
     if [ "$matches" ]; then
-        echo "$matches" | head -n 1
+        echo "$matches" | head -n 1 | grep -v "$cwd"
         return 0
     fi
     not_found="${not_found}$file
