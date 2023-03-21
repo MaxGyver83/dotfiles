@@ -575,6 +575,12 @@ function! GitHub()
 endfunction
 command! GitHub call GitHub()
 
+function! AddIncludeSubdirectoriesToPath(directory)
+    let $include_dirs = system('fd include '.a:directory.' | tr "\n" ,')
+    set path+=$include_dirs
+endfunction
+command! -nargs=1 AddIncludeSubdirectoriesToPath call AddIncludeSubdirectoriesToPath(<f-args>)
+
 function! Sum()
     :'<,'>w !awk '{s+=$1} END {print s}'
 endfunction
@@ -784,6 +790,7 @@ nnoremap <Leader>ec :FZF %:p:h<CR>
 nnoremap <Leader>ew :FZF<CR>
 nnoremap <Leader>eh :FZF ~<CR>
 nnoremap <Leader>er :FZF /<CR>
+nnoremap <Leader>eg :execute 'FZF' trim(system('git rev-parse --show-toplevel'))<CR>
 nnoremap <Leader>ef :FZFFunctionTagFile<CR>
 nnoremap <Leader>eb :Buffers<CR>
 nnoremap <Leader>el :BLines<CR>
@@ -893,14 +900,16 @@ highlight HighlightedyankRegion ctermbg=229 ctermfg=none cterm=none
 " vim-gutentags
 let g:gutentags_ctags_exclude = ['virtual_envs', '.ccls-cache']
 let g:gutentags_exclude_project_root = ['/usr/local', '/home/max/.password-store']
+set tags+=tags-external
 
 " quick-scope
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
 " vim-oscyank
 if $SSH_CLIENT != "" || $SSH_TTY != ""
-  vnoremap <leader>y :OSCYank<CR>
-  nmap <leader>y <Plug>OSCYank
+  " let g:oscyank_term = 'default'
+  vnoremap <leader>y <Plug>OSCYankVisual
+  nmap <leader>y <Plug>OSCYankOperator
 endif
 
 " termdebug
