@@ -9,6 +9,9 @@ ctags_for_includes --errors       : List headers 'gcc -M' couldn't find
 fi
 
 code_files="$(fd -ec -eh -ecpp -ehpp)"
+if [ -z "$code_files" ]; then
+    echo '`fd -ec -eh -ecpp -ehpp` did not find any code files!'
+fi
 
 if [ "$1" = "--errors" ]; then
     shift
