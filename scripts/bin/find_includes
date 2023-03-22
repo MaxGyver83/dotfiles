@@ -1,7 +1,7 @@
 #!/bin/sh
 if [ "$1" = '-h' ] || [ "$1" = '--help' ]; then
     echo "Usage:
-find_includes [directory ...]
+find_includes [PATH ...]
 
 Get all non-system header files listed in C/C++ files of the current directory
 and search for them in the given directories and list all matches.

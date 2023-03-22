@@ -3,7 +3,7 @@ if [ "$1" = '-h' ] || [ "$1" = '--help' ]; then
     echo "Usage:
 list_includes                : List all include lines
 list_includes --skip-system  : List all include lines except system headers (like <foo>)
-list_includes --raw          : List all include file names except system headers
+list_includes --raw          : List all include file names
 "
     exit 0
 fi
@@ -14,7 +14,7 @@ includes="$(rg -tc -tcpp --no-filename '#include' \
     | sed 's: */[/\*].*$::' | sort -u)"
 
 if [ "$1" = '--raw' ]; then
-    echo "$includes" | grep -Ev '<[^/]+>' \
+    echo "$includes" \
         | sed -E -e 's/ *#include +//' -e 's/.(.*)./\1/' \
         | sed 's:\.\./::g' | sort -u
 
