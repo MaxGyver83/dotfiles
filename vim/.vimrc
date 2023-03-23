@@ -577,10 +577,29 @@ command! GitHub call GitHub()
 
 function! AddIncludeSubdirectoriesToPath(directory)
     let $include_dirs = system('fd include '.a:directory.' | tr "\n" ,')
+    let $include_dirs = substitute($include_dirs, ',$', '', '')
     set path+=$include_dirs
 endfunction
-command! -nargs=1 AddIncludeSubdirectoriesToPath call AddIncludeSubdirectoriesToPath(<f-args>)
+command! -nargs=1 AddIncludeSubdirsToPath call AddIncludeSubdirectoriesToPath(<f-args>)
 
+function! AddIncludeSubdirectoriesRelativeToGitRootToPath(directory)
+    let $include_dirs = system('fd include "$(git rev-parse --show-toplevel)"/'.a:directory.'  | tr "\n" ,')
+    let $include_dirs = substitute($include_dirs, ',$', '', '')
+    set path+=$include_dirs
+endfunction
+command! -nargs=1 AddIncludeSubdirsToPathGit call AddIncludeSubdirectoriesRelativeToGitRootToPath(<f-args>)
+
+function! FZF_dir_files(directory, files)
+    " norm "ty
+    if a:directory == "GIT_ROOT"
+        let l:dir = trim(system('git rev-parse --show-toplevel'))
+    else
+        let l:dir = a:directory
+    endif
+    exec ":call fzf#vim#files('" . l:dir . "', {'options':'--query " . a:files . "'})"
+endfunction
+
+command! -nargs=1 AddIncludeSubdirsToPathGit call AddIncludeSubdirectoriesRelativeToGitRootToPath(<f-args>)
 function! Sum()
     :'<,'>w !awk '{s+=$1} END {print s}'
 endfunction
@@ -786,11 +805,19 @@ let g:jedi#rename_command = "<leader>jr"
 " open/search file in current/working/home/root directory with FZF
 " mnemonic: e like in `:e[dit]`
 nnoremap <Leader>ee :e<CR>
+
 nnoremap <Leader>ec :FZF %:p:h<CR>
 nnoremap <Leader>ew :FZF<CR>
 nnoremap <Leader>eh :FZF ~<CR>
 nnoremap <Leader>er :FZF /<CR>
-nnoremap <Leader>eg :execute 'FZF' trim(system('git rev-parse --show-toplevel'))<CR>
+nnoremap <Leader>eg :exec "call FZF_dir_files('GIT_ROOT', '" . expand('<cfile>') . "')"<CR>
+
+xnoremap <Leader>ec "ty:exec "call FZF_dir_files('" . expand("%:p:h") . "', '<C-R>t')"<CR>
+xnoremap <Leader>ew "ty:exec "call FZF_dir_files('', '<C-R>t')"<CR>
+xnoremap <Leader>eh "ty:exec "call FZF_dir_files('~', '<C-R>t')"<CR>
+xnoremap <Leader>er "ty:exec "call FZF_dir_files('/', '<C-R>t')"<CR>
+xnoremap <Leader>eg "ty:exec "call FZF_dir_files('GIT_ROOT', '<C-R>t')"<CR>
+
 nnoremap <Leader>ef :FZFFunctionTagFile<CR>
 nnoremap <Leader>eb :Buffers<CR>
 nnoremap <Leader>el :BLines<CR>
@@ -800,9 +827,9 @@ nnoremap <Leader>es :RgRaw -g '!tags' -s ''<left>
 " open/search file by word under cursor in working/home directory with FZF
 " I use <Leader>g... for git functions but in this case <Leader>gf makes more
 " sense because this function is analog to vim's gf
-nnoremap <Leader>gf :<C-U>exec ":call fzf#vim#files('', {'options':'--query "expand('<cword>')"'})"<CR>
+nnoremap <Leader>gf :<C-U>exec ":call fzf#vim#files('', {'options':'--query "expand('<cfile>')"'})"<CR>
 xnoremap <Leader>gf "ty \| :<C-U>exec ":call fzf#vim#files('', {'options':'--query <C-R>t'})"<CR>
-nnoremap <Leader>fh :<C-U>exec ":call fzf#vim#files('~', {'options':'--query "expand('<cword>')"'})"<CR>
+nnoremap <Leader>fh :<C-U>exec ":call fzf#vim#files('~', {'options':'--query "expand('<cfile>')"'})"<CR>
 xnoremap <Leader>fh "ty \| :<C-U>exec ":call fzf#vim#files('~', {'options':'--query <C-R>t'})"<CR>
 " toggle between .c and .h files
 nnoremap <expr> <Leader>et expand('%:e') == 'h' ? ':e %:r.c<CR>' : expand('%:e') == 'c' ? ':e %:r.h<CR>' : expand('%:e') == 'hpp' ? ':e **/%:t:r.cpp<CR>' : expand('%:e') == 'cpp' ? ':e **/%:t:r.hpp<CR>' :':echo "Not a c[pp] or h[pp] file."<CR>'
@@ -863,6 +890,7 @@ let g:ale_linters = {
 let g:ale_fixers = {
     \ 'python': ['black', 'isort'],
     \ 'c': ['astyle'],
+    \ 'cpp': ['clangtidy', 'clang-format'],
     \ }
 let g:ale_c_clangtidy_options = '-std=c99 -pedantic'
 let g:ale_cpp_cpplint_options = '--filter=-legal/copyright,-whitespace/line_length,-whitespace/blank_line'
@@ -900,6 +928,7 @@ highlight HighlightedyankRegion ctermbg=229 ctermfg=none cterm=none
 " vim-gutentags
 let g:gutentags_ctags_exclude = ['virtual_envs', '.ccls-cache']
 let g:gutentags_exclude_project_root = ['/usr/local', '/home/max/.password-store']
+let g:gutentags_project_root = ['.gutentags']
 set tags+=tags-external
 
 " quick-scope
