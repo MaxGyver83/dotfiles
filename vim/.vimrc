@@ -589,17 +589,17 @@ function! AddIncludeSubdirectoriesRelativeToGitRootToPath(directory)
 endfunction
 command! -nargs=1 AddIncludeSubdirsToPathGit call AddIncludeSubdirectoriesRelativeToGitRootToPath(<f-args>)
 
-function! FZF_dir_files(directory, files)
+function! FZF_dir_files(directory, file)
     " norm "ty
     if a:directory == "GIT_ROOT"
         let l:dir = trim(system('git rev-parse --show-toplevel'))
     else
         let l:dir = a:directory
     endif
-    exec ":call fzf#vim#files('" . l:dir . "', {'options':'--query " . a:files . "'})"
+    let l:file =  substitute(a:file, '\.\./', ' ', 'g')
+    exec ":call fzf#vim#files('" . l:dir . "', {'options':'--query " . l:file . "'})"
 endfunction
 
-command! -nargs=1 AddIncludeSubdirsToPathGit call AddIncludeSubdirectoriesRelativeToGitRootToPath(<f-args>)
 function! Sum()
     :'<,'>w !awk '{s+=$1} END {print s}'
 endfunction
@@ -802,7 +802,7 @@ let g:jedi#usages_command = "<leader>jn"
 let g:jedi#completions_command = "<C-Space>"
 let g:jedi#rename_command = "<leader>jr"
 
-" open/search file in current/working/home/root directory with FZF
+" open/search file in current/working/home/root/git_root directory with FZF
 " mnemonic: e like in `:e[dit]`
 nnoremap <Leader>ee :e<CR>
 
@@ -812,11 +812,19 @@ nnoremap <Leader>eh :FZF ~<CR>
 nnoremap <Leader>er :FZF /<CR>
 nnoremap <Leader>eg :exec "call FZF_dir_files('GIT_ROOT', '" . expand('<cfile>') . "')"<CR>
 
-xnoremap <Leader>ec "ty:exec "call FZF_dir_files('" . expand("%:p:h") . "', '<C-R>t')"<CR>
-xnoremap <Leader>ew "ty:exec "call FZF_dir_files('', '<C-R>t')"<CR>
-xnoremap <Leader>eh "ty:exec "call FZF_dir_files('~', '<C-R>t')"<CR>
-xnoremap <Leader>er "ty:exec "call FZF_dir_files('/', '<C-R>t')"<CR>
-xnoremap <Leader>eg "ty:exec "call FZF_dir_files('GIT_ROOT', '<C-R>t')"<CR>
+" search selected (partial) file name in current/working/home/root/git_root directory with FZF
+xnoremap <Leader>ec "ty:<C-U>exec "call FZF_dir_files('" . expand("%:p:h") . "', '<C-R>t')"<CR>
+xnoremap <Leader>ew "ty:<C-U>exec "call FZF_dir_files('', '<C-R>t')"<CR>
+xnoremap <Leader>eh "ty:<C-U>exec "call FZF_dir_files('~', '<C-R>t')"<CR>
+xnoremap <Leader>er "ty:<C-U>exec "call FZF_dir_files('/', '<C-R>t')"<CR>
+xnoremap <Leader>eg "ty:<C-U>exec "call FZF_dir_files('GIT_ROOT', '<C-R>t')"<CR>
+
+" search file name under cursor in current/working/home/root/git_root directory with FZF
+nnoremap <Leader>fc :exec "call FZF_dir_files('" . expand("%:p:h") . "', '" . expand('<cfile>') . "')"<CR>
+nnoremap <Leader>fw :exec "call FZF_dir_files('', '" . expand('<cfile>') . "')"<CR>
+nnoremap <Leader>fh :exec "call FZF_dir_files('~', '" . expand('<cfile>') . "')"<CR>
+nnoremap <Leader>fr :exec "call FZF_dir_files('/', '" . expand('<cfile>') . "')"<CR>
+nnoremap <Leader>fg :exec "call FZF_dir_files('GIT_ROOT', '" . expand('<cfile>') . "')"<CR>
 
 nnoremap <Leader>ef :FZFFunctionTagFile<CR>
 nnoremap <Leader>eb :Buffers<CR>
@@ -824,13 +832,7 @@ nnoremap <Leader>el :BLines<CR>
 " o like in `:oldfiles`
 nnoremap <Leader>eo :History<CR>
 nnoremap <Leader>es :RgRaw -g '!tags' -s ''<left>
-" open/search file by word under cursor in working/home directory with FZF
-" I use <Leader>g... for git functions but in this case <Leader>gf makes more
-" sense because this function is analog to vim's gf
-nnoremap <Leader>gf :<C-U>exec ":call fzf#vim#files('', {'options':'--query "expand('<cfile>')"'})"<CR>
-xnoremap <Leader>gf "ty \| :<C-U>exec ":call fzf#vim#files('', {'options':'--query <C-R>t'})"<CR>
-nnoremap <Leader>fh :<C-U>exec ":call fzf#vim#files('~', {'options':'--query "expand('<cfile>')"'})"<CR>
-xnoremap <Leader>fh "ty \| :<C-U>exec ":call fzf#vim#files('~', {'options':'--query <C-R>t'})"<CR>
+
 " toggle between .c and .h files
 nnoremap <expr> <Leader>et expand('%:e') == 'h' ? ':e %:r.c<CR>' : expand('%:e') == 'c' ? ':e %:r.h<CR>' : expand('%:e') == 'hpp' ? ':e **/%:t:r.cpp<CR>' : expand('%:e') == 'cpp' ? ':e **/%:t:r.hpp<CR>' :':echo "Not a c[pp] or h[pp] file."<CR>'
 
