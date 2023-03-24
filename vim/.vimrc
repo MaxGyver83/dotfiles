@@ -38,6 +38,7 @@ if &term != 'cygwin'
     autocmd FileType diff highlight diffAddedButRemoved ctermfg=101   |
                         \ highlight diffLine            ctermfg=blue
 endif
+highlight clear SignColumn
 
 " Allow to use Ctrl-s and Ctrl-q as keybinds even when not started from a
 " shell
@@ -896,7 +897,13 @@ let g:ale_fixers = {
     \ }
 let g:ale_c_clangtidy_options = '-std=c99 -pedantic'
 let g:ale_cpp_cpplint_options = '--filter=-legal/copyright,-whitespace/line_length,-whitespace/blank_line'
-highlight ALEWarning ctermbg=red ctermfg=none cterm=none
+let g:ale_sign_warning = ' !'
+let g:ale_sign_error = ' X'
+highlight ALEWarningSign ctermbg=215 ctermfg=black cterm=NONE
+highlight ALEErrorSign ctermbg=red ctermfg=none cterm=bold
+highlight ALEWarning ctermbg=NONE ctermfg=red cterm=underline
+highlight ALEVirtualTextWarning ctermfg=215
+highlight ALEVirtualTextError ctermfg=red
 
 " TiddlyWiki
 let g:tiddlywiki_no_mappings=1
