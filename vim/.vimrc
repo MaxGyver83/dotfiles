@@ -897,13 +897,17 @@ let g:ale_fixers = {
     \ }
 let g:ale_c_clangtidy_options = '-std=c99 -pedantic'
 let g:ale_cpp_cpplint_options = '--filter=-legal/copyright,-whitespace/line_length,-whitespace/blank_line'
+" ale look
 let g:ale_sign_warning = ' !'
 let g:ale_sign_error = ' X'
-highlight ALEWarningSign ctermbg=215 ctermfg=black cterm=NONE
-highlight ALEErrorSign ctermbg=red ctermfg=none cterm=bold
-highlight ALEWarning ctermbg=NONE ctermfg=red cterm=underline
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+let g:ale_virtualtext_prefix = '◼ %type%: '
+highlight ALEWarningSign  ctermbg=215 ctermfg=black cterm=NONE
+highlight ALEErrorSign    ctermbg=red ctermfg=NONE  cterm=bold
+highlight ALEWarning      ctermbg=NONE ctermfg=red  cterm=undercurl
+highlight ALEError        ctermbg=NONE ctermfg=red  cterm=undercurl
 highlight ALEVirtualTextWarning ctermfg=215
-highlight ALEVirtualTextError ctermfg=red
+highlight ALEVirtualTextError   ctermfg=red
 
 " TiddlyWiki
 let g:tiddlywiki_no_mappings=1
