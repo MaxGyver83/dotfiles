@@ -909,6 +909,21 @@ highlight ALEError        ctermbg=NONE ctermfg=red  cterm=undercurl
 highlight ALEVirtualTextWarning ctermfg=215
 highlight ALEVirtualTextError   ctermfg=red
 
+function! LinterStatus() abort
+    try
+        let l:counts = ale#statusline#Count(bufnr(''))
+    catch
+        return 'No ALE'
+    endtry
+
+    let l:all_errors = l:counts.error + l:counts.style_error
+    let l:all_non_errors = l:counts.total - l:all_errors
+
+    return l:counts.total == 0 ? 'OK' : printf(
+    \   '%dE %dW', all_errors, all_non_errors
+    \)
+endfunction
+
 " TiddlyWiki
 let g:tiddlywiki_no_mappings=1
 
@@ -925,9 +940,13 @@ let g:lightline = {
     \ 'colorscheme': 'wombat',
     \ 'active': {
     \   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'absolutepath', 'modified' ] ],
+    \   'right': [ [ 'lineinfo' ],
+    \              [ 'percent' ],
+    \              [ 'errorcount', 'fileformat', 'fileencoding', 'filetype' ] ]
     \ },
     \ 'component_function': {
-    \   'charcode': 'LightlineCharcode'
+    \   'charcode': 'LightlineCharcode',
+    \   'errorcount': 'LinterStatus'
     \ }
     \ }
 " uncomment for showing the current character's hex code
