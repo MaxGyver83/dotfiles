@@ -920,9 +920,15 @@ function! LinterStatus() abort
     let l:all_errors = l:counts.error + l:counts.style_error
     let l:all_non_errors = l:counts.total - l:all_errors
 
-    return l:counts.total == 0 ? 'OK' : printf(
-    \   '%dE %dW', all_errors, all_non_errors
-    \)
+    if l:counts.total == 0
+        return 'OK'
+    endif
+
+    let l:status = all_errors == 0 ? '' : printf('%dE', all_errors)
+    if all_non_errors > 0
+        return printf('%s %dW', l:status, all_non_errors)
+    endif
+    return l:status
 endfunction
 
 " TiddlyWiki
