@@ -20,6 +20,7 @@ tpope/vim-speeddating
 tpope/vim-sleuth
 Konfekt/vim-CtrlXA
 tommcdo/vim-exchange
+machakann/vim-swap
 inkarkat/vim-ReplaceWithRegister
 lifepillar/vim-mucomplete
 kshenoy/vim-signature
