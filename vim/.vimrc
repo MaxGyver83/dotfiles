@@ -202,8 +202,8 @@ endif
 "---------
 let mapleader="\<Space>"   " leader is space
 
-" show buffer list and select by number
-nnoremap gb :ls<CR>:b<Space>
+" show (FZF) buffer list
+nnoremap gb :Buffers<CR>
 
 " insert line and return to normal mode (except in quickfix window)
 nnoremap <expr> <CR> &buftype ==# 'quickfix' ? "\<CR>" : 'o<Esc>'
