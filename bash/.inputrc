@@ -36,6 +36,7 @@ $if gdb
     R: "\C-a\C-kserver return\n"
     N: "\C-a\C-kserver next\n"
     S: "\C-a\C-kserver step\n"
+    U: "\C-a\C-kserver until\n"
     C: "\C-a\C-kserver continue\n"
 $endif
 
