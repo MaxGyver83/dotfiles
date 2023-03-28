@@ -73,6 +73,7 @@ set list             " show non-printable chars
 autocmd FileType html,css setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType groovy setlocal colorcolumn=120 shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType python setlocal colorcolumn=72,80,100 | nmap gca A  # | nmap gco o# | nmap gcO O# 
+autocmd FileType python syn match Function '\%([^[:cntrl:][:space:][:punct:][:digit:]]\|_\)\%([^[:cntrl:][:punct:][:space:]]\|_\)*\ze\%(\s*(\)'
 autocmd FileType c nmap gca A // | nmap gco o// | nmap gcO O// 
 autocmd FileType cpp setlocal omnifunc=
 
