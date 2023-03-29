@@ -912,6 +912,7 @@ highlight ALEVirtualTextError   ctermfg=red
 
 function! LinterStatus() abort
     try
+        let l:checking = ale#engine#IsCheckingBuffer(bufnr(''))
         let l:counts = ale#statusline#Count(bufnr(''))
     catch
         return 'No ALE'
@@ -920,11 +921,14 @@ function! LinterStatus() abort
     let l:all_errors = l:counts.error + l:counts.style_error
     let l:all_non_errors = l:counts.total - l:all_errors
 
-    if l:counts.total == 0
+    if l:checking == 0 && l:counts.total == 0
         return 'OK'
     endif
 
-    let l:status = all_errors == 0 ? '' : printf('%dE', all_errors)
+    let l:status = (l:checking == 1) ? 'checking' : ''
+    if all_errors > 0
+        let l:status = printf('%s %dE', l:status, all_errors)
+    endif
     if all_non_errors > 0
         return printf('%s %dW', l:status, all_non_errors)
     endif
