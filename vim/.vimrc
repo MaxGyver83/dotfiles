@@ -15,6 +15,11 @@ if &term != 'cygwin'
     try
         if empty(glob('/tmp/st-light'))
             colorscheme minimalist
+            if exists('$TMUX')
+                highlight Normal ctermbg=NONE
+                highlight LineNr ctermbg=NONE
+            endif
+            highlight CursorLineNr ctermbg=NONE ctermfg=252
         else
             colorscheme PaperColor
         endif
@@ -25,10 +30,10 @@ if &term != 'cygwin'
         highlight CursorLine ctermfg=NONE ctermbg=239 cterm=NONE
         highlight Special    ctermfg=172              cterm=bold          guifg=Orange
     endtry
-    highlight DiffAdd    ctermfg=10   ctermbg=24  cterm=bold gui=none guifg=bg guibg=Red
-    highlight DiffDelete ctermfg=167  ctermbg=bg  cterm=NONE          guifg=#D75F5F guibg=#1C1C1C
-    highlight DiffChange ctermfg=10   ctermbg=24  cterm=bold gui=none guifg=bg guibg=Red
-    highlight DiffText   ctermfg=10   ctermbg=167 cterm=bold gui=none guifg=bg guibg=Red
+    highlight DiffAdd    ctermfg=10   ctermbg=24   cterm=bold gui=none guifg=bg guibg=Red
+    highlight DiffDelete ctermfg=167  ctermbg=NONE cterm=NONE          guifg=#D75F5F guibg=#1C1C1C
+    highlight DiffChange ctermfg=10   ctermbg=24   cterm=bold gui=none guifg=bg guibg=Red
+    highlight DiffText   ctermfg=10   ctermbg=167  cterm=bold gui=none guifg=bg guibg=Red
     " patches / diff files
     autocmd FileType diff syntax    match diffAddedButRemoved "^+-.*"
     syntax match diffAdded /✔/
