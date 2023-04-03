@@ -18,6 +18,7 @@ if &term != 'cygwin'
             if exists('$TMUX')
                 highlight Normal ctermbg=NONE
                 highlight LineNr ctermbg=NONE
+                highlight NonText ctermbg=NONE
             endif
             highlight CursorLineNr ctermbg=NONE ctermfg=252
         else
