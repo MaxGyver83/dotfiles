@@ -604,11 +604,12 @@ function! FZF_dir_files(directory, file)
     else
         let l:dir = a:directory
     endif
-    " escape spaces, replace '../' with space, replace '.' with space
+    " escape spaces, replace '../' with space
     let l:file = substitute(a:file, ' ', '\\ ', 'g')
     let l:file = substitute(l:file, '\.\./', '\\ ', 'g')
-    let l:file = substitute(l:file, '\.', '\\ ', 'g')
-    exec ":call fzf#vim#files('" . l:dir . "', {'options':'--query " . l:file . "'})"
+    " replace '.' with space when followed by more than 3 characters
+    let l:file = substitute(l:file, '\.\(....\)', '\\ \1', 'g')
+    exec ":call fzf#vim#files('" . l:dir . "', {'options':'--query " . l:file . " --select-1'})"
 endfunction
 
 function! Sum()
