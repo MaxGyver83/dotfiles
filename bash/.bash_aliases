@@ -94,8 +94,8 @@ alias g='git status'
 alias gd='git diff'
 alias gp='git pull'
 alias gps='git push'
-# gh = "git home" (go to the toplevel of the current repo)
-alias gh='cd $(git rev-parse --show-toplevel)'
+# gr = "git root" (go to the toplevel of the current repo)
+alias gr='cd $(git rev-parse --show-toplevel)'
 # git log
 alias gl='git log'
 
