@@ -122,13 +122,13 @@ git_color() {
   local git_status="$(LC_ALL=C git status 2> /dev/null)"
 
   if [[ ! $git_status =~ "working tree clean" ]]; then
-    echo -e $COLOR_RED
+    echo -en $COLOR_RED
   elif [[ $git_status =~ "Your branch is ahead of" ]]; then
-    echo -e $COLOR_YELLOW
+    echo -en $COLOR_YELLOW
   elif [[ $git_status =~ "nothing to commit" ]]; then
-    echo -e $COLOR_GREEN
+    echo -en $COLOR_GREEN
   else
-    echo -e $COLOR_OCHRE
+    echo -en $COLOR_OCHRE
   fi
 }
 
@@ -151,12 +151,12 @@ if [ "$color_prompt" = yes ]; then
     # PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 
     # show green ✔ if last command was successful, otherwise show red ✘
-    PS1="\n\$(if [ \$? == 0 ]; then echo \"\[${COLOR_GREEN}\]✔\"; else echo \"\[${COLOR_RED}\]✘\"; fi)\[$COLOR_RESET\] "
+    PS1="\n\$(if [ \$? == 0 ]; then echo -en \"\[${COLOR_GREEN}\]✔\"; else echo -en \"\[${COLOR_RED}\]✘\"; fi)\[$COLOR_RESET\] "
     # check if I'm connected via SSH
     [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ] || [ -f /.dockerenv ] && HOSTINFO="$USER@$HOSTNAME:"
     PS1+="$HOSTINFO"                            # add host info
     # add the default part: current path in bold blue letters
-    PS1+='${debian_chroot:+($debian_chroot)}\[\033[01;34m\]\w\[\033[00m\]'
+    PS1+='${debian_chroot:+($debian_chroot)}'"\[\033[01;34m\]\w\[\033[0m\]"
     PS1+=" \[\$(git_color)\]"                   # colors git status
     PS1+="\$(git_branch)"                       # prints current branch
     PS1+="\[$COLOR_BLUE\]\$\[$COLOR_RESET\] "   # '#' for root, else '$'
