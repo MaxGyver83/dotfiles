@@ -604,7 +604,10 @@ function! FZF_dir_files(directory, file)
     else
         let l:dir = a:directory
     endif
-    let l:file =  substitute(a:file, '\.\./', ' ', 'g')
+    " escape spaces, replace '../' with space, replace '.' with space
+    let l:file = substitute(a:file, ' ', '\\ ', 'g')
+    let l:file = substitute(l:file, '\.\./', '\\ ', 'g')
+    let l:file = substitute(l:file, '\.', '\\ ', 'g')
     exec ":call fzf#vim#files('" . l:dir . "', {'options':'--query " . l:file . "'})"
 endfunction
 
@@ -818,7 +821,7 @@ nnoremap <Leader>ec :FZF %:p:h<CR>
 nnoremap <Leader>ew :FZF<CR>
 nnoremap <Leader>eh :FZF ~<CR>
 nnoremap <Leader>er :FZF /<CR>
-nnoremap <Leader>eg :exec "call FZF_dir_files('GIT_ROOT', '" . expand('<cfile>') . "')"<CR>
+nnoremap <Leader>eg :exec "call FZF_dir_files('GIT_ROOT', '.')"<CR>
 
 " search selected (partial) file name in current/working/home/root/git_root directory with FZF
 xnoremap <Leader>ec "ty:<C-U>exec "call FZF_dir_files('" . expand("%:p:h") . "', '<C-R>t')"<CR>
