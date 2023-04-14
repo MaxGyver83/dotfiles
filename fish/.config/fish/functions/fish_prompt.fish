@@ -35,7 +35,11 @@ function fish_prompt --description 'Prompt ausgeben'
 
     # printf '%s ' (__fish_vcs_prompt)
     if string match -q 's*' $USER
-        printf '%s ' (timeout 0.5 fish -i -c vcs_prompt)
+        set git_prompt (timeout 0.5 fish -i -c vcs_prompt)
+        if [ -z $git_prompt ]
+            set git_prompt " ("(git branch --show-current 2> /dev/null)"|?)"
+        end
+        printf '%s ' $git_prompt
     else
         printf '%s ' (vcs_prompt)
     end
