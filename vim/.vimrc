@@ -984,6 +984,9 @@ let g:gutentags_exclude_project_root = ['/usr/local', '/home/max/.password-store
 let g:gutentags_project_root = ['.gutentags']
 set tags+=tags-external
 
+" tagbar
+nmap <F8> :TagbarToggle f<CR>
+
 " quick-scope
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 

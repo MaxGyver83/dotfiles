@@ -40,6 +40,7 @@ easymotion/vim-easymotion
 unblevable/quick-scope
 chaoren/vim-wordmotion
 ludovicchabant/vim-gutentags
+preservim/tagbar
 
 # open, find and search files
 EinfachToll/DidYouMean
