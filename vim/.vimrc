@@ -599,8 +599,11 @@ command! -nargs=1 AddIncludeSubdirsToPathGit call AddIncludeSubdirectoriesRelati
 
 function! FZF_dir_files(directory, file)
     " norm "ty
-    if a:directory == "GIT_ROOT"
+    if a:directory == "GIT_ROOT" || a:directory == "GIT_PARENT"
         let l:dir = trim(system('git rev-parse --show-toplevel'))
+        if a:directory == "GIT_PARENT"
+            let l:dir = fnamemodify(l:dir, ":h")
+        endif
     else
         let l:dir = a:directory
     endif
@@ -823,6 +826,7 @@ nnoremap <Leader>ew :FZF<CR>
 nnoremap <Leader>eh :FZF ~<CR>
 nnoremap <Leader>er :FZF /<CR>
 nnoremap <Leader>eg :exec "call FZF_dir_files('GIT_ROOT', '.')"<CR>
+nnoremap <Leader>eG :exec "call FZF_dir_files('GIT_PARENT', '.')"<CR>
 
 " search selected (partial) file name in current/working/home/root/git_root directory with FZF
 xnoremap <Leader>ec "ty:<C-U>exec "call FZF_dir_files('" . expand("%:p:h") . "', '<C-R>t')"<CR>
@@ -830,6 +834,7 @@ xnoremap <Leader>ew "ty:<C-U>exec "call FZF_dir_files('', '<C-R>t')"<CR>
 xnoremap <Leader>eh "ty:<C-U>exec "call FZF_dir_files('~', '<C-R>t')"<CR>
 xnoremap <Leader>er "ty:<C-U>exec "call FZF_dir_files('/', '<C-R>t')"<CR>
 xnoremap <Leader>eg "ty:<C-U>exec "call FZF_dir_files('GIT_ROOT', '<C-R>t')"<CR>
+xnoremap <Leader>eG "ty:<C-U>exec "call FZF_dir_files('GIT_PARENT', '<C-R>t')"<CR>
 
 " search file name under cursor in current/working/home/root/git_root directory with FZF
 nnoremap <Leader>fc :exec "call FZF_dir_files('" . expand("%:p:h") . "', '" . expand('<cfile>') . "')"<CR>
@@ -837,6 +842,7 @@ nnoremap <Leader>fw :exec "call FZF_dir_files('', '" . expand('<cfile>') . "')"<
 nnoremap <Leader>fh :exec "call FZF_dir_files('~', '" . expand('<cfile>') . "')"<CR>
 nnoremap <Leader>fr :exec "call FZF_dir_files('/', '" . expand('<cfile>') . "')"<CR>
 nnoremap <Leader>fg :exec "call FZF_dir_files('GIT_ROOT', '" . expand('<cfile>') . "')"<CR>
+nnoremap <Leader>fG :exec "call FZF_dir_files('GIT_PARENT', '" . expand('<cfile>') . "')"<CR>
 
 nnoremap <Leader>ef :FZFFunctionTagFile<CR>
 nnoremap <Leader>eb :Buffers<CR>
