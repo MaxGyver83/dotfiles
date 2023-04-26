@@ -601,6 +601,10 @@ function! FZF_dir_files(directory, file)
     " norm "ty
     if a:directory == "GIT_ROOT" || a:directory == "GIT_PARENT"
         let l:dir = trim(system('git rev-parse --show-toplevel'))
+        if v:shell_error > 0
+            " fallback in case cwd is a catkin root directory
+            let l:dir = trim(system('cd src && git rev-parse --show-toplevel'))
+        endif
         if a:directory == "GIT_PARENT"
             let l:dir = fnamemodify(l:dir, ":h")
         endif
