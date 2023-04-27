@@ -585,15 +585,19 @@ command! GitHub call GitHub()
 
 function! AddIncludeSubdirectoriesToPath(directory)
     let $include_dirs = system('fd include '.a:directory.' | tr "\n" ,')
-    let $include_dirs = substitute($include_dirs, ',$', '', '')
-    set path+=$include_dirs
+    if stridx($include_dirs, 'fd error') < 0
+        let $include_dirs = substitute($include_dirs, ',$', '', '')
+        set path+=$include_dirs
+    endif
 endfunction
 command! -nargs=1 AddIncludeSubdirsToPath call AddIncludeSubdirectoriesToPath(<f-args>)
 
 function! AddIncludeSubdirectoriesRelativeToGitRootToPath(directory)
     let $include_dirs = system('fd include "$(git rev-parse --show-toplevel)"/'.a:directory.'  | tr "\n" ,')
-    let $include_dirs = substitute($include_dirs, ',$', '', '')
-    set path+=$include_dirs
+    if stridx($include_dirs, 'fd error') < 0
+        let $include_dirs = substitute($include_dirs, ',$', '', '')
+        set path+=$include_dirs
+    endif
 endfunction
 command! -nargs=1 AddIncludeSubdirsToPathGit call AddIncludeSubdirectoriesRelativeToGitRootToPath(<f-args>)
 
