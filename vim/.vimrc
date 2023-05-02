@@ -622,6 +622,14 @@ function! FZF_dir_files(directory, file)
     let l:file = substitute(l:file, '\.\(....\)', '\\ \1', 'g')
     exec ":call fzf#vim#files('" . l:dir . "', {'options':'--query " . l:file . " --select-1'})"
 endfunction
+command! -nargs=+ FzfDirFiles call FZF_dir_files(<f-args>)
+
+function! OpenAllFiles()
+    g/ +\d/exe ":norm gF"|exe ":norm \<C-^>"
+    exe ":norm \<C-o>"
+    nohlsearch
+endfunction
+command! OpenAllFiles call OpenAllFiles()
 
 function! Sum()
     :'<,'>w !awk '{s+=$1} END {print s}'
