@@ -993,7 +993,7 @@ let g:highlightedyank_highlight_duration = 500
 highlight HighlightedyankRegion ctermbg=229 ctermfg=none cterm=none
 
 " vim-gutentags
-let g:gutentags_ctags_exclude = ['virtual_envs', '.ccls-cache']
+let g:gutentags_ctags_exclude = ['virtual_envs', '.ccls-cache', '.mypy_cache']
 let g:gutentags_exclude_project_root = ['/usr/local', '/home/max/.password-store']
 let g:gutentags_project_root = ['.gutentags']
 set tags+=tags-external
