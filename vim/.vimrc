@@ -328,17 +328,17 @@ nnoremap <silent><C-Up> :call search('\%' . virtcol('.') . 'v\S', 'bW')<CR>
 nnoremap <silent><C-Down> :call search('\%' . virtcol('.') . 'v\S', 'W')<CR>
 
 " execute file in python
-autocmd FileType python nnoremap <Leader>x :w !python3<cr>
+autocmd FileType python nnoremap <buffer> <Leader>x :w !python3<cr>
 " execute selection in python
-autocmd FileType python xnoremap <Leader>x :w !python3<cr>
+autocmd FileType python xnoremap <buffer> <Leader>x :w !python3<cr>
 
 " compile and run a rust project
-autocmd FileType rust nnoremap <Leader>x :w !cargo run<cr>
+autocmd FileType rust nnoremap <buffer> <Leader>x :w !cargo run<cr>
 
-autocmd FileType groovy nnoremap <Leader>x :w \| !env JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64 groovy %<cr>
+autocmd FileType groovy nnoremap <buffer> <Leader>x :w \| !env JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64 groovy %<cr>
 
 " repeat last command in previous tmux pane
-autocmd FileType c,cpp nnoremap <Leader>x :silent call system('tmux lastp \; send up \; send enter \; lastp')<cr>
+autocmd FileType c,cpp nnoremap <buffer> <Leader>x :silent call system('tmux lastp \; send up \; send enter \; lastp')<cr>
 
 " open file with xdg-open
 nnoremap <Leader>o :!xdg-open % &<cr>
