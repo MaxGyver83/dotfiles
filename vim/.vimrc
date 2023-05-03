@@ -235,10 +235,11 @@ if exists('$TMUX')
     xnoremap <Leader><Return> y \| :silent call system('tmux load-buffer -',@") \| :silent exe '!tmux paste -t 2 \; send -t 2 Enter' \| exe ':redraw!'<cr>
 endif
 
-" copy relative path/full path/just filename to clipboard
+" copy relative path/full path/just filename/full path + line number to clipboard
 noremap <Leader>cr :let @+ = expand("%")<cr>
 noremap <Leader>cp :let @+ = expand("%:p")<cr>
 noremap <Leader>cn :let @+ = expand("%:t")<cr>
+noremap <Leader>cl :let @+ = expand("%:p").' +'.line(".")<cr>
 
 " copy file/selection formatted as HTML for emails (no line numbers)
 let g:html_number_lines = 0
