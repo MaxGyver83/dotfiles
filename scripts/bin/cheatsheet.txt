@@ -48,3 +48,28 @@ PREFIX )             Next session
 Alt-Shift-p          Open output in vim
 PREFIX ,             Rename window
 PREFIX :swapw -t 2   Swap current window with window 2
+
+
+aerc
+====
+C    write mail
+c    change folder
+e    mail up
+o    mail down
+O    folder up
+E    folder down
+T    toggle threads
+v    toggle mark
+V    toggle visual mark mode
+/    search
+\    filter
+C-n  next account
+
+O    mail up
+E    mail down
+C-j  next mime type
+H    toggle headers
+rr   reply all
+rq   reply all quoted
+Rr   reply
+Rq   reply quoted
