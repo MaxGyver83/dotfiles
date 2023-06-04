@@ -56,13 +56,18 @@ set_xrandr_brightness() {
     notify-send -t 500 $(echo "$NEWBRIGHT * 100" | bc | sed -E 's/\.0+//')"% (xrandr)"
 }
 
+case "$1" in
+-s|--software)
+    SOFTWARE=1; shift
+    ;;
+esac
 
 monitor_xpos=$(xdotool getactivewindow getwindowgeometry | grep Position | grep -o '[0-9]*,' | sed 's/,//')
 active_monitor=$(xrandr | grep -w connected | grep "+$monitor_xpos+" | head -n 1 | cut -d " " -f1)
 # use primary monitor as fallback
 [ -z $active_monitor ] && active_monitor=$(xrandr | grep -w 'connected primary' | head -n 1 | cut -d " " -f1)
 
-if [ "$(hostname)" = 'max-laptop' ] && [ "$active_monitor" = 'eDP-1' ] && exists light ; then
+if [ "$(hostname)" = 'max-laptop' ] && [ "$active_monitor" = 'eDP-1' ] && exists light && ! [ $SOFTWARE ]; then
     echo "Set hardware brightness"
     set_hardware_brightness "$1"
 else
