@@ -1,0 +1,34 @@
+#!/bin/bash
+
+usage() {
+    echo "Usage:
+memory_usage PID|PROCESS_NAME"
+    exit $1
+}
+
+case "$1" in
+"") usage 1;;
+-h|--help) usage 0;;
+esac
+
+if [[ $1 =~ ^[0-9]+$ ]]; then
+    pid=$1
+else
+    pid=$(pgrep -d, "$1")
+fi
+
+# detailed information
+ps -p $pid -o pid,comm,nice,ppid,pcpu,pmem,size,vsz,rss,sz,args
+echo
+
+# query less information in the while loop below
+ps_cmd="ps -p $pid -o pcpu,pmem,size,vsz,rss,sz"
+
+# (short) header
+printf "      "
+$ps_cmd | head -n 1
+
+# numbers
+while printf "%5d " $SECONDS; $ps_cmd --no-headers; do
+    sleep 3
+done
