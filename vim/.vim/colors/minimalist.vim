@@ -165,8 +165,8 @@ hi markdownError        ctermfg=167     ctermbg=NONE    cterm=NONE      guifg=#D
 hi markdownHeadingDelimiter ctermfg=150 ctermbg=NONE    cterm=NONE      guifg=#AFD787       guibg=NONE      gui=NONE
 hi markdownUrl          ctermfg=173     ctermbg=NONE    cterm=NONE      guifg=#D7875F       guibg=NONE      gui=NONE
 hi markdownLinkText     ctermfg=blue
-hi markdownH1           ctermfg=196
-hi markdownH2           ctermfg=202
+hi markdownH1           ctermfg=9       cterm=bold
+hi markdownH2           ctermfg=202     cterm=bold
 hi markdownH3           ctermfg=208
 hi markdownH4           ctermfg=214
 hi markdownH5           ctermfg=220
