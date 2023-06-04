@@ -86,6 +86,7 @@ abbr vim "$VIM"
 abbr vimdiff "$VIM -d"
 alias vv=$VIM' -c "normal '\''0"'
 abbr n 'nvim'
+abbr nd "$VIM -d"
 # vr = open vim with last ripgrep search
 alias vr='~/bin/vimrg.fish'
 # start vim and open vim-fugitive's git status
@@ -191,6 +192,8 @@ abbr cr 'crontab -l | grep --color=never "^[^#]"'
 abbr simpleprompt 'function fish_prompt; echo \n(prompt_pwd)\ ▶\ ; end'
 
 alias disp 'bass source ~/bin/update-DISPLAY.sh'
+
+abbr en 'LC_ALL=C'
 
 # source work related / private stuff (not part of the dotfiles repo)
 if [ -f $HOME/.config/fish/local.fish ]
