@@ -87,11 +87,14 @@ abbr vimdiff "$VIM -d"
 alias vv=$VIM' -c "normal '\''0"'
 abbr n 'nvim'
 abbr nd "$VIM -d"
+# select file from command output and open in (n)vim
+abbr nf "$VIM (tmux-select-filename.sh)"
 # vr = open vim with last ripgrep search
 alias vr='~/bin/vimrg.fish'
 # start vim and open vim-fugitive's git status
 # (and close the empty buffer and jump to the first unstaged file)
 alias vg=$VIM' +G +"silent %bd|e#" +"norm gU"'
+abbr ro "$VIM -M"
 
 abbr rr 'ranger'
 alias feh='feh --scale-down --auto-zoom --auto-rotate'
@@ -149,6 +152,8 @@ abbr gpa 'git pull --autostash'
 abbr gps 'git push'
 # git push upstream
 abbr gpsu 'git push --set-upstream origin (git rev-parse --abbrev-ref HEAD)'
+# git reset hard to origin
+abbr grho 'git reset --hard origin/(git rev-parse --abbrev-ref HEAD)'
 abbr gc 'git clone'
 abbr gcm 'git co master'
 abbr cim 'git ci -m "'
