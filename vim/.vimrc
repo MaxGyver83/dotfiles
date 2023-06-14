@@ -754,6 +754,8 @@ endfunction
 
 noremap gf :call GoToFile()<CR>
 
+command! CloseOtherBuffers silent! execute "%bd|e#|bd#"
+
 "-------------------
 " related to plugins
 "-------------------
