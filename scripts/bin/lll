@@ -1,0 +1,2 @@
+#!/bin/sh
+exa -l -s age --color=always "${1:-.}" | head -n ${2:-10}
