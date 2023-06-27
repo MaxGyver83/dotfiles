@@ -1,0 +1,8 @@
+#!/bin/bash
+cd "$(dirname "$(realpath -- "$0")")"
+mkdir -p ~/.config ~/bin ~/repos ~/.vim/pack/plugins/start ~/.vim/pack/plugins/opt
+[ -e ~/.bashrc ] && mv ~/.bashrc ~/.bashrc_bak
+# Run stow but strip spurious warning
+# (https://github.com/aspiers/stow/issues/65)
+stow -t "$HOME" bash fish tmux vim ripgrep scripts \
+    2> >(grep -v 'BUG in find_stowed_path? Absolute/relative mismatch' 1>&2)
