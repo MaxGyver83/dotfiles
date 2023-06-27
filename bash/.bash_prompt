@@ -1,0 +1,122 @@
+
+# set variable identifying the chroot you work in (used in the prompt below)
+if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
+    debian_chroot=$(cat /etc/debian_chroot)
+fi
+DEBIAN_CHROOT="${debian_chroot:+($debian_chroot)}"
+
+# check if I'm connected via SSH
+[ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ] || [ -f /.dockerenv ] && HOSTINFO="$USER@$HOSTNAME:"
+
+
+# set a fancy prompt (non-color, unless we know we "want" color)
+case "$TERM" in
+    screen|xterm-color|*-256color) color_prompt=yes; export COLORTERM=truecolor;;
+esac
+
+# uncomment for a colored prompt, if the terminal has the capability; turned
+# off by default to not distract the user: the focus in a terminal window
+# should be on the output of commands, not on the prompt
+#force_color_prompt=yes
+
+if [ -n "$force_color_prompt" ]; then
+    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+        # We have color support; assume it's compliant with Ecma-48
+        # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+        # a case would tend to support setf rather than setaf.)
+        color_prompt=yes
+    else
+        color_prompt=
+    fi
+fi
+
+# git branch information for prompt
+COLOR_RED="\001\033[1;31m\002"
+COLOR_YELLOW="\001\033[0;33m\002"
+COLOR_GREEN="\001\033[0;32m\002"
+COLOR_OCHRE="\001\033[38;5;95m\002"
+COLOR_BLUE="\001\033[0;34m\002"
+BOLD_BLUE="\001\033[01;34m\002"
+COLOR_WHITE="\001\033[0;37m\002"
+COLOR_RESET="\001\033[0m\002"
+
+if [ $color_prompt ]; then
+    CWD="$BOLD_BLUE\w$COLOR_RESET"
+else
+    CWD='\w'
+fi
+
+git_status() {
+    local git_status="$(LC_ALL=C git status 2> /dev/null)"
+    local on_branch="On branch ([^${IFS}]*)"
+    local on_commit="HEAD detached at ([^${IFS}]*)"
+
+    GIT_BRANCH=
+    if [[ $git_status =~ $on_branch ]]; then
+        local branch="${BASH_REMATCH[1]}"
+        GIT_BRANCH=" ($branch)"
+    elif [[ $git_status =~ $on_commit ]]; then
+        local commit="${BASH_REMATCH[1]}"
+        GIT_BRANCH=" ($commit)"
+    fi
+    # GIT_BRANCH=" (master)"
+
+    GIT_COLOR=
+    if [[ ! $git_status =~ "working tree clean" ]]; then
+        GIT_COLOR="$COLOR_RED"
+    elif [[ $git_status =~ "Your branch is ahead of" ]]; then
+        GIT_COLOR="$COLOR_YELLOW"
+    elif [[ $git_status =~ "nothing to commit" ]]; then
+        GIT_COLOR="$COLOR_GREEN"
+    else
+        GIT_COLOR="$COLOR_OCHRE"
+    fi
+
+    GIT_COLORED="${GIT_COLOR}${GIT_BRANCH}${COLOR_RESET}"
+}
+
+cmd_status() {
+    if [ $? = "0" ]; then
+        if [ "$color_prompt" = yes ]; then
+            STATUS="${COLOR_GREEN}✔${COLOR_RESET} "
+        else
+            STATUS="✔ "
+        fi
+    else
+        if [ "$color_prompt" = yes ]; then
+            STATUS="${COLOR_RED}✘${COLOR_RESET} "
+        else
+            STATUS="✘ "
+        fi
+    fi
+}
+
+prompt_command() {
+    cmd_status
+    git_status
+    type __prompt_command > /dev/null 2>&1 && __prompt_command
+    echo
+    # breaks when the prompt is so long that it wraps but only with color prompt and
+    # inside git directories (even when GIT_COLOR and COLOR_RESET in omitted)!
+    # (breaks only when prompt is wrapped twice or wrapped inside cwd!?)
+    if [ "$color_prompt" = yes ]; then
+        PS1="${STATUS}${KRB_STATUS_MSG}${HOSTINFO}${DEBIAN_CHROOT}${CWD}${GIT_COLORED} ${COLOR_BLUE}\$${COLOR_RESET} "
+    else
+        PS1="${STATUS}${KRB_STATUS_MSG}${HOSTINFO}${DEBIAN_CHROOT}${CWD}${GIT_BRANCH} \$ "
+    fi
+}
+
+# Static prompt as fallback for cases when COLOR_PROMPT is overwritten after this file
+prompt_command
+PS1="${HOSTINFO}${DEBIAN_CHROOT}${CWD} \$ "
+
+# If this is an xterm set the title to user@host:dir
+case "$TERM" in
+    xterm*|rxvt*)
+        PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+        ;;
+    *)
+        ;;
+esac
+
+PROMPT_COMMAND=prompt_command

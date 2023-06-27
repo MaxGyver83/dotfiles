@@ -59,35 +59,6 @@ shopt -s checkwinsize
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-# set variable identifying the chroot you work in (used in the prompt below)
-if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
-    debian_chroot=$(cat /etc/debian_chroot)
-fi
-
-# set a fancy prompt (non-color, unless we know we "want" color)
-case "$TERM" in
-    screen|xterm-color|*-256color) color_prompt=yes; export COLORTERM=truecolor;;
-esac
-
-# uncomment for a colored prompt, if the terminal has the capability; turned
-# off by default to not distract the user: the focus in a terminal window
-# should be on the output of commands, not on the prompt
-#force_color_prompt=yes
-
-if [ -n "$force_color_prompt" ]; then
-    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	# We have color support; assume it's compliant with Ecma-48
-	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	# a case would tend to support setf rather than setaf.)
-	color_prompt=yes
-    else
-	color_prompt=
-    fi
-fi
-
-# system language for parsing git output
-lang=$(locale | grep LANGUAGE | cut -d= -f2 | cut -d_ -f1)
-
 # better colors for the virtual console (tty)
 if [ "$TERM" = "linux" ]; then
     echo -en "\e]P0232323" #black
@@ -109,77 +80,13 @@ if [ "$TERM" = "linux" ]; then
     clear #for background artifacting
 fi
 
-# git branch information for prompt
-COLOR_RED="\033[1;31m"
-COLOR_YELLOW="\033[0;33m"
-COLOR_GREEN="\033[0;32m"
-COLOR_OCHRE="\033[38;5;95m"
-COLOR_BLUE="\033[0;34m"
-COLOR_WHITE="\033[0;37m"
-COLOR_RESET="\033[0m"
-
-git_color() {
-  local git_status="$(LC_ALL=C git status 2> /dev/null)"
-
-  if [[ ! $git_status =~ "working tree clean" ]]; then
-    echo -en $COLOR_RED
-  elif [[ $git_status =~ "Your branch is ahead of" ]]; then
-    echo -en $COLOR_YELLOW
-  elif [[ $git_status =~ "nothing to commit" ]]; then
-    echo -en $COLOR_GREEN
-  else
-    echo -en $COLOR_OCHRE
-  fi
-}
-
-git_branch() {
-  local git_status="$(LC_ALL=C git status 2> /dev/null)"
-  local on_branch="On branch ([^${IFS}]*)"
-  local on_commit="HEAD detached at ([^${IFS}]*)"
-
-  if [[ $git_status =~ $on_branch ]]; then
-    local branch=${BASH_REMATCH[1]}
-    echo "($branch)"
-  elif [[ $git_status =~ $on_commit ]]; then
-    local commit=${BASH_REMATCH[1]}
-    echo "($commit)"
-  fi
-}
-
-if [ "$color_prompt" = yes ]; then
-    # original prompt
-    # PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-
-    # show green ✔ if last command was successful, otherwise show red ✘
-    PS1="\n\$(if [ \$? == 0 ]; then echo -en \"\[${COLOR_GREEN}\]✔\"; else echo -en \"\[${COLOR_RED}\]✘\"; fi)\[$COLOR_RESET\] "
-    # check if I'm connected via SSH
-    [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ] || [ -f /.dockerenv ] && HOSTINFO="$USER@$HOSTNAME:"
-    PS1+="$HOSTINFO"                            # add host info
-    # add the default part: current path in bold blue letters
-    PS1+='${debian_chroot:+($debian_chroot)}'"\[\033[01;34m\]\w\[\033[0m\]"
-    PS1+=" \[\$(git_color)\]"                   # colors git status
-    PS1+="\$(git_branch)"                       # prints current branch
-    PS1+="\[$COLOR_BLUE\]\$\[$COLOR_RESET\] "   # '#' for root, else '$'
-    unset HOSTINFO
+if [ -f ~/.bash_prompt ]; then
+    source ~/.bash_prompt
+elif [ -f ~/dotfiles/bash/.bash_prompt ]; then
+    source ~/dotfiles/bash/.bash_prompt
 else
-    PS1="\n\$(if [ \$? == 0 ]; then echo \"✔\"; else echo \"✘\"; fi) "
-    # check if I'm connected via SSH
-    [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ] || [ -f /.dockerenv ] && HOSTINFO="$USER@$HOSTNAME:"
-    PS1+="$HOSTINFO"                            # add host info
-    PS1+='${debian_chroot:+($debian_chroot)}\w$ '
-    unset HOSTINFO
+    PS1="\n\u@\h:\w \$ "
 fi
-unset color_prompt force_color_prompt
-
-# If this is an xterm set the title to user@host:dir
-case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    ;;
-*)
-    ;;
-esac
-PROMPT_COMMAND='echo -ne "\e]0;$USER@$HOSTNAME:${PWD/$HOME/\~}\a"'
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
