@@ -1,5 +1,8 @@
 FROM ubuntu:20.04
 
+ENV TZ=Europe/Berlin \
+    DEBIAN_FRONTEND=noninteractive
+
 RUN apt-get update && apt-get install -y \
   sudo \
   wget \
@@ -32,24 +35,25 @@ ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 
 # get fish
-RUN ver=3.6.0-1 \
+RUN ver=3.6.1-1 \
     && cd /tmp \
     && wget https://launchpad.net/~fish-shell/+archive/ubuntu/release-3/+files/fish_${ver}~focal_amd64.deb \
     && dpkg -i fish_${ver}~focal_amd64.deb \
     && rm fish_${ver}~focal_amd64.deb
 
 # get bat
-RUN ver=0.22.1 \
+RUN ver=0.23.0 \
     && cd /tmp \
     && wget https://github.com/sharkdp/bat/releases/download/v${ver}/bat_${ver}_amd64.deb \
     && dpkg -i bat_${ver}_amd64.deb \
     && rm bat_${ver}_amd64.deb
 
 # get sd
-RUN cd /tmp \
-    && wget https://github.com/chmln/sd/releases/download/v0.7.6/sd-v0.7.6-x86_64-unknown-linux-gnu \
-    && chmod +x sd-v0.7.6-x86_64-unknown-linux-gnu \
-    && mv sd-v0.7.6-x86_64-unknown-linux-gnu /usr/bin/sd
+RUN ver=v0.7.6 \
+    && cd /tmp \
+    && wget https://github.com/chmln/sd/releases/download/${ver}/sd-${ver}-x86_64-unknown-linux-gnu \
+    && chmod +x sd-${ver}-x86_64-unknown-linux-gnu \
+    && mv sd-${ver}-x86_64-unknown-linux-gnu /usr/bin/sd
 
 # add user "docker"
 RUN useradd -m docker && echo "docker:docker" | chpasswd && adduser docker sudo
@@ -60,8 +64,7 @@ WORKDIR /home/docker
 RUN git clone --depth 1 https://github.com/MaxGyver83/dotfiles.git ~/.dotfiles
 
 # run stow (linking my dotfiles) and create other useful directories
-RUN mv ~/.bashrc ~/.bashrc_bak ; mkdir -p ~/.config ~/.vim ~/bin ~/.vim/pack/plugins/start ~/.vim/pack/plugins/opt ~/repos \
-    && cd ~/.dotfiles && stow bash fish tmux ripgrep scripts vim
+RUN ~/.dotfiles/install
 
 # will be used in .tmux.conf
 ENV IN_DOCKER=1

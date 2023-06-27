@@ -60,7 +60,6 @@ RUN useradd -m docker && echo "docker:docker" | chpasswd && adduser docker sudo
 USER docker
 WORKDIR /home/docker
 
-RUN echo
 # (shallow) clone my dotfiles repo
 RUN git clone --depth 1 https://github.com/MaxGyver83/dotfiles.git ~/.dotfiles
 # run stow (linking my dotfiles) and create other useful directories
