@@ -621,7 +621,7 @@ function! FZF_dir_files(directory, file)
     let l:file = substitute(l:file, '\.\./', '\\ ', 'g')
     " replace '.' with space when followed by more than 3 characters
     let l:file = substitute(l:file, '\.\(....\)', '\\ \1', 'g')
-    exec ":call fzf#vim#files('" . l:dir . "', {'options':'--query " . l:file . " --select-1'})"
+    exec ":call fzf#vim#files('" . l:dir . "', {'options': ['--select-1', '--query=" . l:file . "']})"
 endfunction
 command! -nargs=+ FzfDirFiles call FZF_dir_files(<f-args>)
 
@@ -844,8 +844,8 @@ nnoremap <Leader>ec :FZF %:p:h<CR>
 nnoremap <Leader>ew :FZF<CR>
 nnoremap <Leader>eh :FZF ~<CR>
 nnoremap <Leader>er :FZF /<CR>
-nnoremap <Leader>eg :exec "call FZF_dir_files('GIT_ROOT', '.')"<CR>
-nnoremap <Leader>eG :exec "call FZF_dir_files('GIT_PARENT', '.')"<CR>
+nnoremap <Leader>eg :exec "call FZF_dir_files('GIT_ROOT', '')"<CR>
+nnoremap <Leader>eG :exec "call FZF_dir_files('GIT_PARENT', '')"<CR>
 
 " search selected (partial) file name in current/working/home/root/git_root directory with FZF
 xnoremap <Leader>ec "ty:<C-U>exec "call FZF_dir_files('" . expand("%:p:h") . "', '<C-R>t')"<CR>
