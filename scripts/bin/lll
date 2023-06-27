@@ -1,2 +1,6 @@
 #!/bin/sh
-exa -l -s age --color=always "${1:-.}" | head -n ${2:-10}
+if type -q exa
+    exa -l -s age --color=always "${1:-.}" | head -n ${2:-10}
+else
+    ll -t --color=always "${1:-.}" | tail -n +2 | head -n ${2:-10}
+fi
