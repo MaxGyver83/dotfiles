@@ -870,9 +870,12 @@ nnoremap <Leader>el :BLines<CR>
 nnoremap <Leader>eo :History<CR>
 nnoremap <Leader>es :RgRaw -g '!tags' -s ''<left>
 
-" toggle between .c and .h files
-nnoremap <expr> <Leader>et expand('%:e') == 'h' ? ':e %:r.c<CR>' : expand('%:e') == 'c' ? ':e %:r.h<CR>' : expand('%:e') == 'hpp' ? ':e **/%:t:r.cpp<CR>' : expand('%:e') == 'cpp' ? ':e **/%:t:r.hpp<CR>' :':echo "Not a c[pp] or h[pp] file."<CR>'
-
+" toggle between .c(pp) and .h(pp) files
+nnoremap <expr> <Leader>et expand('%:e') == 'h' ? ':e %:r.c<CR>'
+            \ : expand('%:e') == 'c' ? ':e %:r.h<CR>'
+            \ : expand('%:e') == 'hpp' ? ':e %:h/../../src/%:t:r.cpp<CR>'
+            \ : expand('%:e') == 'cpp' ? ':e %:h/../include/**/%:t:r.hpp<CR>'
+            \ : ':echo "Not a c[pp] or h[pp] file."<CR>'
 
 " jump to the next function
 nnoremap <silent> <Leader>ff :call
