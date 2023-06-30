@@ -625,6 +625,30 @@ function! FZF_dir_files(directory, file)
 endfunction
 command! -nargs=+ FzfDirFiles call FZF_dir_files(<f-args>)
 
+function! FZF_word_dir(word, directory)
+    " norm "ty
+    if a:directory == "GIT_ROOT" || a:directory == "GIT_PARENT"
+        " Using git root of cwd! Follow link below for how to use git root of current buffer:
+        " https://github.com/junegunn/fzf.vim/issues/837#issuecomment-615995881
+        let l:dir = trim(system('git rev-parse --show-toplevel'))
+        if v:shell_error > 0
+            " fallback in case cwd is a catkin root directory
+            let l:dir = trim(system('cd src && git rev-parse --show-toplevel'))
+        endif
+        if a:directory == "GIT_PARENT"
+            let l:dir = fnamemodify(l:dir, ":h")
+        endif
+    else
+        let l:dir = a:directory
+    endif
+    exec ':call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case -- '.shellescape(a:word).' '.shellescape(l:dir).'", fzf#vim#with_preview(), 0)'
+endfunction
+command! -nargs=+ FzfWordDir call FZF_word_dir(<f-args>)
+
+" https://github.com/junegunn/fzf.vim/issues/837#issuecomment-1179386300
+command! -bang -nargs=* Rg2
+  \ call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".<q-args>, 1, {'dir': system('git -C '.expand('%:p:h').' rev-parse --show-toplevel 2> /dev/null')[:-2]}, <bang>0)
+
 function! OpenAllFiles()
     g/ +\d/exe ":norm gF"|exe ":norm \<C-^>"
     exe ":norm \<C-o>"
@@ -835,6 +859,22 @@ let g:jedi#documentation_command = "K"
 let g:jedi#usages_command = "<leader>jn"
 let g:jedi#completions_command = "<C-Space>"
 let g:jedi#rename_command = "<leader>jr"
+
+" open/search word(s) in current/working/home/root/git_root directory with FZF
+nnoremap <Leader>uc :exec "call FZF_word_dir('', '" . expand("%:p:h") . "')"<CR>
+nnoremap <Leader>uw :exec "call FZF_word_dir('', '')"<CR>
+nnoremap <Leader>uh :exec "call FZF_word_dir('', $HOME)"<CR>
+nnoremap <Leader>ur :exec "call FZF_word_dir('', '/')"<CR>
+nnoremap <Leader>ug :exec "call FZF_word_dir('', 'GIT_ROOT')"<CR>
+nnoremap <Leader>uG :exec "call FZF_word_dir('', 'GIT_PARENT')"<CR>
+
+" search selected (partial) word in current/working/home/root/git_root directory with FZF
+xnoremap <Leader>uc "ty:<C-U>exec "call FZF_word_dir('<C-R>t', '" . expand("%:p:h") . "')"<CR>
+xnoremap <Leader>uw "ty:<C-U>exec "call FZF_word_dir('<C-R>t', '')"<CR>
+xnoremap <Leader>uh "ty:<C-U>exec "call FZF_word_dir('<C-R>t', '~')"<CR>
+xnoremap <Leader>ur "ty:<C-U>exec "call FZF_word_dir('<C-R>t', '/')"<CR>
+xnoremap <Leader>ug "ty:<C-U>exec "call FZF_word_dir('<C-R>t', 'GIT_ROOT')"<CR>
+xnoremap <Leader>uG "ty:<C-U>exec "call FZF_word_dir('<C-R>t', 'GIT_PARENT')"<CR>
 
 " open/search file in current/working/home/root/git_root directory with FZF
 " mnemonic: e like in `:e[dit]`
