@@ -526,6 +526,10 @@ nnoremap <A-b> <C-w>h
 nnoremap <A-t> <C-w>j
 nnoremap <A-r> <C-w>k
 nnoremap <A-n> <C-w>l
+nnoremap <A-a> <C-w>h
+nnoremap <A-e> <C-w>j
+nnoremap <A-o> <C-w>k
+nnoremap <A-i> <C-w>l
 
 " navigate between buffers with Alt+q/w
 noremap <A-v> :bp<cr>
