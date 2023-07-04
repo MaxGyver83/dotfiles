@@ -57,6 +57,7 @@ mapkey('p', '#0enter ephemeral PassThrough mode to temporarily suppress SurfingK
 });
 
 Hints.setCharacters('iterancyb.oughzx,pdwmks');
+Hints.style('font-size: 14px;');
 settings.hintAlign = "right";
 
 
