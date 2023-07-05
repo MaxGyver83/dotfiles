@@ -42,7 +42,7 @@ This function should only modify configuration layer settings."
      ;; better-defaults
      emacs-lisp
      common-lisp
-     ;; git
+     git
      helm
      ;; lsp
      markdown
@@ -65,7 +65,8 @@ This function should only modify configuration layer settings."
    ;; `dotspacemacs/user-config'. To use a local version of a package, use the
    ;; `:location' property: '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '()
+   dotspacemacs-additional-packages '(
+     sqlite3)
 
    ;; A list of packages that cannot be updated.
    ;; A list of packages that will not be installed and loaded.
@@ -569,6 +570,7 @@ configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
   (define-key evil-normal-state-map (kbd "s") #'avy-goto-char-2)
+  (setq avy-keys '(?c ?a ?e ?i ?t ?r ?n ?s ?o ?l))
 )
 
 
