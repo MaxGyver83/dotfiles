@@ -17,7 +17,11 @@ end
 if test -n "$_flag_test"
     set binary ~/repos/kmonad/kmonad
 else
-    set binary kmonad
+    set binary $HOME/install/kmonad
+    if ! test -f $binary
+        # start first kmonad binary found in PATH
+        set binary kmonad
+    end
 end
 
 if test -n "$_flag_config"
@@ -27,11 +31,15 @@ else
 end
 
 if test "$_flag_keyboard" = "all" || string match -q -i "*$_flag_keyboard*" "internal"
-    echo "Kill KMonad for internal keyboard"
-    pkill -f "kmonad $config"
-    if test -z "$_flag_stop"
-        echo "Activate KMonad for internal keyboard"
-        $binary $config & ; disown
+    if test -e /dev/input/by-path/platform-i8042-serio-0-event-kbd
+        echo "Kill KMonad for internal keyboard"
+        pkill -f "kmonad $config"
+        if test -z "$_flag_stop"
+            echo "Activate KMonad for internal keyboard"
+            $binary $config & ; disown
+        end
+    else
+        echo "Device /dev/input/by-path/platform-i8042-serio-0-event-kbd does not exist."
     end
 end
 
@@ -39,13 +47,20 @@ set devices \
 /dev/input/by-id/usb-Telink_Wireless_Receiver-if01-event-kbd \
 /dev/input/by-id/usb-413c_Dell_KB216_Wired_Keyboard-event-kbd \
 /dev/input/by-id/usb-SONiX_USB_DEVICE-event-kbd \
-/dev/input/by-id/usb-Keychron_Keychron_K6-event-kbd
+/dev/input/by-id/usb-Keychron_Keychron_K6-event-kbd \
+/dev/input/by-id/usb-Lenovo_Lenovo_Traditional_USB_Keyboard-event-kbd \
+/dev/input/by-id/usb-Lite-On_Technology_Corp_HP_USB_Slim_Keyboard_-_Skylab_EU-event-kbd #\
+# /dev/input/event8
+# /dev/input/by-id/usb-046a_0023-event-kbd
 
 set names \
 'Jelly Comb keyboard' \
 'Dell keyboard' \
 'Royal Kludge keyboard' \
-'Keychron K6'
+'Keychron K6' \
+'Lenovo keyboard' \
+'HP keyboard' #\
+# 'Cherry keyboard'
 
 # check if Royal Kludge RK61 is available over bluetooth
 set RK61 /dev/input/(grep -B 8 -A 4 12001 /proc/bus/input/devices | grep RK-Bluetooth -A 4 | grep -oE 'event[0-9]+')
