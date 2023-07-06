@@ -583,6 +583,8 @@ function! TrimWhitespace()
 endfunction
 command! TrimWhitespace call TrimWhitespace()
 
+command! StripColorCodes %s/\e\[[0-9;]*m//g
+
 function! GitHub()
     :execute ':!xdg-open https://github.com/' . shellescape(expand('<cWORD>'))
 endfunction
