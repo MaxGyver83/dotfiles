@@ -13,6 +13,11 @@ if [ -L /sbin ] && contains /usr/sbin $PATH && set -l ind (contains -i -- /sbin 
     set -e PATH[$ind]
 end
 
+if type -q luarocks
+    set -x LUA_PATH "$(luarocks path --lr-path)"
+    set -x LUA_CPATH "$(luarocks path --lr-cpath)"
+end
+
 # load aliases
 if [ -f $HOME/.config/fish/aliases.fish ]
   source $HOME/.config/fish/aliases.fish
