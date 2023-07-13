@@ -36,13 +36,14 @@ if &term != 'cygwin'
     highlight DiffChange ctermfg=10   ctermbg=24   cterm=bold gui=none guifg=bg guibg=Red
     highlight DiffText   ctermfg=10   ctermbg=167  cterm=bold gui=none guifg=bg guibg=Red
     " patches / diff files
-    autocmd FileType diff syntax    match diffAddedButRemoved "^+-.*"
-    syntax match diffAdded /✔/
-    syntax match diffRemoved /✘/
+    autocmd FileType diff syntax match diffAddedButRemoved "^+-.*"
+    autocmd BufWinEnter * syntax match diffAdded /✔/
+    autocmd BufWinEnter * syntax match diffRemoved /✘/
     highlight diffAdded   ctermfg=green
     highlight diffRemoved ctermfg=red
     autocmd FileType diff highlight diffAddedButRemoved ctermfg=101   |
                         \ highlight diffLine            ctermfg=blue
+    syntax match SpecialKey /^☐ .*/
 endif
 highlight clear SignColumn
 
@@ -82,6 +83,7 @@ autocmd FileType python setlocal colorcolumn=72,80,100 | nmap gca A  # | nmap gc
 autocmd FileType python syn match Function '\%([^[:cntrl:][:space:][:punct:][:digit:]]\|_\)\%([^[:cntrl:][:punct:][:space:]]\|_\)*\ze\%(\s*(\)'
 autocmd FileType c nmap gca A // | nmap gco o// | nmap gcO O// 
 autocmd FileType cpp setlocal omnifunc=
+autocmd FileType hare let g:hare_recommended_style = 1
 
 " Autocompletion for python3 (currently replaced by jedi-vim)
 " if has('python3')
@@ -206,7 +208,8 @@ endif
 "---------
 " mappings
 "---------
-let mapleader="\<Space>"   " leader is space
+let mapleader = "\<Space>"        " leader is space
+let maplocalleader = "\<Space>"   " local leader is space
 
 " show (FZF) buffer list
 nnoremap gb :Buffers<CR>
@@ -339,7 +342,7 @@ autocmd FileType rust nnoremap <buffer> <Leader>x :w !cargo run<cr>
 autocmd FileType groovy nnoremap <buffer> <Leader>x :w \| !env JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64 groovy %<cr>
 
 " repeat last command in previous tmux pane
-autocmd FileType c,cpp nnoremap <buffer> <Leader>x :silent call system('tmux lastp \; send up \; send enter \; lastp')<cr>
+autocmd FileType c,cpp,hare nnoremap <buffer> <Leader>x :silent call system('tmux lastp \; send up \; send enter \; lastp')<cr>
 
 " open file with xdg-open
 nnoremap <Leader>o :!xdg-open % &<cr>
@@ -472,6 +475,10 @@ nmap <leader>mm ysiW`
 xmap <leader>mm S`
 nnoremap <leader>mM o```<ESC><up>O```
 nmap <leader>ml ysiW]%a()<left>
+" toggle checkbox, repeatable with dot
+nnoremap <silent> <Plug>ToggleCheckbox :s/🗹/⌘/e<CR>:s/☐/🗹/e<CR>:s/⌘/☐/e<CR>:nohlsearch<CR>:silent! call repeat#set("\<Plug>ToggleCheckbox", v:count)<CR>
+nmap <leader>mc <Plug>ToggleCheckbox
+
 xmap <leader>mi S_
 xmap <leader>mb S*gvS*
 xmap <leader>ml S]%a()<left>
@@ -586,7 +593,7 @@ command! TrimWhitespace call TrimWhitespace()
 command! StripColorCodes %s/\e\[[0-9;]*m//g
 
 function! GitHub()
-    :execute ':!xdg-open https://github.com/' . shellescape(expand('<cWORD>'))
+    :execute ':!xdg-open https://github.com/' . shellescape(trim(expand('<cWORD>'), "\',"))
 endfunction
 command! GitHub call GitHub()
 
@@ -661,6 +668,17 @@ function! OpenAllFiles()
     nohlsearch
 endfunction
 command! OpenAllFiles call OpenAllFiles()
+
+" Show syntax highlighting groups for word under cursor
+function! SynStack()
+    for i1 in synstack(line("."), col("."))
+        let i2 = synIDtrans(i1)
+        let n1 = synIDattr(i1, "name")
+        let n2 = synIDattr(i2, "name")
+        echo n1 "->" n2
+    endfor
+endfunction
+nmap <leader><leader>h :call SynStack()<CR>
 
 function! Sum()
     :'<,'>w !awk '{s+=$1} END {print s}'
