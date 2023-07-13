@@ -1,0 +1,33 @@
+#!/bin/sh
+usage() {
+  printf 'Usage:\nwiki-search [-w] "Search term"\n'
+  exit 1
+}
+
+[ $# = 0 ] && usage
+TIDDLER_PATH=~/repos/tiddlywiki/Notizen/tiddlers
+[ ! -e "$TIDDLER_PATH" ] && TIDDLER_PATH=~/repos/wiki/Notizen/tiddlers
+cd $TIDDLER_PATH
+rg --line-number --no-heading --color=always --smart-case --glob '*.{tid,md}' "${@}" \
+    | fzf -d ':' -n 2.. --ansi --no-sort --exit-0 --preview-window 'down:40%:+{2}' \
+      --preview 'bat -l=md --style=numbers --color=always --highlight-line {2} {1}' \
+    | sed -E "s|^(.*?):([0-9]+):(.*$)|'${TIDDLER_PATH}/\1' \+\2|" \
+    | xargs --no-run-if-empty --open-tty nvim
+
+# selected_line="$(rg --line-number --no-heading --color=always --smart-case --glob '*.{tid,md}' "$1" \
+#     | fzf -d ':' -n 2.. --ansi --no-sort --preview-window 'down:50%:+{2}' \
+#     --preview 'bat -l=md --style=numbers --color=always --highlight-line {2} {1}')"
+# [ -z "$selected_line" ] && exit 0
+
+# echo "$selected_line" | sed -E "s|^(.*?):([0-9]+):(.*$)|'\1' \+\2|" \
+#   | xargs --open-tty nvim
+
+# filename="$(sed -E "s|^(.*?):([0-9]+):(.*$)|\1|" <<EOF
+# $selected_line
+# EOF
+# )"
+
+# filename="$(echo "$selected_line" | sed -E "s|^(.*?):([0-9]+):(.*$)|\1|")"
+# linenumber="$(echo "$selected_line" | sed -E "s|^(.*?):([0-9]+):(.*$)|\+\2|")"
+# searchterm="$1"
+# nvim -c "/$searchterm" "${filename}" "${linenumber}"
