@@ -1,0 +1,65 @@
+#!/bin/sh
+
+usage() {
+    echo "Usage:
+wiki new [FILENAME]
+wiki list
+wiki [i]find FILENAME_PART
+wiki [i]grep PATTERN ...
+
+new: Pass FILENAME without path and file extension.
+ifind/igrep: Interactive search using fzf.
+"
+}
+
+[ ! $WIKI_DIR ] && echo 'Set/export $WIKI_DIR before running this script!' && exit 1
+[ ! -d "$WIKI_DIR" ] && echo "Can't find directory '$WIKI_DIR'!" && exit 1
+
+new() {
+    if [ $1 ]; then
+        name="$*"
+    else
+        read -p "Title: " name
+        # remove trailing newline
+        name="${name%
+}"
+    fi
+    echo "Name: $name"
+    mdfile="$WIKI_DIR/$name.md"
+
+    now="$(date -u '+%Y%m%d%H%M%S%3N')"
+    echo -n "\
+created: $now
+modified: $now
+tags:
+title: $name
+type: text/x-markdown" > "$mdfile".meta
+
+    touch "$mdfile" && nvim "$mdfile"
+}
+
+fzffind() {
+    fd -etid -emd "$*" | sed 's|^\./||' | fzf --exit-0 \
+        | sed -E "s|^(.*)$|'\1'|" \
+        | xargs --no-run-if-empty --open-tty nvim
+}
+
+fzfgrep() {
+    rg --line-number --no-heading --color=always --smart-case \
+          --glob '*.{tid,md}' "${@}" \
+        | fzf -d ':' -n 2.. --ansi --no-sort --exit-0 \
+          --preview-window 'down:40%:+{2}' \
+          --preview 'bat -l=md --style=numbers --color=always --highlight-line {2} {1}' \
+        | sed -E "s|^(.*?):([0-9]+):(.*$)|'${WIKI_DIR}/\1' \+\2|" \
+        | xargs --no-run-if-empty --open-tty nvim
+}
+
+case "$1" in
+new) shift; new;;
+list) cd "$WIKI_DIR" && fd -etid -emd ;;
+find) shift; cd "$WIKI_DIR" && fd -etid -emd "$*" ;;
+ifind) shift; cd "$WIKI_DIR" && fzffind "$@" ;;
+grep) shift; cd "$WIKI_DIR" && rg -g '*.{tid,md}' "$@" ;;
+igrep) shift; cd "$WIKI_DIR" && fzfgrep "$@" ;;
+""|-h|--help|*) usage;;
+esac
