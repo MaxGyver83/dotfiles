@@ -39,9 +39,12 @@ type: text/x-markdown" > "$mdfile".meta
 }
 
 fzffind() {
-    fd -etid -emd "$*" | sed 's|^\./||' | fzf --exit-0 \
-        | sed -E "s|^(.*)$|'\1'|" \
-        | xargs --no-run-if-empty --open-tty nvim
+    default='enter:become(nvim {})'
+    nvim='ctrl-n:become(nvim {})'
+    bat='ctrl-b:become(bat --style=plain,header-filename {})'
+    rich='ctrl-r:become(python -m rich.markdown -c {} |& less -R)'
+    fd -etid -emd "$*" | sed 's|^\./||' \
+        | fzf --exit-0 --bind "$default,$nvim,$bat,$rich"
 }
 
 fzfgrep() {
