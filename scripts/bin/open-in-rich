@@ -1,0 +1,7 @@
+#!/bin/sh
+filename="${1%%:*}"
+remainder="${1#${filename}:}"
+linenumber="${remainder%%:*}"
+
+echo python -m rich.markdown -c "$WIKI_DIR/$filename" '|' less -R +"$linenumber"
+python -m rich.markdown -c "$WIKI_DIR/$filename" | less -R +"$linenumber"

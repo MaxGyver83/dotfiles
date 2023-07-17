@@ -1,0 +1,6 @@
+#!/bin/sh
+filename="${1%%:*}"
+remainder="${1#${filename}:}"
+linenumber="${remainder%%:*}"
+
+nvim "$WIKI_DIR/$filename" "+$linenumber"
