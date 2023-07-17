@@ -7,7 +7,7 @@ if [ $(tmux list-panes | wc -l) = 1 ]; then
 else
     tmux select-pane -l
 fi
-other_tty=$(tmux display -p '#{pane_tty}')
+other_tty=$(tty)
 tmux select-pane -l
 
 gdb -q -ex "tty $other_tty" "$@"
