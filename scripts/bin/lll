@@ -1,6 +1,6 @@
 #!/bin/sh
-if type -q exa
+if type exa 2>1 > /dev/null; then
     exa -l -s age --color=always "${1:-.}" | head -n ${2:-10}
 else
-    ll -t --color=always "${1:-.}" | tail -n +2 | head -n ${2:-10}
+    ls -hAlF -t --color=always "${1:-.}" | tail -n +2 | head -n ${2:-10}
 fi
