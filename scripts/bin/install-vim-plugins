@@ -12,6 +12,7 @@ tpope/vim-rhubarb
 airblade/vim-gitgutter
 
 # text editing
+tpope/vim-sensible
 tpope/vim-surround
 tpope/vim-repeat
 tpope/vim-commentary
@@ -64,6 +65,13 @@ guns/xterm-color-table.vim
 ojroques/vim-oscyank
 thinca/vim-localrc
 )
+
+if [[ ${MACHINE} = work* ]]; then
+start+=(
+tommcdo/vim-fubitive
+taketwo/vim-ros
+)
+fi
 
 opt=(
 # color themes
