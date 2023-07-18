@@ -31,6 +31,11 @@ remove_from_path_if_symlink /bin
 prepend_to_path $HOME/.local/bin
 prepend_to_path $HOME/install
 
+exists() {
+  command -v "$1" > /dev/null 2>&1 ;
+}
+exists luarocks && eval $(luarocks path)
+
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
@@ -132,11 +137,14 @@ if ! shopt -oq posix; then
   fi
 fi
 
+# default settings for less
+export LESS='-iMFXRj4a#4'
+
 # colored man pages
 export LESS_TERMCAP_mb=$'\E[1;31m'     # begin bold
 export LESS_TERMCAP_md=$'\E[1;36m'     # begin blink
 export LESS_TERMCAP_me=$'\E[0m'        # reset bold/blink
-export LESS_TERMCAP_so=$'\E[01;44;33m' # begin reverse video
+export LESS_TERMCAP_so=$'\E[0;43;30m'  # begin reverse video
 export LESS_TERMCAP_se=$'\E[0m'        # reset reverse video
 export LESS_TERMCAP_us=$'\E[1;32m'     # begin underline
 export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
