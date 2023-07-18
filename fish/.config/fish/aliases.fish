@@ -116,6 +116,7 @@ abbr ca "$VIM ~/.config/fish/aliases.fish"
 abbr cl "$VIM ~/.config/fish/local.fish"
 abbr cs "$VIM ~/.config/sxhkd/sxhkdrc"
 abbr ct "$VIM ~/.tmux.conf"
+abbr ce "$VIM ~/.config/emacs/init.el"
 abbr ck "$VIM ~/.config/kmonad/vou-linux-de-rctrl.kbd"
 abbr td "$VIM ~/dev/gta_local/max/todo/todo.md"
 
@@ -128,7 +129,8 @@ abbr qq 'pkill try_three_times ; pkill run_forever ; pkill kmonad ; pkill keyboa
 abbr QQ 'pkill try_three_times ; pkill run_forever ; pkill kmonad ; pkill keyboard-layouts'
 abbr s 'xrandr | grep -q 2560x1440 && ~/.screenlayout/peaq-usb.sh || ~/.screenlayout/laptop.sh'
 # redshift: red=night mode (darker, redish), notred=day mode
-abbr red 'redshift -P -O 3500 -b 0.7 || redshift -O 3500 -b 0.7'
+# abbr red 'redshift -P -O 3500 -b 0.7 || redshift -O 3500 -b 0.7'
+abbr red 'redshift -P -O 3500 -b 1'
 abbr notred 'redshift -P -O 6500 || redshift -O 6500'
 abbr ti 'pkill run_forever ; pkill kmonad ; setxkbmap de ; tipp10 ; ~/bin/start-kmonad.fish -k all'
 
@@ -153,7 +155,7 @@ abbr gpsu 'git push --set-upstream origin (git rev-parse --abbrev-ref HEAD)'
 # git reset hard to origin
 abbr grho 'git reset --hard origin/(git rev-parse --abbrev-ref HEAD)'
 abbr gc 'git clone'
-abbr gcm 'git co master'
+abbr gcm 'git co master || git co main'
 abbr cim 'git ci -m "'
 abbr gch 'git co HEAD --'
 # gr = "git root" (go to the toplevel of the current repo)
@@ -195,6 +197,8 @@ abbr cr 'crontab -l | grep --color=never "^[^#]"'
 abbr simpleprompt 'function fish_prompt; echo \n(prompt_pwd)\ ▶\ ; end'
 
 alias disp 'bass source ~/bin/update-DISPLAY.sh'
+
+abbr vlime 'sbcl --load ~/.vim/pack/plugins/start/vlime/lisp/start-vlime.lisp'
 
 abbr en 'LC_ALL=C'
 

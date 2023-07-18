@@ -44,11 +44,14 @@ set fish_color_autosuggestion 888888
 set -g __fish_git_prompt_color_branch
 set -g __fish_git_prompt_showcolorhints true
 
+# default settings for less
+set -x LESS '-iMFXRj4a#4'
+
 # colored man pages
 set -x LESS_TERMCAP_mb (printf "\033[1;31m")     # begin bold
 set -x LESS_TERMCAP_md (printf "\033[1;36m")     # begin blink
 set -x LESS_TERMCAP_me (printf "\033[0m")        # reset bold/blink
-set -x LESS_TERMCAP_so (printf "\033[01;44;33m") # begin reverse video
+set -x LESS_TERMCAP_so (printf "\033[0;43;30m")  # begin reverse video
 set -x LESS_TERMCAP_se (printf "\033[0m")        # reset reverse video
 set -x LESS_TERMCAP_us (printf "\033[1;32m")     # begin underline
 set -x LESS_TERMCAP_ue (printf "\033[0m")        # reset underline
