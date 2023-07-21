@@ -164,6 +164,8 @@ case "$HOST" in
 esac
 export MACHINE
 
+export ABDUCO_CMD=fish
+
 # use locate to find a file in home directory and highlight matches
 locateh() {
   # case sensitive

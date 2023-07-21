@@ -94,7 +94,11 @@ cmd_status() {
 prompt_command() {
     cmd_status
     git_status
-    type __prompt_command > /dev/null 2>&1 && __prompt_command
+    if [ -f /.dockerenv ]; then
+        KRB_STATUS_MSG=""
+    else
+        type __prompt_command > /dev/null 2>&1 && __prompt_command
+    fi
     echo
     # breaks when the prompt is so long that it wraps but only with color prompt and
     # inside git directories (even when GIT_COLOR and COLOR_RESET in omitted)!
