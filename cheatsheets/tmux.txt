@@ -1,0 +1,8 @@
+tmux
+====
+PREFIX :killp (or x)  Kill active pane
+PREFIX :new           Start new session
+PREFIX )              Next session
+Alt-Shift-p           Open output in vim
+PREFIX ,              Rename window
+PREFIX :swapw -t 2    Swap current window with window 2

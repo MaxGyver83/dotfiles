@@ -1,0 +1,4 @@
+misc
+====
+Reload sxhkd
+  pkill -USR1 sxhkd

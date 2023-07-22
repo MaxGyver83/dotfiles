@@ -1,0 +1,23 @@
+aerc
+====
+C    write mail
+c    change folder
+e    mail up
+o    mail down
+O    folder up
+E    folder down
+T    toggle threads
+v    toggle mark
+V    toggle visual mark mode
+/    search
+\    filter
+C-n  next account
+
+O    mail up
+E    mail down
+C-j  next mime type
+H    toggle headers
+rr   reply all
+rq   reply all quoted
+Rr   reply
+Rq   reply quoted

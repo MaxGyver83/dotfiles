@@ -15,9 +15,9 @@ g,  of next change (after g;)
 [c  jump to previous diff ("change") (my alias: C-l)
 ]c  jump to next diff                (my alias: C-h)
 
-C-] jump to tag under cursor (or follow link in vim help)
+C-]  jump to tag under cursor (or follow link in vim help)
 
-:Hi recent files
+:Hi  recent files
 
 :g/xxx\|yyy/d   delete all lines containing 'xxx' or 'yyy'
 :g!/xxx\|yyy/d  delete all lines not containing 'xxx' or 'yyy'
@@ -39,37 +39,4 @@ zG  add word under the cursor as a good word to temporary wordlist
 ␣hu  undo hunk
 ␣hs  stage hunk
 
-
-tmux
-====
-PREFIX :killp (or x) Kill active pane
-PREFIX :new          Start new session
-PREFIX )             Next session
-Alt-Shift-p          Open output in vim
-PREFIX ,             Rename window
-PREFIX :swapw -t 2   Swap current window with window 2
-
-
-aerc
-====
-C    write mail
-c    change folder
-e    mail up
-o    mail down
-O    folder up
-E    folder down
-T    toggle threads
-v    toggle mark
-V    toggle visual mark mode
-/    search
-\    filter
-C-n  next account
-
-O    mail up
-E    mail down
-C-j  next mime type
-H    toggle headers
-rr   reply all
-rq   reply all quoted
-Rr   reply
-Rq   reply quoted
+:Tab /|/l0  Align table at '|', left aligned, no spaces
