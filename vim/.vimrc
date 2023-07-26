@@ -224,7 +224,9 @@ noremap <Leader>p "+p
 noremap <Leader>P "+P
 
 " copy complete file content to system clipboard
-noremap <Leader>ca gg"+yG``
+" noremap <Leader>ca gg"+yG``
+noremap <Leader>ca :%y+<cr>
+
 
 " copy current line/selection into tmux buffer
 if exists('$TMUX')
@@ -373,6 +375,7 @@ nmap <expr> <C-h> &spell ? ']s' : &diff ? ']c' : (exists("g:ale_enabled") && g:a
 " or previous/next C function otherwise
 " '?\(\(if\\|for\\|while\\|switch\\|catch\)\_s*\)\@64<!(\_[^)]*)\_[^;{}()]*\zs{<CR>'
 " '/\(\(if\\|for\\|while\\|switch\\|catch\)\_s*\)\@64<!(\_[^)]*)\_[^;{}()]*\zs{<CR>'
+" or previous/next mark `[ `] otherwise?
 if &diff
     highlight clear CursorLine
     highlight CursorLine gui=underline cterm=underline
@@ -545,6 +548,8 @@ noremap <A-.> :bn<cr>
 "--------------
 " abbreviations
 "--------------
+
+" expand abbreviations with C-]
 
 " type kb>, get <kbd></kbd>
 iab kb <kbd></kbd><C-o>F<<BS>
@@ -884,6 +889,11 @@ let g:jedi#usages_command = "<leader>jn"
 let g:jedi#completions_command = "<C-Space>"
 let g:jedi#rename_command = "<leader>jr"
 
+nnoremap <Leader>ftl :set ft=log<CR>
+nnoremap <Leader>fti :set ft=ini<CR>
+nnoremap <Leader>fts :set ft=sh<CR>
+nnoremap <Leader>ftb :set ft=bash<CR>
+
 " open/search word(s) in current/working/home/root/git_root directory with FZF
 nnoremap <Leader>uc :exec "call FZF_word_dir('', '" . expand("%:p:h") . "')"<CR>
 nnoremap <Leader>uw :exec "call FZF_word_dir('', '')"<CR>
@@ -1071,7 +1081,7 @@ let g:highlightedyank_highlight_duration = 500
 highlight HighlightedyankRegion ctermbg=229 ctermfg=none cterm=none
 
 " vim-gutentags
-let g:gutentags_ctags_exclude = ['virtual_envs', '.ccls-cache', '.mypy_cache']
+let g:gutentags_ctags_exclude = ['tags', 'virtual_envs', '.ccls-cache', '.mypy_cache', '*.json', '*.rst', '*.md', '*.css', '*.js', '*.html', '*.diff', '*.patch', '*.svg', '*.tex', '*.pb']
 let g:gutentags_exclude_project_root = ['/usr/local', '/home/max/.password-store']
 let g:gutentags_project_root = ['.gutentags']
 set tags+=tags-external
