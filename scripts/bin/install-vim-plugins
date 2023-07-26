@@ -31,6 +31,7 @@ rstacruz/vim-closer
 kana/vim-textobj-user
 kana/vim-textobj-line
 kana/vim-textobj-function
+kana/vim-textobj-entire
 sgur/vim-textobj-parameter
 rhysd/vim-textobj-word-column
 beloglazov/vim-textobj-quotes
