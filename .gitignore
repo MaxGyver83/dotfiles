@@ -10,3 +10,5 @@ fish/.config/fish/functions/__z_add.fish
 fish/.config/fish/functions/__z_clean.fish
 fish/.config/fish/functions/__z_complete.fish
 qtile/.config/qtile/__pycache__/
+vis/.config/vis/plugins
+vis/.config/vis/themes
