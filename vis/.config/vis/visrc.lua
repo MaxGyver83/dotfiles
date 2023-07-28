@@ -2,7 +2,7 @@
 require('vis')
 
 local plug = require('plugins/vis-plug')
-plug.path('/home/max/.config/vis')
+plug.path(os.getenv('HOME') .. '/.config/vis')
 
 -- configure plugins in an array of tables with git urls and options
 local plugins = {
