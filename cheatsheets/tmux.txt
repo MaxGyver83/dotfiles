@@ -3,6 +3,10 @@ tmux
 PREFIX :killp (or x)  Kill active pane
 PREFIX :new           Start new session
 PREFIX )              Next session
-Alt-Shift-p           Open output in vim
+Alt-Shift-p           Open full output in vim
+PREFIX t              Open output of last command in vim
 PREFIX ,              Rename window
 PREFIX :swapw -t 2    Swap current window with window 2
+PREFIX y              Copy cwd
+PREFIX Y              Copy cwd of previous pane
+PREFIX P              Copy cwd of previous pane and paste
