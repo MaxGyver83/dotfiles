@@ -69,6 +69,8 @@ set -x EDITOR vim
 
 set -x BYOBU_EDITOR vim
 
+set -x ABDUCO_CMD fish
+
 ulimit -c 1000000
 
 if test -f "$HOME/.config/ripgrep/ripgreprc"
