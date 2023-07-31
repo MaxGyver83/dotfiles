@@ -15,7 +15,8 @@ g,  of next change (after g;)
 [c  jump to previous diff ("change") (my alias: C-l)
 ]c  jump to next diff                (my alias: C-h)
 
-C-]  jump to tag under cursor (or follow link in vim help)
+C-]  jump to tag under cursor (or follow link in vim help) (my alias: C-t)
+g]   show all matching tags
 
 :Hi  recent files
 
