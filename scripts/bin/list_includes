@@ -8,10 +8,11 @@ list_includes --raw          : List all include file names
     exit 0
 fi
 
-# find lines with '#include', trim, remove comment lines, remove trailing comments, sort unique
-includes="$(rg -tc -tcpp --no-filename '#include' \
-    | awk '{$1=$1;print}' | grep -v '^/[\*/]' \
-    | sed 's: */[/\*].*$::' | sort -u)"
+# find lines with '#include', trim, remove comment lines, remove trailing comments,
+# delete carriage return, sort unique
+includes="$(rg -tc -tcpp --no-filename '^\S*#include' \
+    | awk '{$1=$1;print}' | grep -v '^/[\*/]' | grep -Ev '{|}' \
+    | sed 's: */[/\*].*$::' | tr -d '\015' | sort -u)"
 
 if [ "$1" = '--raw' ]; then
     echo "$includes" \
