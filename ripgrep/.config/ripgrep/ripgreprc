@@ -5,3 +5,4 @@
 
 --glob=!tags
 --glob=!tags.temp
+--glob=!tags-*
