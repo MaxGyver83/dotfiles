@@ -1,25 +1,35 @@
 #!/bin/sh
-if [ "$1" = '-h' ] || [ "$1" = '--help' ]; then
+usage() {
     echo "Usage:
-list_includes                : List all include lines
-list_includes --skip-system  : List all include lines except system headers (like <foo>)
-list_includes --raw          : List all include file names
+list_includes [--skip-system|--raw] [DIR ...]
+
+List all include lines of all C/C++ files in given directories/current directory and subdirectories
+--skip-system   Skip system headers (like <foo>)
+--raw           Print only file names (like bar/foo.h)
 "
     exit 0
-fi
+}
+
+DIRS=""
+while [ "$1" ]; do case $1 in
+  -h|--help) usage ;;
+  -s|--skip-system) SKIP_SYSTEM=1; shift ;;
+  -r|--raw) RAW=1; shift ;;
+  *) DIRS="$DIRS $1"; shift ;;
+esac; done
 
 # find lines with '#include', trim, remove comment lines, remove trailing comments,
 # delete carriage return, sort unique
-includes="$(rg -tc -tcpp --no-filename '^\S*#include' \
+includes="$(rg -tc -tcpp --no-filename '^\S*#include' ${DIRS} \
     | awk '{$1=$1;print}' | grep -v '^/[\*/]' | grep -Ev '{|}' \
     | sed 's: */[/\*].*$::' | tr -d '\015' | sort -u)"
 
-if [ "$1" = '--raw' ]; then
+if [ "$RAW" ]; then
     echo "$includes" \
         | sed -E -e 's/ *#include +//' -e 's/.(.*)./\1/' \
         | sed 's:\.\./::g' | sort -u
 
-elif [ "$1" = '--skip-system' ]; then
+elif [ "$SKIP_SYSTEM" ]; then
     echo "$includes" | grep -Ev '<[^/]+>'
 
 else

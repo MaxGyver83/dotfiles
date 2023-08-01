@@ -1,40 +1,56 @@
 #!/bin/sh
-if [ "$1" = '-h' ] || [ "$1" = '--help' ]; then
+usage() {
     echo "Usage:
-ctags_for_includes [PATH ...]     : Create tags all C(++) files in current directory and write to 'tags-external'
-ctags_for_includes --list|--info  : List headers found by 'gcc -M'
-ctags_for_includes --errors       : List headers 'gcc -M' couldn't find
+ctags_for_includes [--skip-gcc] [--list|--errors] [--include-dirs DIR1,DIR2] [PATH ...]
+
+--list       Only list headers found by 'gcc -M' and 'find_includes'.
+--errors     Only list error from 'gcc -M' and 'find_includes'.
+--skip-gcc   Skip 'gcc -M', rely only on 'find_includes'.
+Otherwise create tags for all C(++) files in given project directories/current directory
+(+ subdirectories) and write to 'tags-external'.
+
+Example:
+In catkin_project/src:
+ctags_for_includes --include-dirs /opt/ros/noetic/include,/usr/include tools/x tools/y
 "
     exit 0
-fi
+}
 
-code_files="$(fd -ec -eh -ecpp -ehpp)"
+PROJECT_DIRS=""
+while [ "$1" ]; do case $1 in
+  -h|--help) usage ;;
+  -l|--list) LIST=1; shift ;;
+  -e|--errors) ERRORS=1; shift ;;
+  --skip-gcc) SKIP_GCC=1; shift ;;
+  -i|-I|--include-dirs) INCLUDE_DIRS="$2"; shift; shift ;;
+  *) PROJECT_DIRS="$PROJECT_DIRS $1"; shift ;;
+esac; done
+
+code_files="$(fd -ec -eh -ecpp -ehpp . $PROJECT_DIRS)"
 if [ -z "$code_files" ]; then
     echo '`fd -ec -eh -ecpp -ehpp` did not find any code files!'
 fi
 
-if [ "$1" = "--errors" ]; then
-    shift
-    gcc -M $code_files 1>/dev/null
-    find_includes "$@" 1>/dev/null
+if [ "$ERRORS" ]; then
+    [ "$SKIP_GCC" ] || gcc -M $code_files 1>/dev/null
+    find_includes -I $INCLUDE_DIRS $PROJECT_DIRS 1>/dev/null
 
-elif [ "$1" = "--list" ] || [ "$1" = "--info" ]; then
-    shift
-    gcc -M $code_files 2>/dev/null \
+elif [ "$LIST" ]; then
+    [ "$SKIP_GCC" ] || gcc -M $code_files 2>/dev/null \
       | tr ' \\' '\n' \
       | grep -v '\.o:[ \t]*$' \
       | grep '\S' \
       | sort -u
-    echo '---'
-    find_includes "$@"
+    [ "$SKIP_GCC" ] || echo '---'
+    find_includes -I $INCLUDE_DIRS $PROJECT_DIRS
 
 else
-    gcc -M $code_files 2>/dev/null \
+    [ "$SKIP_GCC" ] || gcc -M $code_files 2>/dev/null \
       | tr ' \\' '\n' \
       | grep -v '\.o:[ \t]*$' \
       | grep '\S' \
       | sort -u \
       | grep '^/' \
       | ctags --c++-kinds=+p -o tags-external -L -
-    find_includes "$@" | ctags --c++-kinds=+p -a -o tags-external -L -
+    find_includes -I $INCLUDE_DIRS $PROJECT_DIRS | ctags --c++-kinds=+p -a -o tags-external -L -
 fi
