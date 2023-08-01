@@ -6,6 +6,7 @@ wiki new [FILENAME]
 wiki list
 wiki [i]find FILENAME_PART
 wiki [i]grep PATTERN ...
+wiki FILENAME_PART|PATTERN
 
 new: Pass FILENAME without path and file extension.
 ifind/igrep: Interactive search using fzf.
@@ -16,7 +17,7 @@ ifind/igrep: Interactive search using fzf.
 [ ! -d "$WIKI_DIR" ] && echo "Can't find directory '$WIKI_DIR'!" && exit 1
 
 new() {
-    if [ $1 ]; then
+    if [ "$1" ]; then
         name="$*"
     else
         read -p "Title: " name
@@ -44,11 +45,32 @@ fzffind() {
     bat='ctrl-b:become(bat --style=plain,header-filename -l md {})'
     rich='ctrl-r:become(python -m rich.markdown -c {} |& less -R)'
 
+    preview='bat -l=md --style=numbers --color=always {1}'
+
     fd -etid -emd "$*" | sed 's|^\./||' \
-        | fzf --exit-0 --bind "$default,$bat,$rich,$filename"
+        | fzf -d ':' --exit-0 --bind "$default,$bat,$rich,$filename" \
+          --preview-window 'down:40%:+{2}' \
+          --preview "$preview"
 }
 
 fzfgrep() {
+    default='enter:become(open-in-nvim {})'
+    filename="ctrl-f:become[echo {} | cut -d: -f1 | (echo -n '$WIKI_DIR'/ && cat)]"
+    bat='ctrl-b:become(open-in-bat {})'
+    rich='ctrl-r:become(open-in-rich {})'
+    line='ctrl-l:become(open-in-bat {} single-line)'
+
+    preview='bat -l=md --style=numbers --color=always --highlight-line {2} {1}'
+
+    rg --line-number --no-heading --color=always --smart-case \
+          --glob '*.{tid,md}' "${@}" \
+        | fzf -d ':' --ansi --no-sort --exit-0 \
+          --bind "$default,$bat,$rich,$filename,$line" \
+          --preview-window 'down:40%:+{2}' \
+          --preview "$preview"
+}
+
+fzfcombined() {
     default='enter:become(open-in-nvim {})'
     filename="ctrl-f:become[echo {} | cut -d: -f1 | (echo -n '$WIKI_DIR'/ && cat)]"
     line='ctrl-l:become(open-in-bat {} single-line)'
@@ -57,20 +79,22 @@ fzfgrep() {
 
     preview='bat -l=md --style=numbers --color=always --highlight-line {2} {1}'
 
-    rg --line-number --no-heading --color=always --smart-case \
-          --glob '*.{tid,md}' "${@}" \
-        | fzf -d ':' -n 2.. --ansi --no-sort --exit-0 \
+    (fd -etid -emd "$*" | sed 's|^\./||' | sed 's/$/:1/' ;\
+     rg --line-number --no-heading --color=always --smart-case \
+          --glob '*.{tid,md}' "${@}") \
+        | fzf -d ':' --ansi --no-sort --exit-0 \
           --bind "$default,$bat,$rich,$filename,$line" \
           --preview-window 'down:40%:+{2}' \
           --preview "$preview"
 }
 
 case "$1" in
-new) shift; new;;
+""|-h|--help) usage ;;
+new) shift; new "$@" ;;
 list) cd "$WIKI_DIR" && fd -etid -emd ;;
 find) shift; cd "$WIKI_DIR" && fd -etid -emd "$*" ;;
 ifind) shift; cd "$WIKI_DIR" && fzffind "$@" ;;
 grep) shift; cd "$WIKI_DIR" && rg -g '*.{tid,md}' "$@" ;;
 igrep) shift; cd "$WIKI_DIR" && fzfgrep "$@" ;;
-""|-h|--help|*) usage;;
+*) cd "$WIKI_DIR" && fzfcombined "$@" ;;
 esac
