@@ -41,3 +41,6 @@ zG  add word under the cursor as a good word to temporary wordlist
 ␣hs  stage hunk
 
 :Tab /|/l0  Align table at '|', left aligned, no spaces
+
+# create helptags
+vim -u NONE -c "helptags fugitive/doc" -c q
