@@ -893,6 +893,7 @@ nnoremap <Leader>ftl :set ft=log<CR>
 nnoremap <Leader>fti :set ft=ini<CR>
 nnoremap <Leader>fts :set ft=sh<CR>
 nnoremap <Leader>ftb :set ft=bash<CR>
+nnoremap <Leader>ftm :set ft=markdown<CR>
 
 " open/search word(s) in current/working/home/root/git_root directory with FZF
 nnoremap <Leader>uc :exec "call FZF_word_dir('', '" . expand("%:p:h") . "')"<CR>
