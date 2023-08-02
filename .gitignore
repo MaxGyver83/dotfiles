@@ -12,3 +12,6 @@ fish/.config/fish/functions/__z_complete.fish
 qtile/.config/qtile/__pycache__/
 vis/.config/vis/plugins
 vis/.config/vis/themes
+cheatsheets/l4.txt
+*~undo-tree~
+nohup.out
