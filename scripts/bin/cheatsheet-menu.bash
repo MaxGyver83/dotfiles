@@ -13,6 +13,12 @@ if [ "$1" = "-w" ]; then
   exit 0
 fi
 
+show_cheatsheet() {
+    nohup $SCRIPT $CHEATSHEET_DIR/$1.txt &
+    sleep 0.1
+}
+
+
 options='
 vim
 tmux
@@ -29,10 +35,10 @@ options=$(echo "$options" | sed -e "s/\(^.\)/${red}${bold}\1${normal} \1/")
 echo -e "Show cheatsheet:\n$options" | sed 's/^/ /'
 read -rsn1 key
 
-case $key in
-  v) nohup $SCRIPT $CHEATSHEET_DIR/vim.txt & ;;
-  t) nohup $SCRIPT $CHEATSHEET_DIR/tmux.txt & ;;
-  a) nohup $SCRIPT $CHEATSHEET_DIR/aerc.txt & ;;
-  m) nohup $SCRIPT $CHEATSHEET_DIR/misc.txt & ;;
+case "$key" in
+  v) show_cheatsheet vim ;;
+  t) show_cheatsheet tmux ;;
+  a) show_cheatsheet aerc ;;
+  m) show_cheatsheet misc ;;
   *) echo Canceled. ;;
 esac
