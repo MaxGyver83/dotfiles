@@ -44,3 +44,7 @@ zG  add word under the cursor as a good word to temporary wordlist
 
 # create helptags
 vim -u NONE -c "helptags fugitive/doc" -c q
+
+F2  save session
+F3  load session
+F4  load autosession
