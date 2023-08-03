@@ -166,6 +166,14 @@ export MACHINE
 
 export ABDUCO_CMD=fish
 
+copy_line_to_x_clipboard () {
+  # using OSC 52
+  printf "\e]52;c;%s\a" "$(printf %s "$READLINE_LINE" | openssl base64 -A)"
+  # using the X clipboard
+  # printf %s "$READLINE_LINE" | xclip -selection CLIPBOARD
+}
+bind -x '"\C-y": copy_line_to_x_clipboard'
+
 # use locate to find a file in home directory and highlight matches
 locateh() {
   # case sensitive
