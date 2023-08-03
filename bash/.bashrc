@@ -87,8 +87,8 @@ fi
 
 if [ -f ~/.bash_prompt ]; then
     source ~/.bash_prompt
-elif [ -f ~/dotfiles/bash/.bash_prompt ]; then
-    source ~/dotfiles/bash/.bash_prompt
+elif [ -f ~/.dotfiles/bash/.bash_prompt ]; then
+    source ~/.dotfiles/bash/.bash_prompt
 else
     PS1="\n\u@\h:\w \$ "
 fi
