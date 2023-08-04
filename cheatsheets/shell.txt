@@ -1,0 +1,9 @@
+shell
+=====
+
+${parameter#word}   Remove matching prefix pattern (## = greedy).
+${parameter%word}   Remove matching suffix pattern (%% = greedy).
+${parameter:-word}  Use word as default if parameter is not defined.
+
+{ list; }           Group command, executed in current shell environment.
+( list )            Subshell.

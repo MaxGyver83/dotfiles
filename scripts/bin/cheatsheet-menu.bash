@@ -6,6 +6,7 @@ CHEATSHEET_DIR=~/.dotfiles/cheatsheets
 options='
 vim
 tmux
+shell
 aerc
 misc
 '
@@ -40,6 +41,7 @@ read -rsn1 key
 case "$key" in
   v) show_cheatsheet vim ;;
   t) show_cheatsheet tmux ;;
+  s) show_cheatsheet shell ;;
   a) show_cheatsheet aerc ;;
   m) show_cheatsheet misc ;;
   *) echo Canceled. ;;
