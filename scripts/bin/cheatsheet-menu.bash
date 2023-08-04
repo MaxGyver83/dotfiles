@@ -3,16 +3,10 @@
 SCRIPT=~/bin/cheatsheet.bash
 CHEATSHEET_DIR=~/.dotfiles/cheatsheets
 
-options='
-vim
-tmux
-shell
-aerc
-misc
-'
+options="$(ls -1 $CHEATSHEET_DIR | sed s/\.txt//)"
 
 lines="$(echo "$options" | wc -l)"
-lines=$((lines + 1))
+lines=$((lines + 2))
 
 # when called with option -w, run this script in a new alacritty window
 if [ "$1" = "-w" ]; then
@@ -24,11 +18,6 @@ if [ "$1" = "-w" ]; then
   exit 0
 fi
 
-show_cheatsheet() {
-    nohup $SCRIPT $CHEATSHEET_DIR/$1.txt &
-    sleep 0.1
-}
-
 # print first letter in red at the beginning of each line
 bold=$(tput bold)
 red=$(tput setaf 1)
@@ -39,10 +28,15 @@ echo -e "Show cheatsheet:\n$options" | sed 's/^/ /'
 read -rsn1 key
 
 case "$key" in
-  v) show_cheatsheet vim ;;
-  t) show_cheatsheet tmux ;;
-  s) show_cheatsheet shell ;;
-  a) show_cheatsheet aerc ;;
-  m) show_cheatsheet misc ;;
-  *) echo Canceled. ;;
+$'\e'|""|"\t"|"\n") echo "Cancel."; sleep 0.5; exit 1 ;;
 esac
+
+# show cheatsheet beginning with entered letter
+glob="$CHEATSHEET_DIR/$key*.txt"
+if ls $glob &>/dev/null; then
+  nohup $SCRIPT $glob &
+  sleep 0.1
+else
+  echo "No cheatsheet found starting with '$key'!"
+  sleep 1
+fi
