@@ -1,0 +1,25 @@
+#!/bin/sh
+
+cachedir=${XDG_CACHE_HOME:-"$HOME/.cache"}
+cache=$cachedir/dmenu_run
+hist=$cachedir/dmenu_run_history
+histsize=50
+
+[ ! -e "$cachedir" ] && mkdir -p "$cachedir"
+
+[ ! -e "$hist" ] && touch "$hist"
+
+cmd=$(
+    IFS=:
+    if stest -dqr -n "$cache" $PATH; then
+        (tac "$hist" ; stest -flx $PATH | sort -u | tee "$cache" ) | dmenu "$@"
+    else
+        (tac "$hist"; cat "$cache") | dmenu "$@"
+    fi
+    )
+
+echo "$cmd" | ${SHELL:-"/bin/sh"} &
+notify-send "exec $cmd" &
+
+sed -i -e "/^${cmd}$/d;${histsize}q" "$hist"
+echo "$cmd" >> "$hist"
