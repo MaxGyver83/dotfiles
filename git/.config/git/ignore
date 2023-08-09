@@ -2,3 +2,7 @@
 *.swp
 *.swo
 tags
+tags.lock
+tags.temp
+.notags
+.exrc
