@@ -79,9 +79,12 @@ fzfcombined() {
 
     preview='bat -l=md --style=numbers --color=always --highlight-line {2} {1}'
 
-    (fd -etid -emd "$*" | sed 's|^\./||' | sed 's/$/:1/' ;\
+    or_regex="$(echo $* | tr ' ' '|')"
+    and_regex=""
+    for part in "$@"; do and_regex="${and_regex}(?=.*$part)"; done
+    (fd -etid -emd . | rg --pcre2 "$and_regex" | sed 's|^\./||' | sed 's/$/:1/' ;\
      rg --line-number --no-heading --color=always --smart-case \
-          --glob '*.{tid,md}' "${@}") \
+          --glob '*.{tid,md}' "$or_regex") \
         | fzf -d ':' --ansi --no-sort --exit-0 \
           --bind "$default,$bat,$rich,$filename,$line" \
           --preview-window 'down:40%:+{2}' \
