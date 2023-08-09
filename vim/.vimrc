@@ -46,6 +46,7 @@ if &term != 'cygwin'
     syntax match SpecialKey /^☐ .*/
 endif
 highlight clear SignColumn
+let g:markdown_fenced_languages = ['py=python', 'python', 'c', 'cpp', 'sh', 'bash=sh', 'vim', 'yaml']
 
 " Allow to use Ctrl-s and Ctrl-q as keybinds even when not started from a
 " shell
@@ -98,8 +99,7 @@ autocmd BufRead,BufNewFile **/dwm.c set autoindent noexpandtab tabstop=4 shiftwi
 autocmd BufRead,BufNewFile *.js.tid set filetype=javascript noexpandtab tabstop=4 shiftwidth=4
 autocmd BufRead,BufNewFile *.h,*.c set filetype=c
 autocmd BufRead,BufNewFile *.gnu set filetype=gnuplot
-
-" let g:markdown_fenced_languages = ['py=python', 'python', 'c', 'cpp', 'sh', 'bash=sh', 'yaml']
+autocmd BufRead,BufNewFile tags-* set filetype=tags
 
 " disable MUcomplete for fish and for git commit messages
 autocmd BufEnter * if &ft ==# 'gitcommit' || &ft ==# 'fish' | MUcompleteAutoOff | else | MUcompleteAutoOn | endif
@@ -249,13 +249,13 @@ endif
 
 " copy complete file content to system clipboard
 " noremap <Leader>ca gg"+yG``
-noremap <Leader>ca :%y+<cr>
+nnoremap <Leader>ca :%y+<cr>
 
 " copy relative path/full path/just filename/full path + line number to clipboard
-noremap <Leader>cr :let @+ = expand("%")<cr>
-noremap <Leader>cp :let @+ = expand("%:p")<cr>
-noremap <Leader>cn :let @+ = expand("%:t")<cr>
-noremap <Leader>cl :let @+ = expand("%:p").' +'.line(".")<cr>
+nnoremap <Leader>cr :let @+ = expand("%")<cr>
+nnoremap <Leader>cp :let @+ = expand("%:p")<cr>
+nnoremap <Leader>cn :let @+ = expand("%:t")<cr>
+nnoremap <Leader>cl :let @+ = expand("%:p").' +'.line(".")<cr>
 
 " copy file/selection formatted as HTML for emails (no line numbers)
 let g:html_number_lines = 0
@@ -348,6 +348,9 @@ nnoremap <silent><C-Down> :call search('\%' . virtcol('.') . 'v\S', 'W')<CR>
 autocmd FileType python nnoremap <buffer> <Leader>x :w !python3<cr>
 " execute selection in python
 autocmd FileType python xnoremap <buffer> <Leader>x :w !python3<cr>
+
+" run file in Go
+autocmd FileType go nmap <Leader>x <Plug>(go-run)
 
 " compile and run a rust project
 autocmd FileType rust nnoremap <buffer> <Leader>x :w !cargo run<cr>
@@ -925,6 +928,7 @@ nnoremap <Leader>fti :set ft=ini<CR>
 nnoremap <Leader>fts :set ft=sh<CR>
 nnoremap <Leader>ftb :set ft=bash<CR>
 nnoremap <Leader>ftm :set ft=markdown<CR>
+nnoremap <Leader>ftt :set ft=tags<CR>
 
 " open/search word(s) in current/working/home/root/git_root directory with FZF
 nnoremap <Leader>uc :exec "call FZF_word_dir('', '" . expand("%:p:h") . "')"<CR>
