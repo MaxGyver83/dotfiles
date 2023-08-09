@@ -1,0 +1,35 @@
+Jira
+====
+
+[Description|https://example.com]  
+{{monospace}}                      (escape underscores in monospace: \_)
+[~username]                        
+??citation??                       (single line?)
+-deleted-                          
+
+
+Code block
+----------
+
+{code:bash}
+x="${1#https://}"
+{code}
+
+
+Block quote
+-----------
+
+bq. A block quote paragraph.
+
+{quote}
+Block quote of
+one or more paragraphs.
+{quote}
+
+
+Table
+-----
+
+||heading 1||heading 2||heading 3||
+|col A1|col A2|col A3|
+|col B1|col B2|col B3|
