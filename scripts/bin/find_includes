@@ -24,6 +24,7 @@ not_found=""
 search_file() {
     file="$1"
     # echo "File = $file"
+    # --max-results=1 prints a random result if there is more than one
     matches="$(fd --type file --max-results=1 --full-path --case-sensitive "[/^]$file\$" $directory_list)"
     if [ "$matches" ]; then
         # first grep -v, then head -n 1?
