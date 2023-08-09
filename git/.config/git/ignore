@@ -4,5 +4,6 @@
 tags
 tags.lock
 tags.temp
+tags-*
 .notags
 .exrc
