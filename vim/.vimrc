@@ -243,8 +243,8 @@ nnoremap <Leader>,tw :set wrap!<cr>
 " copy current line/selection into tmux buffer and paste into second pane
 " This mapping is made for sending code lines to ipython3. Disable %autoindent first!
 if exists('$TMUX')
-    nnoremap <Leader><Return> yy \| :silent call system('tmux load-buffer -',@") \| :silent exe '!tmux paste -t 2' \| exe ':redraw!'<cr>
-    xnoremap <Leader><Return> y \| :silent call system('tmux load-buffer -',@") \| :silent exe '!tmux paste -t 2 \; send -t 2 Enter' \| exe ':redraw!'<cr>
+    nnoremap <Leader><Return> yy \| <cmd>call PasteUnnamedRegisterInOtherTmuxPane()<cr>
+    xnoremap <Leader><Return> y \| <cmd>call PasteUnnamedRegisterInOtherTmuxPane()<cr>
 endif
 
 " copy complete file content to system clipboard
@@ -705,6 +705,16 @@ function! SynStack()
     endfor
 endfunction
 nmap <leader><leader>h :call SynStack()<CR>
+
+function! PasteUnnamedRegisterInOtherTmuxPane()
+    let s = @"
+    if s[len(s)-1] != "\n"
+        let s = s . "\n"
+    endif
+    silent call system('tmux load-buffer -', s)
+    " paste-buffer -p ? (bracketed paste mode)
+    silent exe '!tmux paste-buffer -t \!'
+endfunction
 
 function! Sum()
     :'<,'>w !awk '{s+=$1} END {print s}'
