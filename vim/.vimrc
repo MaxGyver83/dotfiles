@@ -84,12 +84,12 @@ autocmd FileType python syn match Function '\%([^[:cntrl:][:space:][:punct:][:di
 autocmd FileType c nmap gca A // | nmap gco o// | nmap gcO O// 
 autocmd FileType cpp setlocal omnifunc=
 autocmd FileType hare let g:hare_recommended_style = 1
-
+autocmd FileType gnuplot setlocal commentstring=#\ %s
+autocmd FileType mail setlocal nojoinspaces formatoptions=watqc
 " Autocompletion for python3 (currently replaced by jedi-vim)
 " if has('python3')
     " autocmd FileType python set omnifunc=python3complete#Complete
 " endif
-autocmd FileType mail setlocal nojoinspaces formatoptions=watqc
 autocmd BufRead,BufNewFile ~/Documents/notes/*.txt setlocal syntax=sh
 autocmd BufRead,BufNewFile **/conanfile.txt setlocal filetype=toml
 autocmd BufRead,BufNewFile **/kmonad/*.kbd setlocal filetype=clojure
@@ -97,6 +97,9 @@ autocmd BufRead,BufNewFile /tmp/*.kbd setlocal filetype=clojure
 autocmd BufRead,BufNewFile **/dwm.c set autoindent noexpandtab tabstop=4 shiftwidth=4
 autocmd BufRead,BufNewFile *.js.tid set filetype=javascript noexpandtab tabstop=4 shiftwidth=4
 autocmd BufRead,BufNewFile *.h,*.c set filetype=c
+autocmd BufRead,BufNewFile *.gnu set filetype=gnuplot
+
+" let g:markdown_fenced_languages = ['py=python', 'python', 'c', 'cpp', 'sh', 'bash=sh', 'yaml']
 
 " disable MUcomplete for fish and for git commit messages
 autocmd BufEnter * if &ft ==# 'gitcommit' || &ft ==# 'fish' | MUcompleteAutoOff | else | MUcompleteAutoOn | endif
