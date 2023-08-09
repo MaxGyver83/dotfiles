@@ -42,6 +42,10 @@ zG  add word under the cursor as a good word to temporary wordlist
 
 :Tab /|/l0  Align table at '|', left aligned, no spaces
 
+# vim-swap
+g>  move function argument right
+gs  move function argument interactively
+
 # create helptags
 vim -u NONE -c "helptags fugitive/doc" -c q
 
