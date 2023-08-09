@@ -18,8 +18,10 @@ cmd=$(
     fi
     )
 
+[ "$cmd" ] || exit
+
 echo "$cmd" | ${SHELL:-"/bin/sh"} &
-notify-send "exec $cmd" &
+notify-send "exec: $cmd" &
 
 sed -i -e "/^${cmd}$/d;${histsize}q" "$hist"
 echo "$cmd" >> "$hist"
