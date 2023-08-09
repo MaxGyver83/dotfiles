@@ -226,22 +226,30 @@ noremap <Leader>d "+d
 noremap <Leader>p "+p
 noremap <Leader>P "+P
 
-" copy complete file content to system clipboard
-" noremap <Leader>ca gg"+yG``
-noremap <Leader>ca :%y+<cr>
+" reload vimrc
+nnoremap <Leader>,r :source $MYVIMRC<cr>
+nnoremap <Leader>,s :WrapShellCommand<cr>
+nnoremap <Leader>,w :TrimWhitespace<cr>
+nnoremap <Leader>,c :StripColorCodes<cr>
+nnoremap <Leader>,g :GitHub<cr>
+" spell language english/deutsch/both
+nnoremap <Leader>,le :set spelllang=en \| set spell<cr>
+nnoremap <Leader>,ld :set spelllang=de \| set spell<cr>
+nnoremap <Leader>,lb :set spelllang=en,de \| set spell<cr>
+" toggle spell, wrap
+nnoremap <Leader>,ts :set spell!<cr>
+nnoremap <Leader>,tw :set wrap!<cr>
 
-
-" copy current line/selection into tmux buffer
-if exists('$TMUX')
-    nnoremap <Leader>, yy \| :call system('tmux load-buffer -',@")<cr>
-    xnoremap <Leader>, y \| :call system('tmux load-buffer -',@")<cr>
-endif
 " copy current line/selection into tmux buffer and paste into second pane
 " This mapping is made for sending code lines to ipython3. Disable %autoindent first!
 if exists('$TMUX')
     nnoremap <Leader><Return> yy \| :silent call system('tmux load-buffer -',@") \| :silent exe '!tmux paste -t 2' \| exe ':redraw!'<cr>
     xnoremap <Leader><Return> y \| :silent call system('tmux load-buffer -',@") \| :silent exe '!tmux paste -t 2 \; send -t 2 Enter' \| exe ':redraw!'<cr>
 endif
+
+" copy complete file content to system clipboard
+" noremap <Leader>ca gg"+yG``
+noremap <Leader>ca :%y+<cr>
 
 " copy relative path/full path/just filename/full path + line number to clipboard
 noremap <Leader>cr :let @+ = expand("%")<cr>
@@ -600,8 +608,18 @@ command! TrimWhitespace call TrimWhitespace()
 
 command! StripColorCodes %s/\e\[[0-9;]*m//g
 
+function! WrapShellCommand()
+    % s#\v +--# \\\r  --#g
+endfunction
+command! WrapShellCommand call WrapShellCommand()
+
 function! GitHub()
-    :execute ':!xdg-open https://github.com/' . shellescape(trim(expand('<cWORD>'), "\',"))
+    if $DISPLAY == ':0'
+        execute ':!xdg-open https://github.com/' . shellescape(trim(expand('<cWORD>'), "\',"))
+    else
+        let l:url = 'https://github.com/' . trim(expand('<cWORD>'), "\',")
+        call OSCYank(l:url)
+    endif
 endfunction
 command! GitHub call GitHub()
 
