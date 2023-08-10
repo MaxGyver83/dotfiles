@@ -30,6 +30,19 @@ if [ "$GALLERY" = 1 ]; then
 elif [ "$OCR" = 1 ]; then
   ~/bin/ocr-region-to-clipboard.bash && notify-send "Copied to clipboard:" "$(xsel -bo)"
 
+elif [ "$TYPE" = Region ] && command -v sx4 > /dev/null 2>&1 ; then
+  geometry="$(sx4)"
+  [ "$geometry" ] || exit
+  FILENAME="$(date '+%F %H.%M.%S') $(echo "$geometry" | cut -d, -f3- | tr , x) $TYPE.png"
+  if [ "$CLIPBOARD" = 1 ]; then
+    FILENAME=/tmp/"$FILENAME"
+    sxot -g $geometry | optipng-pipe | tee "$FILENAME" | copyq write image/png -
+  else
+    FILENAME=~/Screenshots/"$FILENAME"
+    sxot -g $geometry | optipng-pipe > "$FILENAME"
+  fi
+  notify-send "$FILENAME"
+
 else
   FILENAME='%Y-%m-%d %H.%M.%S $wx$h '$TYPE.png
   NOTIFICATION='echo "$f" && notify-send -u low "$f"'
