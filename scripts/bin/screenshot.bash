@@ -3,7 +3,7 @@
 show_help() {
   echo "Arguments:
   -c|--clipboard   Save screenshot in /tmp and copy into clipboard
-  -s|--screen      Take screenshot of all screens
+  -s|--screen      Take screenshot of all screens (with sxot: current screen!?)
   -w|--window      Take screenshot of active window
   -r|--region      Select region for screenshot
   -o|--ocr         Select region, do OCR and copy recognized text to clipboard
@@ -30,18 +30,37 @@ if [ "$GALLERY" = 1 ]; then
 elif [ "$OCR" = 1 ]; then
   ~/bin/ocr-region-to-clipboard.bash && notify-send "Copied to clipboard:" "$(xsel -bo)"
 
-elif [ "$TYPE" = Region ] && command -v sx4 > /dev/null 2>&1 ; then
-  geometry="$(sx4)"
-  [ "$geometry" ] || exit
-  FILENAME="$(date '+%F %H.%M.%S') $(echo "$geometry" | cut -d, -f3- | tr , x) $TYPE.png"
-  if [ "$CLIPBOARD" = 1 ]; then
-    FILENAME=/tmp/"$FILENAME"
-    sxot -g $geometry | optipng-pipe | tee "$FILENAME" | copyq write image/png -
-  else
-    FILENAME=~/Screenshots/"$FILENAME"
-    sxot -g $geometry | optipng-pipe > "$FILENAME"
-  fi
-  notify-send "$FILENAME"
+elif command -v sxot > /dev/null 2>&1 ; then
+  pgrep picom > /dev/null && PICOM=1 && pkill picom
+  DATE="$(date '+%F %H.%M.%S')"
+  case "$TYPE" in
+  Region)
+    geometry="$(sx4)"
+    [ "$geometry" ] || { [ "$PICOM" ] && picom; exit; }
+    WxH="$(echo "$geometry" | cut -d, -f3- | tr , x) "
+    GEOMETRY_ARGS="-g $geometry"
+    ;;
+  Window)
+    geometry="$(xdotool getwindowfocus getwindowgeometry | awk '/Position|Geometry/ {print $2}' | tr x , | paste -sd ,)"
+    [ "$geometry" ] || { [ "$PICOM" ] && picom; exit; }
+    WxH="$(echo "$geometry" | cut -d, -f3- | tr , x) "
+    GEOMETRY_ARGS="-g $geometry"
+    ;;
+  Screen)
+    # TODO: add "wxh"?
+    WxH=''
+    GEOMETRY_ARGS=''
+    ;;
+  *) exit 1 ;;
+  esac
+
+  [ "$CLIPBOARD" = 1 ] && DIR=/tmp || DIR=~/Screenshots
+  FILENAME="$DIR/$DATE ${WxH}$TYPE.png"
+
+  sxot $GEOMETRY_ARGS | ffmpeg -hide_banner -loglevel error -i - "$FILENAME"
+  [ "$CLIPBOARD" = 1 ] && copyq write image/png - < "$FILENAME"
+  notify-send -t 1000 -u low "$FILENAME"
+  [ "$PICOM" ] && picom
 
 else
   FILENAME='%Y-%m-%d %H.%M.%S $wx$h '$TYPE.png
