@@ -509,14 +509,10 @@ noremap ü 10gk
 noremap ö 10gj
 nmap ß @
 
-nnoremap j k
-nnoremap k j
-nnoremap l h
-nnoremap h l
-xnoremap j k
-xnoremap k j
-xnoremap l h
-xnoremap h l
+noremap j k
+noremap k j
+noremap l h
+noremap h l
 
 " navigate between windows (incl. terminal) with Alt+h/j/k/l
 " (only valid for VOU keyboard layout)
