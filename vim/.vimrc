@@ -232,6 +232,7 @@ nnoremap <Leader>,s :WrapShellCommand<cr>
 nnoremap <Leader>,w :TrimWhitespace<cr>
 nnoremap <Leader>,c :StripColorCodes<cr>
 nnoremap <Leader>,g :GitHub<cr>
+nnoremap <Leader>,o :CloseOtherBuffers<cr>
 " spell language english/deutsch/both
 nnoremap <Leader>,le :set spelllang=en \| set spell<cr>
 nnoremap <Leader>,ld :set spelllang=de \| set spell<cr>
