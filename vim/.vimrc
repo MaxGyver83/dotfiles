@@ -249,23 +249,22 @@ if exists('$TMUX')
 endif
 
 " copy complete file content to system clipboard
-" noremap <Leader>ca gg"+yG``
-nnoremap <Leader>ca :%y+<cr>
+nnoremap <Leader>,ya :%y+<cr>
 
 " copy relative path/full path/just filename/full path + line number to clipboard
-nnoremap <Leader>cr :let @+ = expand("%")<cr>
-nnoremap <Leader>cp :let @+ = expand("%:p")<cr>
-nnoremap <Leader>cn :let @+ = expand("%:t")<cr>
-nnoremap <Leader>cl :let @+ = expand("%:p").' +'.line(".")<cr>
+nnoremap <Leader>,fr :let @+ = expand("%") \| :echo getreg('+')<cr>
+nnoremap <Leader>,fp :let @+ = expand("%:p") \| :echo getreg('+')<cr>
+nnoremap <Leader>,fn :let @+ = expand("%:t") \| :echo getreg('+')<cr>
+nnoremap <Leader>,fl :let @+ = expand("%:p").' +'.line(".") \| :echo getreg('+')<cr>
 
 " copy file/selection formatted as HTML for emails (no line numbers)
 let g:html_number_lines = 0
 let g:html_no_progress = 1
 let g:html_pre_wrap = 0
-nnoremap <Leader>ch :TOhtml \| call MakeHtmlReadyForEmail() \| %y+ \| bw!<cr>
-xnoremap <Leader>ch :TOhtml \| call MakeHtmlReadyForEmail() \| %y+ \| bw!<cr>
-nnoremap <Leader>ce :TOhtml \| call MakeHtmlReadyForEmail() \| exe 'w !xclip -sel clip -t text/html' \| bw!<cr>
-xnoremap <Leader>ce :TOhtml \| call MakeHtmlReadyForEmail() \| exe 'w !xclip -sel clip -t text/html' \| bw!<cr>
+" nnoremap <Leader>ch :TOhtml \| call MakeHtmlReadyForEmail() \| %y+ \| bw!<cr>
+" xnoremap <Leader>ch :TOhtml \| call MakeHtmlReadyForEmail() \| %y+ \| bw!<cr>
+" nnoremap <Leader>ce :TOhtml \| call MakeHtmlReadyForEmail() \| exe 'w !xclip -sel clip -t text/html' \| bw!<cr>
+" xnoremap <Leader>ce :TOhtml \| call MakeHtmlReadyForEmail() \| exe 'w !xclip -sel clip -t text/html' \| bw!<cr>
 
 " show diff between buffer and saved file
 nnoremap <Leader>i :w !diff --color % -<cr>
