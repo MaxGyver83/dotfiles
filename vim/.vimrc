@@ -72,6 +72,7 @@ set shiftwidth=4     " 1 tab == 4 spaces
 set expandtab        " tabs are spaces
 set autoindent       " indent new lines
 set listchars=tab:\|_ " show tabs as |_
+set listchars+=lead:· " show leading spaces as ·
 set list             " show non-printable chars
 
 " Workaround for bug https://github.com/vim/vim/issues/7742
