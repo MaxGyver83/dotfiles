@@ -1,9 +1,11 @@
 *.o
 *.swp
 *.swo
+*.patch
 tags
 tags.lock
 tags.temp
 tags-*
+cscope.*
 .notags
 .exrc
