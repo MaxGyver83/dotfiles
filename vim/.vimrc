@@ -209,6 +209,22 @@ if has('nvim')
     autocmd BufEnter,BufNew term://* startinsert
 endif
 
+if has("cscope")
+    " set csprg=/usr/local/bin/cscope
+    " ctags matches first:
+    set cscopetagorder=1
+    set cscopetag
+    set nocscopeverbose
+    if filereadable("cscope.out")
+        cs add cscope.out
+    elseif $CSCOPE_DB != ""
+        cs add $CSCOPE_DB
+    endif
+    set cscopeverbose
+    " cscope: Find functions calling this function
+    nnoremap <space>cc :cscope find c <C-R>=expand("<cword>")<CR><CR>
+endif
+
 "---------
 " mappings
 "---------
