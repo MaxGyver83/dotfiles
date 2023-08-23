@@ -517,6 +517,10 @@ noremap h l
 " navigate between windows (incl. terminal) with Alt+h/j/k/l
 " (only valid for VOU keyboard layout)
 if !has('nvim')
+    execute "set <A-a>=\ea"
+    execute "set <A-e>=\ee"
+    execute "set <A-o>=\eo"
+    execute "set <A-i>=\ei"
     execute "set <A-b>=\eb"
     execute "set <A-t>=\et"
     execute "set <A-r>=\er"
