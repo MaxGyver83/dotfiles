@@ -23,6 +23,7 @@ unmapAllExcept(['f', 'q', 'i', ';e', 'T', '<Ctrl-6>'], /maximilian-schillinger\.
 unmapAllExcept(['f', 'q', 'i', ';e', 'T', '<Ctrl-6>'], /http:\/\/127\.0\.0\.1:8080/i);
 unmapAllExcept(['f', 'q', 'i', ';e', 'T', '<Ctrl-6>'], /localhost:8080/);
 unmapAllExcept(['f', 'q', 'i', ';e', 'T', '<Ctrl-6>'], /\/Downloads\/Wiki\//);
+unmapAllExcept(['f', 'q', 'i', ';e', 'T', '<Ctrl-6>'], /TW5\/editions\/tw5\.com\/output\/index\.html/);
 //unmap('t', /http:\/\/127\.0\.0\.1:8080/i);
 
 map('`', "'"); // use ` instead of '
