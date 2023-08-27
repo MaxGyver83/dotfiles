@@ -57,6 +57,9 @@ set -x LESS_TERMCAP_us (printf "\033[1;32m")     # begin underline
 set -x LESS_TERMCAP_ue (printf "\033[0m")        # reset underline
 set -x GROFF_NO_SGR 1                            # for konsole and gnome-terminal
 
+# colors for ls
+set -x LS_COLORS "$LS_COLORS*.c=0;38;5;34:*.h=0;38;5;36:*.d=0;38;5;245:*.o=0;38;5;242:"
+
 # colors for exa
 set -x EXA_COLORS 'nb=38;5;7:nk=38;5;228:nm=38;5;208:ng=38;5;199:sb=38;5;7:uu=37:un=31'
 
