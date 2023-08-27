@@ -20,6 +20,8 @@ run() {
 # See https://unix.stackexchange.com/a/230442/305474
 export NO_AT_BRIDGE=1
 
+PATH="$PATH:~/.local/bin"
+
 # numlockx off
 ~/bin/start-kmonad.fish --keyboard all &
 #xset r rate 300 50
@@ -27,7 +29,7 @@ export NO_AT_BRIDGE=1
 run dunst
 echo "$(timestamp) Switch to external screen (if available)"
 if [ "$(hostname)" = 'max-laptop' ]; then
-  [ "$(head -1 /sys/class/drm/card0-DP-1/modes)" = '2560x1440' ] && ~/.screenlayout/layout.sh external
+  [ "$(head -1 /sys/class/drm/card0-DP-1/modes)" = '2560x1440' ] || [ "$(head -1 /sys/class/drm/card1-DP-1/modes)" = '2560x1440' ] && ~/.screenlayout/layout.sh external
 elif xrandr | grep -q 3840x2160 ; then
   ~/.screenlayout/layout.sh external 4K
 elif xrandr | grep -q 2560x1440 ; then
