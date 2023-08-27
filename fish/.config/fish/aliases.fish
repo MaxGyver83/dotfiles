@@ -79,7 +79,7 @@ abbr pc 'patool create'
 abbr pd 'patool diff'
 
 type -q nvim && set VIM 'nvim' || set VIM 'vim'
-abbr v "$VIM"
+abbr v "vim"
 abbr vim "$VIM"
 abbr vimdiff "$VIM -d"
 alias vv=$VIM' -c "normal '\''0"'
