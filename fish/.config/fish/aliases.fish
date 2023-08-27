@@ -200,7 +200,8 @@ alias disp 'bass source ~/bin/update-DISPLAY.sh'
 
 abbr vlime 'sbcl --load ~/.vim/pack/plugins/start/vlime/lisp/start-vlime.lisp'
 
-abbr en 'LC_ALL=C'
+# abbr en 'LC_ALL=C'
+abbr en 'LANG=en_US.UTF-8'
 
 # source work related / private stuff (not part of the dotfiles repo)
 if [ -f $HOME/.config/fish/local.fish ]
