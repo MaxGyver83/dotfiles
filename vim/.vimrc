@@ -1136,6 +1136,7 @@ highlight HighlightedyankRegion ctermbg=229 ctermfg=none cterm=none
 
 " vim-gutentags
 let g:gutentags_ctags_exclude = ['tags', 'virtual_envs', '.ccls-cache', '.mypy_cache', '*.json', '*.rst', '*.md', '*.css', '*.js', '*.html', '*.diff', '*.patch', '*.svg', '*.tex', '*.pb']
+let g:gutentags_exclude_filetypes = ['tags', 'diff', 'text', 'md', 'css']
 let g:gutentags_exclude_project_root = ['/usr/local', '/home/max/.password-store']
 let g:gutentags_project_root = ['.gutentags']
 set tags+=tags-external
