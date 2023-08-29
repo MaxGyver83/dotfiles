@@ -136,8 +136,8 @@ set spelllang=de,en
 
 " highlight trailing whitespaces (except when typing at the end of a line)
 highlight ExtraWhitespace ctermbg=red guibg=red
-autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
-autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd BufWinEnter * if expand('%') != 'REPL' | match ExtraWhitespace /\s\+$/ | endif
+autocmd InsertEnter * if expand('%') != 'REPL' | match ExtraWhitespace /\s\+\%#\@<!$/ | endif
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
 " also highlight no-break spaces (U+00A0) and narrow no-break spaces (U+202F),
