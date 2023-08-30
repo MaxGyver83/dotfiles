@@ -41,7 +41,8 @@ MaxGyver83/vim-textobj-brace
 easymotion/vim-easymotion
 unblevable/quick-scope
 chaoren/vim-wordmotion
-ludovicchabant/vim-gutentags
+# ludovicchabant/vim-gutentags
+MaxGyver83/vim-gutentags
 preservim/tagbar
 
 # open, find and search files
@@ -72,6 +73,13 @@ start+=(
 tommcdo/vim-fubitive
 taketwo/vim-ros
 )
+else
+start+=(
+fatih/vim-go
+ziglang/zig.vim
+guns/vim-sexp
+tpope/vim-sexp-mappings-for-regular-people
+)
 fi
 
 opt=(
@@ -95,6 +103,7 @@ xolox/vim-colorscheme-switcher
 jacquesbh/vim-showmarks
 pechorin/any-jump.vim
 will133/vim-dirdiff
+puremourning/vimspector
 # balanceiskey/vim-framer-syntax
 # justinmk/vim-sneak
 # frazrepo/vim-rainbow  # colored brackets
@@ -103,9 +112,30 @@ will133/vim-dirdiff
 COLOR_RED="\033[1;31m"
 COLOR_YELLOW="\033[0;33m"
 COLOR_GREEN="\033[0;32m"
+COLOR_BLUE="\033[0;34m"
 COLOR_GRAY="\033[0;38;5;240m"
 BOLD="\033[1m"
 RESET="\033[0m"
+
+update_plugins() {
+    mkdir -p ~/log
+    logfile=~/log/update-vim-plugins.log
+    printf "\n###################\n" >> "$logfile"
+    date "+%Y-%m-%d %H:%M:%S" >> "$logfile"
+    for p in ~/.vim/pack/plugins/start/* ~/.vim/pack/plugins/opt/*; do
+        dir="$(dirname $p)"
+        plugin="$(basename $p)"
+        printf "\n$dir/${COLOR_BLUE}${BOLD}${plugin}${RESET} "
+        cd $p
+        git rev-parse --short HEAD
+        git pull
+    done | tee -a "$logfile"
+}
+
+case $1 in
+-u|--update)
+    update_plugins; exit;;
+esac
 
 function clone_repo {
     sleep 0.1
