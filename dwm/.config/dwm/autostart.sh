@@ -11,9 +11,15 @@ timestamp() {
 run() {
   if ! pgrep -f "$1"
   then
-    echo $(timestamp) Run: $@
+    echo "$(timestamp) Run: $@"
     $@&
   fi
+}
+
+restart() {
+  pkill "$1" && action=Restart || action=Run
+  echo "$(timestamp) $action: $@"
+  $@&
 }
 
 # Get rid of some dbind warnings.
@@ -50,7 +56,7 @@ fi
 run nm-applet
 run pasystray
 run blueman-applet
-pkill copyq; run copyq
+restart copyq
 run sxhkd
 internxt="$(\ls ~/install/Internxt-Drive-* | head -n 1)"
 [ "$internxt" ] && run "$internxt"
@@ -72,9 +78,7 @@ export SSH_AUTH_SOCK
 if ! pgrep '^st$' ; then
   tmux has-session -t 0 && run 'st -e tmux a -t 0' || st -e tmux &
 fi
-echo "$(timestamp) (Re)start Firefox"
-pkill firefox
-firefox &
+restart firefox
 echo "$(timestamp) Sleep for 1 second"
 sleep 1
 echo "$(timestamp) Focus tmux:"
