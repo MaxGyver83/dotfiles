@@ -1135,11 +1135,30 @@ let g:highlightedyank_highlight_duration = 500
 highlight HighlightedyankRegion ctermbg=229 ctermfg=none cterm=none
 
 " vim-gutentags
+" let g:gutentags_define_advanced_commands = 1
 let g:gutentags_ctags_exclude = ['tags', 'virtual_envs', '.ccls-cache', '.mypy_cache', '*.json', '*.rst', '*.md', '*.css', '*.js', '*.html', '*.diff', '*.patch', '*.svg', '*.tex', '*.pb']
-let g:gutentags_exclude_filetypes = ['tags', 'diff', 'text', 'md', 'css']
+" let g:gutentags_exclude_filetypes = ['tags', 'diff', 'text', 'md', 'css', 'readline']
 let g:gutentags_exclude_project_root = ['/usr/local', '/home/max/.password-store']
 let g:gutentags_project_root = ['.gutentags']
 set tags+=tags-external
+autocmd FileType python  let b:gutentags_ctags_extra_args = ['--languages=Python']
+autocmd FileType cpp     let b:gutentags_ctags_extra_args = ['--languages=C++']
+autocmd FileType vim     let b:gutentags_ctags_extra_args = ['--languages=Vim']
+autocmd FileType sh      let b:gutentags_ctags_extra_args = ['--languages=Sh']
+autocmd FileType c       let b:gutentags_ctags_extra_args = ['-h=.c.h']
+
+function! GutentagsInitFunction(file)
+    " echo a:file
+    if index(['c', 'cpp', 'python', 'sh', 'vim'], &ft) >= 0
+        execute 'setl tags=tags-'.&ft.'-external'
+        let b:gutentags_ctags_tagfile = "tags-" . &ft
+        return 1
+    endif
+    " ignore all other filetypes
+    return 0
+endfunction
+
+let g:gutentags_init_user_func = 'GutentagsInitFunction'
 
 " tagbar
 nmap <F8> :TagbarToggle f<CR>
