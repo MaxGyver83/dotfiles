@@ -9,7 +9,7 @@ timestamp() {
 }
 
 run() {
-  if ! pgrep -f "$1" ;
+  if ! pgrep -f "$1"
   then
     echo $(timestamp) Run: $@
     $@&
@@ -50,7 +50,7 @@ fi
 run nm-applet
 run pasystray
 run blueman-applet
-run copyq
+pkill copyq; run copyq
 run sxhkd
 internxt="$(\ls ~/install/Internxt-Drive-* | head -n 1)"
 [ "$internxt" ] && run "$internxt"
@@ -72,12 +72,12 @@ export SSH_AUTH_SOCK
 if ! pgrep '^st$' ; then
   tmux has-session -t 0 && run 'st -e tmux a -t 0' || st -e tmux &
 fi
-if ! pgrep -f firefox ; then
-  echo "$(timestamp) Start Firefox"
-  firefox &
-  echo "$(timestamp) Sleep for 1 second"
-  sleep 1
-  echo "$(timestamp) Focus tmux:"
-  wmctrl -a tmux
-fi
+echo "$(timestamp) (Re)start Firefox"
+pkill firefox
+firefox &
+echo "$(timestamp) Sleep for 1 second"
+sleep 1
+echo "$(timestamp) Focus tmux:"
+wmctrl -a tmux
+
 echo "$(timestamp) autostart.sh done"

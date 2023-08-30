@@ -35,8 +35,9 @@ while true; do
         dpi=''
         devPixelsPerPx=1.3
     fi
-    # append $dpi to ~/.Xresources if not already contained
-    [ "$dpi" ] && ! grep -q "$dpi" ~/.Xresources && echo "$dpi" >> ~/.Xresources
+    # remove current dpi settings and append $dpi to ~/.Xresources
+    sed -iE '/^(Xft|rofi).dpi.*/d' ~/.Xresources
+    [ "$dpi" ] && echo "$dpi" >> ~/.Xresources
     if test -e ~/.mozilla/firefox/5c2gkmrd.default-release
     then
         echo "user_pref(\"layout.css.devPixelsPerPx\", \"$devPixelsPerPx\");" > ~/.mozilla/firefox/5c2gkmrd.default-release/user.js
