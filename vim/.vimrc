@@ -1140,7 +1140,7 @@ let g:gutentags_ctags_exclude = ['tags', 'virtual_envs', '.ccls-cache', '.mypy_c
 " let g:gutentags_exclude_filetypes = ['tags', 'diff', 'text', 'md', 'css', 'readline']
 let g:gutentags_exclude_project_root = ['/usr/local', '/home/max/.password-store']
 let g:gutentags_project_root = ['.gutentags']
-set tags+=tags-external
+" set tags+=tags-external
 autocmd FileType python  let b:gutentags_ctags_extra_args = ['--languages=Python']
 autocmd FileType cpp     let b:gutentags_ctags_extra_args = ['--languages=C++']
 autocmd FileType vim     let b:gutentags_ctags_extra_args = ['--languages=Vim']
