@@ -39,7 +39,7 @@ read -rsn1 key
 case $key in
   l) png="$(xdg-user-dir PICTURES)/Leo4.png" && test -f "$png" && i3lock -n -e -f -i "$png" -t || i3lock -n -e -f -c 333333 ;;
   k) [ $WM = bspwm ] && bspc wm -r || pkill -f '^dwm' ;;
-  e) [ $WM = bspwm ] && { pkill -x panel ; bspc quit; } || pkill dwm ;;
+  e) [ $WM = bspwm ] && { pkill -x panel ; bspc quit; } || { pkill xinit || pkill dwm; } ;;
   r) systemctl reboot ;;
   s) systemctl poweroff ;;
   *) echo Canceled. ;;
