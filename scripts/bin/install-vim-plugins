@@ -61,6 +61,7 @@ justinmk/vim-syntax-extra  # improved syntax highlighting for C
 inkarkat/vim-SyntaxRange  # different syntax for part of a file
 inkarkat/vim-ingo-library
 Galicarnax/vim-regex-syntax  # syntax highlighting for regexs
+kovisoft/slimv
 
 # other
 guns/xterm-color-table.vim
