@@ -9,7 +9,7 @@ timestamp() {
 }
 
 run() {
-  if ! pgrep -f "$1"
+  if ! pgrep -fa "$1"
   then
     echo "$(timestamp) Run: $@"
     $@&
@@ -17,10 +17,23 @@ run() {
 }
 
 restart() {
-  pkill "$1" && action=Restart || action=Run
+  if [ $RESTART ]; then
+    if [ $DPI_CHANGED ]; then
+      # restart $1 if it's already running
+      pkill "$1" && action=Restart || return
+    else
+      echo "$(timestamp) WM restarted, no DPI change: Ignore '$@'."
+      return
+    fi
+  else
+    action=Run
+  fi
   echo "$(timestamp) $action: $@"
   $@&
 }
+
+echo "RESTART=$RESTART"
+echo "DPI_CHANGED=$DPI_CHANGED"
 
 # Get rid of some dbind warnings.
 # See https://unix.stackexchange.com/a/230442/305474
@@ -75,7 +88,7 @@ export SSH_AUTH_SOCK
 # fi ) &
 
 # start st with tmux and Firefox if not yet running
-if ! pgrep '^st$' ; then
+if ! pgrep -a '^st$' ; then
   tmux has-session -t 0 && run 'st -e tmux a -t 0' || st -e tmux &
 fi
 restart firefox

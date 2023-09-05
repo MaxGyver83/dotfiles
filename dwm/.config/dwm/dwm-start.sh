@@ -20,6 +20,7 @@ msteams_cookies="$HOME/.config/Microsoft/Microsoft Teams/Cookies"
 
 # start dwm
 while true; do
+    devPixelsPerPxOld=$devPixelsPerPx
     if xrandr | grep -q 3840x2160
     then
         # HiDPI settings for the 4k display in the office
@@ -35,6 +36,8 @@ while true; do
         dpi=''
         devPixelsPerPx=1.3
     fi
+    [ "$devPixelsPerPx" = "$devPixelsPerPxOld" ] && DPI_CHANGED= || DPI_CHANGED=1
+    export DPI_CHANGED
     # remove current dpi settings and append $dpi to ~/.Xresources
     sed -iE '/^(Xft|rofi).dpi.*/d' ~/.Xresources
     [ "$dpi" ] && echo "$dpi" >> ~/.Xresources
@@ -47,4 +50,5 @@ while true; do
     xrdb ~/.Xresources
     # Log stderror to a file
     dwm > ~/log/dwm.log 2>&1
+    export RESTART=1
 done
