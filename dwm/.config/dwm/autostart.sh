@@ -45,7 +45,7 @@ PATH="$PATH:~/.local/bin"
 ~/bin/start-kmonad.fish --keyboard all &
 #xset r rate 300 50
 #xinput set-prop 'ETPS/2 Elantech Touchpad' 'libinput Natural Scrolling Enabled' 1
-run dunst
+restart dunst
 echo "$(timestamp) Switch to external screen (if available)"
 if [ "$(hostname)" = 'max-laptop' ]; then
   [ "$(head -1 /sys/class/drm/card0-DP-1/modes)" = '2560x1440' ] || [ "$(head -1 /sys/class/drm/card1-DP-1/modes)" = '2560x1440' ] && ~/.screenlayout/layout.sh external
