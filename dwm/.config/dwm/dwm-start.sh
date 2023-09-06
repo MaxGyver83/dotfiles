@@ -39,7 +39,7 @@ while true; do
     [ "$devPixelsPerPx" = "$devPixelsPerPxOld" ] && DPI_CHANGED= || DPI_CHANGED=1
     export DPI_CHANGED
     # remove current dpi settings and append $dpi to ~/.Xresources
-    sed -iE '/^(Xft|rofi).dpi.*/d' ~/.Xresources
+    sed -i -E '/^(Xft|rofi)\.dpi.*/d' ~/.Xresources
     [ "$dpi" ] && echo "$dpi" >> ~/.Xresources
     if test -e ~/.mozilla/firefox/5c2gkmrd.default-release
     then
