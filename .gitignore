@@ -5,13 +5,17 @@ byobu/.byobu/.tmux_history
 byobu/.byobu/backend
 byobu/.byobu/color
 byobu/.byobu/windows
+dunst/.config/dunst/dunstrc
 fish/.config/fish/functions/__z.fish
 fish/.config/fish/functions/__z_add.fish
 fish/.config/fish/functions/__z_clean.fish
 fish/.config/fish/functions/__z_complete.fish
+scripts/bin/office
+scripts/bin/home-office
 qtile/.config/qtile/__pycache__/
 vis/.config/vis/plugins
 vis/.config/vis/themes
 cheatsheets/l4.txt
 *~undo-tree~
 nohup.out
+tags-*
