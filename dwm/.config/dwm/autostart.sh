@@ -32,6 +32,7 @@ restart() {
   $@&
 }
 
+echo "$(timestamp) Start running autostart.sh"
 echo "RESTART=$RESTART"
 echo "DPI_CHANGED=$DPI_CHANGED"
 
@@ -42,7 +43,8 @@ export NO_AT_BRIDGE=1
 PATH="$PATH:~/.local/bin"
 
 # numlockx off
-~/bin/start-kmonad.fish --keyboard all &
+echo "$(timestamp) Run start-kmonad.fish --keyboard all"
+{ ~/bin/start-kmonad.fish --keyboard all; echo "$(timestamp) start-kmonad.fish done"; } &
 #xset r rate 300 50
 #xinput set-prop 'ETPS/2 Elantech Touchpad' 'libinput Natural Scrolling Enabled' 1
 restart dunst
@@ -55,6 +57,7 @@ elif xrandr | grep -q 2560x1440 ; then
   ~/.screenlayout/layout.sh external
   # [ $(xrandr | grep -wc connected) -eq 3 ] && ~/.screenlayout/2x-acer.sh
 fi
+echo "$(timestamp) Switching to external screen (if available) done"
 # echo "$(timestamp) Set first (=laptop) display to 70% brightness"
 # set first (=laptop) display to 70% brightness
 # xrandr --output $(xrandr | grep -w connected | head -n 1 | cut -d " " -f1) --brightness 0.7
