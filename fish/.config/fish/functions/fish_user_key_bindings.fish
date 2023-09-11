@@ -4,9 +4,12 @@ function fish_user_key_bindings
     # Ctrl-w: delete bigword (p.e. whole path with Ctrl-w, as in bash)
     bind \cw backward-kill-bigword
 
+    # Ctrl-b : duplicate previous bigword
+    bind \cb backward-kill-bigword yank yank
+
     # jump bigword with Ctrl+b/f
-    bind \cb backward-bigword
-    bind \cf forward-bigword
+    # bind \cb backward-bigword
+    # bind \cf forward-bigword
 
     # jump bigword with Shift+LeftArrow/RightArrow
     # (fish default, does work in gnome-terminal and st but not in alacritty)
