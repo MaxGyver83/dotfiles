@@ -32,6 +32,7 @@ elif [ "$OCR" = 1 ]; then
 
 elif command -v sxot > /dev/null 2>&1 ; then
   pgrep picom > /dev/null && PICOM=1 && pkill picom
+  pgrep compton > /dev/null && COMPTON=1 && pkill compton
   DATE="$(date '+%F %H.%M.%S')"
   case "$TYPE" in
   Region)
@@ -59,8 +60,9 @@ elif command -v sxot > /dev/null 2>&1 ; then
 
   sxot $GEOMETRY_ARGS | ffmpeg -hide_banner -loglevel error -i - "$FILENAME"
   [ "$CLIPBOARD" = 1 ] && copyq write image/png - < "$FILENAME"
-  notify-send -t 1000 -u low "$FILENAME"
-  [ "$PICOM" ] && picom
+  notify-send -t 1000 -u low "$FILENAME" -i "$FILENAME"
+  [ "$PICOM" ] && nohup picom &
+  [ "$COMPTON" ] && nohup compton &
 
 else
   FILENAME='%Y-%m-%d %H.%M.%S $wx$h '$TYPE.png
