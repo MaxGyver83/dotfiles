@@ -1023,6 +1023,15 @@ nnoremap <Leader>go :GBrowse<cr>
 xnoremap <Leader>go :'<,'>GBrowse<cr>
 nnoremap <Leader>gpl :Git pull<cr>
 nnoremap <Leader>gps :Git push<cr>
+" git log of current file/current/working/git_root directory
+nnoremap <Leader>glf :Git log -20 --oneline -- %<cr>
+nnoremap <Leader>glc :Git log -20 --oneline -- %:h<cr>
+nnoremap <Leader>glw :execute ":Git log -20 --oneline -- " . getcwd()<cr>
+nnoremap <Leader>glg :Git log -20 --oneline<cr>
+nnoremap <Leader>gLf :Git log -20 --stat -- %<cr>
+nnoremap <Leader>gLc :Git log -20 --stat -- %:h<cr>
+nnoremap <Leader>gLw :execute ":Git log -20 --stat -- " . getcwd()<cr>
+nnoremap <Leader>gLg :Git log -20 --stat<cr>
 
 " ale
 nnoremap <Leader>ae :pa ale \| ALEEnable \| ALELint<cr>
