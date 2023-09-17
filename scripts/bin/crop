@@ -1,0 +1,46 @@
+#!/bin/sh
+usage() {
+    echo "Usage:
+crop [160x90+0+0] ORIGINAL.png [CROPPED.png]
+
+First argument: WxH+X+Y. If omitted, user can select a region (with mpv + sx4).
+If the third argument is omitted, it defaults to <ORIGINAL>_cropped<.png>.
+"
+    exit 0
+}
+
+die() {
+    echo "$1"; exit 1
+}
+
+is_geometry() {
+    # check if argument contains only digits, x, + and -
+    test "$(expr length "$1")" = "$(expr $1 : '[0-9x+-]\+')"
+}
+
+default_output_name() {
+    basename="${1%.*}"
+    extension="${1##*.}"
+    # image.png → image_cropped.png
+    echo "${basename}_cropped.${extension}"
+}
+
+case "$1" in
+""|-h|--help) usage;;
+esac
+
+if is_geometry "$1"; then
+    geometry="$1"
+    shift
+else
+    command -v sx5 || die "sx4 required to select a region.
+https://codeberg.org/MaxGyver83/sx4"
+    command -v mpv || die "mpv required to display an image for region selection."
+    geometry="$(select-region-mpv "$1")"
+fi
+
+original="$1"
+cropped="${2:-$(default_output_name "$original")}"
+
+magick "$original" +repage -crop "$geometry" "$cropped"
+echo "$cropped"

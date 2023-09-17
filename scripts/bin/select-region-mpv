@@ -1,0 +1,10 @@
+#!/bin/sh
+filename="$1"
+
+mpv --no-config --video-align-y=-1 --video-align-x=-1 --fullscreen \
+         --video-unscaled=yes --keep-open=yes "$filename" > /dev/null &
+proc=$!
+geom="$(sx4)"
+kill $proc
+geom="$(echo ${geom#*,*,} | tr , x)+$(echo ${geom%,*,*} | tr , +)"
+echo "$geom"
