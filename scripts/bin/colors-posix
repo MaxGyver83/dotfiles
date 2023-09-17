@@ -1,0 +1,33 @@
+#!/bin/sh
+MAP666_START=16
+MAP666_SIZE=$((6*6*6))
+SHADES_OF_GRAY_START=$((MAP666_START + MAP666_SIZE))
+
+for i in $(seq 0 8 15); do
+    for column in $(seq 0 7); do
+        c=$((i+column))
+        color_string=$(printf %11s colour$c)
+        printf "\033[38;5;${c}m${color_string}\033[0m "
+    done
+    printf "\n"
+done
+printf "\n"
+
+for i in $(seq $MAP666_START 6 $((SHADES_OF_GRAY_START-1))); do
+    for column in $(seq 0 5); do
+        c=$((i+column))
+        color_string=$(printf %11s colour$c)
+        printf "\033[38;5;${c}m${color_string}\033[0m "
+    done
+    printf "\n"
+done
+printf "\n"
+
+for i in $(seq $SHADES_OF_GRAY_START 8 255); do
+    for column in $(seq 0 7); do
+        c=$((i+column))
+        color_string=$(printf %11s colour$c)
+        printf "\033[38;5;${c}m${color_string}\033[0m "
+    done
+    printf "\n"
+done
