@@ -13,6 +13,9 @@ fish/.config/fish/functions/__z_complete.fish
 scripts/bin/office
 scripts/bin/home-office
 qtile/.config/qtile/__pycache__/
+vim/.vim/.Vimball*
+vim/.vim/pack
+vim/.vim/spell
 vis/.config/vis/plugins
 vis/.config/vis/themes
 cheatsheets/l4.txt
