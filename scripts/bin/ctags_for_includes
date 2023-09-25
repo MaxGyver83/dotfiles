@@ -7,7 +7,7 @@ ctags_for_includes [--skip-gcc] [--list|--errors] [--include-dirs DIR1,DIR2] [PA
 --errors     Only list error from 'gcc -M' and 'find_includes'.
 --skip-gcc   Skip 'gcc -M', rely only on 'find_includes'.
 Otherwise create tags for all C(++) files in given project directories/current directory
-(+ subdirectories) and write to 'tags-external'.
+(+ subdirectories) and write to 'tags-c-external'.
 
 Example:
 In catkin_project/src:
@@ -51,6 +51,6 @@ else
       | grep '\S' \
       | sort -u \
       | grep '^/' \
-      | ctags --c++-kinds=+p -o tags-external -L -
-    find_includes -I $INCLUDE_DIRS $PROJECT_DIRS | ctags --c++-kinds=+p -a -o tags-external -L -
+      | ctags --c++-kinds=+p -o tags-c-external -L -
+    find_includes -I $INCLUDE_DIRS $PROJECT_DIRS | ctags --c++-kinds=+p -a -o tags-c-external -L -
 fi
