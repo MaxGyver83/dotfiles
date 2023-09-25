@@ -13,6 +13,7 @@ done &
 # fix for bug with floating windows and Java programs
 export _JAVA_AWT_WM_NONREPARENTING=1
 #export AWT_TOOLKIT=MToolkit
+export XDG_SESSION_TYPE=x11
 
 mkdir -p ~/log
 msteams_cookies="$HOME/.config/Microsoft/Microsoft Teams/Cookies"
