@@ -33,7 +33,7 @@ if is_geometry "$1"; then
     geometry="$1"
     shift
 else
-    command -v sx5 || die "sx4 required to select a region.
+    command -v sx4 || die "sx4 required to select a region.
 https://codeberg.org/MaxGyver83/sx4"
     command -v mpv || die "mpv required to display an image for region selection."
     geometry="$(select-region-mpv "$1")"
