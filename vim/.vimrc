@@ -1017,7 +1017,7 @@ nnoremap <Leader>gm /\v^\<\<\<\<\<\<\< \|\=\=\=\=\=\=\=$\|\>\>\>\>\>\>\> /<cr>
 
 " vim-fugitive (git support)
 nnoremap <Leader>gg :G<cr>
-nnoremap <Leader>gd :Gdiff<cr>
+nnoremap <Leader>gd :Gvdiffsplit<cr>
 nnoremap <Leader>gb :Git blame<cr>
 nnoremap <Leader>go :GBrowse<cr>
 xnoremap <Leader>go :'<,'>GBrowse<cr>
