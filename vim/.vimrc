@@ -1154,6 +1154,7 @@ let g:gutentags_project_root = ['.gutentags']
 " set tags+=tags-external
 autocmd FileType python  let b:gutentags_ctags_extra_args = ['--languages=Python']
 autocmd FileType cmake   let b:gutentags_ctags_extra_args = ['--languages=CMake']
+autocmd FileType lisp    let b:gutentags_ctags_extra_args = ['--languages=Lisp']
 autocmd FileType cpp     let b:gutentags_ctags_extra_args = ['--languages=C++']
 autocmd FileType vim     let b:gutentags_ctags_extra_args = ['--languages=Vim']
 autocmd FileType sh      let b:gutentags_ctags_extra_args = ['--languages=Sh']
@@ -1161,7 +1162,7 @@ autocmd FileType c       let b:gutentags_ctags_extra_args = ['-h=.c.h']
 
 function! GutentagsInitFunction(file)
     " echo a:file
-    if index(['c', 'cpp', 'cmake', 'python', 'sh', 'vim'], &ft) >= 0
+    if index(['c', 'cpp', 'cmake', 'lisp', 'python', 'sh', 'vim'], &ft) >= 0
         execute 'setl tags=tags-'.&ft.'-external'
         let b:gutentags_ctags_tagfile = "tags-" . &ft
         return 1
