@@ -68,6 +68,14 @@ super + alt + s
     # ~/bin/rofi-power.bash
     # sudo shutdown -h now
 
+# best monitor for current setup
+super + alt + b
+    ~/.screenlayout/layout.sh auto
+
+# other monitor
+super + alt + o
+    ~/.screenlayout/layout.sh other
+
 # lock screen
 super + alt + l
     png="$(xdg-user-dir PICTURES)/Leo5_2560x1440.png" && test -f "$png" && i3lock -e -f -i "$png" -t || i3lock -e -f -c 333333
