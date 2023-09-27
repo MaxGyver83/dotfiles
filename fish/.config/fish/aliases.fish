@@ -110,11 +110,14 @@ alias bate='bat --pager="less +G"'
 abbr rich 'python -m rich.markdown -c'
 
 abbr cv "$VIM ~/.vimrc"
-abbr cn "$VIM ~/.config/nvim/init.vim"
+abbr cnv "$VIM ~/.config/nvim/init.vim"
+abbr cl "$VIM ~/.vim/after/ftplugin/lisp.vim"
 abbr cf "$VIM ~/.config/fish/config.fish"
 abbr ca "$VIM ~/.config/fish/aliases.fish"
-abbr cl "$VIM ~/.config/fish/local.fish"
+abbr cfl "$VIM ~/.config/fish/local.fish"
+abbr cn "vim ~/.config/nyxt/config.lisp"
 abbr cs "$VIM ~/.config/sxhkd/sxhkdrc"
+abbr cst "vim ~/.config/stumpwm/config"
 abbr ct "$VIM ~/.tmux.conf"
 abbr ce "$VIM ~/.config/emacs/init.el"
 abbr ck "$VIM ~/.config/kmonad/vou-linux-de-rctrl.kbd"
@@ -125,8 +128,8 @@ abbr asdf 'xhost &> /dev/null && setxkbmap de koy && xkbcomp -w 0 ~/bin/vou-tabw
 alias vou='setxkbmap de koy && xkbcomp -w 0 ~/bin/vou.xkb $DISPLAY'
 abbr k '~/bin/start-kmonad.fish -k all'
 abbr m 'pkill kmonad ; unbuffer ./keyboard-layouts --device "/dev/input/by-id/usb-Keychron_Keychron_K6-event-kbd" | tee ~/log/keyboard-layouts-(date "+%Y-%m-%d %H.%M.%S").log'
-abbr qq 'pkill try_three_times ; pkill run_forever ; pkill kmonad ; pkill keyboard-layouts'
-abbr QQ 'pkill try_three_times ; pkill run_forever ; pkill kmonad ; pkill keyboard-layouts'
+abbr qq 'pkill try_three_times ; pkill run_forever ; pkill kmonad ; pkill -f keyboard-layouts'
+abbr QQ 'pkill try_three_times ; pkill run_forever ; pkill kmonad ; pkill -f keyboard-layouts'
 abbr s 'xrandr | grep -q 2560x1440 && ~/.screenlayout/peaq-usb.sh || ~/.screenlayout/laptop.sh'
 # redshift: red=night mode (darker, redish), notred=day mode
 # abbr red 'redshift -P -O 3500 -b 0.7 || redshift -O 3500 -b 0.7'
@@ -199,6 +202,8 @@ abbr simpleprompt 'function fish_prompt; echo \n(prompt_pwd)\ ▶\ ; end'
 alias disp 'bass source ~/bin/update-DISPLAY.sh'
 
 abbr vlime 'sbcl --load ~/.vim/pack/plugins/start/vlime/lisp/start-vlime.lisp'
+
+alias nyxt 'XDG_SESSION_TYPE=x11 VISUAL=gvim command nyxt'
 
 # abbr en 'LC_ALL=C'
 abbr en 'LANG=en_US.UTF-8'
