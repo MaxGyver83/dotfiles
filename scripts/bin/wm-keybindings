@@ -1,0 +1,4 @@
+#!/bin/sh
+
+rg XK_ ~/repos/my-dwm/config.h | sort
+rg -A 1 'super ?\+' ~/.config/sxhkd/sxhkdrc | sd '\n    ' '\t' | rg . | rg -v '^(--|#)' | sort
