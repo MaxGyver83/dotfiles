@@ -11,9 +11,11 @@ options='
 S All screen
 W Active window
 R Select region
+L Last region
 s All screens
 w Active window (/tmp + clipboard)
 r Select region or window (/tmp + clipboard)
+l last region (/tmp + clipboard)
 o OCR region (to clipboard)
 g Gallery of screenshots: Select one to be copied to clipboard (`mq`)
 '
@@ -28,7 +30,7 @@ echo -e "Select an option:\n$options"
 read -rsn1 key
 
 case $key in
-  S|W|R|O|o|g) nohup sh -c "~/bin/screenshot.bash -${key,,} &" ;;
-  s|w|r)       nohup sh -c "~/bin/screenshot.bash -$key -c &" ;;
-  *)           echo Canceled. ;;
+  S|W|R|L|O|o|g) nohup sh -c "~/bin/screenshot.bash -${key,,} &" ;;
+  s|w|r|l)       nohup sh -c "~/bin/screenshot.bash -$key -c &" ;;
+  *)             echo Canceled. ;;
 esac

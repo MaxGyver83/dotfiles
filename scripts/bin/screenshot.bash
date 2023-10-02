@@ -6,21 +6,27 @@ show_help() {
   -s|--screen      Take screenshot of all screens (with sxot: current screen!?)
   -w|--window      Take screenshot of active window
   -r|--region      Select region for screenshot
+  -l|--last-region Use same region as last time
   -o|--ocr         Select region, do OCR and copy recognized text to clipboard
   -g|--gallery     Select a screenshot (from ~/Screenshots and /tmp) to copy into clipboard
 "
 }
 
-while [[ "$#" > 0 ]]; do case $1 in
-  -h|--help) show_help; exit 0;shift;;
+[ "$#" = 0 ] && { show_help; exit 0; }
+
+while [[ "$#" > 0 ]]; do case "$1" in
+  -h|--help|"") show_help; exit 0;shift;;
   -c|--clipboard) CLIPBOARD=1;shift;;
   -s|--screen) PARAM=''  ; TYPE='Screen'; shift;;
   -w|--window) PARAM='-u'; TYPE='Window'; shift;;
   -r|--region) PARAM='-s'; TYPE='Region'; shift;;
+  -l|--last-region) PARAM='-s'; TYPE='Last'; shift;;
   -o|--ocr) OCR=1;shift;;
   -g|--gallery) GALLERY=1;shift;;
   *) show_help; echo "Unknown parameter passed: $1"; exit 1; shift; shift;;
 esac; done
+
+GEOMETRY_FILE='/tmp/geometry'
 
 sleep 0.2
 
@@ -34,9 +40,16 @@ elif command -v sxot > /dev/null 2>&1 ; then
   pgrep picom > /dev/null && PICOM=1 && pkill picom
   pgrep compton > /dev/null && COMPTON=1 && pkill compton
   DATE="$(date '+%F %H.%M.%S')"
+  [ "$TYPE" = Last ] && [ ! -f "$GEOMETRY_FILE" ] && echo "$GEOMETRY_FILE not found!" && TYPE='Region'
   case "$TYPE" in
+  Last)
+    geometry="$(cat $GEOMETRY_FILE)"
+    WxH="$(echo "$geometry" | cut -d, -f3- | tr , x) "
+    GEOMETRY_ARGS="-g $geometry"
+    ;;
   Region)
     geometry="$(sx4)"
+    echo "$geometry" > "$GEOMETRY_FILE"
     [ "$geometry" ] || { [ "$PICOM" ] && picom; exit; }
     WxH="$(echo "$geometry" | cut -d, -f3- | tr , x) "
     GEOMETRY_ARGS="-g $geometry"
