@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 show_help() {
   echo "Arguments:
@@ -14,7 +14,7 @@ show_help() {
 
 [ "$#" = 0 ] && { show_help; exit 0; }
 
-while [[ "$#" > 0 ]]; do case "$1" in
+while [ "$#" -gt 0 ]; do case "$1" in
   -h|--help|"") show_help; exit 0;shift;;
   -c|--clipboard) CLIPBOARD=1;shift;;
   -s|--screen) PARAM=''  ; TYPE='Screen'; shift;;

@@ -30,7 +30,7 @@ echo -e "Select an option:\n$options"
 read -rsn1 key
 
 case $key in
-  S|W|R|L|O|o|g) nohup sh -c "~/bin/screenshot.bash -${key,,} &" ;;
-  s|w|r|l)       nohup sh -c "~/bin/screenshot.bash -$key -c &" ;;
+  S|W|R|L|O|o|g) nohup sh -c "~/bin/screenshot -${key,,} &" ;;
+  s|w|r|l)       nohup sh -c "~/bin/screenshot -$key -c &" ;;
   *)             echo Canceled. ;;
 esac
