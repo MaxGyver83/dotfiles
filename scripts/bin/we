@@ -1,2 +1,2 @@
 #!/bin/sh
-nvim $(which "$@")
+matches="$(which "$@")" && exec nvim $matches
