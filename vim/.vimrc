@@ -841,7 +841,7 @@ function! GoToFile()
         normal! gf
     catch
         let path = expand("<cfile>")
-        if path[0] == '/'
+        if path[0] == '/' && stridx(path, '/home/') != 0
             let x = path[1:]
             echo 'Not found. Opening ' . x . ' instead.'
             if !empty(glob(x))
