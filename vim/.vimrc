@@ -1188,6 +1188,12 @@ if $SSH_CLIENT != "" || $SSH_TTY != "" || $IN_DOCKER != ""
   nmap <leader>y <Plug>OSCYankOperator
 endif
 
+" vim-easy-align
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
 " termdebug
 packadd termdebug
 let g:termdebug_wide=1
