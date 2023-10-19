@@ -299,8 +299,10 @@ vnoremap <C-s> <C-c>:update<cr>
 inoremap <C-s> <C-c>:update<cr>
 noremap <Leader>w :update<cr>
 
-" close buffer
+" close buffer and split window
 noremap <Leader>b :bd<cr>
+" close buffer but keep split window open
+noremap <Leader>B :b#\|bd #<cr>
 
 " close window
 noremap <Leader>q :q<cr>
