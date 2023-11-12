@@ -3,7 +3,7 @@ usage() {
     echo "Usage:
 crop [160x90+0+0] ORIGINAL.png [CROPPED.png]
 
-First argument: WxH+X+Y. If omitted, user can select a region (with mpv + sx4).
+First argument: WxH+X+Y. If omitted, user can select a region (with mpv + selx).
 If the third argument is omitted, it defaults to <ORIGINAL>_cropped<.png>.
 "
     exit 0
@@ -33,7 +33,7 @@ if is_geometry "$1"; then
     geometry="$1"
     shift
 else
-    command -v sx4 || die "sx4 required to select a region.
+    command -v selx || die "selx required to select a region.
 https://codeberg.org/MaxGyver83/sx4"
     command -v mpv || die "mpv required to display an image for region selection."
     geometry="$(select-region-mpv "$1")"
