@@ -1161,6 +1161,8 @@ autocmd FileType cpp     let b:gutentags_ctags_extra_args = ['--languages=C++']
 autocmd FileType vim     let b:gutentags_ctags_extra_args = ['--languages=Vim']
 autocmd FileType sh      let b:gutentags_ctags_extra_args = ['--languages=Sh']
 autocmd FileType c       let b:gutentags_ctags_extra_args = ['-h=.c.h']
+" hare-jump
+autocmd FileType hare    nnoremap <buffer><silent> <C-t> :HareJumpToDefinition<CR>
 
 function! GutentagsInitFunction(file)
     " echo a:file
