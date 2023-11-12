@@ -9,3 +9,5 @@ tags-*
 cscope.*
 .notags
 .exrc
+nohup.out
+swank.log
