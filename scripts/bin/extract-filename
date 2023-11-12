@@ -1,0 +1,32 @@
+#!/bin/bash
+
+line="$1"
+re_file='[[:alnum:]._-]+'
+re_path="(${re_file}/)+(${re_file})"
+re_path_or_file="(${re_file}/)*(${re_file})"
+
+extract() {
+    if [[ $line =~ ^.*▶ ]]; then
+        line="${line#${BASH_REMATCH[0]}}" # part after "▶"
+    fi
+
+    if [[ $line =~ ^(---|\+\+\+)\ [ab]/($re_path_or_file) ]]; then
+        # echo "diff: ${BASH_REMATCH[2]}"
+        echo "${BASH_REMATCH[2]}"
+    elif [[ $line =~ ^[d.-]r.*\ ($re_file)/?$ ]]; then
+        # echo "ls: ${BASH_REMATCH[1]}"
+        echo "${BASH_REMATCH[1]}"
+    elif [[ $line =~ ($re_path) ]]; then
+        # echo "dir: ${BASH_REMATCH[1]}"
+        echo "${BASH_REMATCH[1]}"
+    elif [[ $line =~ ($re_file) ]]; then
+        # echo "file: ${BASH_REMATCH[1]}"
+        echo "${BASH_REMATCH[1]}"
+    fi
+}
+
+if [ "$line" ]; then
+    extract
+else
+    while read line ; do extract ; done
+fi

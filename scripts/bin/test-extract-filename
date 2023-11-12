@@ -1,0 +1,16 @@
+#!/bin/bash
+
+lines=(
+'main.c'
+'-rw-r--r-- 1 max max  369 22. Okt 21:38 README.md'
+'-rw-r--r-- 1 max max    8 22. Okt 21:38 .gitignore'
+'drwxr-xr-x    - max 12 Nov 17:01 .git/'
+'~/repos/madeline (madeline↑1|✔) ▶ nvim made/line.ha'
+'+++ b/made/line.ha'
+)
+
+for line in "${lines[@]}"; do
+    echo "$line"
+    extract-filename "$line"
+    echo
+done
