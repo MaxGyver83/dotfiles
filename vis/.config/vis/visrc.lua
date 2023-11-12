@@ -31,7 +31,7 @@ vis.events.subscribe(vis.events.WIN_OPEN, function(win)
 	-- Your per window configuration options
 	vis:command('set number')
 	vis:command('set tabwidth 4')
-	vis:command('set show-tabs on')
+	vis:command('set showtabs on')
 end)
 
 my_fzf_args = string.gsub([[
