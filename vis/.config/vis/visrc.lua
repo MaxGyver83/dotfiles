@@ -66,6 +66,11 @@ local plugin_vis_open = require('plugins/vis-fzf-open')
 -- Arguments passed to fzf (default: "")
 plugin_vis_open.fzf_args = my_fzf_args
 
+function fzf_current_dir()
+    local dir = io.popen('dirname ' .. vis.win.file.path):read()
+    vis:command('fzf --search-path ' .. dir)
+end
+
 vis:map(vis.modes.NORMAL, ' w', ':w<Enter>')
 vis:map(vis.modes.NORMAL, ' q', ':q<Enter>')
 vis:map(vis.modes.NORMAL, '<C-s>', ':w<Enter>')
@@ -86,6 +91,7 @@ vis:map(vis.modes.NORMAL, ' y', '"+y')
 vis:map(vis.modes.VISUAL, ' y', '"+y')
 
 vis:map(vis.modes.NORMAL, ' ff', ':fzf<Enter>')
+vis:map(vis.modes.NORMAL, ' fc', fzf_current_dir)
 vis:map(vis.modes.NORMAL, ' fh', ':fzf --search-path $HOME<Enter>')
 vis:map(vis.modes.NORMAL, ' fr', ':fzf --search-path /<Enter>')
 vis:map(vis.modes.NORMAL, ' fg', ':fzf --search-path "$(git rev-parse --show-toplevel<C-s>)"<Enter>')
