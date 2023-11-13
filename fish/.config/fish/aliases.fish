@@ -195,6 +195,7 @@ abbr cpbr 'git rev-parse --abbrev-ref HEAD | tr -d \n | xclip -sel clip'
 # for git 2.22 and newer:
 # abbr cpbr 'git branch --show-current | tr -d \n | xclip -sel clip'
 
+abbr dps 'docker ps --format="table {{.ID}}\t{{.Image}}\t{{.Status}}\t{{.Names}}"'
 abbr cr 'crontab -l | grep --color=never "^[^#]"'
 
 abbr simpleprompt 'function fish_prompt; echo \n(prompt_pwd)\ ▶\ ; end'
