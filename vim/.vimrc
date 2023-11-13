@@ -429,6 +429,7 @@ nnoremap g. g;
 " swap C-] and C-t
 nnoremap <C-]> <C-t>
 nnoremap <C-t> <C-]>
+nnoremap g<C-t> g<C-]>
 
 " move vertically by visual line
 " if a count is given, ignore wrapped lines
