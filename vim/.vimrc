@@ -950,6 +950,8 @@ nnoremap <Leader>ftl :set ft=log<CR>
 nnoremap <Leader>fti :set ft=ini<CR>
 nnoremap <Leader>fts :set ft=sh<CR>
 nnoremap <Leader>ftb :set ft=bash<CR>
+nnoremap <Leader>ftj :set ft=json<CR>
+nnoremap <Leader>fty :set ft=yaml<CR>
 nnoremap <Leader>ftm :set ft=markdown<CR>
 nnoremap <Leader>ftt :set ft=tags<CR>
 
