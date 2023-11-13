@@ -2,12 +2,13 @@
 
 line="$1"
 re_file='[[:alnum:]._-]+'
-re_path="(${re_file}/)+(${re_file})"
-re_path_or_file="(${re_file}/)*(${re_file})"
+re_file_only='[[:alnum:]._-]{5,}'
+re_path="/?(${re_file}/)+(${re_file})"
+re_path_or_file="/?(${re_file}/)*(${re_file})"
 
 extract() {
-    if [[ $line =~ ^.*▶ ]]; then
-        line="${line#${BASH_REMATCH[0]}}" # part after "▶"
+    if [[ $line =~ ^.*[$▶] ]]; then
+        line="${line#${BASH_REMATCH[0]}}" # part after "$" or "▶"
     fi
 
     if [[ $line =~ ^(---|\+\+\+)\ [ab]/($re_path_or_file) ]]; then
@@ -19,7 +20,7 @@ extract() {
     elif [[ $line =~ ($re_path) ]]; then
         # echo "dir: ${BASH_REMATCH[1]}"
         echo "${BASH_REMATCH[1]}"
-    elif [[ $line =~ ($re_file) ]]; then
+    elif [[ $line =~ ($re_file_only) ]]; then
         # echo "file: ${BASH_REMATCH[1]}"
         echo "${BASH_REMATCH[1]}"
     fi
