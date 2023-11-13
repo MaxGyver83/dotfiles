@@ -48,7 +48,7 @@ elif command -v sxot > /dev/null 2>&1 ; then
     GEOMETRY_ARGS="-g $geometry"
     ;;
   Region)
-    geometry="$(sx4)"
+    geometry="$(selx)"
     echo "$geometry" > "$GEOMETRY_FILE"
     [ "$geometry" ] || { [ "$PICOM" ] && picom; exit; }
     WxH="$(echo "$geometry" | cut -d, -f3- | tr , x) "
