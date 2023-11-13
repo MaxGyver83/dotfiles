@@ -833,31 +833,102 @@ endfunction
 vnoremap * :<C-u>call <SID>VSetSearch()<CR>/<CR>
 vnoremap # :<C-u>call <SID>VSetSearch()<CR>?<CR>
 
+fu! StartsWith(longer, shorter) abort
+  return a:longer[0:len(a:shorter)-1] ==# a:shorter
+endfunction
+
+fu! EndsWith(longer, shorter) abort
+  return a:longer[len(a:longer)-len(a:shorter):] ==# a:shorter
+endfunction
+
+" filetype yaml
+function! s:GoToAzureFile()
+    let path = expand("<cfile>")
+    if path[0] == '/' && stridx(path, '/home/') != 0
+        " delete leading slash
+        let x = path[1:]
+        echo 'Not found. Opening ' . x . ' instead.'
+        if !empty(glob(x))
+            silent execute "edit" x
+        else
+            " remove top-most directory and try again
+            let x = substitute(x, '.\{-}/', '', '')
+            if !empty(glob(x))
+                silent execute "edit" x
+            else
+                let x = '..' . path
+                if !empty(glob(x))
+                    silent execute "edit" x
+                endif
+            endif
+        endif
+    endif
+endfunction
+
+" filetype bzl
+function! s:GoToBazelFile()
+    " TODO: load() → jump to function definition
+    let oldisfname = &isfname
+    let &isfname ..= ',:,@-@'
+    let path = expand("<cfile>")
+    let &isfname = oldisfname
+
+    if match(path, '\w') == -1
+        return 0
+    endif
+
+    if StartsWith(path, '@py_deps')
+        let path = path[8:]
+    elseif StartsWith(path, '@athena')
+        let path = path[7:]
+    endif
+
+    if StartsWith(path, '//')
+        let path = path[2:]
+        let git_root = trim(system('git rev-parse --show-toplevel'))
+        if v:shell_error > 0
+            return 0
+        endif
+        let path = git_root..'/'..path
+    else
+        return 0
+    endif
+
+    let tokens = split(path, ':')
+
+    if len(tokens) >= 2 && EndsWith(tokens[1], '.bzl')
+        let path = join(tokens, '/')
+        if !empty(glob(path))
+            silent execute "edit" path
+            return 1
+        endif
+    else
+        let path = tokens[0]..'/BUILD'
+        if !empty(glob(path))
+            silent execute "edit" path
+            if len(tokens) >= 2
+                let target = tokens[1]
+                call search('name *= *"'..target..'"', 'W')
+            endif
+            return 1
+        endif
+    endif
+    return 0
+endfunction
+
 " When gf fails, try again without the first character
 " because p.e. in Azure pipelines '/project/file' might be a relative path.
 " If this fails, too, try opening 'file' (because the working directory might
 " be '/project')
 function! GoToFile()
+    if &ft ==# 'bzl' && s:GoToBazelFile()
+        return
+    endif
     try
         normal! gf
     catch
-        let path = expand("<cfile>")
-        if path[0] == '/' && stridx(path, '/home/') != 0
-            let x = path[1:]
-            echo 'Not found. Opening ' . x . ' instead.'
-            if !empty(glob(x))
-                silent execute "edit" x
-            else
-                let x = substitute(x, '.\{-}/', '', '')
-                if !empty(glob(x))
-                    silent execute "edit" x
-                else
-                    let x = '..' . path
-                    if !empty(glob(x))
-                        silent execute "edit" x
-                    endif
-                endif
-            endif
+        if &ft ==# 'yaml'
+            call s:GoToAzureFile()
         endif
     endtry
 endfunction
