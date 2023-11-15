@@ -12,7 +12,7 @@ super + w
 
 # set random wallpaper
 super + shift + w
-    ~/bin/set-random-wallpaper.bash
+    ~/bin/set-random-wallpaper
 
 # show keybindings cheatsheet
 super + k

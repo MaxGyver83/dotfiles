@@ -1,0 +1,3 @@
+#!/bin/sh
+# test -d /home/max && ~/bin/set-random-wallpaper || feh --bg-fill ~/Pictures/Leo4.jpg
+~/bin/set-random-wallpaper
