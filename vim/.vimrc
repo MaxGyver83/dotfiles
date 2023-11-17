@@ -96,6 +96,7 @@ autocmd FileType mail setlocal nojoinspaces formatoptions=watqc
     " autocmd FileType python set omnifunc=python3complete#Complete
 " endif
 autocmd BufRead,BufNewFile ~/Documents/notes/*.txt setlocal syntax=sh
+autocmd BufRead,BufNewFile /tmp/printscreen setlocal filetype=log
 autocmd BufRead,BufNewFile **/conanfile.txt setlocal filetype=toml
 autocmd BufRead,BufNewFile **/kmonad/*.kbd setlocal filetype=clojure
 autocmd BufRead,BufNewFile /tmp/*.kbd setlocal filetype=clojure
@@ -921,7 +922,7 @@ endfunction
 " If this fails, too, try opening 'file' (because the working directory might
 " be '/project')
 function! GoToFile()
-    if &ft ==# 'bzl' && s:GoToBazelFile()
+    if (&ft ==# 'bzl' || &ft ==# 'log') && s:GoToBazelFile()
         return
     endif
     try
