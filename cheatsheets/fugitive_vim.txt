@@ -8,3 +8,21 @@ u  unstage
 -  stage or unstage
 U  unstage all
 X  discard change (checkout/clean)
+
+
+Custom mappings
+---------------
+␣gg   :G<cr>
+␣gd   :Gvdiffsplit<cr>
+␣gb   :Git blame<cr>
+␣go   :GBrowse<cr>
+␣go   :'<,'>GBrowse<cr>
+␣gpl  :Git pull<cr>
+␣gps  :Git push<cr>
+
+# git log of current file/current/working/git_root directory
+␣glf  :Git log -20 --oneline -- %<cr>
+␣glc  :Git log -20 --oneline -- %:h<cr>
+␣glw  :execute ":Git log -20 --oneline -- " . getcwd()<cr>
+␣glg  :Git log -20 --oneline<cr>
+# Use capital L for --stat
