@@ -936,6 +936,22 @@ endfunction
 
 noremap gf :call GoToFile()<CR>
 
+function! GoToFileWithLineNumber()
+    let path = expand("<cfile>")
+    let pattern = path..'["'':, ]*\(line \)\?\([0-9]\+\)'
+    let matches = matchlist(getline('.'), pattern)
+    if len(matches) >= 3
+        let linenum = matches[2]
+        normal! gf
+        execute linenum
+        return 1
+    endif
+    " fallback to regular gF
+    normal! gF
+endfunction
+
+noremap gF :call GoToFileWithLineNumber()<CR>
+
 command! CloseOtherBuffers silent! execute "%bd|e#|bd#"
 
 "-------------------
