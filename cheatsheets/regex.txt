@@ -1,0 +1,20 @@
+regex
+=====
+
+Always special: ^[].*$
+
+Basic regular expressions (BRE)
+-------------------------------
+* vim, sed, grep: Escape (){}|+?
+
+Extended regular expressions (ERE)
+----------------------------------
+* sed -E, grep -E, awk, rg, fd
+
+Example
+-------
+Match 4 or 5 digits, followed by one or more spaces,
+followed by Köln or Bonn:
+
+BRE: [0-9]\{4,5\} \+\(Köln\|Bonn\)
+ERE: [0-9]{4,5} +(Köln|Bonn)
