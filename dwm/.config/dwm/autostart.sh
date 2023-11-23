@@ -9,7 +9,7 @@ timestamp() {
 }
 
 run() {
-  if ! pgrep -fa "$1"
+  if ! pgrep -fa "$*"
   then
     echo "$(timestamp) Run: $@"
     $@&
@@ -92,7 +92,8 @@ export SSH_AUTH_SOCK
 
 # start st with tmux and Firefox if not yet running
 if ! pgrep -a '^st$' ; then
-  tmux has-session -t 0 && run 'st -e tmux a -t 0' || st -e tmux &
+  grep -q 'dpi: 150' ~/.Xresources && fontarg='-z 28'
+  tmux has-session -t 0 && run "st $fontarg -e tmux a -t 0" || st $fontarg -e tmux &
 fi
 restart firefox
 echo "$(timestamp) Sleep for 1 second"
