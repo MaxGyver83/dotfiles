@@ -2,14 +2,21 @@
 # notmuch help &> /dev/null && mailinfo="✉$(notmuch search tag:unread | wc -l), " || mailinfo=""
 
 exists() { command -v "$1" > /dev/null 2>&1 ; }
-round() { LC_ALL=C printf '%.0f' "$1"; }
+round() { LC_ALL=C printf '%.0f' "$1" ; }
+office() { ip -br -4 a show dev enx0c379667313c 2> /dev/null | awk '{print $3}' | grep -q '^10\.' ; }
+vpn() { ip -br -4 a show dev tun0 2> /dev/null | awk '{print $3}' | grep -q '^10\.' ; }
+kerb() { klist -s ; }
+
 
 if test -f ~/bin/toggle_bluetooth_profile_WH-XB910N.sh ; then
   headset_profile="$(~/bin/toggle_bluetooth_profile_WH-XB910N.sh --status)"
   [ "$headset_profile" ] && headset_profile="${headset_profile}  "
 fi
 
-[ "$USER" = schimax ] && network=$(~/bin/check_network.bash)"  " || network=""
+if [[ "$USER" =~ sc* ]]; then
+  office || { vpn || network="No VPN "; }
+  kerb || network+="No Kerb "
+fi
 
 monitor_xpos=$(xdotool getactivewindow getwindowgeometry | grep Position | grep -o '[0-9]*,' | sed 's/,//')
 active_monitor=$(xrandr | grep -w connected | grep "+$monitor_xpos+" | head -n 1 | cut -d " " -f1)
