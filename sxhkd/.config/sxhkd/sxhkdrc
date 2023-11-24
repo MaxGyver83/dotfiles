@@ -16,7 +16,7 @@ super + shift + w
 
 # show keybindings cheatsheet
 super + k
-    ~/bin/cheatsheet-menu.bash -w
+    ~/bin/cheatsheet-menu.bash -w -v
 
 # start or focus tmux (in st)
 super + b
