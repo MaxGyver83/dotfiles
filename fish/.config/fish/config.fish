@@ -44,6 +44,8 @@ set fish_color_autosuggestion 888888
 set -g __fish_git_prompt_color_branch
 set -g __fish_git_prompt_showcolorhints true
 
+set -x XDG_SESSION_TYPE x11
+
 # default settings for less
 set -x LESS '-iMFXRj4a#4'
 
