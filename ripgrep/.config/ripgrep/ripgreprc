@@ -6,3 +6,4 @@
 --glob=!tags
 --glob=!tags.temp
 --glob=!tags-*
+--glob=!swank.log
