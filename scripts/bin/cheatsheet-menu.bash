@@ -3,18 +3,22 @@
 SCRIPT=~/bin/cheatsheet.bash
 CHEATSHEET_DIR=~/.dotfiles/cheatsheets
 
-options="$(ls -1 $CHEATSHEET_DIR | sed s/\.txt//)"
+options="$(ls -1 $CHEATSHEET_DIR | grep \\.txt | sed s/\.txt//)"
 
 lines="$(echo "$options" | wc -l)"
 lines=$((lines + 2))
 
 # when called with option -w, run this script in a new alacritty window
 if [ "$1" = "-w" ]; then
+  if [ "$2" != "-v" ]; then
+    export YELLOW="-o colors.primary.background='#fcfc90' \
+                   -o colors.primary.foreground='#000000'"
+    export USE_LESS=1
+  fi
   pkill -f "alacritty -t Cheatsheet" || \
   WINIT_X11_SCALE_FACTOR=1.0 alacritty -t "Cheatsheet menu" \
     -o "window.dimensions.columns=18" -o "window.dimensions.lines=$lines" \
-    -o "font.size=16.0" -o "colors.primary.background='#fcfc90'" \
-    -o "colors.primary.foreground='#000000'" -e "$0"
+    -o "font.size=14.0" $YELLOW -e "$0"
   exit 0
 fi
 
