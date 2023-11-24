@@ -1,8 +1,8 @@
 #!/bin/bash
 
 line="$1"
-re_file='[[:alnum:]._-]+'
-re_file_only='[[:alnum:]._-]{5,}'
+re_file='[[:alnum:]._+-]+'
+re_file_only='[[:alnum:]._+-]{5,}'
 re_path="/?(${re_file}/)+(${re_file})"
 re_path_or_file="/?(${re_file}/)*(${re_file})"
 
