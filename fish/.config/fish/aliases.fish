@@ -96,6 +96,7 @@ abbr ro "$VIM -M"
 
 abbr rr 'ranger'
 alias feh='feh --scale-down --auto-zoom --auto-rotate'
+alias aerc='COLORTERM=truecolor command aerc'
 
 # bat: default: line numbers, no pager
 # no decorations, no pager
@@ -130,6 +131,7 @@ abbr k '~/bin/start-kmonad.fish -k all'
 abbr m 'pkill kmonad ; unbuffer ./keyboard-layouts --device "/dev/input/by-id/usb-Keychron_Keychron_K6-event-kbd" | tee ~/log/keyboard-layouts-(date "+%Y-%m-%d %H.%M.%S").log'
 abbr qq 'pkill try_three_times ; pkill run_forever ; pkill kmonad ; pkill -f keyboard-layouts'
 abbr QQ 'pkill try_three_times ; pkill run_forever ; pkill kmonad ; pkill -f keyboard-layouts'
+abbr psk 'pgrep -fa "kmonad|/keyboard-layouts"'
 abbr s 'xrandr | grep -q 2560x1440 && ~/.screenlayout/peaq-usb.sh || ~/.screenlayout/laptop.sh'
 # redshift: red=night mode (darker, redish), notred=day mode
 # abbr red 'redshift -P -O 3500 -b 0.7 || redshift -O 3500 -b 0.7'
