@@ -1,0 +1,19 @@
+#!/bin/sh
+[ -x ~/repos/keyboard-layouts/keyboard-layouts ] || exit 1
+[ -e ~/repos/keyboard-layouts/config/vou.toml ] || exit 1
+
+pkill -f 'kmonad'
+pkill -f 'keyboard-layouts/keyboard-layouts'
+
+echo "Start keyboard-layouts for built-in keyboard"
+~/repos/keyboard-layouts/keyboard-layouts \
+  --config-file config/vou.toml > /dev/null &
+
+if [ -e /dev/input/by-id/usb-Keychron_Keychron_K6-event-kbd ]; then
+    pkill -f 'keyboard-layouts.*usb-Keychron_Keychron_K6-event-kbd'
+    echo "Start keyboard-layouts for Keychron K6 (via USB)"
+    ~/repos/keyboard-layouts/keyboard-layouts \
+      --device /dev/input/by-id/usb-Keychron_Keychron_K6-event-kbd \
+      --config-file config/vou.toml > /dev/null &
+      #--key-log-file /tmp/key.log
+fi
