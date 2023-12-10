@@ -43,8 +43,10 @@ export NO_AT_BRIDGE=1
 PATH="$PATH:~/.local/bin"
 
 # numlockx off
-echo "$(timestamp) Run start-kmonad.fish --keyboard all"
-{ ~/bin/start-kmonad.fish --keyboard all; echo "$(timestamp) start-kmonad.fish done"; } &
+~/bin/start-keyboard-layouts || { \
+  echo "$(timestamp) Run start-kmonad.fish --keyboard all"
+  { ~/bin/start-kmonad.fish --keyboard all; echo "$(timestamp) start-kmonad.fish done"; } &
+}
 #xset r rate 300 50
 #xinput set-prop 'ETPS/2 Elantech Touchpad' 'libinput Natural Scrolling Enabled' 1
 restart dunst
