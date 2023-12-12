@@ -1,0 +1,24 @@
+#!/bin/sh
+
+# https://github.com/junegunn/fzf/issues/2789
+
+# fzf
+# --preview window ~8,+{1}-5
+#   this is a fzf feature
+#   ~8 - show first 8 lines (header)
+#   +{2} - fzf delimits the input piped in to it and provides access via index variables {n}. 
+#   the default delimiter fzf uses is space but can be specified via --delimiter <delimiter>
+#   pass the second index variable from bat (which is the line number)
+#   the number is signed, you can show eg the +n row or the -n row (the nth row from the bottom)
+#   -5 subtract 5 rows (go up 5 rows) so that you don't show the highlighted line as the first line
+#   since you want to provide context by showing the rows above the highlighted line
+
+selection="$(rg --color=always --smart-case --line-number --with-filename "$@" \
+  | fzf -0 --ansi --delimiter : --preview "bat --color=always {1} --highlight-line {2}" \
+  --preview-window ~8,+{2}-5)"
+
+file="${selection%%:*}"
+num="${selection#*:}"
+num="${num%%:*}"
+
+[ "$file" ] && exec nvim "$file" "+$num"
