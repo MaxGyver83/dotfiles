@@ -91,6 +91,8 @@ autocmd FileType cpp setlocal omnifunc=
 autocmd FileType hare let g:hare_recommended_style = 1
 autocmd FileType gnuplot setlocal commentstring=#\ %s
 autocmd FileType mail setlocal nojoinspaces formatoptions=watqc
+autocmd FileType netrw setlocal bufhidden=wipe
+
 " Autocompletion for python3 (currently replaced by jedi-vim)
 " if has('python3')
     " autocmd FileType python set omnifunc=python3complete#Complete
@@ -957,6 +959,8 @@ command! CloseOtherBuffers silent! execute "%bd|e#|bd#"
 "-------------------
 " related to plugins
 "-------------------
+
+let g:netrw_fastbrowse = 0
 
 " buftabline (https://github.com/ap/vim-buftabline)
 let g:buftabline_indicators=1
