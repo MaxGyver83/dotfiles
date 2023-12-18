@@ -107,6 +107,7 @@ autocmd BufRead,BufNewFile *.js.tid set filetype=javascript noexpandtab tabstop=
 autocmd BufRead,BufNewFile *.h,*.c set filetype=c
 autocmd BufRead,BufNewFile *.gnu set filetype=gnuplot
 autocmd BufRead,BufNewFile tags-* set filetype=tags
+autocmd BufRead,BufNewFile **/bazel-out/**/*.log FixBazelPaths
 
 " disable MUcomplete for fish and for git commit messages
 autocmd BufEnter * if &ft ==# 'gitcommit' || &ft ==# 'fish' | MUcompleteAutoOff | else | MUcompleteAutoOn | endif
@@ -890,6 +891,7 @@ function! s:GoToBazelFile()
         let path = path[2:]
         let git_root = trim(system('git rev-parse --show-toplevel'))
         if v:shell_error > 0
+            echo 'Not in a git repository: '..getcwd()
             return 0
         endif
         let path = git_root..'/'..path
@@ -951,6 +953,8 @@ function! GoToFileWithLineNumber()
     " fallback to regular gF
     normal! gF
 endfunction
+
+command! FixBazelPaths silent! :% s:sandbox/processwrapper-sandbox/\d\+/::g
 
 noremap gF :call GoToFileWithLineNumber()<CR>
 
@@ -1244,6 +1248,7 @@ highlight HighlightedyankRegion ctermbg=229 ctermfg=none cterm=none
 
 " vim-gutentags
 " let g:gutentags_define_advanced_commands = 1
+" let g:gutentags_ctags_extra_args = ['--languages=c++,python']
 let g:gutentags_ctags_exclude = ['tags', 'virtual_envs', '.ccls-cache', '.mypy_cache', '*.json', '*.rst', '*.md', '*.css', '*.js', '*.html', '*.diff', '*.patch', '*.svg', '*.tex', '*.pb']
 " let g:gutentags_exclude_filetypes = ['tags', 'diff', 'text', 'md', 'css', 'readline']
 let g:gutentags_exclude_project_root = ['/usr/local', '/home/max/.password-store']
