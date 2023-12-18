@@ -1,0 +1,19 @@
+#!/bin/sh
+
+usage() {
+    echo 'Usage:
+date-converter 1669366505
+date-converter 1669366505079428085
+'
+}
+
+date="$1"
+
+case "$date" in
+"") usage ;;
+*[!0-9]*) echo "To do: Use Python to convert any date to UNIX timestamp." ;;
+# 1????????? = after 2001-09-09
+1?????????) date -d"@$date" '+%Y-%m-%d %H:%M:%S' ;;
+1?????????*) date -d"@$(echo "$date" | cut -c 1-10)" '+%Y-%m-%d %H:%M:%S' ;;
+*) usage ;;
+esac
