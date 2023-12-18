@@ -4,6 +4,8 @@ status is-interactive || exit 0
 fish_add_path -p ~/install
 fish_add_path -a ~/.local/bin
 fish_add_path -a ~/bin
+fish_add_path -a ~/.cargo/bin
+fish_add_path -a ~/go/bin
 
 # delete /bin and /sbin from PATH when they are just symlinks
 if [ -L /bin ] && contains /usr/bin $PATH && set -l ind (contains -i -- /bin $PATH)
