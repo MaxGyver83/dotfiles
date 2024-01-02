@@ -1,0 +1,8 @@
+# Create new session and attach to it
+
+abduco -c cde-xxxx
+
+# Debug
+
+abduco-debug -n cde-xxxx 2> ~/abduco-server.log
+abduco-debug -a cde-xxxx 2> ~/abduco-client.log
