@@ -1,6 +1,14 @@
+# List running sessions
+
+abduco
+
 # Create new session and attach to it
 
 abduco -c cde-xxxx
+
+# Attach to running session
+
+abduco -a cde-xxxx
 
 # Debug
 
