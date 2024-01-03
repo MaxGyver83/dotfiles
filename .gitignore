@@ -5,7 +5,10 @@ byobu/.byobu/.tmux_history
 byobu/.byobu/backend
 byobu/.byobu/color
 byobu/.byobu/windows
+cheatsheets/user-ids.txt
 dunst/.config/dunst/dunstrc
+fish/.config/fish/local.fish
+fish/.config/fish/completions/fisher.fish
 fish/.config/fish/functions/__z.fish
 fish/.config/fish/functions/__z_add.fish
 fish/.config/fish/functions/__z_clean.fish
@@ -13,6 +16,7 @@ fish/.config/fish/functions/__z_complete.fish
 scripts/bin/office
 scripts/bin/home-office
 qtile/.config/qtile/__pycache__/
+vim/.vim/autoload/plug.vim
 vim/.vim/.Vimball*
 vim/.vim/pack
 vim/.vim/spell
