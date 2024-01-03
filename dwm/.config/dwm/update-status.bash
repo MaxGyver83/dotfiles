@@ -3,7 +3,8 @@
 
 exists() { command -v "$1" > /dev/null 2>&1 ; }
 round() { LC_ALL=C printf '%.0f' "$1" ; }
-office() { ip -br -4 a show dev enx0c379667313c 2> /dev/null | awk '{print $3}' | grep -q '^10\.' ; }
+office_lan() { ip -br -4 a show dev enx0c379667313c 2> /dev/null | awk '{print $3}' | grep -q '^10\.' ; }
+office_wifi() { ip -br -4 a show dev wlp0s20f3 2> /dev/null | grep -Eq 'UP\ +10\.' ; }
 vpn() { ip -br -4 a show dev tun0 2> /dev/null | awk '{print $3}' | grep -q '^10\.' ; }
 kerb() { klist -s ; }
 
@@ -14,7 +15,7 @@ if test -f ~/bin/toggle_bluetooth_profile_WH-XB910N.sh ; then
 fi
 
 if [[ "$USER" =~ sc* ]]; then
-  office || { vpn || network="No VPN "; }
+  office_lan || office_wifi || { vpn || network="No VPN "; }
   kerb || network+="No Kerb "
 fi
 
