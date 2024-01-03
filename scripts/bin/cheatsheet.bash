@@ -7,6 +7,7 @@ rows=$(wc -l "$document" | cut -d' ' -f1)
 rows=$(( rows > 40 ? 40 : rows+1 ))
 
 cols=$(wc -L "$document" | cut -d' ' -f1)
+cols=$(( cols < 19 ? 20 : cols+2 ))
 cols=$(( cols > 200 ? 200 : cols+2 ))
 
 if [ $USE_LESS ]; then
