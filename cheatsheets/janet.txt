@@ -1,0 +1,12 @@
+janet
+=====
+
+|Mutable (@) |Immutable
+|------------|---------------------
+|Array       |Tuple   [1 2]
+|Table       |Struct  {:a 1 :b 2}
+|Buffer      |String  "Hello World"
+
+Start netrepl server
+--------------------
+janet -e "(import spork/netrepl) (netrepl/server)"
