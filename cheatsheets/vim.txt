@@ -52,3 +52,6 @@ vim -u NONE -c "helptags fugitive/doc" -c q
 F2  save session
 F3  load session
 F4  load autosession
+
+:'<,'>w !cmd  Execute cmd with selected range as stdin
+:'<,'>!cmd    Same as above but replace complete line with output
