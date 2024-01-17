@@ -27,16 +27,19 @@ inkarkat/vim-ReplaceWithRegister
 lifepillar/vim-mucomplete
 kshenoy/vim-signature
 godlygeek/tabular
+junegunn/vim-easy-align
 joereynolds/vim-minisnip
 rstacruz/vim-closer
 kana/vim-textobj-user
 kana/vim-textobj-line
 kana/vim-textobj-function
 kana/vim-textobj-entire
+kana/vim-textobj-indent
 sgur/vim-textobj-parameter
 rhysd/vim-textobj-word-column
 beloglazov/vim-textobj-quotes
 MaxGyver83/vim-textobj-brace
+terryma/vim-expand-region
 
 # navigation
 easymotion/vim-easymotion
@@ -63,6 +66,8 @@ inkarkat/vim-SyntaxRange  # different syntax for part of a file
 inkarkat/vim-ingo-library
 Galicarnax/vim-regex-syntax  # syntax highlighting for regexs
 kovisoft/slimv
+weakish/rcshell.vim
+bakpakin/janet.vim
 
 # other
 guns/xterm-color-table.vim
@@ -82,6 +87,8 @@ fatih/vim-go
 ziglang/zig.vim
 guns/vim-sexp
 tpope/vim-sexp-mappings-for-regular-people
+https://git.sr.ht/~sircmpwn/hare.vim
+https://git.sr.ht/~torresjrjr/vim-haredoc
 )
 fi
 
