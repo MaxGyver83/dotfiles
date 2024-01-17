@@ -1301,6 +1301,26 @@ packadd termdebug
 let g:termdebug_wide=1
 noremap <silent> <leader>gt :Termdebug<cr>
 
+" vim-expand-region
+let g:expand_region_text_objects = {
+      \ 'iw'  :0,
+      \ 'iW'  :0,
+      \ 'i"'  :0,
+      \ '2i"' :0,
+      \ 'i''' :0,
+      \ '2i''':0,
+      \ 'i]'  :1,
+      \ 'a]'  :1,
+      \ 'i)'  :1,
+      \ 'a)'  :1,
+      \ 'i}'  :1,
+      \ 'a}'  :1,
+      \ 'il'  :0,
+      \ 'ii'  :0,
+      \ 'ai'  :0,
+      \ 'ip'  :0,
+      \ }
+
 " try loading machine-specific settings
 try
   source ~/.vimrc_local
