@@ -14,4 +14,5 @@ for device in $external_devices ; do
     command="$command --output $device --off"
 done
 
+echo "$command"
 $command
