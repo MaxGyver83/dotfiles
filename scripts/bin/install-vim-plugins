@@ -73,6 +73,7 @@ bakpakin/janet.vim
 guns/xterm-color-table.vim
 ojroques/vim-oscyank
 thinca/vim-localrc
+inkarkat/SyntaxAttr.vim
 )
 
 if [[ ${MACHINE} = work* ]]; then

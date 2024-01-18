@@ -735,6 +735,8 @@ function! SynStack()
     endfor
 endfunction
 nmap <leader><leader>h :call SynStack()<CR>
+" similar, using inkarkat/SyntaxAttr.vim
+nmap <leader><leader>H :call SyntaxAttr#SyntaxAttr()<CR>
 
 function! PasteUnnamedRegisterInOtherTmuxPane()
     let s = @"
