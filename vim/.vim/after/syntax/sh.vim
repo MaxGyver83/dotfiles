@@ -1,7 +1,7 @@
 " Recognize indented here-doc delimiters.
 " This is necessary for here-docs in bash scripts embedded in YAML (Azure
 " DevOps) files with syntax highlighting via the vim-SyntaxRange plugin.
-syn region shHereDoc matchgroup=shHereDoc01 start="<<\s*\z([^ \t|>]\+\)"
+syn region shHereDoc matchgroup=shHereDoc01 start="<<\s*\z([^< \t|>]\+\)"
             \ matchgroup=shHereDoc01 end="^ *\z1$"	contains=@shDblQuoteList
 syn region shHereDoc matchgroup=shHereDoc03 start="<<\s*\\\z([^ \t|>]\+\)"
             \ matchgroup=shHereDoc03 end="^ *\z1$"
