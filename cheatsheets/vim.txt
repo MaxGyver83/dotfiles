@@ -55,3 +55,4 @@ F4  load autosession
 
 :'<,'>w !cmd  Execute cmd with selected range as stdin
 :'<,'>!cmd    Same as above but replace complete line with output
+:.!cmd        Same as above but only for current line (in normal mode)
