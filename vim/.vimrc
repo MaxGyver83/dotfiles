@@ -1027,6 +1027,11 @@ nmap <Leader>: :History:<CR>
 " mucomplete
 let g:mucomplete#enable_auto_at_startup = 1
 let g:mucomplete#always_use_completeopt = 1
+let g:mucomplete#chains = {
+            \ 'vim': ['path', 'cmd', 'keyn'],
+            \ 'janet': ['path', 'keyn', 'dict', 'uspl', 'omni'],
+            \ 'default': ['path', 'omni', 'keyn', 'dict', 'uspl']
+            \ }
 " deactivate because of a bug in vim-fish: https://github.com/dag/vim-fish/issues/50
 autocmd FileType fish let g:mucomplete#enable_auto_at_startup = 0
 autocmd FileType fish let g:mucomplete#always_use_completeopt = 0
