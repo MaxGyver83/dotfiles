@@ -15,9 +15,16 @@ C-n  next account
 
 O    mail up
 E    mail down
-C-j  next mime type
+C-k  next mime type
 H    toggle headers
 rr   reply all
 rq   reply all quoted
 Rr   reply
 Rq   reply quoted
+
+Compose
+-------
+C-j     previous field
+C-k     next field
+C-x     command mode
+C-x header Cc  add cc field
