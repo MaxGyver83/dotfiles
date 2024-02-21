@@ -150,6 +150,9 @@ autocmd BufWinLeave * call clearmatches()
 " and soft hyphen (U+00AD)
 highlight NoBreakWhitespace ctermbg=blue guibg=blue
 autocmd BufWinEnter,InsertLeave * match NoBreakWhitespace / \| \|­/
+" highlight NUL bytes
+highlight NULByte ctermbg=yellow ctermfg=black guibg=yellow guifg=black
+autocmd BufWinEnter,InsertLeave * match NULByte /\%x00/
 
 augroup autocom
     autocmd!
