@@ -6,12 +6,12 @@ exists() { command -v "$1" > /dev/null 2>&1 ; }
 
 set_hardware_brightness() {
     case "$1" in
-    +)          light -A 10 ;;
-    -)          light -U 10 ;;
-    max|full)   light -S 100 ;;
-    [1-9][0-9]) light -S "$1" ;;
-    [1-9])      light -S "$1" ;;
-    *)          light -G; exit 0 ;;
+    +)            light -A 10 ;;
+    -)            light -U 10 ;;
+    max|full|100) light -S 100 ;;
+    [1-9][0-9])   light -S "$1" ;;
+    [1-9])        light -S "$1" ;;
+    *)            light -G; exit 0 ;;
     esac
 
     notify-send -t 500 $(light -G | sed -E 's/\.0+//')"% (hardware)"
@@ -34,7 +34,7 @@ set_xrandr_brightness() {
             NEWBRIGHT='0.1'
         fi
         ;;
-    max|full)
+    max|full|100)
         NEWBRIGHT='1.0'
         ;;
     [1-9][0-9])
