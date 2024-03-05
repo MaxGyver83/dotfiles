@@ -10,4 +10,5 @@ fi
 other_tty=$(tty)
 tmux select-pane -l
 
-gdb -q -ex "tty $other_tty" "$@"
+echo "gdb -q -ex \"tty $other_tty\" \"$@\""
+exec gdb -q -ex "tty $other_tty" "$@"
