@@ -43,7 +43,7 @@ export NO_AT_BRIDGE=1
 PATH="$PATH:~/.local/bin"
 
 # numlockx off
-~/bin/start-keyboard-layouts || { \
+~/bin/start-keyboard-layouts -b -s || { \
   echo "$(timestamp) Run start-kmonad.fish --keyboard all"
   { ~/bin/start-kmonad.fish --keyboard all; echo "$(timestamp) start-kmonad.fish done"; } &
 }
