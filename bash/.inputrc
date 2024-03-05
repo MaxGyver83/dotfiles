@@ -33,11 +33,12 @@ set completion-ignore-case on
 
 # Max
 $if gdb
-    R: "\C-a\C-kserver return\n"
-    N: "\C-a\C-kserver next\n"
-    S: "\C-a\C-kserver step\n"
-    U: "\C-a\C-kserver until\n"
-    C: "\C-a\C-kserver continue\n"
+    # key bindings inspired by https://github.com/puremourning/vimspector#human-mode
+    "\e[15~": "\C-a\C-kserver continue\n" # F5
+    "\e[21~": "\C-a\C-kserver next\n" # F10
+    "\e[23~": "\C-a\C-kserver step\n" # F11
+    "\e[24~": "\C-a\C-kserver return\n" # F12
+    "\e[20~": "\C-a\C-kserver until\n" # F9
 $endif
 
 # some defaults / modifications for the emacs mode
