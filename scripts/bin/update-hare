@@ -4,6 +4,10 @@ COLOR_BLUE="\033[0;34m"
 BOLD="\033[1m"
 RESET="\033[0m"
 
+case $1 in
+-f|--force) force=1;;
+esac
+
 print_header() {
     printf "\n$COLOR_BLUE$BOLD$1$RESET\n"
 }
@@ -19,7 +23,7 @@ git_pull() {
 update_harec() {
     print_header harec
     cd ~/repos/harec
-    git_pull || return
+    git_pull || [ $force ] || return
     cp configs/linux.mk config.mk &&
     make &&
     make check &&
@@ -29,7 +33,7 @@ update_harec() {
 update_hare() {
     print_header hare
     cd ~/repos/hare
-    git_pull || return
+    git_pull || [ $force ] || return
     cp configs/linux.mk config.mk &&
     make &&
     make check &&
