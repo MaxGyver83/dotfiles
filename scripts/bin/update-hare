@@ -20,9 +20,7 @@ update_harec() {
     print_header harec
     cd ~/repos/harec
     git_pull || return
-    mkdir -p build &&
-    cd build
-    ../configure &&
+    cp configs/linux.mk config.mk &&
     make &&
     make check &&
     sudo make install
@@ -31,8 +29,8 @@ update_harec() {
 update_hare() {
     print_header hare
     cd ~/repos/hare
-    # cp config.example.mk config.mk
     git_pull || return
+    cp configs/linux.mk config.mk &&
     make &&
     make check &&
     sudo make uninstall install
