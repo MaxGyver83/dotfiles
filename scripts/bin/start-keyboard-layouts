@@ -28,6 +28,9 @@ pkill -f 'keyboard-layouts/keyboard-layouts'
 
 [ $DEBUG ] && BINARY="$BINARY --debug -vvv"
 
+# sleep to not miss the return key release event
+sleep 0.2
+
 echo "Start keyboard-layouts for built-in keyboard"
 if [ $BACKGROUND ] || [ $K6_CONNECTED ]; then
   $BINARY ~/repos/keyboard-layouts/keyboard-layouts \
