@@ -3,11 +3,13 @@
 while [[ "$#" > 0 ]]; do case $1 in
   -s|--stable) STABLE=1; shift;;
   -b|--background) BACKGROUND=1; shift;;
+  -d|--debug) DEBUG=1; shift;;
   *) echo "Unknown parameter passed: $1"; shift; shift;;
 esac; done
 
 echo BACKGROUND=$BACKGROUND
 echo STABLE=$STABLE
+echo DEBUG=$DEBUG
 
 if [ $STABLE ]; then
   BINARY=~/repos/keyboard-layouts/keyboard-layouts-stable
@@ -23,6 +25,8 @@ echo K6_CONNECTED=$K6_CONNECTED
 
 pkill -f 'kmonad'
 pkill -f 'keyboard-layouts/keyboard-layouts'
+
+[ $DEBUG ] && BINARY="$BINARY --debug -vvv"
 
 echo "Start keyboard-layouts for built-in keyboard"
 if [ $BACKGROUND ] || [ $K6_CONNECTED ]; then
