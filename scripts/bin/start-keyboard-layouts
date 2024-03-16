@@ -13,8 +13,10 @@ echo DEBUG=$DEBUG
 
 if [ $STABLE ]; then
   BINARY=~/repos/keyboard-layouts/keyboard-layouts-stable
+  CONFIG=config/vou-stable.toml
 else
   BINARY=~/repos/keyboard-layouts/keyboard-layouts
+  CONFIG=config/vou.toml
 fi
 
 [ -x "$BINARY" ] || exit 1
@@ -33,11 +35,9 @@ sleep 0.2
 
 echo "Start keyboard-layouts for built-in keyboard"
 if [ $BACKGROUND ] || [ $K6_CONNECTED ]; then
-  $BINARY ~/repos/keyboard-layouts/keyboard-layouts \
-    --config-file config/vou.toml > /dev/null &
+  $BINARY --config-file $CONFIG > /dev/null &
 else
-  exec $BINARY ~/repos/keyboard-layouts/keyboard-layouts \
-    --config-file config/vou.toml
+  exec $BINARY --config-file $CONFIG
 fi
 
 if [ -e /dev/input/by-id/usb-Keychron_Keychron_K6-event-kbd ]; then
@@ -46,12 +46,12 @@ if [ -e /dev/input/by-id/usb-Keychron_Keychron_K6-event-kbd ]; then
     if [ $BACKGROUND ]; then
       $BINARY \
         --device /dev/input/by-id/usb-Keychron_Keychron_K6-event-kbd \
-        --config-file config/vou.toml > /dev/null &
+        --config-file $CONFIG > /dev/null &
         #--key-log-file /tmp/key.log
     else
       exec $BINARY \
         --device /dev/input/by-id/usb-Keychron_Keychron_K6-event-kbd \
-        --config-file config/vou.toml
+        --config-file $CONFIG
         #--key-log-file /tmp/key.log
     fi
 fi
