@@ -35,25 +35,25 @@ ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 
 # get fish
-RUN ver=3.6.1-1 \
+RUN ver=3.7.0-1 \
     && cd /tmp \
     && wget https://launchpad.net/~fish-shell/+archive/ubuntu/release-3/+files/fish_${ver}~jammy_amd64.deb \
     && dpkg -i fish_${ver}~jammy_amd64.deb \
     && rm fish_${ver}~jammy_amd64.deb
 
 # get bat
-RUN ver=0.23.0 \
+RUN ver=0.24.0 \
     && cd /tmp \
     && wget https://github.com/sharkdp/bat/releases/download/v${ver}/bat_${ver}_amd64.deb \
     && dpkg -i bat_${ver}_amd64.deb \
     && rm bat_${ver}_amd64.deb
 
 # get sd
-RUN ver=v0.7.6 \
+RUN ver=v1.0.0 \
     && cd /tmp \
-    && wget https://github.com/chmln/sd/releases/download/${ver}/sd-${ver}-x86_64-unknown-linux-gnu \
-    && chmod +x sd-${ver}-x86_64-unknown-linux-gnu \
-    && mv sd-${ver}-x86_64-unknown-linux-gnu /usr/bin/sd
+    && wget https://github.com/chmln/sd/releases/download/${ver}/sd-${ver}-x86_64-unknown-linux-gnu.tar.gz \
+    && tar -xzf sd-${ver}-x86_64-unknown-linux-gnu.tar.gz \
+    && mv sd-${ver}-x86_64-unknown-linux-gnu/sd /usr/bin/sd
 
 # add user "docker"
 RUN useradd -m docker && echo "docker:docker" | chpasswd && adduser docker sudo
