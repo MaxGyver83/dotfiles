@@ -1,127 +1,4 @@
 #!/bin/bash
-
-start=(
-# improve visualization
-ap/vim-buftabline
-itchyny/lightline.vim
-machakann/vim-highlightedyank
-rickhowe/diffchar.vim
-
-# git related
-tpope/vim-fugitive
-tpope/vim-rhubarb
-airblade/vim-gitgutter
-
-# text editing
-tpope/vim-sensible
-tpope/vim-surround
-tpope/vim-repeat
-tpope/vim-commentary
-tpope/vim-abolish
-tpope/vim-speeddating
-tpope/vim-sleuth
-Konfekt/vim-CtrlXA
-tommcdo/vim-exchange
-machakann/vim-swap
-inkarkat/vim-ReplaceWithRegister
-lifepillar/vim-mucomplete
-kshenoy/vim-signature
-godlygeek/tabular
-junegunn/vim-easy-align
-joereynolds/vim-minisnip
-rstacruz/vim-closer
-kana/vim-textobj-user
-kana/vim-textobj-line
-kana/vim-textobj-function
-kana/vim-textobj-entire
-kana/vim-textobj-indent
-sgur/vim-textobj-parameter
-rhysd/vim-textobj-word-column
-beloglazov/vim-textobj-quotes
-MaxGyver83/vim-textobj-brace
-terryma/vim-expand-region
-
-# navigation
-easymotion/vim-easymotion
-unblevable/quick-scope
-chaoren/vim-wordmotion
-# ludovicchabant/vim-gutentags
-MaxGyver83/vim-gutentags
-preservim/tagbar
-
-# open, find and search files
-EinfachToll/DidYouMean
-tpope/vim-vinegar
-junegunn/fzf.vim
-jesseleite/vim-agriculture
-
-# file type support
-editorconfig/editorconfig-vim
-dag/vim-fish
-sukima/vim-tiddlywiki
-davidhalter/jedi-vim,recursive  # Python autocompletion
-MTDL9/vim-log-highlighting
-justinmk/vim-syntax-extra  # improved syntax highlighting for C
-inkarkat/vim-SyntaxRange  # different syntax for part of a file
-inkarkat/vim-ingo-library
-Galicarnax/vim-regex-syntax  # syntax highlighting for regexs
-kovisoft/slimv
-weakish/rcshell.vim
-bakpakin/janet.vim
-
-# other
-guns/xterm-color-table.vim
-ojroques/vim-oscyank
-thinca/vim-localrc
-inkarkat/SyntaxAttr.vim
-)
-
-if [[ ${MACHINE} = work* ]]; then
-start+=(
-tommcdo/vim-fubitive
-# taketwo/vim-ros
-github/copilot.vim
-)
-else
-start+=(
-fatih/vim-go
-ziglang/zig.vim
-guns/vim-sexp
-tpope/vim-sexp-mappings-for-regular-people
-https://git.sr.ht/~sircmpwn/hare.vim
-https://git.sr.ht/~torresjrjr/vim-haredoc
-)
-fi
-
-opt=(
-# color themes
-lifepillar/vim-solarized8
-manasthakur/papercolor-theme
-
-# file type support
-mwgkgk/kmonad-vim
-cespare/vim-toml
-# rust-lang/rust.vim
-
-# other
-dense-analysis/ale  # linting
-chrisbra/Colorizer  # preview colors
-ap/vim-css-color  # preview colors
-Raimondi/delimitMate  # automatic closing of quotes, parenthesis, brackets
-junegunn/gv.vim  # git commit browser
-tpope/vim-characterize  # unicode character metadata
-xolox/vim-colorscheme-switcher
-jacquesbh/vim-showmarks
-pechorin/any-jump.vim
-will133/vim-dirdiff
-puremourning/vimspector
-# balanceiskey/vim-framer-syntax
-# justinmk/vim-sneak
-# frazrepo/vim-rainbow  # colored brackets
-)
-
-# COLOR_RED="\033[1;31m"
-# COLOR_YELLOW="\033[0;33m"
 COLOR_GREEN="\033[0;32m"
 COLOR_BLUE="\033[0;34m"
 COLOR_GRAY="\033[0;38;5;240m"
@@ -161,32 +38,29 @@ update_plugins() {
 }
 
 case $1 in
--u|--update)
-    update_plugins; exit;;
+-u|--update)  update_plugins; exit;;
 esac
 
-function clone_repo {
+clone_repo() {
     sleep 0.1
-    cd "$1" && git clone $3 "$2" 2> /dev/null
+    cd "$1" && git clone $3 "$2" > /dev/null 2>&1
+    printf '.'
 }
 
-installation_count=0
-for types in start opt; do
-    dir="$HOME/.vim/pack/plugins/$types/"
-    echo -e "\n${BOLD}$dir${RESET}"
-    mkdir -p "$dir"
-    cd "$dir" || exit 1
-    # workaround for iterating over an array using indirect reference
-    # see https://stackoverflow.com/questions/11180714/how-to-iterate-over-an-array-using-indirect-reference
-    plugins=${types}[@]
-    for plugin in "${!plugins}"; do
+install_plugins() {
+    input_file="$1"
+    section="$2"
+    lines="$(sed -n "/^\[$section\]/,/^\[/p" "$input_file" | grep '^[^#[]' | sed 's/\s*#.*$//')"
+    while read -r plugin
+    do
+        [ $plugin ] || continue
         printf "  $plugin "
         # if $plugin contains a comma, save part after first comma as $params
         [[ $plugin == *,* ]] && params="--"${plugin#*,} || params=
         plugin=${plugin%%,*}  # keep part before first comma
         folder=${plugin##*/}
         folder=${folder%.git}
-        dest_path="$HOME/.vim/pack/plugins/$types/$folder"
+        dest_path="$HOME/.vim/pack/plugins/$section/$folder"
         [ -d "$dest_path" ] && echo -e "${COLOR_GRAY}Folder $folder does already exist${RESET}" && continue
         ((installation_count++))
         echo -e "${COLOR_GREEN}Installing '$folder'...${RESET}"
@@ -196,9 +70,25 @@ for types in start opt; do
             url=https://github.com/"$plugin".git
         fi
         clone_repo "$dir" "$url" "$params" &
-    done
+    done <<< "$lines"
+}
+
+installation_count=0
+
+for types in start opt; do
+    dir="$HOME/.vim/pack/plugins/$types/"
+    echo -e "\n${BOLD}$dir${RESET}"
+    mkdir -p "$dir"
+    cd "$dir" || exit 1
+
+    install_plugins ~/.dotfiles/vim/.vim/plugins $types
+    if [[ ${MACHINE} = work* ]]; then
+        install_plugins ~/.dotfiles/vim/.vim/plugins-work $types
+    else
+        install_plugins ~/.dotfiles/vim/.vim/plugins-home $types
+    fi
 done
-echo
-[ $installation_count -gt 0 ] && echo "Downloading..."
+
+printf "\nDownloading $installation_count plugins.\n"
 wait
-echo "Done."
+printf "\nDone.\n"
