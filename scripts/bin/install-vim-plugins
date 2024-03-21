@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 COLOR_GREEN="\033[0;32m"
 COLOR_BLUE="\033[0;34m"
 COLOR_GRAY="\033[0;38;5;240m"
@@ -56,37 +56,42 @@ install_plugins() {
         [ $plugin ] || continue
         printf "  $plugin "
         # if $plugin contains a comma, save part after first comma as $params
-        [[ $plugin == *,* ]] && params="--"${plugin#*,} || params=
+        case "$plugin" in
+        *,*) params="--${plugin#*,}" ;;
+        *)   params= ;;
+        esac
         plugin=${plugin%%,*}  # keep part before first comma
         folder=${plugin##*/}
         folder=${folder%.git}
         dest_path="$HOME/.vim/pack/plugins/$section/$folder"
-        [ -d "$dest_path" ] && echo -e "${COLOR_GRAY}Folder $folder does already exist${RESET}" && continue
-        ((installation_count++))
-        echo -e "${COLOR_GREEN}Installing '$folder'...${RESET}"
-        if [[ "$plugin" == http* ]]; then
-            url="$plugin"
-        else
-            url=https://github.com/"$plugin".git
-        fi
+        [ -d "$dest_path" ] \
+            && printf "${COLOR_GRAY}Folder $folder does already exist${RESET}\n" \
+            && continue
+        installation_count=$((installation_count+1))
+        printf "${COLOR_GREEN}Installing '$folder'...${RESET}\n"
+        case "$plugin" in
+        http*) url="$plugin" ;;
+        *)     url=https://github.com/"$plugin".git ;;
+        esac
         clone_repo "$dir" "$url" "$params" &
-    done <<< "$lines"
+    done << EOF
+$lines
+EOF
 }
 
 installation_count=0
 
 for types in start opt; do
     dir="$HOME/.vim/pack/plugins/$types/"
-    echo -e "\n${BOLD}$dir${RESET}"
+    printf "\n${BOLD}$dir${RESET}\n"
     mkdir -p "$dir"
     cd "$dir" || exit 1
 
-    install_plugins ~/.dotfiles/vim/.vim/plugins $types
-    if [[ ${MACHINE} = work* ]]; then
-        install_plugins ~/.dotfiles/vim/.vim/plugins-work $types
-    else
-        install_plugins ~/.dotfiles/vim/.vim/plugins-home $types
-    fi
+    install_plugins "$HOME/.vim/plugins" $types
+    case "$MACHINE" in
+    work*) install_plugins "$HOME/.vim/plugins-work" $types ;;
+    *)     install_plugins "$HOME/.vim/plugins-home" $types ;;
+    esac
 done
 
 printf "\nDownloading $installation_count plugins.\n"
