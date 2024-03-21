@@ -120,27 +120,44 @@ puremourning/vimspector
 # frazrepo/vim-rainbow  # colored brackets
 )
 
-COLOR_RED="\033[1;31m"
-COLOR_YELLOW="\033[0;33m"
+# COLOR_RED="\033[1;31m"
+# COLOR_YELLOW="\033[0;33m"
 COLOR_GREEN="\033[0;32m"
 COLOR_BLUE="\033[0;34m"
 COLOR_GRAY="\033[0;38;5;240m"
 BOLD="\033[1m"
 RESET="\033[0m"
 
+update_plugin() {
+    dir="$(dirname "$1")"
+    plugin="$(basename "$1")"
+    cd "$1" || exit 1
+    git_output="$(LANG=en_US.UTF-8 git pull --progress 2>&1)"
+    if [ "$git_output" = "Already up to date." ]; then
+        printf "$dir/${COLOR_BLUE}${BOLD}${plugin}${RESET} "
+        printf "$(git rev-parse --short HEAD) "
+        printf "${COLOR_GREEN}${git_output}${RESET}\n"
+    else
+        printf "$dir/${COLOR_BLUE}${BOLD}${plugin}${RESET} "
+        git rev-parse --short HEAD
+        printf "${git_output}\n"
+    fi
+}
+
 update_plugins() {
-    mkdir -p ~/log
-    logfile=~/log/update-vim-plugins.log
+    mkdir -p "$HOME/log"
+    logfile="$HOME/log/update-vim-plugins.log"
     printf "\n###################\n" >> "$logfile"
     date "+%Y-%m-%d %H:%M:%S" >> "$logfile"
-    for p in ~/.vim/pack/plugins/start/* ~/.vim/pack/plugins/opt/*; do
-        dir="$(dirname $p)"
-        plugin="$(basename $p)"
-        printf "\n$dir/${COLOR_BLUE}${BOLD}${plugin}${RESET} "
-        cd $p
-        git rev-parse --short HEAD
-        git pull
+    for p in "$HOME"/.vim/pack/plugins/start/*; do
+        # using echo "$(...)" to print all function output at once
+        echo "$(update_plugin "$p")" &
     done | tee -a "$logfile"
+    wait
+    for p in "$HOME"/.vim/pack/plugins/opt/*; do
+        echo "$(update_plugin "$p")" &
+    done | tee -a "$logfile"
+    wait
 }
 
 case $1 in
@@ -158,10 +175,10 @@ for types in start opt; do
     dir="$HOME/.vim/pack/plugins/$types/"
     echo -e "\n${BOLD}$dir${RESET}"
     mkdir -p "$dir"
-    cd "$dir"
+    cd "$dir" || exit 1
     # workaround for iterating over an array using indirect reference
     # see https://stackoverflow.com/questions/11180714/how-to-iterate-over-an-array-using-indirect-reference
-    plugins=$types[@]
+    plugins=${types}[@]
     for plugin in "${!plugins}"; do
         printf "  $plugin "
         # if $plugin contains a comma, save part after first comma as $params
