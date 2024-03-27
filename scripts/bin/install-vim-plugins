@@ -17,7 +17,7 @@ update_plugin() {
     else
         printf "$dir/${COLOR_BLUE}${BOLD}${plugin}${RESET} "
         git rev-parse --short HEAD
-        printf "${git_output}\n"
+        printf "%s\n" "${git_output}"
     fi
 }
 
