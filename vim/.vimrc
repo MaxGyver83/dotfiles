@@ -271,7 +271,7 @@ nnoremap <Leader>,tw :set wrap!<cr>
 " copy current line/selection into tmux buffer and paste into second pane
 " This mapping is made for sending code lines to ipython3. Disable %autoindent first!
 if exists('$TMUX')
-    nnoremap <Leader><Return> yy \| <cmd>call PasteUnnamedRegisterInOtherTmuxPane()<cr>
+    nnoremap <Leader><Return> ^y$ \| <cmd>call PasteUnnamedRegisterInOtherTmuxPane()<cr>
     xnoremap <Leader><Return> y \| <cmd>call PasteUnnamedRegisterInOtherTmuxPane()<cr>
 endif
 
