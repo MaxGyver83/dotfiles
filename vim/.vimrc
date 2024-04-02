@@ -971,6 +971,13 @@ command! CloseOtherBuffers silent! execute "%bd|e#|bd#"
 
 let g:netrw_fastbrowse = 0
 
+" /usr/share/nvim/runtime/ftplugin/mail.vim
+" these mappings prevent the mail plugin to remap <leader>q
+vmap <buffer> <Leader>mq <Plug>MailQuote
+nmap <buffer> <Leader>mq <Plug>MailQuote
+" alternative: disable MailQuote mappings:
+" let no_mail_maps = 1
+
 " buftabline (https://github.com/ap/vim-buftabline)
 let g:buftabline_indicators=1
 let g:buftabline_numbers=2
