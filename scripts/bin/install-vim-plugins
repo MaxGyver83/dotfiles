@@ -71,6 +71,7 @@ install_plugins() {
         printf "${COLOR_GREEN}Installing '$folder'...${RESET}\n"
         case "$plugin" in
         http*) url="$plugin" ;;
+        ~*)    url=https://git.sr.ht/"$plugin" ;;
         *)     url=https://github.com/"$plugin".git ;;
         esac
         clone_repo "$dir" "$url" "$params" &
