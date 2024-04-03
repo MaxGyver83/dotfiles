@@ -27,7 +27,7 @@ update_harec() {
     cp configs/linux.mk config.mk &&
     make &&
     make check &&
-    sudo make install
+    sudo make uninstall install
 }
 
 update_hare() {
