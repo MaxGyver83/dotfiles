@@ -1,0 +1,39 @@
+kakoune
+=======
+
+;       select only current character
+,       back to single selection
+
+d       delete selection
+;d      delete character
+wd      delete word
+x       select line
+
+<a-i>b  select in parentheses
+<a-i>B  select in curly braces
+
+<a-a>...   select around ...
+
+%sfoo<cr>cbar<esc>  replace foo with bar in selection (whole buffer)
+
+<a-j>   join lines
+
+<a-.>   repeat last movement
+<a-;>   move cursor to other end of selection
+
+gl      jump to end of line
+<a-l>   select to end of line
+Gl      extend selection to end of line
+
+m       select to matching parenthesis
+
+ga      switch to alternate buffer
+
+u       undo
+U       redo
+
+<a-`>   toggle case
+`       to lower case
+~       to upper case
+
+<a-)>   rotate selections
