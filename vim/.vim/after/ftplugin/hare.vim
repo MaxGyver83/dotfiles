@@ -18,19 +18,19 @@ vnoremap <leader>,Ee <cmd>call InsertPrintStatement('above', 'error', 0)<CR>
 vnoremap <leader>,el <cmd>call InsertPrintStatement('below', 'error', 1)<CR>
 vnoremap <leader>,El <cmd>call InsertPrintStatement('above', 'error', 1)<CR>
 
-function! InsertPrintStatement(position, type, getlength)
+function! InsertPrintStatement(position, type, printlength)
   if mode() ==# 'v'
     let var = getregion(getpos('v'), getpos('.'), #{ type: mode() })[0]
   else
     let var = s:GetIdentifierUnderCursor()
   endif
   let cmd = (a:position ==# 'above') ? 'O' : 'o'
-  if a:getlength == 1
+  if a:printlength == 1
     let var = 'len(' .. var .. ')'
   endif
   let fullcmd = 'normal '
   if mode() ==# 'v'
-    let fullcmd = fullcmd .. "\<esc>"
+    let fullcmd ..= "\<esc>"
   endif
   exe fullcmd .. $"{cmd}fmt::{a:type}fln(\"{var} = '{{}}'\", {var})!;"
   call UseFmt()
