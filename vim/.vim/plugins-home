@@ -3,5 +3,5 @@ fatih/vim-go
 ziglang/zig.vim
 guns/vim-sexp
 tpope/vim-sexp-mappings-for-regular-people
-https://git.sr.ht/~sircmpwn/hare.vim
-https://git.sr.ht/~torresjrjr/vim-haredoc
+~sircmpwn/hare.vim
+# ~torresjrjr/vim-haredoc

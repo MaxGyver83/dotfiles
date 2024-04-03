@@ -10,6 +10,7 @@ junegunn/limelight.vim
 # git related
 tpope/vim-fugitive
 tpope/vim-rhubarb
+~willdurand/srht.vim
 airblade/vim-gitgutter
 
 # text editing
