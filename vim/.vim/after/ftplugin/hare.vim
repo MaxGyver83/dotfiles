@@ -60,3 +60,8 @@ function! UseFmt()
     normal ``
   endif
 endfunction
+
+" vim-CtrlXA
+let g:CtrlXA_Toggles = [
+    \ ['const', 'let'],
+    \ ] + g:CtrlXA_Toggles
