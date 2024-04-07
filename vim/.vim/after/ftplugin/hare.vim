@@ -32,7 +32,7 @@ function! InsertPrintStatement(position, type, printlength)
   if mode() ==# 'v'
     let fullcmd ..= "\<esc>"
   endif
-  exe fullcmd .. $"{cmd}fmt::{a:type}fln(\"{var} = '{{}}'\", {var})!;"
+  exe fullcmd .. $"{cmd}fmt::{a:type}fln(`{var} = \"{{}}\"`, {var})!;"
   call UseFmt()
 endfunction
 
@@ -64,4 +64,7 @@ endfunction
 " vim-CtrlXA
 let g:CtrlXA_Toggles = [
     \ ['const', 'let'],
+    \ ['println', 'errorln'],
+    \ ['printfln', 'errorfln'],
+    \ ['fn', 'export fn'],
     \ ] + g:CtrlXA_Toggles
