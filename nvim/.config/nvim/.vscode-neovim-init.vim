@@ -1,4 +1,4 @@
-set runtimepath+=~/.vim/pack/plugins/start/vim-commentary,~/.vim/pack/plugins/start/vim-surround,~/.vim/autoload,~/.local/share/nvim/plugged/hop.nvim
+set runtimepath+=~/.vim/pack/plugins/start/vim-commentary,~/.vim/pack/plugins/start/vim-surround,~/.vim/autoload,~/.local/share/nvim/plugged-vscode
 let &packpath = &runtimepath
 
 set hidden           " allow leaving a buffer unsaved when switching to another one
@@ -178,8 +178,8 @@ endfunction
 
 source ~/.vim/autoload/plug.vim
 
-call plug#begin('~/.vim/autoload/plug.vim')
-Plug 'phaazon/hop.nvim'
+call plug#begin('~/.local/share/nvim/plugged-vscode')
+    Plug 'smoka7/hop.nvim'
 call plug#end()
 
 lua << EOF
