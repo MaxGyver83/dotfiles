@@ -20,6 +20,15 @@ git_pull() {
     esac
 }
 
+update_qbe() {
+    print_header qbe
+    cd ~/repos/qbe
+    git_pull || [ $force ] || return
+    make &&
+    make check &&
+    sudo make uninstall install
+}
+
 update_harec() {
     print_header harec
     cd ~/repos/harec
@@ -40,6 +49,7 @@ update_hare() {
     sudo make uninstall install
 }
 
+update_qbe
 update_harec
 update_hare
 
