@@ -1,6 +1,8 @@
 #!/bin/sh
+COLOR_RED="\033[0;31m"
 COLOR_GREEN="\033[0;32m"
 COLOR_BLUE="\033[0;34m"
+COLOR_YELLOW="\033[0;33m"
 COLOR_GRAY="\033[0;38;5;240m"
 BOLD="\033[1m"
 RESET="\033[0m"
@@ -10,13 +12,19 @@ update_plugin() {
     plugin="$(basename "$1")"
     cd "$1" || exit 1
     git_output="$(LANG=en_US.UTF-8 git pull --progress 2>&1)"
+    result=$?
     if [ "$git_output" = "Already up to date." ]; then
         printf "$dir/${COLOR_BLUE}${BOLD}${plugin}${RESET} "
         printf "$(git rev-parse --short HEAD) "
         printf "${COLOR_GREEN}${git_output}${RESET}\n"
     else
         printf "$dir/${COLOR_BLUE}${BOLD}${plugin}${RESET} "
-        git rev-parse --short HEAD
+        printf "$(git rev-parse --short HEAD) "
+        if [ $result = 0 ]; then
+            printf "${COLOR_YELLOW}${BOLD}Updated:${RESET}\n"
+        else
+            printf "${COLOR_RED}${BOLD}Update failed:${RESET}\n"
+        fi
         printf "%s\n" "${git_output}"
     fi
 }
