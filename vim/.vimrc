@@ -336,6 +336,10 @@ xnoremap <Leader>r "_c<C-r>"<ESC>
 " overwrite with yanked text
 nnoremap <Leader>R R<C-r>"<ESC>
 
+" change word using cgn, repeatable with dot
+nnoremap <Leader>cw :set noignorecase<CR>*``cgn
+xnoremap <Leader>c "vy<esc>:set noignorecase<CR>/<C-r>v<cr>``cgn
+
 " search working directory with ripgrep
 nnoremap <Leader>/ :Rg<space>
 
