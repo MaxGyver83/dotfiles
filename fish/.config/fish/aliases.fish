@@ -6,11 +6,11 @@ abbr ..... 'cd ../../../..'
 alias ll='ls -hAlF'
 alias la='ls -A'
 if type -q exa
-    alias l='exa -alF --color-scale'
+    alias l='exa -alF --color-scale all --color-scale-mode fixed'
 else
     alias l='ls -CF'
 end
-alias lg='exa -alF --color-scale --git'
+alias lg='exa -alF --color-scale all --color-scale-mode fixed --git'
 
 abbr ff 'fzf'
 
@@ -94,6 +94,7 @@ alias vr='~/bin/vimrg.fish'
 alias vg=$VIM' +G +"silent %bd|e#" +"norm gU"'
 abbr ro "$VIM -M"
 
+alias helix='COLORTERM=truecolor command helix'
 abbr rr 'ranger'
 alias feh='feh --scale-down --auto-zoom --auto-rotate'
 alias aerc='COLORTERM=truecolor command aerc'
