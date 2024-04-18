@@ -19,6 +19,7 @@ if [[ "$USER" =~ sc* ]]; then
   kerb || network+="No Kerb "
 fi
 
+# TODO: Does not work when no window is open.
 monitor_xpos=$(xdotool getactivewindow getwindowgeometry | grep Position | grep -o '[0-9]*,' | sed 's/,//')
 active_monitor=$(xrandr | grep -w connected | grep "+$monitor_xpos+" | head -n 1 | cut -d " " -f1)
 if [ "$(hostname)" = 'max-laptop' ] && [ "$active_monitor" = 'eDP-1' ] && exists light ; then
@@ -39,7 +40,9 @@ if test -f /sys/class/power_supply/BAT0/capacity ; then
 fi
 [ "$battery" ] && battery="$battery  "
 
+disk="$(df -h --output=avail / | tail +2 | tr -d ' ')  "
+
 dat=$(date "+%a %F %R")
 
 
-xsetroot -name "${headset_profile}${mailinfo}${network}${brightness}${battery}${dat}"
+xsetroot -name "${headset_profile}${mailinfo}${network}${brightness}${battery}${disk}${dat}"
