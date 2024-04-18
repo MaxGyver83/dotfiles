@@ -9,13 +9,11 @@ alias .....='cd ../../../..'
 alias la='ls -A'
 alias ll='ls -alF'
 if exists exa; then
-  alias l='exa -alF --color-scale'
-  alias lll='exa -l -s age --color=always | head -n 10'
+  alias l='exa -alF --color-scale all --color-scale-mode fixed'
 else
   alias l='ls -CF'
-  alias lll='ll -t | head -n 10'
 fi
-alias lg='exa -alF --color-scale --git'
+alias lg='exa -alF --color-scale all --color-scale-mode fixed --git'
 
 alias f='find . -iname'
 alias fif='find . -type f -iname'
