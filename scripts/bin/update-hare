@@ -34,6 +34,7 @@ update_harec() {
     cd ~/repos/harec
     git_pull || [ $force ] || return
     cp configs/linux.mk config.mk &&
+    make clean &&
     make &&
     make check &&
     sudo make uninstall install
@@ -44,6 +45,7 @@ update_hare() {
     cd ~/repos/hare
     git_pull || [ $force ] || return
     cp configs/linux.mk config.mk &&
+    make clean &&
     make &&
     make check &&
     sudo make uninstall install
