@@ -255,7 +255,8 @@ noremap <Leader>P "+P
 
 " reload vimrc
 nnoremap <Leader>,r :source $MYVIMRC<cr>
-nnoremap <Leader>,s :WrapShellCommand<cr>
+nnoremap <Leader>,s :WrapShellCommand %<cr>
+xnoremap <Leader>,s <cmd>call WrapShellCommand('selection')<cr>
 nnoremap <Leader>,w :TrimWhitespace<cr>
 nnoremap <Leader>,c :StripColorCodes<cr>
 nnoremap <Leader>,g :GitHub<cr>
@@ -645,10 +646,14 @@ command! TrimWhitespace call TrimWhitespace()
 
 command! StripColorCodes %s/\e\[[0-9;]*m//g
 
-function! WrapShellCommand()
-    % s#\v +--# \\\r  --#g
+function! WrapShellCommand(...)
+    if a:1 ==# 'selection'
+        :s#\v +-# \\\r  -#g
+    else
+        % s#\v +-# \\\r  -#g
+    endif
 endfunction
-command! WrapShellCommand call WrapShellCommand()
+command! -nargs=+ WrapShellCommand call WrapShellCommand(<f-args>)
 
 function! GitHub()
     if $DISPLAY == ':0'
