@@ -878,64 +878,14 @@ function! s:GoToAzureFile()
     endif
 endfunction
 
-" filetype bzl
-function! s:GoToBazelFile()
-    " TODO: load() → jump to function definition
-    let oldisfname = &isfname
-    let &isfname ..= ',:,@-@'
-    let path = expand("<cfile>")
-    let &isfname = oldisfname
-
-    if match(path, '\w') == -1
-        return 0
-    endif
-
-    if StartsWith(path, '@py_deps')
-        let path = path[8:]
-    elseif StartsWith(path, '@athena')
-        let path = path[7:]
-    endif
-
-    if StartsWith(path, '//')
-        let path = path[2:]
-        let git_root = trim(system('git rev-parse --show-toplevel'))
-        if v:shell_error > 0
-            echo 'Not in a git repository: '..getcwd()
-            return 0
-        endif
-        let path = git_root..'/'..path
-    else
-        return 0
-    endif
-
-    let tokens = split(path, ':')
-
-    if len(tokens) >= 2 && EndsWith(tokens[1], '.bzl')
-        let path = join(tokens, '/')
-        if !empty(glob(path))
-            silent execute "edit" path
-            return 1
-        endif
-    else
-        let path = tokens[0]..'/BUILD'
-        if !empty(glob(path))
-            silent execute "edit" path
-            if len(tokens) >= 2
-                let target = tokens[1]
-                call search('name *= *"'..target..'"', 'W')
-            endif
-            return 1
-        endif
-    endif
-    return 0
-endfunction
-
 " When gf fails, try again without the first character
 " because p.e. in Azure pipelines '/project/file' might be a relative path.
 " If this fails, too, try opening 'file' (because the working directory might
 " be '/project')
 function! GoToFile()
-    if (&ft ==# 'bzl' || &ft ==# 'log') && s:GoToBazelFile()
+    " TODO: Source ~/.vim/after/ftplugin/bzl.vim for log files as well?
+    " if (&ft ==# 'bzl' || &ft ==# 'log') && GoToBazelFile()
+    if &ft ==# 'bzl' && GoToBazelFile()
         return
     endif
     try
