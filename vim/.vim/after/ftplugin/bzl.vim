@@ -122,7 +122,7 @@ function! JumpToMacroDefinition()
     let rule = expand('<cword>')
     " TODO: Search in current file before calling `rg`? Might hide duplicate
     " definitions!?
-    let cmd = 'rg --column -- "^def '..rule..'\(" 2>/dev/null'
+    let cmd = 'rg --column --type bazel -- "^def '..rule..'\(" 2>/dev/null'
     let matches = system(cmd)
     if matches == ''
         return 0
@@ -141,7 +141,8 @@ command JumpToMacroDefinition call JumpToMacroDefinition()
 
 function! JumpToRuleDefinition()
     let rule = expand('<cword>')
-    let cmd = 'rg --column -- "^'..rule..' = rule" 2>/dev/null || rg --column -- "^'..rule..' =" 2>/dev/null'
+    let cmd = 'rg --column --type bazel -- "^'..rule..' = rule" 2>/dev/null'
+    let cmd ..= ' || rg --column --type bazel -- "^'..rule..' =" 2>/dev/null'
     let matches = system(cmd)
     if matches == ''
         return 0
