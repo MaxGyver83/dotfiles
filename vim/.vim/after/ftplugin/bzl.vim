@@ -6,6 +6,16 @@ if exists('*JumpToRuleDefinition')
     finish
 endif
 
+function! s:SearchAndJumpInFile(pattern, flags, stopline = 0)
+  " use searchpos + 'normal xxGyy|' to record jump in jumplist
+  let [line, column] = searchpos(a:pattern, a:flags..'n', a:stopline)
+  if [line, column] == [0, 0]
+    return 0
+  endif
+  execute 'normal! '..line..'G0'..column..'lh'
+  return 1
+endfunction
+
 function! IsBazelPackage(directory)
     return !empty(glob(a:directory..'/BUILD.bazel')) || !empty(glob(a:directory..'/BUILD'))
 endfunction
@@ -120,8 +130,6 @@ endfunction
 
 function! JumpToMacroDefinition()
     let rule = expand('<cword>')
-    " TODO: Search in current file before calling `rg`? Might hide duplicate
-    " definitions!?
     let cmd = 'rg --column --type bazel -- "^def '..rule..'\(" 2>/dev/null'
     let matches = system(cmd)
     if matches == ''
@@ -159,7 +167,30 @@ function! JumpToRuleDefinition()
 endfunction
 command JumpToRuleDefinition call JumpToRuleDefinition()
 
+function! JumpToDefinitionInBuffer()
+    let rule = expand('<cword>')
+    let patterns = [
+                \ '^'..rule..' = rule',
+                \ '^'..rule..' =',
+                \ '^def '..rule..'(',
+                \ ]
+    for pattern in patterns
+        if s:SearchAndJumpInFile(pattern, 'w') == 1 | return 1 | endif
+    endfor
+    return 0
+endfunction
+
 function! JumpToDefinition()
-    call JumpToRuleDefinition() || call JumpToMacroDefinition()
+    " chaining function calls with `||` results in unexpected output like:
+    "  16 yaaa_library(
+    "  85 yaaa_library = rule(
+    " Press ENTER or type command to continue
+    " call JumpToDefinitionInBuffer() || call JumpToRuleDefinition() || call JumpToMacroDefinition()
+
+    if !JumpToDefinitionInBuffer()
+        if !JumpToRuleDefinition()
+            call JumpToMacroDefinition()
+        endif
+    endif
 endfunction
 command JumpToDefinition call JumpToDefinition()
