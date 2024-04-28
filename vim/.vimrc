@@ -555,40 +555,36 @@ if !has('nvim')
     execute "set <A-e>=\ee"
     execute "set <A-o>=\eo"
     execute "set <A-i>=\ei"
-    execute "set <A-b>=\eb"
-    execute "set <A-t>=\et"
-    execute "set <A-r>=\er"
-    execute "set <A-n>=\en"
     execute "set <A-v>=\ev"
     execute "set <A-.>=\e."
 endif
 
 if has('nvim')
     tnoremap <Esc> <C-\><C-n>
-    tnoremap <A-b> <C-\><C-N><C-w>h
-    tnoremap <A-t> <C-\><C-N><C-w>j
-    tnoremap <A-r> <C-\><C-N><C-w>k
-    tnoremap <A-n> <C-\><C-N><C-w>l
-endif
-if has("patch-8.0.0")
+    tnoremap <A-a> <C-\><C-N><C-w>h
+    tnoremap <A-e> <C-\><C-N><C-w>j
+    tnoremap <A-o> <C-\><C-N><C-w>k
+    tnoremap <A-i> <C-\><C-N><C-w>l
+elseif has("patch-8.0.0")
     tnoremap <Esc> <C-\><C-n>
-    tnoremap <A-b> <C-w>h
-    tnoremap <A-t> <C-w>j
-    tnoremap <A-r> <C-w>k
-    tnoremap <A-n> <C-w>l
+    tnoremap <A-a> <C-w>h
+    tnoremap <A-e> <C-w>j
+    tnoremap <A-o> <C-w>k
+    tnoremap <A-i> <C-w>l
 endif
-inoremap <A-b> <C-\><C-N><C-w>h
-inoremap <A-t> <C-\><C-N><C-w>j
-inoremap <A-r> <C-\><C-N><C-w>k
-inoremap <A-n> <C-\><C-N><C-w>l
-nnoremap <A-b> <C-w>h
-nnoremap <A-t> <C-w>j
-nnoremap <A-r> <C-w>k
-nnoremap <A-n> <C-w>l
+" inoremap <A-a> <C-\><C-N><C-w>h
+" inoremap <A-e> <C-\><C-N><C-w>j
+" inoremap <A-o> <C-\><C-N><C-w>k
+" inoremap <A-i> <C-\><C-N><C-w>l
 nnoremap <A-a> <C-w>h
 nnoremap <A-e> <C-w>j
 nnoremap <A-o> <C-w>k
 nnoremap <A-i> <C-w>l
+" stay in insert mode
+inoremap <A-a> <cmd>normal <C-w>h<cr>
+inoremap <A-e> <cmd>normal <C-w>j<cr>
+inoremap <A-o> <cmd>normal <C-w>k<cr>
+inoremap <A-i> <cmd>normal <C-w>l<cr>
 
 " navigate between buffers with Alt+q/w
 noremap <A-v> :bp<cr>
