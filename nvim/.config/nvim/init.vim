@@ -3,6 +3,7 @@ let &packpath = &runtimepath
 source ~/.vimrc
 
 call plug#begin('~/.local/share/nvim/plugged')
+    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
     Plug 'ibhagwan/fzf-lua'
     Plug 'dhananjaylatkar/cscope_maps.nvim'
     Plug 'lukas-reineke/headlines.nvim'
