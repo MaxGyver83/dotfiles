@@ -185,6 +185,7 @@ alias glch='git --no-pager log --pretty="'$format_short'" --decorate -n 10'
 # git log compact [with] names
 alias glcn='git log --pretty="'$format_names'" --decorate'
 alias glcnh='git --no-pager log --pretty="'$format_names'" --decorate -n 10'
+alias glcnht='glcnh --color=always | less -SE'
 
 alias gitlog='git log --oneline --graph --decorate'
 alias gitlogs='git log --oneline --graph --decorate --stat'
