@@ -1,4 +1,4 @@
-
+# vim: ft=bash:
 # set variable identifying the chroot you work in (used in the prompt below)
 if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
@@ -6,7 +6,7 @@ fi
 DEBIAN_CHROOT="${debian_chroot:+($debian_chroot)}"
 
 # check if I'm connected via SSH
-[ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ] || [ -f /.dockerenv ] && HOSTINFO="$USER@$HOSTNAME:"
+[ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ] || [ -f /.dockerenv ] && HOSTINFO='\u@\h:'
 
 
 # set a fancy prompt (non-color, unless we know we "want" color)
