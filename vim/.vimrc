@@ -47,7 +47,7 @@ if &term != 'cygwin'
     syntax match SpecialKey /^☐ .*/
 endif
 highlight clear SignColumn
-let g:markdown_fenced_languages = ['py=python', 'python', 'c', 'cpp', 'sh', 'bash=sh', 'vim', 'yaml']
+let g:markdown_fenced_languages = ['py=python', 'python', 'bzl', 'c', 'cpp', 'sh', 'bash=sh', 'toml', 'vim', 'yaml']
 
 " Allow to use Ctrl-s and Ctrl-q as keybinds even when not started from a
 " shell
