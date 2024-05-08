@@ -1,7 +1,7 @@
 [start]
 # improve visualization
 ap/vim-buftabline
-ap/vim-readdir # fixes problems with netrw+buftabline
+# ap/vim-readdir # fixes problems with netrw+buftabline
 itchyny/lightline.vim
 machakann/vim-highlightedyank
 rickhowe/diffchar.vim
@@ -67,12 +67,13 @@ inkarkat/vim-SyntaxRange  # different syntax for part of a file
 inkarkat/vim-ingo-library
 Galicarnax/vim-regex-syntax  # syntax highlighting for regexs
 kovisoft/slimv
-eraserhd/parinfer-rust
+# eraserhd/parinfer-rust
 weakish/rcshell.vim
 bakpakin/janet.vim
+~maxgyver83/hare-jump.vim
 
 # language server
-prabirshrestha/vim-lsp
+# prabirshrestha/vim-lsp
 
 # other
 guns/xterm-color-table.vim
