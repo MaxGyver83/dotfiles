@@ -200,7 +200,7 @@ tere() {
   [ -n "$result" ] && cd -- "$result"
 }
 
-[ -f ~/workspace/z/z.sh ] && source ~/workspace/z/z.sh
+[ -f ~/repos/z/z.sh ] && source ~/repos/z/z.sh
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
