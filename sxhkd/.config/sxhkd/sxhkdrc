@@ -136,6 +136,9 @@ ctrl + shift + 1
 ctrl + shift + 2
     sudo modprobe -r psmouse ; sudo modprobe psmouse
 
+ctrl + shift + 4
+    ~/.screenlayout/layout.sh laptop
+
 super + 5
     ~/bin/brightness "-"
 
