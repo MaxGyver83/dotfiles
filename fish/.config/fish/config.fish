@@ -16,8 +16,8 @@ if [ -L /sbin ] && contains /usr/sbin $PATH && set -l ind (contains -i -- /sbin 
 end
 
 if type -q luarocks
-    set -x LUA_PATH "$(luarocks path --lr-path)"
-    set -x LUA_CPATH "$(luarocks path --lr-cpath)"
+    set -x LUA_PATH (luarocks path --lr-path)
+    set -x LUA_CPATH (luarocks path --lr-cpath)
 end
 
 # load aliases
