@@ -11,6 +11,7 @@ v    toggle mark
 V    toggle visual mark mode
 /    search
 \    filter
+<Esc> clear search/filter
 C-n  next account
 
 O    mail up
