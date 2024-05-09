@@ -200,6 +200,7 @@ abbr cpbr 'git rev-parse --abbrev-ref HEAD | tr -d \n | xclip -sel clip'
 # for git 2.22 and newer:
 # abbr cpbr 'git branch --show-current | tr -d \n | xclip -sel clip'
 
+abbr a 'aerc'
 abbr dps 'docker ps --format="table {{.ID}}\t{{.Image}}\t{{.Status}}\t{{.Names}}"'
 abbr cr 'crontab -l | grep --color=never "^[^#]"'
 
