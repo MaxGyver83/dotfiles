@@ -77,3 +77,6 @@ laptop) [ $laptop ] && activate_one "$laptop" ;;
 external) activate_one "$first_external_device" "$2" ;;
 all|both|*) activate_both "$laptop" "$first_external_device" ;;
 esac
+
+# reload current wallpaper (with updated size/position)
+~/.fehbg
