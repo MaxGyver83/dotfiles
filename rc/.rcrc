@@ -1,0 +1,46 @@
+history=$home/.rc_history
+
+fn alias {
+	name=$1
+	shift
+	eval 'fn' $name '{' $* '$*}'
+}
+
+alias .. 'cd ..'
+alias ... 'cd ../..'
+alias .... 'cd ../../..'
+alias ..... 'cd ../../../..'
+alias n nvim
+alias ll 'ls --color=always -lAhF'
+alias l 'exa -alF --color-scale all --color-scale-mode fixed'
+
+fn cd {
+	curdir=`{pwd}
+	switch ($1) {
+		case (); builtin cd
+		case -;  builtin cd $lastdir
+		case *;  builtin cd $*
+	}
+	lastdir=$curdir
+}
+
+RED='\e[1;31m'
+GREEN='\e[0;32m'
+BLUE='\e[0;34m'
+RESET='\e[0m'
+
+fn prompt {
+	if (~ $status 0) {
+		result=$GREEN^'✔'^$RESET
+	} else result=$RED^'✘'^$RESET
+	dir=`{pwd | sed -E 's|^(/media)?'$home'/||'}
+	branch=`{git rev-parse --abbrev-ref HEAD >[2=]}
+	if (!~ $branch ()) {
+		modified=`{git ls-files --modified | wc -l}
+		if (~ $modified 0) {
+			branch=' ('^$branch^')'
+		} else 
+			branch=' ('^$branch^'|+'^$modified^')'
+	}
+	prompt=($nl^`{printf $result}^' '`{printf $BLUE^$dir^$RESET}^$branch^$nl^'% ' '')
+}
