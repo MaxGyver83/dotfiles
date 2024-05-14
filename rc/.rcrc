@@ -1,25 +1,40 @@
 history=$home/.rc_history
 
-RED=`{printf '\e[1;31m'}
-GREEN=`{printf '\e[0;32m'}
-BLUE=`{printf '\e[0;34m'}
-RESET=`{printf '\e[0m'}
+esc=`{printf '\e'}
+RED=$esc'[1;31m'
+GREEN=$esc'[0;32m'
+YELLOW=$esc'[0;33m'
+BLUE=$esc'[0;34m'
+RESET=$esc'[0m'
 
 fn prompt {
 	curstatus=$status
-	if (~ $status 0) {
-		result=$GREEN^'✔'^$RESET
-	} else result=$RED^'✘'^$RESET
+	if (~ $curstatus 0) {
+		result=''
+	} else
+		result=$RED^'['^$curstatus^']'^$RESET^' '
 	dir=`{pwd | sed -E 's|^(/media)?'$home'/||'}
+
 	branch=`{git rev-parse --abbrev-ref HEAD >[2=]}
 	if (!~ $branch ()) {
 		modified=`{git ls-files --modified | wc -l}
+		remote_tracking=`{git rev-parse --abbrev-ref --symbolic-full-name '@{u}'}
+		behind=`{git rev-list --left-only --count $remote_tracking...@}
+		ahead=`{git rev-list --right-only --count $remote_tracking...@}
 		if (~ $modified 0) {
-			branch=' ('^$branch^')'
+			branch=' ('$GREEN^$branch^$RESET
 		} else
-			branch=' ('^$branch^'|+'^$modified^')'
+			branch=' ('^$YELLOW^$branch^$RESET
+		if (!~ $behind 0)
+			branch=$branch^'↓'^$behind
+		if (!~ $ahead 0)
+			branch=$branch^'↑'^$ahead
+		if (!~ $modified 0)
+			branch=$branch^'|+'^$modified
+		branch=$branch^')'
 	}
-	prompt=($nl^$result^' '^$BLUE^$dir^$RESET^$branch^$nl^'% ' '  ')
+
+	prompt=($nl^$result^$BLUE^$dir^$RESET^$branch^$nl^'% ' '  ')
 	~ $curstatus 0 # reset status to original value
 }
 
