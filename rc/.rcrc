@@ -1,29 +1,5 @@
 history=$home/.rc_history
 
-fn alias {
-	name=$1
-	shift
-	eval 'fn' $name '{' $* '$*}'
-}
-
-alias .. 'cd ..'
-alias ... 'cd ../..'
-alias .... 'cd ../../..'
-alias ..... 'cd ../../../..'
-alias n nvim
-alias ll 'ls --color=always -lAhF'
-alias l 'exa -alF --color-scale all --color-scale-mode fixed'
-
-fn cd {
-	curdir=`{pwd}
-	switch ($1) {
-		case (); builtin cd
-		case -;  builtin cd $lastdir
-		case *;  builtin cd $*
-	}
-	lastdir=$curdir
-}
-
 RED='\e[1;31m'
 GREEN='\e[0;32m'
 BLUE='\e[0;34m'
@@ -39,8 +15,96 @@ fn prompt {
 		modified=`{git ls-files --modified | wc -l}
 		if (~ $modified 0) {
 			branch=' ('^$branch^')'
-		} else 
+		} else
 			branch=' ('^$branch^'|+'^$modified^')'
 	}
-	prompt=($nl^`{printf $result}^' '`{printf $BLUE^$dir^$RESET}^$branch^$nl^'% ' '')
+	prompt=($nl^`{printf $result}^' '`{printf $BLUE^$dir^$RESET}^$branch^$nl^'% ' '  ')
 }
+
+fn cd {
+	curdir=`{pwd}
+	switch ($1) {
+		case (); builtin cd
+		case -;  builtin cd $lastdir
+		case *;  builtin cd $*
+	}
+	lastdir=$curdir
+}
+
+fn alias {
+	name=$1
+	shift
+	eval 'fn' $name '{' $* '$*}'
+}
+
+alias .. 'cd ..'
+alias ... 'cd ../..'
+alias .... 'cd ../../..'
+alias ..... 'cd ../../../..'
+
+alias ll 'ls --color=always -lAhF'
+alias la 'ls -A'
+alias l 'exa -alF --color-scale all --color-scale-mode fixed'
+alias lg 'exa -alF --color-scale all --color-scale-mode fixed --git'
+alias fdall 'fd -HIL'
+alias du0 'du -h -d0'
+alias du1 'du -h -d1'
+alias ncdu 'ncdu --color=dark --one-file-system'
+alias xo xdg-open
+alias nw 'ls -Art | tail -n 1'
+# alias extract-latest '. $home/bin/extract-latest'
+alias y yank
+alias cb 'xclip -sel clip'
+
+alias acs 'apt-cache search'
+alias sai 'sudo apt install'
+alias sau 'sudo apt update'
+alias saU 'sudo apt upgrade'
+alias alu 'apt list --upgradable'
+alias ali 'apt list --installed'
+alias ap 'apt policy'
+
+alias sps 'sudo pacman -S'
+alias spss 'pacman -Ss'
+alias pss 'pacman -Ss'
+alias syu 'sudo pacman -Syu'
+
+alias pl 'patool list'
+alias pe 'patool extract'
+alias px 'patool extract'
+alias pc 'patool create'
+alias pd 'patool diff'
+
+alias v vim
+alias n nvim
+
+alias helix 'COLORTERM=truecolor builtin helix'
+alias rr ranger
+alias feh 'feh --scale-down --auto-zoom --auto-rotate'
+alias aerc 'COLORTERM=truecolor builtin aerc'
+
+alias rich 'python -m rich.markdown -c'
+
+if (whatis nvim >[2=]) {
+	VIM=nvim
+} else VIM=vim
+
+alias cv '$VIM $home/.vimrc'
+alias cnv '$VIM $home/.config/nvim/init.vim'
+alias cl '$VIM $home/.vim/after/ftplugin/lisp.vim'
+alias cf '$VIM $home/.config/fish/config.fish'
+alias ca '$VIM $home/.config/fish/aliases.fish'
+alias cfl '$VIM $home/.config/fish/local.fish'
+alias cn '$VIM $home/.config/nyxt/config.lisp'
+alias cs '$VIM $home/.config/sxhkd/sxhkdrc'
+alias cst '$VIM $home/.config/stumpwm/config'
+alias ct '$VIM $home/.tmux.conf'
+alias ce '$VIM $home/.config/emacs/init.el'
+alias ck '$VIM $home/.config/kmonad/vou-linux-de-rctrl.kbd'
+alias td '$VIM $home/dev/gta_local/max/todo/todo.md'
+
+alias g 'git status --short'
+alias G 'git status'
+alias gd 'git diff'
+
+alias en 'LANG=en_US.UTF-8'
