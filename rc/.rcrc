@@ -105,7 +105,7 @@ alias aerc 'COLORTERM=truecolor builtin aerc'
 
 alias rich 'python -m rich.markdown -c'
 
-if (whatis nvim >[2=]) {
+if (whatis nvim >[1=] >[2=]) {
 	VIM=nvim
 } else VIM=vim
 
@@ -126,5 +126,18 @@ alias td '$VIM $home/dev/gta_local/max/todo/todo.md'
 alias g 'git status --short'
 alias G 'git status'
 alias gd 'git diff'
+alias gdd 'git -c core.pager=delta -c delta.syntax-scheme=zenburn diff'
+alias gds 'git -c core.pager=delta -c delta.features=side-by-side -c delta.syntax-scheme=zenburn diff'
+alias gdt 'git difftool'
+alias gf 'git fetch'
+alias gp 'git pull'
+alias gpa 'git pull --autostash'
+alias gps 'git push'
+# git push upstream
+alias gpsu 'git push --set-upstream origin `{git rev-parse --abbrev-ref HEAD}'
+# git reset hard to origin
+alias grho 'git reset --hard origin/`{git rev-parse --abbrev-ref HEAD}'
+alias gc 'git clone'
+alias gcm 'git co master || git co main'
 
 alias en 'LANG=en_US.UTF-8'
