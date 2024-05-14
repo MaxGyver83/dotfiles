@@ -18,7 +18,7 @@ abbr fi 'find . -iname'
 abbr fif 'find . -type f -iname'
 abbr fid 'find . -type d -iname'
 type -q fd || begin; type -q fdfind && alias fd='fdfind'; end
-abbr fda 'fd -HI'
+abbr fdall 'fd -HIL'
 
 abbr du1 'du -h -d1'
 abbr du0 'du -h -d0'
@@ -98,6 +98,7 @@ alias helix='COLORTERM=truecolor command helix'
 abbr rr 'ranger'
 alias feh='feh --scale-down --auto-zoom --auto-rotate'
 alias aerc='COLORTERM=truecolor command aerc'
+abbr a 'aerc'
 
 # bat: default: line numbers, no pager
 # no decorations, no pager
@@ -200,7 +201,6 @@ abbr cpbr 'git rev-parse --abbrev-ref HEAD | tr -d \n | xclip -sel clip'
 # for git 2.22 and newer:
 # abbr cpbr 'git branch --show-current | tr -d \n | xclip -sel clip'
 
-abbr a 'aerc'
 abbr dps 'docker ps --format="table {{.ID}}\t{{.Image}}\t{{.Status}}\t{{.Names}}"'
 abbr cr 'crontab -l | grep --color=never "^[^#]"'
 
