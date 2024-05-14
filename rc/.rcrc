@@ -23,14 +23,17 @@ fn prompt {
 	~ $curstatus 0 # reset status to original value
 }
 
+# support `cd -` and update $PWD
 fn cd {
-	curdir=`{pwd}
+	curdir=$PWD
 	switch ($1) {
 		case (); builtin cd
 		case -;  builtin cd $lastdir
 		case *;  builtin cd $*
 	}
-	lastdir=$curdir
+	PWD=`pwd
+	if (!~ $curdir $PWD)
+		lastdir=$curdir
 }
 
 fn alias {
