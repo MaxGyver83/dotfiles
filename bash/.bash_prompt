@@ -48,16 +48,17 @@ fi
 
 git_status() {
     local git_status="$(LC_ALL=C git status 2> /dev/null)"
+    [ "$git_status" = "" ] && GIT_COLORED= && GIT_NOCOLOR= && return
     local on_branch="On branch ([^${IFS}]*)"
     local on_commit="HEAD detached at ([^${IFS}]*)"
 
     GIT_BRANCH=
     if [[ $git_status =~ $on_branch ]]; then
         local branch="${BASH_REMATCH[1]}"
-        GIT_BRANCH=" ($branch)"
+        GIT_BRANCH="$branch"
     elif [[ $git_status =~ $on_commit ]]; then
         local commit="${BASH_REMATCH[1]}"
-        GIT_BRANCH=" ($commit)"
+        GIT_BRANCH="$commit"
     fi
     # GIT_BRANCH=" (master)"
 
@@ -72,7 +73,18 @@ git_status() {
         GIT_COLOR="$COLOR_OCHRE"
     fi
 
-    GIT_COLORED="${GIT_COLOR}${GIT_BRANCH}${COLOR_RESET}"
+    local modified=$(git ls-files --modified | wc -l)
+    local remote_tracking=$(git rev-parse --abbrev-ref --symbolic-full-name '@{u}')
+    local behind=$(git rev-list --left-only --count $remote_tracking...@)
+    local ahead=$(git rev-list --right-only --count $remote_tracking...@)
+
+    local git_info=""
+    [ "$behind"   -gt 0 ] && git_info+='↓'$behind
+    [ "$ahead"    -gt 0 ] && git_info+='↑'$ahead
+    [ "$modified" -gt 0 ] && git_info+='|+'$modified
+
+    GIT_COLORED=" (${GIT_COLOR}${GIT_BRANCH}${COLOR_RESET}${git_info})"
+    GIT_NOCOLOR=" (${GIT_BRANCH}${git_info})"
 }
 
 cmd_status() {
@@ -106,7 +118,7 @@ prompt_command() {
     if [ "$color_prompt" = yes ]; then
         PS1="${STATUS}${KRB_STATUS_MSG}${HOSTINFO}${DEBIAN_CHROOT}${CWD}${GIT_COLORED} ${COLOR_BLUE}\$${COLOR_RESET} "
     else
-        PS1="${STATUS}${KRB_STATUS_MSG}${HOSTINFO}${DEBIAN_CHROOT}${CWD}${GIT_BRANCH} \$ "
+        PS1="${STATUS}${KRB_STATUS_MSG}${HOSTINFO}${DEBIAN_CHROOT}${CWD}${GIT_NOCOLOR} \$ "
     fi
 }
 
