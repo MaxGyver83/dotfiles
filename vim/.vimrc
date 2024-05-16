@@ -1296,6 +1296,17 @@ let g:expand_region_text_objects = {
       \ 'ip'  :0,
       \ }
 
+" Limelight
+" Color name (:help cterm-colors) or ANSI code
+let g:limelight_conceal_ctermfg = 'gray'
+let g:limelight_conceal_ctermfg = 240
+" Color name (:help gui-colors) or RGB color
+let g:limelight_conceal_guifg = 'DarkGray'
+let g:limelight_conceal_guifg = '#777777'
+nmap <Leader>l <Plug>(Limelight)
+xmap <Leader>l <Plug>(Limelight)
+nmap <Leader>ll :Limelight!!<CR>
+
 " try loading machine-specific settings
 try
   source ~/.vimrc_local
