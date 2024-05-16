@@ -1288,6 +1288,8 @@ let g:expand_region_text_objects = {
       \ 'a)'  :1,
       \ 'i}'  :1,
       \ 'a}'  :1,
+      \ 'i>'  :1,
+      \ 'a>'  :1,
       \ 'il'  :0,
       \ 'ii'  :0,
       \ 'ai'  :0,
