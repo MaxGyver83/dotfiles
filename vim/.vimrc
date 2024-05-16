@@ -1307,6 +1307,21 @@ nmap <Leader>l <Plug>(Limelight)
 xmap <Leader>l <Plug>(Limelight)
 nmap <Leader>ll :Limelight!!<CR>
 
+" vimspector
+let g:vimspector_enable_mappings = 'HUMAN'
+" let g:buftabline_show = 0
+nnoremap <Leader>dd :pa vimspector\|call vimspector#Launch()<CR>
+nnoremap <Leader>dq :call vimspector#Reset()<CR>
+nnoremap <Leader>dc :call vimspector#Continue()<CR>
+
+nnoremap <Leader>dt :call vimspector#ToggleBreakpoint()<CR>
+nnoremap <Leader>dT :call vimspector#ClearBreakpoints()<CR>
+
+nmap <Leader>do <Plug>VimspectorRestart
+nmap <Leader>da <Plug>VimspectorStepOut
+nmap <Leader>di <Plug>VimspectorStepInto
+nmap <Leader>de <Plug>VimspectorStepOver
+
 " try loading machine-specific settings
 try
   source ~/.vimrc_local
