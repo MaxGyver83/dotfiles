@@ -63,10 +63,12 @@ git_status() {
     # GIT_BRANCH=" (master)"
 
     GIT_COLOR=
-    if [[ ! $git_status =~ "working tree clean" ]]; then
+    if [[ $git_status =~ "Changes not staged for commit" ]]; then
         GIT_COLOR="$COLOR_RED"
     elif [[ $git_status =~ "Your branch is ahead of" ]]; then
         GIT_COLOR="$COLOR_YELLOW"
+    elif [[ $git_status =~ "nothing added to commit but untracked files present" ]]; then
+        GIT_COLOR="$COLOR_GREEN"
     elif [[ $git_status =~ "nothing to commit" ]]; then
         GIT_COLOR="$COLOR_GREEN"
     else
@@ -74,6 +76,7 @@ git_status() {
     fi
 
     local modified=$(git ls-files --modified | wc -l)
+    local untracked=$(git ls-files --others --exclude-standard | wc -l)
     local remote_tracking=$(git rev-parse --abbrev-ref --symbolic-full-name '@{u}')
     local behind=$(git rev-list --left-only --count $remote_tracking...@)
     local ahead=$(git rev-list --right-only --count $remote_tracking...@)
@@ -81,7 +84,9 @@ git_status() {
     local git_info=""
     [ "$behind"   -gt 0 ] && git_info+='↓'$behind
     [ "$ahead"    -gt 0 ] && git_info+='↑'$ahead
-    [ "$modified" -gt 0 ] && git_info+='|+'$modified
+    [ "$modified" -gt 0 ] || [ "$untracked" -gt 0 ] && git_info+='|'
+    [ "$modified" -gt 0 ] && git_info+='+'$modified
+    [ "$untracked" -gt 0 ] && git_info+='…'$untracked
 
     GIT_COLORED=" (${GIT_COLOR}${GIT_BRANCH}${COLOR_RESET}${git_info})"
     GIT_NOCOLOR=" (${GIT_BRANCH}${git_info})"
