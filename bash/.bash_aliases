@@ -67,6 +67,7 @@ alias pd='patool diff'
 
 exists nvim && VIM='nvim' || VIM='vim'
 alias v=$VIM
+alias vim=$VIM
 alias vv="$VIM -c \"normal '0\""
 alias n='nvim'
 # start vim and open vim-fugitive's git status
@@ -89,9 +90,13 @@ alias akku='upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep -E "po
 
 # git
 alias g='git status'
+alias gc='git clone'
 alias gd='git diff'
+alias gf='git fetch'
 alias gp='git pull'
 alias gps='git push'
+alias gcm='git co master || git co main'
+alias gch='git co HEAD --'
 # gr = "git root" (go to the toplevel of the current repo)
 alias gr='cd $(git rev-parse --show-toplevel)'
 # git log
