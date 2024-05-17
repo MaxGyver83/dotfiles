@@ -75,9 +75,16 @@ $if mode=emacs
 
 # Max: Ctrl+b/f or Shift+Left/Right for moving by one WORD (including /, \, -, etc.) instead of one letter
 "\C-f": shell-forward-word
-"\C-b": shell-backward-word
+# "\C-b": shell-backward-word
 "\e[1;2D": shell-backward-word
 "\e[1;2C": shell-forward-word
+
+# Max: duplicate last word (bash)
+"\C-\xff": shell-backward-kill-word
+"\C-b": "\C-\xff\C-y\C-y"
+
+# Exit on Ctrl+q
+"\C-q": "\C-d"
 
 $if term=rxvt
 "\e[7~": beginning-of-line
