@@ -73,15 +73,26 @@ $if mode=emacs
 "\e\e[C": forward-word
 "\e\e[D": backward-word
 
-# Max: Ctrl+b/f or Shift+Left/Right for moving by one WORD (including /, \, -, etc.) instead of one letter
-"\C-f": shell-forward-word
-# "\C-b": shell-backward-word
-"\e[1;2D": shell-backward-word
-"\e[1;2C": shell-forward-word
+$if Bash
+    # Ctrl+b/f or Shift+Left/Right for moving by one WORD (including /, \, -, etc.) instead of one letter
+    # "\C-f": shell-forward-word
+    # "\C-b": shell-backward-word
+    "\e[1;2D": shell-backward-word
+    "\e[1;2C": shell-forward-word
 
-# Max: duplicate last word (bash)
-"\C-\xff": shell-backward-kill-word
-"\C-b": "\C-\xff\C-y\C-y"
+    # duplicate last word (bash)
+    "\C-\xff": shell-backward-kill-word
+    "\C-b": "\C-\xff\C-y\C-y"
+
+    # edit command line in vim
+    "\ev": edit-and-execute-command
+    # "\C-X": copy_line_to_x_clipboard
+$endif
+
+$if rc
+    "\C-\xfe": menu-complete
+    "\C-i": "\e~\C-\xfe"
+$endif
 
 # Exit on Ctrl+q
 "\C-q": "\C-d"
@@ -92,9 +103,6 @@ $if term=rxvt
 "\eOc": forward-word
 "\eOd": backward-word
 $endif
-
-# edit command line in vim
-"\ev": edit-and-execute-command
 
 # for non RH/Debian xterm, can't hurt for RH/Debian xterm
 # "\eOH": beginning-of-line
