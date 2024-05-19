@@ -18,6 +18,7 @@ fn prompt {
 	branch=`{git rev-parse --abbrev-ref HEAD >[2=]}
 	if (!~ $branch ()) {
 		modified=`{git ls-files --modified | wc -l}
+		untracked=`{git ls-files --others --exclude-standard | wc -l}
 		remote_tracking=`{git rev-parse --abbrev-ref --symbolic-full-name '@{u}'}
 		behind=`{git rev-list --left-only --count $remote_tracking...@ >[2=]}
 		ahead=`{git rev-list --right-only --count $remote_tracking...@ >[2=]}
@@ -25,12 +26,12 @@ fn prompt {
 			branch=' ('$GREEN^$branch^$RESET
 		} else
 			branch=' ('^$YELLOW^$branch^$RESET
-		if (!~ $behind 0)
-			branch=$branch^'↓'^$behind
-		if (!~ $ahead 0)
-			branch=$branch^'↑'^$ahead
-		if (!~ $modified 0)
-			branch=$branch^'|+'^$modified
+		if (!~ $behind 0)    branch=$branch^'↓'^$behind
+		if (!~ $ahead 0)     branch=$branch^'↑'^$ahead
+		if (!~ $modified 0 || !~ $untracked 0)
+			branch=$branch^'|'
+		if (!~ $modified 0)  branch=$branch^'+'^$modified
+		if (!~ $untracked 0) branch=$branch^'…'^$untracked
 		branch=$branch^')'
 	}
 
