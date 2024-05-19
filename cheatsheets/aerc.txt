@@ -14,6 +14,9 @@ V    toggle visual mark mode
 <Esc> clear search/filter
 C-n  next account
 
+View
+----
+
 O    mail up
 E    mail down
 C-k  next mime type
@@ -22,6 +25,11 @@ rr   reply all
 rq   reply all quoted
 Rr   reply
 Rq   reply quoted
+
+Apply patch:
+
+:cd /to/project
+:pipe -mb git am -3
 
 Compose
 -------
