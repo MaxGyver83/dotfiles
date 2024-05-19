@@ -56,6 +56,12 @@ fn cd {
 		lastdir=$curdir
 }
 
+# edit command in $VIM_CMD and source it afterwards
+fn editcmd {
+	tmp_file=`mktemp
+	$VIM_CMD -c 'set ft=rcshell' $tmp_file && . $tmp_file
+}
+
 fn alias {
 	name=$1
 	shift
@@ -108,6 +114,7 @@ alias rich 'python -m rich.markdown -c'
 
 alias v vim
 alias n nvim
+alias e editcmd
 
 if (whatis nvim >[1=] >[2=]) {
 	VIM_CMD=nvim
