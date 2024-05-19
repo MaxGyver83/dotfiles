@@ -1,5 +1,7 @@
 history=$home/.rc_history
 
+stty -ixon
+
 esc=`{printf '\e'}
 RED=$esc'[1;31m'
 GREEN=$esc'[0;32m'
