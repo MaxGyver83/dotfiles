@@ -19,8 +19,8 @@ fn prompt {
 	if (!~ $branch ()) {
 		modified=`{git ls-files --modified | wc -l}
 		remote_tracking=`{git rev-parse --abbrev-ref --symbolic-full-name '@{u}'}
-		behind=`{git rev-list --left-only --count $remote_tracking...@}
-		ahead=`{git rev-list --right-only --count $remote_tracking...@}
+		behind=`{git rev-list --left-only --count $remote_tracking...@ >[2=]}
+		ahead=`{git rev-list --right-only --count $remote_tracking...@ >[2=]}
 		if (~ $modified 0) {
 			branch=' ('$GREEN^$branch^$RESET
 		} else
