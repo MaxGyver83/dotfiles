@@ -96,33 +96,35 @@ alias px 'patool extract'
 alias pc 'patool create'
 alias pd 'patool diff'
 
-alias v vim
-alias n nvim
-
 alias helix 'COLORTERM=truecolor builtin helix'
 alias rr ranger
 alias feh 'feh --scale-down --auto-zoom --auto-rotate'
 alias aerc 'COLORTERM=truecolor builtin aerc'
-
 alias rich 'python -m rich.markdown -c'
 
-if (whatis nvim >[1=] >[2=]) {
-	VIM=nvim
-} else VIM=vim
+alias v vim
+alias n nvim
 
-alias cv '$VIM $home/.vimrc'
-alias cnv '$VIM $home/.config/nvim/init.vim'
-alias cl '$VIM $home/.vim/after/ftplugin/lisp.vim'
-alias cf '$VIM $home/.config/fish/config.fish'
-alias ca '$VIM $home/.config/fish/aliases.fish'
-alias cfl '$VIM $home/.config/fish/local.fish'
-alias cn '$VIM $home/.config/nyxt/config.lisp'
-alias cs '$VIM $home/.config/sxhkd/sxhkdrc'
-alias cst '$VIM $home/.config/stumpwm/config'
-alias ct '$VIM $home/.tmux.conf'
-alias ce '$VIM $home/.config/emacs/init.el'
-alias ck '$VIM $home/.config/kmonad/vou-linux-de-rctrl.kbd'
-alias td '$VIM $home/dev/gta_local/max/todo/todo.md'
+if (whatis nvim >[1=] >[2=]) {
+	VIM_CMD=nvim
+} else VIM_CMD=vim
+
+fn vg {$VIM_CMD '+G' '+silent %bd|e#' '+norm gU'}
+
+alias cr '$VIM_CMD $home/.rcrc'
+alias cv '$VIM_CMD $home/.vimrc'
+alias cnv '$VIM_CMD $home/.config/nvim/init.vim'
+alias cl '$VIM_CMD $home/.vim/after/ftplugin/lisp.vim'
+alias cf '$VIM_CMD $home/.config/fish/config.fish'
+alias ca '$VIM_CMD $home/.config/fish/aliases.fish'
+alias cfl '$VIM_CMD $home/.config/fish/local.fish'
+alias cn '$VIM_CMD $home/.config/nyxt/config.lisp'
+alias cs '$VIM_CMD $home/.config/sxhkd/sxhkdrc'
+alias cst '$VIM_CMD $home/.config/stumpwm/config'
+alias ct '$VIM_CMD $home/.tmux.conf'
+alias ce '$VIM_CMD $home/.config/emacs/init.el'
+alias ck '$VIM_CMD $home/.config/kmonad/vou-linux-de-rctrl.kbd'
+alias td '$VIM_CMD $home/dev/gta_local/max/todo/todo.md'
 
 alias g 'git status --short'
 alias G 'git status'
