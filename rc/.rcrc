@@ -2,6 +2,8 @@ history=$home/.rc_history
 
 stty -ixon
 
+path=($home/install $home/bin $home/.local/bin $path)
+
 esc=`{printf '\e'}
 RED=$esc'[1;31m'
 GREEN=$esc'[0;32m'
