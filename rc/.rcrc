@@ -60,8 +60,8 @@ fn cd {
 
 # edit command in $VIM_CMD and source it afterwards
 fn editcmd {
-	tmp_file=`mktemp
-	$VIM_CMD -c 'set ft=rcshell' $tmp_file && . $tmp_file
+	tmp_file=`{mktemp /tmp/cmd-XXXXXX.rc}
+	$VIM_CMD $tmp_file && . $tmp_file
 }
 
 fn alias {
