@@ -313,8 +313,9 @@ noremap <Leader>b :bd<cr>
 noremap <Leader>B :b#\|bd #<cr>
 
 " close window
-noremap <Leader>q :q<cr>
 nnoremap <C-q> :q<cr>
+noremap <Leader>q :q<cr>
+noremap <Leader>Q :q!<cr>
 
 " start recording a macro with Q instead of q (and unmap q)
 nnoremap Q q
@@ -327,15 +328,19 @@ nnoremap x "_x
 nnoremap <Leader>d "_d
 
 " select word/WORD under cursor
+" or use + (vim-expand-region), not exactly the same because of vim-wordmotion
 nnoremap <Leader>v viw
+" or use ++ (vim-expand-region)
 nnoremap <Leader>V viW
 
 " replace word/selection with yanked text (without yanking the replaced text)
-nnoremap <Leader>r "_ciw<C-r>"<ESC>
-xnoremap <Leader>r "_c<C-r>"<ESC>
+" same as griw (vim-ReplaceWithRegister)
+nnoremap <Leader>rw "_ciw<C-r>"<ESC>
+" same as gr (vim-ReplaceWithRegister)
+" xnoremap <Leader>r "_c<C-r>"<ESC>
 
 " overwrite with yanked text
-nnoremap <Leader>R R<C-r>"<ESC>
+nnoremap <Leader>ro R<C-r>"<ESC>
 
 " change word using cgn, repeatable with dot
 nnoremap <Leader>cw :set noignorecase<CR>*``cgn
