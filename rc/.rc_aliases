@@ -1,0 +1,110 @@
+alias .. 'cd ..'
+alias ... 'cd ../..'
+alias .... 'cd ../../..'
+alias ..... 'cd ../../../..'
+
+alias ll 'ls --color=always -lAhF'
+alias la 'ls -A'
+alias l 'exa -alF --color-scale all --color-scale-mode fixed'
+alias lg 'exa -alF --color-scale all --color-scale-mode fixed --git'
+alias fdall 'fd -HIL'
+alias du0 'du -h -d0'
+alias du1 'du -h -d1'
+alias ncdu 'ncdu --color=dark --one-file-system'
+alias xo xdg-open
+alias nw 'ls -Art | tail -n 1'
+# alias extract-latest '. $home/bin/extract-latest'
+alias y yank
+alias cb 'xclip -sel clip'
+
+alias acs 'apt-cache search'
+alias sai 'sudo apt install'
+alias sau 'sudo apt update'
+alias saU 'sudo apt upgrade'
+alias alu 'apt list --upgradable'
+alias ali 'apt list --installed'
+alias ap 'apt policy'
+
+alias sps 'sudo pacman -S'
+alias spss 'pacman -Ss'
+alias pss 'pacman -Ss'
+alias syu 'sudo pacman -Syu'
+
+alias pl 'patool list'
+alias pe 'patool extract'
+alias px 'patool extract'
+alias pc 'patool create'
+alias pd 'patool diff'
+
+alias helix 'COLORTERM=truecolor builtin helix'
+alias rr ranger
+alias feh 'feh --scale-down --auto-zoom --auto-rotate'
+alias aerc 'COLORTERM=truecolor builtin aerc'
+alias rich 'python -m rich.markdown -c'
+
+alias v vim
+alias n nvim
+alias e editcmd
+
+if (whatis nvim >[1=] >[2=]) {
+	VIM_CMD=nvim
+} else VIM_CMD=vim
+
+fn vg {$VIM_CMD '+G' '+silent %bd|e#' '+norm gU'}
+
+alias cr '$VIM_CMD $home/.rcrc'
+alias cv '$VIM_CMD $home/.vimrc'
+alias cnv '$VIM_CMD $home/.config/nvim/init.vim'
+alias cl '$VIM_CMD $home/.vim/after/ftplugin/lisp.vim'
+alias cf '$VIM_CMD $home/.config/fish/config.fish'
+alias ca '$VIM_CMD $home/.config/fish/aliases.fish'
+alias cfl '$VIM_CMD $home/.config/fish/local.fish'
+alias cn '$VIM_CMD $home/.config/nyxt/config.lisp'
+alias cs '$VIM_CMD $home/.config/sxhkd/sxhkdrc'
+alias cst '$VIM_CMD $home/.config/stumpwm/config'
+alias ct '$VIM_CMD $home/.tmux.conf'
+alias ce '$VIM_CMD $home/.config/emacs/init.el'
+alias ck '$VIM_CMD $home/.config/kmonad/vou-linux-de-rctrl.kbd'
+alias td '$VIM_CMD $home/dev/gta_local/max/todo/todo.md'
+
+alias g 'git status --short'
+alias G 'git status'
+alias gd 'git diff'
+alias gdd 'git -c core.pager=delta -c delta.syntax-scheme=zenburn diff'
+alias gds 'git -c core.pager=delta -c delta.features=side-by-side -c delta.syntax-scheme=zenburn diff'
+alias gdt 'git difftool'
+alias gf 'git fetch'
+alias gp 'git pull'
+alias gpa 'git pull --autostash'
+alias gps 'git push'
+# git push upstream
+alias gpsu 'git push --set-upstream origin `{git rev-parse --abbrev-ref HEAD}'
+# git reset hard to origin
+alias grho 'git reset --hard origin/`{git rev-parse --abbrev-ref HEAD}'
+alias gc 'git clone'
+alias gcm 'git co master || git co main'
+
+hash_date_reldate='%C(Yellow)%h   %C(reset)%ai %<(14)(%C(Green)%cr%C(reset))%x09 %C(reset)'
+author='%C(Cyan)%an: %C(reset)'
+message_refs='%s %C(Red)%d%C(reset)'
+format_short=$hash_date_reldate^$message_refs
+format_names=$hash_date_reldate^$author^$message_refs
+# git log compact
+fn glc {git log --pretty=$format_short --decorate $*}
+fn glch {git --no-pager log --pretty=$format_short --decorate -n 10 $*}
+# git log compact [with] names
+fn glcn {git log --pretty=$format_names --decorate $*}
+fn glcnh {git --no-pager log --pretty=$format_names --decorate -n 10 $*}
+
+alias gitlog 'git log --oneline --graph --decorate'
+alias gitlogs 'git log --oneline --graph --decorate --stat'
+alias gitloga 'git log --oneline --graph --decorate --all'
+fn gitunpushed {git log '..@{u}' $*}
+alias gitunmerged 'git branch --no-merged master'
+
+# copy current branch name into clipboard
+alias cpbr 'git rev-parse --abbrev-ref HEAD | tr -d \n | xclip -sel clip'
+
+alias en 'LANG=en_US.UTF-8'
+
+# vim: ft=rcshell:
