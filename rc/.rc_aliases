@@ -40,6 +40,7 @@ alias helix 'COLORTERM=truecolor builtin helix'
 alias rr ranger
 alias feh 'feh --scale-down --auto-zoom --auto-rotate'
 alias aerc 'COLORTERM=truecolor builtin aerc'
+alias a 'COLORTERM=truecolor builtin aerc'
 alias rich 'python -m rich.markdown -c'
 
 alias v vim
@@ -83,6 +84,8 @@ alias gpsu 'git push --set-upstream origin `{git rev-parse --abbrev-ref HEAD}'
 alias grho 'git reset --hard origin/`{git rev-parse --abbrev-ref HEAD}'
 alias gc 'git clone'
 alias gcm 'git co master || git co main'
+alias cim 'git ci -m'
+alias gch 'git co HEAD -- '
 
 hash_date_reldate='%C(Yellow)%h   %C(reset)%ai %<(14)(%C(Green)%cr%C(reset))%x09 %C(reset)'
 author='%C(Cyan)%an: %C(reset)'
