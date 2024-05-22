@@ -4,6 +4,8 @@ stty -ixon
 
 path=($home/install $home/bin $home/.local/bin $path)
 
+EDITOR=nvim
+
 esc=`{printf '\e'}
 RED=$esc'[1;31m'
 GREEN=$esc'[0;32m'
