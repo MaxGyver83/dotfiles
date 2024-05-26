@@ -26,6 +26,8 @@ fn prompt {
 		modified=`{git ls-files --modified | wc -l}
 		untracked=`{git ls-files --others --exclude-standard | wc -l}
 		remote_tracking=`{git rev-parse --abbrev-ref --symbolic-full-name '@{u}'  >[2=]}
+		behind=0
+		ahead=0
 		if (~ $status 0) {
 			behind=`{git rev-list --left-only --count $remote_tracking...@ >[2=]}
 			ahead=`{git rev-list --right-only --count $remote_tracking...@ >[2=]}
