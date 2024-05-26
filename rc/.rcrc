@@ -77,3 +77,4 @@ fn alias {
 }
 
 . $home/.rc_aliases
+. $home/repos/z.rc/z.rc
