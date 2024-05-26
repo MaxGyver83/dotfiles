@@ -19,7 +19,7 @@ fn prompt {
 		result=''
 	} else
 		result=$RED^'['^$curstatus^']'^$RESET^' '
-	dir=`{pwd | sed -E 's|^(/media)?'$home'/||'}
+	dir = `` $nl {pwd | sed -E 's|^(/media)?'$home'/||'}
 
 	branch=`{git rev-parse --abbrev-ref HEAD >[2=]}
 	if (!~ $branch ()) {
