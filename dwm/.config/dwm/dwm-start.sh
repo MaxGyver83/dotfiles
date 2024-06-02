@@ -19,6 +19,9 @@ mkdir -p ~/log
 msteams_cookies="$HOME/.config/Microsoft/Microsoft Teams/Cookies"
 [ -f "$msteams_cookies" ] && rm "$msteams_cookies" 2> /dev/null
 
+PATH="$HOME/bin:$PATH"
+echo "PATH=$PATH" > ~/log/dwm-start.log
+
 # start dwm
 while true; do
     devPixelsPerPxOld=$devPixelsPerPx
