@@ -38,6 +38,7 @@ kana/vim-textobj-entire
 kana/vim-textobj-indent
 sgur/vim-textobj-parameter
 rhysd/vim-textobj-word-column
+bps/vim-textobj-python
 beloglazov/vim-textobj-quotes
 MaxGyver83/vim-textobj-brace
 terryma/vim-expand-region
