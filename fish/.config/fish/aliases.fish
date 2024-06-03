@@ -168,7 +168,7 @@ abbr cim 'git ci -m "'
 abbr gch 'git co HEAD --'
 # gr = "git root" (go to the toplevel of the current repo)
 abbr gr 'cd (git rev-parse --show-toplevel)'
-abbr gfm 'git ls-files --modified'
+abbr gfm 'git ls-files --modified --deduplicate'
 # untracked files
 abbr gfu 'git ls-files --others --exclude-standard'
 abbr gfc 'git diff --name-only --diff-filter=U'
