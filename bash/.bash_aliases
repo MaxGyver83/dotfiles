@@ -95,10 +95,16 @@ alias gd='git diff'
 alias gf='git fetch'
 alias gp='git pull'
 alias gps='git push'
-alias gcm='git co master || git co main'
+alias gcm='git co $(basename $(git rev-parse --abbrev-ref origin/HEAD || echo main)) || git co master'
 alias gch='git co HEAD --'
 # gr = "git root" (go to the toplevel of the current repo)
 alias gr='cd $(git rev-parse --show-toplevel)'
+# unstaged files
+alias gfm='git ls-files --modified --deduplicate'
+# untracked files
+alias gfu='git ls-files --others --exclude-standard'
+alias gfc='git diff --name-only --diff-filter=U'
+
 # git log
 alias gl='git log'
 
