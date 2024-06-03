@@ -8,8 +8,8 @@ activate_one() {
     else
         command="$command --auto"
     fi
-    # other_devices = connected except the one to be activated
-    other_devices="$(echo "$connected_devices" | grep -v -w "$1")"
+    # other_devices = connected/configured except the one to be activated
+    other_devices="$(printf "%s\n%s" "$connected_devices" "$configured_devices" | sort -u | grep -v -w "$1")"
     for device in $other_devices ; do
         command="$command --output $device --off"
     done
@@ -53,6 +53,7 @@ guess_layout() {
 
 connected_devices="$(xrandr | awk '/ conn/{print $1}')"
 disconnected_devices="$(xrandr | awk '/disconnected/{print $1}')"
+configured_devices="$(xrandr | awk '/connected( primary)? [0-9]/{print $1}')"
 
 case "$connected_devices" in
 *eDP1*) laptop=eDP1;;
