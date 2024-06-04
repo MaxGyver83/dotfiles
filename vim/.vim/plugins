@@ -81,6 +81,7 @@ guns/xterm-color-table.vim
 ojroques/vim-oscyank
 thinca/vim-localrc
 inkarkat/SyntaxAttr.vim
+liuchengxu/vim-which-key
 
 
 [opt]
