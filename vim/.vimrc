@@ -522,10 +522,10 @@ map <F4> :source ~/.autosession.vim<cr>
 
 " Markdown formatting
 nnoremap <leader>m0 :s/\v^#+ *//e<CR>
-nnoremap <leader>m1 :s/\v^#+ *//e<CR>0i#<space><ESC>
-nnoremap <leader>m2 :s/\v^#+ *//e<CR>0i##<space><ESC>
-nnoremap <leader>m3 :s/\v^#+ *//e<CR>0i###<space><ESC>
-nnoremap <leader>m4 :s/\v^#+ *//e<CR>0i####<space><ESC>
+nnoremap <leader>m1 :s/\v^#+ *//e<CR>0i#<space><ESC>0:nohlsearch<CR>
+nnoremap <leader>m2 :s/\v^#+ *//e<CR>0i##<space><ESC>0:nohlsearch<CR>
+nnoremap <leader>m3 :s/\v^#+ *//e<CR>0i###<space><ESC>0:nohlsearch<CR>
+nnoremap <leader>m4 :s/\v^#+ *//e<CR>0i####<space><ESC>0:nohlsearch<CR>
 nmap <leader>mi ysiW_
 nmap <leader>mb ysiW*.
 nmap <leader>mm ysiW`
