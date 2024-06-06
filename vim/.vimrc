@@ -241,6 +241,10 @@ endif
 let mapleader = "\<Space>"        " leader is space
 let maplocalleader = "\<Space>"   " local leader is space
 
+" prevent diffchar from setting these mappings
+nmap <Nop>(g) <Plug>GetDiffCharPair
+nmap <Nop>(p) <Plug>PutDiffCharPair
+
 " show (FZF) buffer list
 nnoremap gb :Buffers<CR>
 
