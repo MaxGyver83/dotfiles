@@ -1098,7 +1098,7 @@ nnoremap <silent> <Leader>ff :call
 autocmd BufRead,BufNewFile *.py nnoremap <silent> <Leader>ff :call search('^def ', "w")<CR>zt
 
 " find git merge conflict
-nnoremap <Leader>gm /\v^\<\<\<\<\<\<\< \|\=\=\=\=\=\=\=$\|\>\>\>\>\>\>\> /<cr>
+nnoremap <Leader>gm /\v^\<\<\<\<\<\<\< \|^\=\=\=\=\=\=\=$\|^\>\>\>\>\>\>\> /<cr>
 
 " vim-fugitive (git support)
 nnoremap <Leader>gg :G<cr>
