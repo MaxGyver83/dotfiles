@@ -191,7 +191,7 @@ if has("patch-8.2.118")
 endif
 
 " no delay after pressing Escape
-set timeoutlen=1000 ttimeoutlen=10
+set ttimeoutlen=10
 
 " update GitGutter signs after 750 ms of no input (also affects swap files)
 set updatetime=750
@@ -955,6 +955,9 @@ nmap <Leader>7 <Plug>BufTabLine.Go(7)
 nmap <Leader>8 <Plug>BufTabLine.Go(8)
 nmap <Leader>9 <Plug>BufTabLine.Go(9)
 nmap <Leader>0 <Plug>BufTabLine.Go(10)
+
+set timeoutlen=300
+nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 
 "" swap ; and , (next/previous match after s, S)
 "nmap ; <Plug>SneakPrevious
