@@ -1,0 +1,35 @@
+#!/bin/sh
+SOURCE_DIR="${SOURCE_DIR:-$HOME/repos}"
+
+git_clone_or_pull() {
+    cd "$SOURCE_DIR"
+    folder="$(basename $1 | sed 's/\.git$//')"
+    realpath $folder
+    if [ -d "$folder" ]; then
+        cd "$folder" && git pull
+    else
+        git clone $1 && cd "$folder"
+    fi
+}
+
+clone_make_install() {
+    git_clone_or_pull $1
+    make && sudo make install
+}
+
+# deps: Imlib2, inotify, libXft, freetype2, fontconfig, libexif-dev
+clone_make_install https://codeberg.org/nsxiv/nsxiv.git
+
+git_clone_or_pull https://codeberg.org/NRK/sxot.git
+cc -o sxot sxot.c -O3 -s -l X11 -l Xfixes \
+    && sudo install -Dm755 sxot /usr/local/bin/sxot
+
+git_clone_or_pull https://codeberg.org/NRK/sxcs.git
+cc -o sxcs sxcs.c -O3 -s -l X11 -l Xcursor \
+    && sudo cp sxcs /usr/local/bin \
+    && sudo cp sxcs.1 /usr/local/share/man/man1
+
+git_clone_or_pull https://codeberg.org/NRK/selx.git
+cc -o selx selx.c -O3 -s -l X11 -l Xext -l Xrandr \
+    && sudo cp selx /usr/local/bin \
+    && sudo cp selx.1 /usr/local/share/man/man1
