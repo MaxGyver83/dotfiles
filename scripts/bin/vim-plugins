@@ -46,7 +46,8 @@ update_plugins() {
 }
 
 case $1 in
--u|--update)  update_plugins; exit;;
+''|-u|--update|update) update_plugins; exit;;
+-i|--install|install) ;;
 esac
 
 clone_repo() {
