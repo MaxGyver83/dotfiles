@@ -1324,17 +1324,21 @@ nmap <Leader>ll :Limelight!!<CR>
 " vimspector
 let g:vimspector_enable_mappings = 'HUMAN'
 " let g:buftabline_show = 0
-nnoremap <Leader>dd :pa vimspector\|call vimspector#Launch()<CR>
 nnoremap <Leader>dq :call vimspector#Reset()<CR>
 nnoremap <Leader>dc :call vimspector#Continue()<CR>
 
 nnoremap <Leader>dt :call vimspector#ToggleBreakpoint()<CR>
 nnoremap <Leader>dT :call vimspector#ClearBreakpoints()<CR>
 
-nmap <Leader>do <Plug>VimspectorRestart
-nmap <Leader>da <Plug>VimspectorStepOut
-nmap <Leader>di <Plug>VimspectorStepInto
-nmap <Leader>de <Plug>VimspectorStepOver
+nmap <Leader>dv <Plug>VimspectorBalloonEval
+xmap <Leader>dv <Plug>VimspectorBalloonEval
+
+function! StartVimspector()
+    execute 'nunmap <space>d'
+    packadd vimspector
+    call vimspector#Launch()
+endfunction
+command! StartVimspector call StartVimspector()
 
 " try loading machine-specific settings
 try
