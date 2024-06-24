@@ -127,7 +127,7 @@ super + alt + i
 
 # activate VOU layout in KMonad
 ctrl + shift + Escape
-    ~/bin/start-kmonad.fish --keyboard all
+    sleep 0.2 && ~/bin/start-kmonad.fish --keyboard all
 
 # release CapsLock (if active)
 ctrl + shift + 1
