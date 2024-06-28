@@ -17,3 +17,6 @@ syn region shHereDoc matchgroup=shHereDoc13 start="<<\s*\\\_$\_s*'\z([^']\+\)'"
             \ matchgroup=shHereDoc13 end="^ *\z1$"
 syn region shHereDoc matchgroup=shHereDoc15 start="<<\s*\\\_$\_s*\"\z([^"]\+\)\""
             \ matchgroup=shHereDoc15 end="^ *\z1$"
+
+syntax match doublebraces '\${{[^}]*}}' containedin=ALL
+syntax match parens '\$([^) ]*)' containedin=ALL
