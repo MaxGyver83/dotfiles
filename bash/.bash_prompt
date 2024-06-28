@@ -78,8 +78,8 @@ git_status() {
         GIT_COLOR="$COLOR_OCHRE"
     fi
 
-    local modified=$(git ls-files --modified | wc -l)
-    local untracked=$(git ls-files --others --exclude-standard | wc -l)
+    local modified=$(git ls-files --modified $(git rev-parse --show-cdup) | wc -l)
+    local untracked=$(git ls-files --others --exclude-standard $(git rev-parse --show-cdup) | wc -l)
     local remote_tracking=$(git rev-parse --abbrev-ref --symbolic-full-name '@{u}' 2> /dev/null)
     local behind=$(git rev-list --left-only --count $remote_tracking...@)
     local ahead=$(git rev-list --right-only --count $remote_tracking...@)
