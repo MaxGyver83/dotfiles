@@ -89,12 +89,20 @@ alias td="$VIM ~/dev/gta_local/max/todo/todo.md"
 alias akku='upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep -E "power|updated|state|energy|time to|perc|capa" | grep -v design'
 
 # git
-alias g='git status'
+alias g='git status --short'
+alias G='git status'
 alias gc='git clone'
 alias gd='git diff'
+alias gdd='git -c "core.pager=delta" -c "delta.syntax-scheme=zenburn" diff'
+alias gds='git -c "core.pager=delta" -c "delta.features=side-by-side" -c "delta.syntax-scheme=zenburn" diff'
+alias gdt='git difftool'
 alias gf='git fetch'
 alias gp='git pull'
 alias gps='git push'
+# git push upstream
+alias gpsu='git push --set-upstream origin "$(git rev-parse --abbrev-ref HEAD)"'
+# git reset hard to origin
+alias grho='git reset --hard "origin/$(git rev-parse --abbrev-ref HEAD)"'
 alias gcm='git co $(basename $(git rev-parse --abbrev-ref origin/HEAD || echo main)) || git co master'
 alias gch='git co HEAD --'
 # gr = "git root" (go to the toplevel of the current repo)
