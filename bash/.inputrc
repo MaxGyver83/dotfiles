@@ -86,7 +86,7 @@ $if Bash
 
     # edit command line in vim
     "\ev": edit-and-execute-command
-    # "\C-X": copy_line_to_x_clipboard
+    # "\C-xx": copy_line_to_x_clipboard
 $endif
 
 $if rc
