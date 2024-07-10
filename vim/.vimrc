@@ -352,6 +352,8 @@ xnoremap <Leader>c "vy<esc>:set noignorecase<CR>/<C-r>v<cr>``cgn
 
 " search working directory with ripgrep
 nnoremap <Leader>/ :Rg<space>
+" search in buffer with FZF
+nnoremap <Leader>,/ :BLines<space>
 
 " search selection with *
 " xnoremap * <ESC>/<C-r>*<cr>
