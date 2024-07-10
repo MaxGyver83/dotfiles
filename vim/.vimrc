@@ -960,6 +960,31 @@ nmap <Leader>0 <Plug>BufTabLine.Go(10)
 
 set timeoutlen=300
 nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
+vnoremap <silent> <leader> :<c-u>WhichKeyVisual '<Space>'<CR>
+
+let g:which_key_map = {}
+let g:which_key_map['f'] = {
+      \ 'name' : '+files' ,
+      \ 'c' : [':exec "call FZF_dir_files(''" . expand("%:p:h") . "'', ''" . expand(''<cfile>'') . "'')"<CR>'     , 'current dir'],
+      \ 'w' : ['<C-W>s'     , 'working dir'],
+      \ 'h' : ['<C-W>v'     , 'home dir'],
+      \ 'r' : ['<C-W>v'     , 'root dir'],
+      \ 'g' : ['<C-W>h'     , 'git root'],
+      \ 'G' : ['<C-W>h'     , 'git root parent'],
+      \ 't' : {
+        \ 'name' : '+filetypes' ,
+        \ 'l' : [':set ft=log'      , 'log'],
+        \ 'i' : [':set ft=ini'      , 'ini'],
+        \ 's' : [':set ft=sh'       , 'sh'],
+        \ 'b' : [':set ft=bash'     , 'bash'],
+        \ 'j' : [':set ft=json'     , 'json'],
+        \ 'y' : [':set ft=yaml'     , 'yaml'],
+        \ 'm' : [':set ft=markdown' , 'markdown'],
+        \ 't' : [':set ft=tags'     , 'tags'],
+        \ },
+      \ }
+call which_key#register('<Space>', "g:which_key_map")
+
 
 "" swap ; and , (next/previous match after s, S)
 "nmap ; <Plug>SneakPrevious
