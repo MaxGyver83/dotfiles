@@ -10,6 +10,15 @@ wiki FILENAME_PART|PATTERN
 
 new: Pass FILENAME without path and file extension.
 ifind/igrep: Interactive search using fzf.
+
+Key bindings in FZF:
+
+- Enter: Open in Neovim.
+- Ctrl-f: Print filename.
+- Ctrl-b: Open in bat.
+- Ctrl-l: Open selected line in bat.
+- Ctrl-r: Open in rich.
+- Ctrl-h: Convert to HTML and open in browser.
 "
 }
 
@@ -44,41 +53,41 @@ fzffind() {
     filename="ctrl-f:become(echo '$WIKI_DIR'/{})"
     bat='ctrl-b:become(bat --style=plain,header-filename -l md {})'
     rich='ctrl-r:become(python -m rich.markdown -c {} |& less -R)'
+    html='ctrl-h:become(open-in-browser {})'
 
     preview='bat -l=md --style=numbers --color=always {1}'
 
     fd -etid -emd "$*" | sed 's|^\./||' \
-        | fzf -d ':' --exit-0 --bind "$default,$bat,$rich,$filename" \
+        | fzf -d ':' --exit-0 --bind "$default,$bat,$rich,$filename,$html" \
           --preview-window 'down:40%:+{2}' \
           --preview "$preview"
 }
 
-fzfgrep() {
+setsharedvars() {
     default='enter:become(open-in-nvim {})'
     filename="ctrl-f:become[echo {} | cut -d: -f1 | (echo -n '$WIKI_DIR'/ && cat)]"
+    line='ctrl-l:become(open-in-bat {} single-line)'
     bat='ctrl-b:become(open-in-bat {})'
     rich='ctrl-r:become(open-in-rich {})'
-    line='ctrl-l:become(open-in-bat {} single-line)'
+    html='ctrl-h:become(open-in-browser {})'
+    # Alternative to external open-in-browser script (and open-in-*):
+    # Use bash; define and export open-in-browser function.
 
     preview='bat -l=md --style=numbers --color=always --highlight-line {2} {1}'
+}
 
+fzfgrep() {
+    setsharedvars
     rg --line-number --no-heading --color=always --smart-case \
           --glob '*.{tid,md}' "${@}" \
         | fzf -d ':' --ansi --no-sort --exit-0 \
-          --bind "$default,$bat,$rich,$filename,$line" \
+          --bind "$default,$bat,$rich,$filename,$line,$html" \
           --preview-window 'down:40%:+{2}' \
           --preview "$preview"
 }
 
 fzfcombined() {
-    default='enter:become(open-in-nvim {})'
-    filename="ctrl-f:become[echo {} | cut -d: -f1 | (echo -n '$WIKI_DIR'/ && cat)]"
-    line='ctrl-l:become(open-in-bat {} single-line)'
-    bat='ctrl-b:become(open-in-bat {})'
-    rich='ctrl-r:become(open-in-rich {})'
-
-    preview='bat -l=md --style=numbers --color=always --highlight-line {2} {1}'
-
+    setsharedvars
     or_regex="$(echo $* | tr ' ' '|')"
     and_regex=""
     for part in "$@"; do and_regex="${and_regex}(?=.*$part)"; done
@@ -86,7 +95,7 @@ fzfcombined() {
      rg --line-number --no-heading --color=always --smart-case \
           --glob '*.{tid,md}' "$or_regex") \
         | fzf -d ':' --ansi --no-sort --exit-0 \
-          --bind "$default,$bat,$rich,$filename,$line" \
+          --bind "$default,$bat,$rich,$filename,$line,$html" \
           --preview-window 'down:40%:+{2}' \
           --preview "$preview"
 }
