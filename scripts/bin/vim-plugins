@@ -74,7 +74,7 @@ install_plugins() {
         folder=${folder%.git}
         dest_path="$HOME/.vim/pack/plugins/$section/$folder"
         [ -d "$dest_path" ] \
-            && printf "${COLOR_GRAY}Folder $folder does already exist${RESET}\n" \
+            && printf "${COLOR_GRAY}Folder $folder already exists.${RESET}\n" \
             && continue
         installation_count=$((installation_count+1))
         printf "${COLOR_GREEN}Installing '$folder'...${RESET}\n"
