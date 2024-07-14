@@ -3,6 +3,7 @@
 COLOR_BLUE="\033[0;34m"
 BOLD="\033[1m"
 RESET="\033[0m"
+PATH="/usr/local/bin:/usr/bin"
 
 case $1 in
 -f|--force) force=1;;
