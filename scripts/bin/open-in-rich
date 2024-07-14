@@ -4,4 +4,4 @@ remainder="${1#${filename}:}"
 linenumber="${remainder%%:*}"
 
 echo python -m rich.markdown -c "$WIKI_DIR/$filename" '|' less -R +"$linenumber"
-python -m rich.markdown -c "$WIKI_DIR/$filename" | less -R +"$linenumber"
+exec python -m rich.markdown -c "$WIKI_DIR/$filename" | less -R +"$linenumber"

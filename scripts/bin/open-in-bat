@@ -4,7 +4,7 @@ remainder="${1#${filename}:}"
 linenumber="${remainder%%:*}"
 
 if [ "$2" = 'single-line' ]; then
-    bat --style=plain -l md -r "$linenumber" "$WIKI_DIR/$filename"
+    exec bat --style=plain -l md -r "$linenumber" "$WIKI_DIR/$filename"
 else
-    bat --style=plain,header-filename -l md -H "$linenumber" "$WIKI_DIR/$filename"
+    exec bat --style=plain,header-filename -l md -H "$linenumber" "$WIKI_DIR/$filename"
 fi

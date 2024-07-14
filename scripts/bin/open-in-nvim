@@ -3,4 +3,4 @@ filename="${1%%:*}"
 remainder="${1#${filename}:}"
 linenumber="${remainder%%:*}"
 
-nvim "$WIKI_DIR/$filename" "+$linenumber"
+exec nvim "$WIKI_DIR/$filename" "+$linenumber"
