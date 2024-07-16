@@ -75,7 +75,8 @@ alias n='nvim'
 alias vg="$VIM +G +'silent %bd|e#' +'norm gU'"
 
 alias rr='ranger'
-alias batp='bat --style=plain'
+# no header, no line numbers, no pager
+alias batp='bat -pp'
 
 alias cv="$VIM ~/.vimrc"
 alias cn="$VIM ~/.config/nvim/init.vim"
