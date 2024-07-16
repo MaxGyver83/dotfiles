@@ -2,8 +2,9 @@
 
 # Execute snippets.sh for rofi or snippets-dmenu.sh (symlink) for dmenu
 if [ ${0##*/} = 'snippets-dmenu.sh' ]; then
+    linecount=$(cat ~/.snippets | wc -l)
     # dmenu with center patch
-    cmd="$HOME/.local/bin/dmenu -i -c -l 10 -fn monospace:size=14"
+    cmd="$HOME/.local/bin/dmenu -i -c -l $linecount -fn monospace:size=14"
 else
     cmd='rofi -i -dmenu -kb-cancel Escape,Control+c,Control+g'
 fi
