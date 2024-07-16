@@ -1,6 +1,6 @@
 #!/bin/sh
 
-while [[ "$#" > 0 ]]; do case $1 in
+while [ "$#" -gt 0 ]; do case $1 in
   -s|--stable) STABLE=1; shift;;
   -b|--background) BACKGROUND=1; shift;;
   -d|--debug) DEBUG=1; shift;;
