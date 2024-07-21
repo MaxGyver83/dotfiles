@@ -108,6 +108,8 @@ alias gitunmerged 'git branch --no-merged master'
 # copy current branch name into clipboard
 alias cpbr 'git rev-parse --abbrev-ref HEAD | tr -d \n | xclip -sel clip'
 
+fn clone {builtin clone $* && cd `{basename $1 .git}}
+
 alias en 'LANG=en_US.UTF-8'
 
 # vim: ft=rcshell:

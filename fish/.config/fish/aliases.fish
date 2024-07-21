@@ -201,6 +201,10 @@ abbr cpbr 'git rev-parse --abbrev-ref HEAD | tr -d \n | xclip -sel clip'
 # for git 2.22 and newer:
 # abbr cpbr 'git branch --show-current | tr -d \n | xclip -sel clip'
 
+function clone
+     command clone $argv && cd (basename "$argv" .git)
+end
+
 abbr dps 'docker ps --format="table {{.ID}}\t{{.Image}}\t{{.Status}}\t{{.Names}}"'
 abbr cr 'crontab -l | grep --color=never "^[^#]"'
 

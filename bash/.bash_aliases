@@ -119,6 +119,8 @@ alias gfc='git diff --name-only --diff-filter=U'
 # git log
 alias gl='git log'
 
+clone() { command clone "$@" && cd "$(basename "$1" .git)"; }
+
 hash_date_reldate='%C(Yellow)%h   %C(reset)%ai %<(14)(%C(Green)%cr%C(reset))%x09 %C(reset)'
 author='%C(Cyan)%an: %C(reset)'
 message_refs='%s %C(Red)%d%C(reset)'

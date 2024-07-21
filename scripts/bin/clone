@@ -1,0 +1,14 @@
+#!/bin/sh
+# Clone a git repository from a URL or a GitHub/sr.ht username/repo.
+case "$1" in
+"") >&2 echo 'Usage: clone <url>'; exit 1 ;;
+https://github.com/*)
+    case "$1" in
+    *.git) git clone "$1" ;;
+    *) git clone "$1.git" ;;
+    esac
+    ;;
+http://*|https://*|ssh://*|git@*) git clone "$1" ;;
+~*) git clone "https://git.sr.ht/$1" ;;
+*/*) git clone "https://github.com/$1.git" ;;
+esac
