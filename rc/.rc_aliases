@@ -42,6 +42,8 @@ alias feh 'feh --scale-down --auto-zoom --auto-rotate'
 alias aerc 'COLORTERM=truecolor builtin aerc'
 alias a 'COLORTERM=truecolor builtin aerc'
 alias rich 'python -m rich.markdown -c'
+# no header, no line numbers, no pager
+alias batp 'bat -pp'
 
 alias v vim
 alias n nvim
@@ -67,6 +69,8 @@ alias ct '$VIM_CMD $home/.tmux.conf'
 alias ce '$VIM_CMD $home/.config/emacs/init.el'
 alias ck '$VIM_CMD $home/.config/kmonad/vou-linux-de-rctrl.kbd'
 alias td '$VIM_CMD $home/dev/gta_local/max/todo/todo.md'
+
+fn psk {pgrep -fa 'kmonad|/keyboard-layouts'}
 
 alias g 'git status --short'
 alias G 'git status'
