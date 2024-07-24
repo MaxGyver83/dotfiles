@@ -40,6 +40,8 @@ kana/vim-textobj-indent
 sgur/vim-textobj-parameter
 rhysd/vim-textobj-word-column
 bps/vim-textobj-python
+# alternative to (abandoned) bps/vim-textobj-python:
+jeetsukumaran/vim-pythonsense
 beloglazov/vim-textobj-quotes
 MaxGyver83/vim-textobj-brace
 terryma/vim-expand-region
