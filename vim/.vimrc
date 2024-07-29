@@ -1088,6 +1088,7 @@ nnoremap <Leader>eh :FZF ~<CR>
 nnoremap <Leader>er :FZF /<CR>
 nnoremap <Leader>eg :exec "call FZF_dir_files('GIT_ROOT', '')"<CR>
 nnoremap <Leader>eG :exec "call FZF_dir_files('GIT_PARENT', '')"<CR>
+nnoremap <Leader>ep :exec "call FZF_dir_files(FindDirectoryContainingFileInTree('.cache'), '')"<CR>
 
 " search selected (partial) file name in current/working/home/root/git_root directory with FZF
 xnoremap <Leader>ec "ty:<C-U>exec "call FZF_dir_files('" . expand("%:p:h") . "', '<C-R>t')"<CR>
@@ -1373,3 +1374,27 @@ try
 catch
   " No such file? No problem; just ignore it.
 endtry
+
+function! FindDirectoryInTree(directory)
+    let current_dir = expand('%:p')
+    let basename = fnamemodify(current_dir, ':t')
+    while basename !=# a:directory
+        if current_dir ==# '/'
+            return ''
+        endif
+        let current_dir = fnamemodify(current_dir, ':h')
+        let basename = fnamemodify(current_dir, ':t')
+    endwhile
+    return current_dir
+endfunction
+
+function! FindDirectoryContainingFileInTree(file)
+    let current_dir = expand('%:p')
+    while empty(glob(current_dir..'/'..a:file))
+        if current_dir ==# '/'
+            return ''
+        endif
+        let current_dir = fnamemodify(current_dir, ':h')
+    endwhile
+    return current_dir
+endfunction
