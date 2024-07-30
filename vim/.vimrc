@@ -312,13 +312,13 @@ inoremap <C-s> <C-c>:update<cr>
 noremap <Leader>w :update<cr>
 
 " close buffer and split window
-noremap <Leader>b :bd<cr>
+noremap <Leader>b :Buffers<cr>
 " close buffer but keep split window open
 noremap <Leader>B :b#\|bd #<cr>
 
 " close window
 nnoremap <C-q> :q<cr>
-noremap <Leader>q :q<cr>
+noremap <Leader>q :bd<cr>
 noremap <Leader>Q :q!<cr>
 
 " start recording a macro with Q instead of q (and unmap q)
