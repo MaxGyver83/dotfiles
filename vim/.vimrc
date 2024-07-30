@@ -1080,6 +1080,7 @@ xnoremap <Leader>uG "ty:<C-U>exec "call FZF_word_dir('<C-R>t', 'GIT_PARENT')"<CR
 
 " open/search file in current/working/home/root/git_root directory with FZF
 " mnemonic: e like in `:e[dit]`
+" reload current file
 nnoremap <Leader>ee :e<CR>
 
 nnoremap <Leader>ec :FZF %:p:h<CR>
@@ -1088,7 +1089,7 @@ nnoremap <Leader>eh :FZF ~<CR>
 nnoremap <Leader>er :FZF /<CR>
 nnoremap <Leader>eg :exec "call FZF_dir_files('GIT_ROOT', '')"<CR>
 nnoremap <Leader>eG :exec "call FZF_dir_files('GIT_PARENT', '')"<CR>
-nnoremap <Leader>ep :exec "call FZF_dir_files(FindDirectoryContainingFileInTree('.cache'), '')"<CR>
+nnoremap <Leader>ep :exec "call FZF_dir_files(FindDirectoryContainingFileInTree('setup.py'), '')"<CR>
 
 " search selected (partial) file name in current/working/home/root/git_root directory with FZF
 xnoremap <Leader>ec "ty:<C-U>exec "call FZF_dir_files('" . expand("%:p:h") . "', '<C-R>t')"<CR>
