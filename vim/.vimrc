@@ -359,7 +359,7 @@ nnoremap <Leader>,/ :BLines<space>
 " xnoremap * <ESC>/<C-r>*<cr>
 "xnoremap <Leader>* *
 " search word under cursor in all files in working directory using FZF + ripgrep
-nnoremap <silent> <Leader>* :RgRaw -g '!tags' -ws <C-R><C-W><CR>
+nnoremap <silent> <Leader>* :RgRaw -g '!tags*' -g '!*.patch' -ws <C-R><C-W><CR>
 " search selection in all files in working directory using FZF + ripgrep
 xnoremap <silent> <Leader>* :<BS><BS><BS><BS><BS>RgRaw -g '!tags' -ws <C-R><C-W><CR>
 
