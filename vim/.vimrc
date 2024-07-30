@@ -358,6 +358,10 @@ nnoremap <Leader>,/ :BLines<space>
 " search selection with *
 " xnoremap * <ESC>/<C-r>*<cr>
 "xnoremap <Leader>* *
+" search but keep cursor position
+" nnoremap * :keepjumps normal! mi*`i<CR>
+" nmap <silent> * "syiw<Esc>: let @/ = @s<CR>
+nnoremap <silent> * :let @/= '\<' . expand('<cword>') . '\>' <bar> set hls<cr>
 " search word under cursor in all files in working directory using FZF + ripgrep
 nnoremap <silent> <Leader>* :RgRaw -g '!tags*' -g '!*.patch' -ws <C-R><C-W><CR>
 " search selection in all files in working directory using FZF + ripgrep
