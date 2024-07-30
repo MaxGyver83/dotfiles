@@ -1399,3 +1399,6 @@ function! FindDirectoryContainingFileInTree(file)
     endwhile
     return current_dir
 endfunction
+
+command! Imaps call fzf#vim#maps('i', 0)
+command! Xmaps call fzf#vim#maps('x', 0)
