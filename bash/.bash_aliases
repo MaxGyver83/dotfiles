@@ -140,7 +140,7 @@ alias gitunpushed='git log ..@{u}'
 alias gitunmerged='git branch --no-merged master'
 
 # copy current branch name into clipboard
-alias cpbr='git rev-parse --abbrev-ref HEAD | tr -d \n | xclip -sel clip'
+alias cpbr='git rev-parse --abbrev-ref HEAD | tr -d "\n" | xclip -sel clip'
 
 alias cr='crontab -l | grep --color=never "^[^#]"'
 
