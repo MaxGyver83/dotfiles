@@ -348,7 +348,7 @@ nnoremap <Leader>ro R<C-r>"<ESC>
 
 " change word using cgn, repeatable with dot
 nnoremap <Leader>cw :set noignorecase<CR>*``cgn
-xnoremap <Leader>c "vy<esc>:set noignorecase<CR>/<C-r>v<cr>``cgn
+xnoremap <Leader>cw "vy<esc>:set noignorecase<CR>/<C-r>v<cr>``cgn
 
 " search working directory with ripgrep
 nnoremap <Leader>/ :Rg<space>
