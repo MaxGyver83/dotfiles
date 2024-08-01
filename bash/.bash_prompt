@@ -46,6 +46,17 @@ else
     CWD='\w'
 fi
 
+git_status_quick() {
+    GIT_BRANCH="$(git rev-parse --abbrev-ref HEAD 2> /dev/null)"
+    if [ $? -ne 0 ]; then
+        GIT_COLORED=
+        GIT_NOCOLOR=
+    else
+        GIT_COLORED=" (${COLOR_BLUE}${GIT_BRANCH}${COLOR_RESET})"
+        GIT_NOCOLOR=" (${GIT_BRANCH})"
+    fi
+}
+
 git_status() {
     local git_status="$(LC_ALL=C git status 2> /dev/null)"
     [ "$git_status" = "" ] && GIT_COLORED= && GIT_NOCOLOR= && return
@@ -90,6 +101,13 @@ git_status() {
     [ "$modified" -gt 0 ] || [ "$untracked" -gt 0 ] && git_info+='|'
     [ "$modified" -gt 0 ] && git_info+='+'$modified
     [ "$untracked" -gt 0 ] && git_info+='…'$untracked
+    # too slow!
+    # execution time in seconds:
+    # 0.014878350    ++++ local ahead=0
+    # 0.017724254    ++++ local behind=18
+    # 0.204176192    ++++ local modified=0
+    # 0.328666759    ++++ local untracked=19
+    # 0.521914460    ++++ local 'git_status=On branch main
 
     GIT_COLORED=" (${GIT_COLOR}${GIT_BRANCH}${COLOR_RESET}${git_info})"
     GIT_NOCOLOR=" (${GIT_BRANCH}${git_info})"
@@ -113,7 +131,8 @@ cmd_status() {
 
 prompt_command() {
     cmd_status
-    git_status
+    # git_status
+    git_status_quick
     if [ -f /.dockerenv ]; then
         KRB_STATUS_MSG=""
     else
