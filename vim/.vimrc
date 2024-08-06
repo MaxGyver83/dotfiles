@@ -273,11 +273,11 @@ nnoremap <Leader>,lb :set spelllang=en,de \| set spell<cr>
 nnoremap <Leader>,ts :set spell!<cr>
 nnoremap <Leader>,tw :set wrap!<cr>
 
-" copy current line/selection into tmux buffer and paste into second pane
+" Copy current line/selection into tmux buffer and paste into last pane.
+" Use count to paste into current pane + count.
 " This mapping is made for sending code lines to ipython3. Disable %autoindent first!
 if exists('$TMUX')
-    nnoremap <Leader><Return> ^y$ \| <cmd>call PasteUnnamedRegisterInOtherTmuxPane()<cr>
-    xnoremap <Leader><Return> y \| <cmd>call PasteUnnamedRegisterInOtherTmuxPane()<cr>
+    noremap <Leader><Return> <cmd>:exe 'call YankAndPasteInOtherTmuxPane('.v:count.')'<cr>
 endif
 
 " copy complete file content to system clipboard
@@ -761,14 +761,24 @@ nmap <leader><leader>h :call SynStack()<CR>
 " similar, using inkarkat/SyntaxAttr.vim
 nmap <leader><leader>H :call SyntaxAttr#SyntaxAttr()<CR>
 
-function! PasteUnnamedRegisterInOtherTmuxPane()
+function! YankAndPasteInOtherTmuxPane(...)
+    let count = get(a:, 1, 0)
+    if mode() == 'v'
+        normal y
+    else
+        normal ^y$
+    endif
     let s = @"
     if s[len(s)-1] != "\n"
         let s = s . "\n"
     endif
     silent call system('tmux load-buffer -', s)
     " paste-buffer -p ? (bracketed paste mode)
-    silent exe '!tmux paste-buffer -t \!'
+    if count > 0
+        silent exe '!tmux paste-buffer -t +'.count
+    else
+        silent exe '!tmux paste-buffer -t \!'
+    endif
 endfunction
 
 function! Sum()
