@@ -28,14 +28,18 @@ Key bindings in FZF:
 new() {
     if [ "$1" ]; then
         name="$*"
+        echo "Title: $name"
     else
+        # switch to bash for `read -e` (=readline)?
+        # or use:
+        # $EDITOR /tmp/title && name="$(head -n1 /tmp/title)"
         read -p "Title: " name
         # remove trailing newline
         name="${name%
 }"
     fi
-    echo "Name: $name"
-    mdfile="$WIKI_DIR/$name.md"
+    # replace colons and slashes with underscores
+    mdfile="$WIKI_DIR/$(echo "$name" | tr ':/' _).md"
 
     now="$(date -u '+%Y%m%d%H%M%S%3N')"
     echo -n "\
