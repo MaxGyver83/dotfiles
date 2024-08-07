@@ -57,7 +57,7 @@ fzffind() {
 
     preview='bat -l=md --style=numbers --color=always {1}'
 
-    fd -etid -emd "$*" | sed 's|^\./||' \
+    fd -e tid -e md --exclude '$__*' "$*" | sed 's|^\./||' \
         | fzf -d ':' --exit-0 --bind "$default,$bat,$rich,$filename,$html" \
           --preview-window 'down:40%:+{2}' \
           --preview "$preview"
@@ -105,7 +105,7 @@ case "$1" in
 ""|-h|--help) usage ;;
 new) shift; new "$@" ;;
 list) cd "$WIKI_DIR" && fd -etid -emd ;;
-find) shift; cd "$WIKI_DIR" && fd -etid -emd "$*" ;;
+find) shift; cd "$WIKI_DIR" && fd -e tid -e md --exclude '$__*' "$*" ;;
 ifind) shift; cd "$WIKI_DIR" && fzffind "$@" ;;
 grep) shift; cd "$WIKI_DIR" && rg -g '*.{tid,md}' "$@" ;;
 igrep) shift; cd "$WIKI_DIR" && fzfgrep "$@" ;;
