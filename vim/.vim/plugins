@@ -45,6 +45,7 @@ jeetsukumaran/vim-pythonsense
 beloglazov/vim-textobj-quotes
 MaxGyver83/vim-textobj-brace
 terryma/vim-expand-region
+AndrewRadev/splitjoin.vim
 
 # navigation
 easymotion/vim-easymotion
@@ -56,7 +57,8 @@ preservim/tagbar
 
 # open, find and search files
 EinfachToll/DidYouMean
-tpope/vim-vinegar
+#tpope/vim-vinegar
+justinmk/vim-dirvish
 junegunn/fzf.vim
 jesseleite/vim-agriculture
 
@@ -75,6 +77,7 @@ kovisoft/slimv
 weakish/rcshell.vim
 bakpakin/janet.vim
 ~maxgyver83/hare-jump.vim
+baskerville/vim-sxhkdrc
 
 # language server
 # prabirshrestha/vim-lsp
