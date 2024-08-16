@@ -3,6 +3,7 @@ set commentary
 set ideajoin
 set exchange
 set easymotion
+set highlightedyank
 
 nnoremap ; ,
 nnoremap , ;
@@ -12,11 +13,11 @@ vnoremap , ;
 " leader is space
 let mapleader="\<Space>"
 nnoremap <leader>n :nohlsearch<CR>
-"noremap <Leader>y "+y
+noremap <Leader>y "+y
 "noremap <Leader>d "+d
 "noremap <Leader>p "+p
 "noremap <Leader>P "+P
-map <leader>y :action $Copy<CR>
+" map <leader>y :action $Copy<CR>
 map <leader>d :action $Cut<CR>
 map <leader>p :action $Paste<CR>
 "map <leader>a :action $SelectAll<CR>
@@ -42,3 +43,6 @@ set scrolloff=2
 " edit ideavim config
 nnoremap <leader>vv :e ~/.config/ideavim/ideavimrc<CR>
 nnoremap <leader>vr :source ~/.config/ideavim/ideavimrc<CR>
+
+" open current file in Neovim
+nmap <leader>ev :action Tool_External Tools_nvim<cr>
