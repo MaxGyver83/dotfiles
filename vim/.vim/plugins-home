@@ -5,3 +5,9 @@ guns/vim-sexp
 tpope/vim-sexp-mappings-for-regular-people
 ~sircmpwn/hare.vim
 # ~torresjrjr/vim-haredoc
+Exafunction/codeium.vim
+hsanson/vim-android
+dart-lang/dart-vim-plugin
+thosakwe/vim-flutter
+natebosch/vim-lsc
+natebosch/vim-lsc-dart
