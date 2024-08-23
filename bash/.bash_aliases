@@ -142,7 +142,7 @@ alias gitunmerged='git branch --no-merged master'
 # copy (yank) current branch name into clipboard
 alias yb='git rev-parse --abbrev-ref HEAD | tr -d "\n" | xclip -sel clip'
 
-alias cr='crontab -l | grep --color=never "^[^#]"'
+alias crl='crontab -l | grep --color=never "^[^#]"'
 
 alias disp='. ~/bin/update-DISPLAY.sh'
 
