@@ -3,11 +3,15 @@ vim-fugitive
 
 Git status
 ----------
-s  stage (file or hunk)
-u  unstage
--  stage or unstage
-U  unstage all
-X  discard change (checkout/clean)
+s    stage (file or hunk)
+u    unstage
+-    stage or unstage
+U    unstage all
+X    discard change (checkout/clean)
+gi   open .git/info/exclude
+1gi  open .gitignore
+gI   add file to .git/info/exclude
+1gI  add file to .gitignore
 
 
 Custom mappings
