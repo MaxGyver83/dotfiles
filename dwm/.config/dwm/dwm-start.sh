@@ -20,6 +20,10 @@ msteams_cookies="$HOME/.config/Microsoft/Microsoft Teams/Cookies"
 [ -f "$msteams_cookies" ] && rm "$msteams_cookies" 2> /dev/null
 
 PATH="$HOME/bin:$PATH"
+# Remove /bin and /sbin from PATH (covered by /usr/bin and /usr/sbin).
+# This is necessary to have /usr/local/bin before /usr/bin.
+PATH="${PATH/:\/sbin:/:}"
+PATH="${PATH/:\/bin:/:}"
 echo "PATH=$PATH" > ~/log/dwm-start.log
 
 # start dwm
@@ -52,6 +56,7 @@ while true; do
         # Ctrl-Shift-k → Services.prefs.setStringPref("layout.css.devPixelsPerPx", "1.1");
     fi
     xrdb ~/.Xresources
+    # [ -f $HOME/.xmodmap ] && xmodmap $HOME/.xmodmap
     # Log stderror to a file
     dwm > ~/log/dwm.log 2>&1
     export RESTART=1
