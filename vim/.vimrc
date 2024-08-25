@@ -5,6 +5,9 @@ set secure
 
 filetype plugin on
 runtime macros/matchit.vim
+if !has('nvim')
+    set runtimepath+=~/.vim/pack/plugins/vim-only/*
+endif
 
 syntax enable       " enable syntax highlighting
 
