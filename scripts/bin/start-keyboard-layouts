@@ -5,6 +5,7 @@ while [ "$#" -gt 0 ]; do case $1 in
   -b|--background) BACKGROUND=1; shift;;
   -l|--log) LOG=1; shift;;
   -d|--debug) DEBUG=1; shift;;
+  --dev) DEV=1; shift;;
   --) shift; break;;
   *) echo "Unknown parameter passed: $1"; shift; shift;;
 esac; done
@@ -16,6 +17,9 @@ echo DEBUG=$DEBUG
 if [ $STABLE ]; then
   BINARY=~/repos/keyboard-layouts/keyboard-layouts-stable
   CONFIG=config/vou-stable.toml
+elif [ $DEV ]; then
+  BINARY=~/repos/keyboard-layouts/keyboard-layouts-dev
+  CONFIG=config/vou.toml
 else
   BINARY=~/repos/keyboard-layouts/keyboard-layouts
   CONFIG=config/vou.toml
