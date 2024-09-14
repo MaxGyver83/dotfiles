@@ -30,7 +30,7 @@ echo K6_CONNECTED=$K6_CONNECTED
 pkill -f 'kmonad'
 pkill -f 'keyboard-layouts/keyboard-layouts'
 
-[ $DEBUG ] && BINARY="$BINARY --debug -vvv"
+[ $DEBUG ] && BINARY="$BINARY --debug -vvvv"
 
 # sleep to not miss the return key release event
 sleep 0.2
