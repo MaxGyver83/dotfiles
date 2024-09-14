@@ -1,6 +1,11 @@
 #!/bin/sh
 
+usage() {
+  echo "Usage: $0 [-h|--help] [-s|--stable] [-b|--background] [-d|--debug] [-l|--log] [--dev] [-- args...]"
+}
+
 while [ "$#" -gt 0 ]; do case $1 in
+  -h|--help) usage; exit;;
   -s|--stable) STABLE=1; shift;;
   -b|--background) BACKGROUND=1; shift;;
   -l|--log) LOG=1; shift;;
