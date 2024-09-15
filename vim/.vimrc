@@ -575,6 +575,10 @@ if !has('nvim')
     execute "set <A-i>=\ei"
     execute "set <A-v>=\ev"
     execute "set <A-.>=\e."
+    " A-w and A-b is used in my vim-wordmotion configuration
+    " (also A-e, conflicting with my window-up mapping)
+    execute "set <A-w>=\ew"
+    execute "set <A-b>=\eb"
 endif
 
 if has('nvim')
