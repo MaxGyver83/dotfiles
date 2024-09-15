@@ -950,7 +950,7 @@ command! FixBazelPaths silent! :% s:sandbox/processwrapper-sandbox/\d\+/::g
 
 noremap gF :call GoToFileWithLineNumber()<CR>
 
-command! CloseOtherBuffers silent! execute "%bd|e#|bd#"
+command! CloseOtherBuffers silent! execute "%bd|e#|bd#|norm \<C-o>"
 
 "-------------------
 " related to plugins
