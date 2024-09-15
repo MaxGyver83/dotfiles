@@ -1330,7 +1330,7 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 " termdebug
-packadd termdebug
+packadd! termdebug
 let g:termdebug_wide=1
 noremap <silent> <leader>gt :Termdebug<cr>
 
