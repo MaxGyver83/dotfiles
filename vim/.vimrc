@@ -975,7 +975,7 @@ nmap <Leader>8 <Plug>BufTabLine.Go(8)
 nmap <Leader>9 <Plug>BufTabLine.Go(9)
 nmap <Leader>0 <Plug>BufTabLine.Go(10)
 
-set timeoutlen=300
+set timeoutlen=500
 nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 vnoremap <silent> <leader> :<c-u>WhichKeyVisual '<Space>'<CR>
 
