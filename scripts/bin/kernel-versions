@@ -1,0 +1,21 @@
+#!/bin/sh
+if [ -f /etc/arch-release ]; then
+    # Arch Linux (only one kernel version)
+    pacman -Qe linux
+elif type lsb_release >/dev/null 2>&1; then
+    # Distributions of interest: Ubuntu and Raspbian
+    distro=$(lsb_release -d | grep Description | cut -f2 | cut -d' ' -f1)
+    release=$(lsb_release -r | grep Release | cut -f2)
+    if [ $distro = Raspbian ] && [ $((release < 12)) = 1 ]; then
+        # Raspberry Pi OS Bullseye and older (raspi3)
+        dpkg --list raspberrypi-kernel | grep '^ii'
+    else
+        # Ubuntu, Raspberry Pi OS Bookworm and newer (raspi1, ionos)
+        dpkg --list 'linux-image*' | grep '^ii'
+    fi
+else
+    echo "Unknown distribution!"
+fi
+
+set -x
+uname -r
