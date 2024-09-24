@@ -1,0 +1,2 @@
+#!/bin/sh
+"$@" 2>&1 | grep -iP --color=always '[\w_]*errors?|[\w_]*failure|failed|backtrace|traceback|$'
