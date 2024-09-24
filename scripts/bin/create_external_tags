@@ -1,0 +1,31 @@
+#!/bin/sh
+VERSION="$(lsb_release -cs)"
+INCLUDE_DIRS="/projectX/include,/usr/include"
+
+PROJECT_DIRS="\
+    projects/project1 \
+    projects/project2"
+
+ERROR_FILE=/tmp/errors
+[ -f "$ERROR_FILE" ] && rm "$ERROR_FILE"
+
+ctags_for_includes --skip-gcc -I "$INCLUDE_DIRS" $PROJECT_DIRS 2> "$ERROR_FILE"
+# find_includes -I "$INCLUDE_DIRS" $PROJECT_DIRS 2>"$ERROR_FILE" \
+#     | ctags --c++-kinds=+p -a -o tags-external -L -
+
+# search files that weren't found so far in ../install and add tags
+[ ! -d ../install ] && exit
+[ ! -f "$ERROR_FILE" ] && exit
+
+# while IFS= read -r line; do
+#     case $line in
+#         ""|"No matches"*) continue ;;
+#     esac
+#     file="$(echo $line | tr -d '\n')"
+#     fd -tf --case-sensitive --full-path "[/^]$file\$" ../install \
+#         | ctags --c++-kinds=+p -a -o tags-external -L -
+# done < "$ERROR_FILE"
+
+grep -v '^No matches\|^$' "$ERROR_FILE" \
+    | xargs -I{} fd -tf --case-sensitive --full-path "[/^]{}\$" ../install \
+    | ctags --c++-kinds=+p -a -o tags-external -L -
