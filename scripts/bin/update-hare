@@ -1,12 +1,14 @@
 #!/bin/sh
 
+# usage: update [-f] [qbe|harec|hare]
+
 COLOR_BLUE="\033[0;34m"
 BOLD="\033[1m"
 RESET="\033[0m"
 PATH="/usr/local/bin:/usr/bin"
 
 case $1 in
--f|--force) force=1;;
+-f|--force) force=1; shift;;
 esac
 
 print_header() {
@@ -52,8 +54,11 @@ update_hare() {
     sudo make uninstall install
 }
 
-update_qbe
-update_harec
-update_hare
+case "$1" in
+qbe)   update_qbe;;
+harec) update_harec;;
+hare)  update_hare;;
+*)     update_qbe && update_harec && update_hare;;
+esac
 
 exit 0
