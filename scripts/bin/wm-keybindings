@@ -1,9 +1,10 @@
 #!/bin/sh
+# tabs 16
 
 # dwm
 rg XK_ ~/repos/my-dwm/config.h \
     | rg '^\s*\{' \
-    | awk '{print $2" + "$3"\t"$4}' \
+    | awk '{print $2" + "$3"\tdwm: "$4}' \
     | tr -d , \
     | sd -F WIN super \
     | sd -F ALT alt \
@@ -11,14 +12,15 @@ rg XK_ ~/repos/my-dwm/config.h \
     | sd -F XK_ '' \
     | sd -F '|' ' + ' \
     | sd -F 'alt + super' 'super + alt' \
+    | sd '  \S' '  dwm: ' \
     | sort
 
 echo
 
 # sxhkd
-rg -A 1 'super ?\+' ~/.config/sxhkd/sxhkdrc | sd '\n    ' '\t' | rg . | rg -v '^(--|#)' | sort
+rg -A 1 '^\w' ~/.config/sxhkd/sxhkdrc | sd '\n    ' '\tsxhkd: ' | rg . | rg -v '^(--|#)' | sort
 
 echo
 
 # tmux
-tmux list-keys -T root | rg -v Mouse | rg -v Click | rg -v Wheel | sd '^bind-key -T root ' '' | sd -F 'M-' 'alt-' | sd '(C|alt)-' '$1 + ' |sort
+tmux list-keys -T root | rg -v Mouse | rg -v Click | rg -v Wheel | sd '^bind-key -T root ' '' | sd -F 'M-' 'alt-' | sd '(C|alt)-' '$1 + ' | sd '    *' '\ttmux: ' | sort
