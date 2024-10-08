@@ -112,6 +112,8 @@ alias gitunmerged 'git branch --no-merged master'
 # copy current branch name into clipboard
 alias yb 'git rev-parse --abbrev-ref HEAD | tr -d \n | xclip -sel clip'
 
+fn crl {crontab -l | grep --color=never '^[^#]'}
+
 fn clone {builtin clone $* && cd `{basename $1 .git}}
 
 alias en 'LANG=en_US.UTF-8'
