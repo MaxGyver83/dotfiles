@@ -10,7 +10,7 @@ alias lg 'exa -alF --color-scale all --color-scale-mode fixed --git'
 alias fdall 'fd -HIL'
 alias du0 'du -h -d0'
 alias du1 'du -h -d1'
-alias ncdu 'ncdu --color=dark --one-file-system'
+alias ncdu 'builtin ncdu --color=dark --one-file-system'
 alias xo xdg-open
 alias nw 'ls -Art | tail -n 1'
 # alias extract-latest '. $home/bin/extract-latest'
@@ -38,9 +38,9 @@ alias pd 'patool diff'
 
 alias helix 'COLORTERM=truecolor builtin helix'
 alias rr ranger
-alias feh 'feh --scale-down --auto-zoom --auto-rotate'
 alias aerc 'COLORTERM=truecolor builtin aerc'
 alias a 'COLORTERM=truecolor builtin aerc'
+alias feh 'builtin feh --scale-down --auto-zoom --auto-rotate'
 alias rich 'python -m rich.markdown -c'
 # no header, no line numbers, no pager
 alias batp 'bat -pp'
