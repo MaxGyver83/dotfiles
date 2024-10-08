@@ -1,0 +1,2 @@
+#!/bin/sh
+./wm-keybindings | column -t -s '	' | cut -c 1-100 | dmenu -i -c -l 40 -fn monospace:size=14
