@@ -10,6 +10,7 @@ while [ "$#" -gt 0 ]; do case $1 in
   -b|--background) BACKGROUND=1; shift;;
   -l|--log) LOG=1; shift;;
   -d|--debug) DEBUG=1; shift;;
+  -p|--parse-only) PARSE=1; shift;;
   --dev) DEV=1; shift;;
   --) shift; break;;
   *) echo "Unknown parameter passed: $1"; shift; shift;;
@@ -36,8 +37,12 @@ fi
 [ -e /dev/input/by-id/usb-Keychron_Keychron_K6-event-kbd ] && K6_CONNECTED=1
 echo K6_CONNECTED=$K6_CONNECTED
 
-pkill -f 'kmonad'
-pkill -f 'keyboard-layouts/keyboard-layouts'
+if [ $PARSE ]; then
+    set -- "$@" -p
+else
+    pkill -f 'kmonad'
+    pkill -f 'keyboard-layouts/keyboard-layouts'
+fi
 
 [ $DEBUG ] && BINARY="$BINARY --debug -vvvv"
 
