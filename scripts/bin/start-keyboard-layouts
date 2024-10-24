@@ -58,13 +58,13 @@ if [ -e /dev/input/by-id/usb-Keychron_Keychron_K6-event-kbd ]; then
     echo "Start keyboard-layouts for Keychron K6 (via USB)"
     if [ $BACKGROUND ]; then
       $BINARY \
-        --device /dev/input/by-id/usb-Keychron_Keychron_K6-event-kbd \
         --config-file $CONFIG \
+        --device /dev/input/by-id/usb-Keychron_Keychron_K6-event-kbd \
         ${LOG:+--key-log-file $HOME/log/"$(date '+%Y-%m-%d_%H.%M.%S')_key_K6.log"} "$@" > /dev/null &
     else
       exec $BINARY \
-        --device /dev/input/by-id/usb-Keychron_Keychron_K6-event-kbd \
         --config-file $CONFIG \
+        --device /dev/input/by-id/usb-Keychron_Keychron_K6-event-kbd \
         ${LOG:+--key-log-file $HOME/log/"$(date '+%Y-%m-%d_%H.%M.%S')_key_K6.log"} "$@"
     fi
 fi
