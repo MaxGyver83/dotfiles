@@ -39,6 +39,10 @@ update_plugins() {
         echo "$(update_plugin "$p")" &
     done | tee -a "$logfile"
     wait
+    for p in "$HOME"/.vim/pack/plugins/vim-only/*; do
+        echo "$(update_plugin "$p")" &
+    done | tee -a "$logfile"
+    wait
     for p in "$HOME"/.vim/pack/plugins/opt/*; do
         echo "$(update_plugin "$p")" &
     done | tee -a "$logfile"
@@ -91,7 +95,7 @@ EOF
 
 installation_count=0
 
-for types in start opt; do
+for types in start vim-only opt; do
     dir="$HOME/.vim/pack/plugins/$types/"
     printf "\n${BOLD}$dir${RESET}\n"
     mkdir -p "$dir"
