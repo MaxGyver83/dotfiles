@@ -3,7 +3,6 @@
 ap/vim-buftabline
 # ap/vim-readdir # fixes problems with netrw+buftabline
 itchyny/lightline.vim
-machakann/vim-highlightedyank
 rickhowe/diffchar.vim
 junegunn/limelight.vim
 
@@ -89,6 +88,8 @@ thinca/vim-localrc
 inkarkat/SyntaxAttr.vim
 liuchengxu/vim-which-key
 
+[vim-only]
+machakann/vim-highlightedyank
 
 [opt]
 # color themes
