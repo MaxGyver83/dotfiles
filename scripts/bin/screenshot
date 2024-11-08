@@ -72,7 +72,8 @@ elif command -v sxot > /dev/null 2>&1 ; then
   FILENAME="$DIR/$DATE ${WxH}$TYPE.png"
 
   sxot $GEOMETRY_ARGS | ffmpeg -hide_banner -loglevel error -i - "$FILENAME"
-  [ "$CLIPBOARD" = 1 ] && copyq write image/png - < "$FILENAME"
+  # [ "$CLIPBOARD" = 1 ] && copyq write image/png - < "$FILENAME"
+  [ "$CLIPBOARD" = 1 ] && xclip -selection clipboard -target image/png "$FILENAME"
   notify-send -t 1000 -u low "$FILENAME" -i "$FILENAME"
   [ "$PICOM" ] && nohup picom &
   [ "$COMPTON" ] && nohup compton &
@@ -81,7 +82,8 @@ else
   FILENAME='%Y-%m-%d %H.%M.%S $wx$h '$TYPE.png
   NOTIFICATION='echo "$f" && notify-send -u low "$f"'
   if [ "$CLIPBOARD" = 1 ]; then
-    scrot $PARAM /tmp/"$FILENAME" -e "copyq write image/png - < '\$f' && $NOTIFICATION"
+    # scrot $PARAM /tmp/"$FILENAME" -e "copyq write image/png - < '\$f' && $NOTIFICATION"
+    scrot $PARAM /tmp/"$FILENAME" -e "xclip -selection clipboard -target image/png '\$f' && $NOTIFICATION"
   else
     scrot $PARAM ~/Screenshots/"$FILENAME" -e "$NOTIFICATION"
   fi
