@@ -51,8 +51,8 @@ alias alu='apt list --upgradable'
 alias ali='apt list --installed'
 alias ap='apt policy'
 
+alias pss='pacman -Ss'
 alias sps='sudo pacman -S'
-alias spss='sudo pacman -Ss'
 alias syu='sudo pacman -Syu'
 
 alias nh='sudo nethogs wlp2s0 -v 3'
@@ -95,6 +95,7 @@ alias akku='upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep -E "po
 alias g='git status --short'
 alias G='git status'
 alias gc='git clone'
+alias gcb='git checkout -'
 alias gd='git diff'
 alias gdd='git -c "core.pager=delta" -c "delta.syntax-scheme=zenburn" diff'
 alias gds='git -c "core.pager=delta" -c "delta.features=side-by-side" -c "delta.syntax-scheme=zenburn" diff'
@@ -153,5 +154,7 @@ if [ "$TERM" = cygwin ]; then
   alias nvim='~/Downloads/Neovim/bin/nvim-qt.exe'
   alias nvimdiff='~/Downloads/Neovim/bin/nvim-qt.exe -- -d'
 fi
+
+alias en='LANG=en_US.UTF-8'
 
 unset -f exists
