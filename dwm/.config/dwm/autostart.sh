@@ -9,8 +9,7 @@ timestamp() {
 }
 
 run() {
-  if ! pgrep -fa "$*"
-  then
+  if ! pgrep -fa "$*"; then
     echo "$(timestamp) Run: $@"
     $@&
   fi
@@ -43,7 +42,7 @@ export NO_AT_BRIDGE=1
 PATH="$PATH:~/.local/bin"
 
 # numlockx off
-~/bin/start-keyboard-layouts -b -s || { \
+~/bin/start-keyboard-layouts -b -l || {
   echo "$(timestamp) Run start-kmonad.fish --keyboard all"
   { ~/bin/start-kmonad.fish --keyboard all; echo "$(timestamp) start-kmonad.fish done"; } &
 }
@@ -76,8 +75,8 @@ run pasystray
 run blueman-applet
 restart copyq
 run sxhkd
-internxt="$(\ls ~/install/Internxt-Drive-* | head -n 1)"
-[ "$internxt" ] && run "$internxt"
+# internxt="$(\ls ~/install/Internxt-Drive-* | head -n 1)"
+# [ "$internxt" ] && run "$internxt"
 # run xbanish -i shift -i control -i mod1 -i mod4
 # ~/bin/beep-on-key.bash enter &
 eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
