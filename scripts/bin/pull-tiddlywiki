@@ -1,0 +1,7 @@
+#!/bin/sh
+export PATH=/usr/bin:/usr/local/bin
+{
+    date '+%Y-%m-%d %H.%M.%S' \
+        && cd $HOME/repos/wiki/ \
+        && git pull
+} >> $HOME/log/wiki_git_pull.log 2>&1
