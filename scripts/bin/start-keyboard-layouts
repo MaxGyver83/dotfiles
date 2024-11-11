@@ -1,20 +1,20 @@
 #!/bin/sh
 
 usage() {
-  echo "Usage: $0 [-h|--help] [-s|--stable] [-b|--background] [-d|--debug] [-l|--log] [-k|--keychron-only] [--dev] [-- args...]"
+    echo "Usage: $0 [-h|--help] [-s|--stable] [-b|--background] [-d|--debug] [-l|--log] [-k|--keychron-only] [--dev] [-- args...]"
 }
 
 while [ "$#" -gt 0 ]; do case $1 in
-  -h|--help) usage; exit;;
-  -s|--stable) STABLE=1; shift;;
-  -b|--background) BACKGROUND=1; shift;;
-  -l|--log) LOG=1; shift;;
-  -d|--debug) DEBUG=1; shift;;
-  -p|--parse-only) PARSE=1; shift;;
-  -k|--keychron-only) KEYCHRON=1; shift;;
-  --dev) DEV=1; shift;;
-  --) shift; break;;
-  *) echo "Unknown parameter passed: $1"; shift; shift;;
+    -h|--help) usage; exit;;
+    -s|--stable) STABLE=1; shift;;
+    -b|--background) BACKGROUND=1; shift;;
+    -l|--log) LOG=1; shift;;
+    -d|--debug) DEBUG=1; shift;;
+    -p|--parse-only) PARSE=1; shift;;
+    -k|--keychron-only) KEYCHRON=1; shift;;
+    --dev) DEV=1; shift;;
+    --) shift; break;;
+    *) echo "Unknown parameter passed: $1"; shift; shift;;
 esac; done
 
 echo BACKGROUND=$BACKGROUND
@@ -22,14 +22,14 @@ echo STABLE=$STABLE
 echo DEBUG=$DEBUG
 
 if [ $STABLE ]; then
-  BINARY=~/repos/keyboard-layouts/keyboard-layouts-stable
-  CONFIG=config/vou-stable.toml
+    BINARY=~/repos/keyboard-layouts/keyboard-layouts-stable
+    CONFIG=config/vou-stable.toml
 elif [ $DEV ]; then
-  BINARY=~/repos/keyboard-layouts/keyboard-layouts-dev
-  CONFIG=config/vou.toml
+    BINARY=~/repos/keyboard-layouts/keyboard-layouts-dev
+    CONFIG=config/vou.toml
 else
-  BINARY=~/repos/keyboard-layouts/keyboard-layouts
-  CONFIG=config/vou.toml
+    BINARY=~/repos/keyboard-layouts/keyboard-layouts
+    CONFIG=config/vou.toml
 fi
 
 [ -x "$BINARY" ] || exit 1
@@ -57,11 +57,11 @@ sleep 0.2
 if [ ! $KEYCHRON ]; then
     echo "Start keyboard-layouts for built-in keyboard"
     if [ $BACKGROUND ] || [ $K6_CONNECTED ]; then
-      $BINARY --config-file $CONFIG \
-        ${LOG:+--key-log-file $HOME/log/"$(date '+%Y-%m-%d_%H.%M.%S')_key.log"} "$@" > /dev/null &
+        $BINARY --config-file $CONFIG \
+          ${LOG:+--key-log-file $HOME/log/"$(date '+%Y-%m-%d_%H.%M.%S')_key.log"} "$@" > /dev/null &
     else
-      exec $BINARY --config-file $CONFIG \
-        ${LOG:+--key-log-file $HOME/log/"$(date '+%Y-%m-%d_%H.%M.%S')_key.log"} "$@"
+        exec $BINARY --config-file $CONFIG \
+          ${LOG:+--key-log-file $HOME/log/"$(date '+%Y-%m-%d_%H.%M.%S')_key.log"} "$@"
     fi
 fi
 
@@ -69,14 +69,14 @@ if [ $K6_CONNECTED ]; then
     # pkill -f 'keyboard-layouts.*usb-Keychron_Keychron_K6-event-kbd'
     echo "Start keyboard-layouts for Keychron K6 (via USB)"
     if [ $BACKGROUND ]; then
-      $BINARY \
-        --config-file $CONFIG \
-        --device /dev/input/by-id/usb-Keychron_Keychron_K6-event-kbd \
-        ${LOG:+--key-log-file $HOME/log/"$(date '+%Y-%m-%d_%H.%M.%S')_key_K6.log"} "$@" > /dev/null &
+        $BINARY \
+          --config-file $CONFIG \
+          --device /dev/input/by-id/usb-Keychron_Keychron_K6-event-kbd \
+          ${LOG:+--key-log-file $HOME/log/"$(date '+%Y-%m-%d_%H.%M.%S')_key_K6.log"} "$@" > /dev/null &
     else
-      exec $BINARY \
-        --config-file $CONFIG \
-        --device /dev/input/by-id/usb-Keychron_Keychron_K6-event-kbd \
-        ${LOG:+--key-log-file $HOME/log/"$(date '+%Y-%m-%d_%H.%M.%S')_key_K6.log"} "$@"
+        exec $BINARY \
+          --config-file $CONFIG \
+          --device /dev/input/by-id/usb-Keychron_Keychron_K6-event-kbd \
+          ${LOG:+--key-log-file $HOME/log/"$(date '+%Y-%m-%d_%H.%M.%S')_key_K6.log"} "$@"
     fi
 fi
