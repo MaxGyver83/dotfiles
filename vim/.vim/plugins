@@ -88,6 +88,7 @@ thinca/vim-localrc
 inkarkat/SyntaxAttr.vim
 liuchengxu/vim-which-key
 tpope/vim-dispatch
+dhruvasagar/vim-markify
 
 [vim-only]
 machakann/vim-highlightedyank
