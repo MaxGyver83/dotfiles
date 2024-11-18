@@ -3,3 +3,9 @@ git
 
 # pull all changes in the repo including changes in the submodules
 git pull --recurse-submodules
+
+# checkout a specific pull request
+git fetch origin pull/413/head:pr-413
+git checkout pr-413
+# or using GitHub CLI
+gh pr checkout 413
