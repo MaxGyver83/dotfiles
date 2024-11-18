@@ -3,6 +3,8 @@
 	st = status
 	ci = commit
 	br = branch
+[core]
+	quotePath = false
 [diff]
 	colorMoved = default
 	tool = vimdiff
