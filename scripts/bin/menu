@@ -1,0 +1,6 @@
+#!/bin/sh
+# example usage: see ~/bin/rescue-menu
+PATH="/home/max/.local/bin:$PATH"
+cmd=$(dmenu -c -n -i -l 10 -fn 'monospace:size=16')
+notify-send "$cmd" &
+echo "$cmd" | ${SHELL:-"/bin/sh"} &
