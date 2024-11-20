@@ -1,0 +1,15 @@
+Linux
+=====
+
+Arch Linux
+----------
+
+C-A-F2      ly/X11/dwm
+C-A-F1,3-6  tty
+
+Ubuntu
+------
+
+C-A-F1      GDM
+C-A-F2      X11/GNOME
+C-A-F3-6    tty

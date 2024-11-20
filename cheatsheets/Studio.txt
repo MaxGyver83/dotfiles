@@ -1,0 +1,12 @@
+Android Studio
+==============
+
+Esc       Focus editor
+S-Esc     Hide/minimize window
+C-tab     Switcher
+C-S-n     Search file
+C-A-s     Settings
+C-S-o     Gradle sync
+S-F10     Run current configuration
+C-S-F10   Run test
+F2        Next error/warning
