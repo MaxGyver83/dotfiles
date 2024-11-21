@@ -1,0 +1,10 @@
+#!/bin/bash
+set -eo pipefail # don't paste anything if user cancels dmenu
+PATH="$HOME/.local/bin:$HOME/install:/usr/local/bin:/usr/bin"
+greenclip print | grep . \
+    | sed -E 's|^(image/png  )(.*)|\1/tmp/greenclip/\2.png|' \
+    | dmenu-png -i -fn 'monospace:size=14' -ip 'image/png  ' -p greenclip -l 23 -is 120 \
+    | sed -E 's|^(image/png  )/tmp/greenclip/(-?[0-9]+)\.png$|\1\2|' \
+    | xargs -r -d'\n' -I '{}' greenclip print '{}'
+sleep 0.1
+xdotool key shift+Insert
