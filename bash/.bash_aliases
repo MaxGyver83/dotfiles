@@ -77,9 +77,10 @@ alias vg="$VIM +G +'silent %bd|e#' +'norm gU'"
 alias rr='ranger'
 # no header, no line numbers, no pager
 alias batp='bat -pp'
+alias iv='nsxiv'
 
 alias cv="$VIM ~/.vimrc"
-alias cn="$VIM ~/.config/nvim/init.vim"
+alias cn="$VIM ~/.config/nvim/init.lua"
 alias cf="$VIM ~/.config/fish/config.fish"
 alias ca="$VIM ~/.config/fish/aliases.fish"
 alias cs="$VIM ~/.config/sxhkd/sxhkdrc"
