@@ -8,21 +8,25 @@ case $- in
       *) return;;
 esac
 
+remove_from_path() {
+    # remove $1 from middle of $PATH
+    PATH="${PATH//:$1:/:}"
+    # remove $1 from beginning of $PATH
+    PATH="${PATH#$1:}"
+}
+
 remove_from_path_if_symlink() {
     if [[ -L $1 ]] \
         && [[ $(realpath $1) == /usr/bin ]] \
         && [[ $PATH == *:$1:* || $PATH == $1:* ]] \
         && [[ $PATH == *:/usr/bin:* ]]
     then
-        # remove $1 from middle of $PATH
-        PATH="${PATH//:$1:/:}"
-        # remove $1 from beginning of $PATH
-        PATH="${PATH#$1:}"
+        remove_from_path $1
     fi
 }
 
 prepend_to_path() {
-    [ -d "$1" ] && [[ $PATH != *$1* ]] && PATH="$1:$PATH"
+    [ -d "$1" ] && remove_from_path "$1" && PATH="$1:$PATH"
 }
 
 remove_from_path_if_symlink /sbin
@@ -32,7 +36,7 @@ prepend_to_path $HOME/.local/bin
 prepend_to_path $HOME/install
 
 exists() {
-  command -v "$1" > /dev/null 2>&1 ;
+    command -v "$1" > /dev/null 2>&1 ;
 }
 exists luarocks && eval $(luarocks path)
 
