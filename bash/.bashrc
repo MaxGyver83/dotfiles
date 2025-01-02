@@ -231,6 +231,8 @@ export FZF_CTRL_T_OPTS="--preview 'bat --style=numbers --line-range :60 --color=
 
 export BAT_THEME=TwoDark
 
+LANG='en_US.UTF-8'
+
 # disable terminal freeze "scroll lock" with Ctrl-s (unlocking with Ctrl-q btw.)
 stty -ixon
 
