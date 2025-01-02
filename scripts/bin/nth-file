@@ -1,0 +1,14 @@
+#!/bin/sh
+case "$1" in
+-h|--help) echo "Usage: nth-file [DIR [N [COUNT]]]"; exit;;
+esac
+
+dir="${1:-.}"
+n="${2:-1}"
+count="${3:-1}"
+
+# only filenames
+# ls -A "$dir" | tail -n+$n | head -n$count
+
+# relative paths
+fd -HI --max-depth=1 --threads=1 . "$dir" | tail -n+$n | head -n$count
