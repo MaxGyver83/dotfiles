@@ -1,2 +1,2 @@
 #!/bin/sh
-awk '{for (i=2; i<NF; i++) printf $i " "; print $NF}'
+awk '{for (i=2; i<NF; i++) printf $i " "; print $NF}' "$@"
