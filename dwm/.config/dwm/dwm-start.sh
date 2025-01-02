@@ -15,6 +15,8 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 #export AWT_TOOLKIT=MToolkit
 export XDG_SESSION_TYPE=x11
 
+LANG='en_US.UTF-8'
+
 mkdir -p ~/log
 msteams_cookies="$HOME/.config/Microsoft/Microsoft Teams/Cookies"
 [ -f "$msteams_cookies" ] && rm "$msteams_cookies" 2> /dev/null
