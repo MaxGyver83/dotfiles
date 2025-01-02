@@ -32,6 +32,7 @@ prepend_to_path() {
 remove_from_path_if_symlink /sbin
 remove_from_path_if_symlink /bin
 
+prepend_to_path $HOME/Android/Sdk/tools/
 prepend_to_path $HOME/.local/bin
 prepend_to_path $HOME/install
 
