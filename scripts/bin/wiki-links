@@ -1,11 +1,29 @@
 #!/bin/sh
+# Usage: wiki-links [-d|-f|-p]
+
 case $1 in
--d|--dmenu|dmenu) filter='dmenu -i -l 20 -c -fn monospace:size=16' ;;
-*) filter=fzf ;;
+-p|--plain|plain)
+    PLAIN=1
+    filter='cat' ;;
+-d|--dmenu|dmenu)
+    filter='dmenu -i -l 20 -c -fn monospace:size=16' ;;
+-f|--fzf|fzf|*)
+    filter=fzf ;;
 esac
 
-rg -oI '\[[^\]]+\]\([^)]+\)' ~/repos/wiki/Notizen/tiddlers \
-    | sed -E 's/\[(.*)\]\((.*)\)/\1   \2/' \
+highlight_link_text() {
+    green=$(printf '\033[32m')
+    reset=$(printf '\033[0m')
+    sed -E "s:^(.*)   :$green\1$reset   :"
+}
+
+strip_link_text() {
+    sed 's/^.*   //'
+}
+
+# find markdown links like [...](https://...)
+rg -oI '\[[^]]+\]\((https?|file|ftp)://[^)]+\)' ~/repos/wiki/Notizen/tiddlers \
+    | sed -E 's:\[([^]]+)\]\(([^)]+)\):\1   \2:' \
     | sort -u \
     | $filter \
-    | sed 's/^.*   //'
+    | { [ $PLAIN ] && highlight_link_text || strip_link_text ; }
