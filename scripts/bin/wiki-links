@@ -21,9 +21,19 @@ strip_link_text() {
     sed 's/^.*   //'
 }
 
+find_markdown_links() {
+    rg -oI '\[[^]]+\]\((https?|file|ftp)://[^)]+\)' ~/repos/wiki/Notizen/tiddlers \
+        | sed -E 's:\[([^]]+)\]\(([^)]+)\):\1   \2:'
+}
+
+find_tiddlywiki_links() {
+    rg -oI '\[\[[^]|]+\|(https?|file|ftp)://[^]|]+\]\]' ~/repos/wiki/Notizen/tiddlers \
+        |  sed -E 's:\[\[([^]|]+)\|([^]]+)\]\]:\1   \2:'
+}
+
 # find markdown links like [...](https://...)
-rg -oI '\[[^]]+\]\((https?|file|ftp)://[^)]+\)' ~/repos/wiki/Notizen/tiddlers \
-    | sed -E 's:\[([^]]+)\]\(([^)]+)\):\1   \2:' \
+# and TiddlyWiki links like [[...|https://...]]
+{ find_markdown_links; find_tiddlywiki_links; } \
     | sort -u \
     | $filter \
     | { [ $PLAIN ] && highlight_link_text || strip_link_text ; }
