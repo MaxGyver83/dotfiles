@@ -1,5 +1,5 @@
 #!/bin/sh
-menu <<eof
+menu <<"eof"
 0 Main menu	~/bin/main-menu
 1 Laptop screen	~/.screenlayout/layout.sh laptop
 2 VOU (KMonad)	sleep 0.2 && ~/bin/start-kmonad.fish --keyboard all
