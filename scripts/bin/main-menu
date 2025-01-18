@@ -1,7 +1,9 @@
 #!/bin/sh
 menu <<"eof"
 1 raspi1	st -e ssh raspi1
-2 ionos server	st -e ssh -t ionos 'tmux a || tmux'
 3 raspi3	st -e ssh raspi3
-4 wiki links	url="$(wiki-links --dmenu)"; [ "$url" ] && firefox "$url"
+i ionos server	st -e ssh -t ionos 'tmux a || tmux'
+s ionos server (no tmux)	st -e ssh -t ionos
+w wiki links	url="$(wiki-links --dmenu)"; [ "$url" ] && firefox "$url"
+p passmenu	passmenu
 eof
