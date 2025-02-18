@@ -46,13 +46,17 @@ Also recommended:
 
 I use vim8's integrated package manager. So some plugins need to be cloned into `~/.vim/pack/plugins/start/` or `~/.vim/pack/plugins/opt/`.
 
-Install plugins with [install-vim-plugins](scripts/bin/install-vim-plugins). This script itself contains the list of plugins to be installed:
+Install plugins with [vim-plugins](scripts/bin/vim-plugins):
 
 ```sh
-~/bin/install-vim-plugins
+~/bin/vim-plugins install
 ```
 
-Update vim plugins with [update-vim-plugins](scripts/bin/update-vim-plugins).
+The list of plugins to be installed is read from `~/.vim/plugins` and
+`~/.vim/plugins-home` (or `plugins-work` if `$MACHINE` is set to `work*`).
+
+Update vim plugins with `vim-plugins update` (or just `vim-plugins` without
+argument).
 
 ## dwm
 
