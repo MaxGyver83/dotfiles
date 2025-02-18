@@ -9,3 +9,11 @@ git fetch origin pull/413/head:pr-413
 git checkout pr-413
 # or using GitHub CLI
 gh pr checkout 413
+
+# push single tag to remote
+git push origin tag <tag_name>
+
+# push branch to remote
+git push -u origin <branch>
+# when branch is checked out:
+git push -u origin HEAD

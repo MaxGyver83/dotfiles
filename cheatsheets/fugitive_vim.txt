@@ -8,10 +8,19 @@ u    unstage
 -    stage or unstage
 U    unstage all
 X    discard change (checkout/clean)
+i    next file or hunk (expand inline diffs automatically)
+(    previous file or hunk
+)    next file or hunk
+gU   go to unstaged section
+gs   go to staged section
+gp   go to unpushed section
 gi   open .git/info/exclude
 1gi  open .gitignore
 gI   add file to .git/info/exclude
 1gI  add file to .gitignore
+cc   create commit
+ca   amend last commit and edit message
+ce   amend last commit (keep message)
 
 
 Custom mappings

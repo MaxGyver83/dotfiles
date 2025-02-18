@@ -37,3 +37,4 @@ C-j     previous field
 C-k     next field
 C-x     command mode
 C-x header Cc  add cc field
+C-x bcc max@example.com  add to bcc
