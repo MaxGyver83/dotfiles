@@ -1,0 +1,15 @@
+GIMP
+====
+
+m      move
+r      rectangle select
+o      color picker
+x      swap colors
+B      bucket fill
+C-S-n  new layer
+PgUp   layer up
+PgDn   layer down
+C-a    select all
+C-S-a  deselect all
+Tab    hide docks
+C-j    center image
