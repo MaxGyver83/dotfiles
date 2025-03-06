@@ -2,11 +2,12 @@
 menu <<"eof"
 0 Main menu	~/bin/main-menu
 1 Laptop screen	~/.screenlayout/layout.sh laptop
-2 VOU (KMonad)	sleep 0.2 && ~/bin/start-kmonad.fish --keyboard all
-3 VOU (keyboard-layouts stable)	sleep 0.2 && ~/bin/start-keyboard-layouts --stable --background --log
-4 VOU (keyboard-layouts)	sleep 0.2 && ~/bin/start-keyboard-layouts --background --log
-5 Release CapsLock	xset -q | grep -qE 'Caps Lock: *on' && xdotool key Caps_Lock
-6 Reload touchpad driver	sudo modprobe -r psmouse ; sudo modprobe psmouse
-7 st	st
-8 screenshot	~/bin/screenshot-menu.bash -w
+2 setxkbmap + xset	setxkbmap de ; xset r rate 300 50
+3 VOU (KMonad)	sleep 0.2 && ~/bin/start-kmonad.fish --keyboard all
+4 VOU (keyboard-layouts stable)	sleep 0.2 && ~/bin/start-keyboard-layouts --stable --background --log
+5 VOU (keyboard-layouts)	sleep 0.2 && ~/bin/start-keyboard-layouts --background --log
+6 Release CapsLock	xset -q | grep -qE 'Caps Lock: *on' && xdotool key Caps_Lock
+7 Reload touchpad driver	sudo modprobe -r psmouse ; sudo modprobe psmouse
+8 st	st
+9 screenshot	~/bin/screenshot-menu.bash -w
 eof
