@@ -65,7 +65,7 @@ super + alt + r
 
 # shutdown
 super + alt + s
-    ~/bin/power-menu.bash -w
+    ~/bin/power-menu
     # ~/bin/rofi-power.bash
     # sudo shutdown -h now
 
