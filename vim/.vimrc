@@ -119,6 +119,7 @@ autocmd BufEnter * if &ft ==# 'gitcommit' || &ft ==# 'fish' | MUcompleteAutoOff 
 autocmd BufRead,BufNewFile *.tmux set filetype=tmux
 autocmd BufRead,BufNewFile /usr/share/X11/xkb/* set syntax=javascript
 autocmd BufRead,BufNewFile sxhkdrc set syntax=sh
+autocmd BufRead,BufNewFile kakrc set syntax=toml
 
 set ignorecase       " make search case-insensitive by default (word\C → case sens.)
 set smartcase        " make search case-sensitive if word contains uppercase letter
