@@ -115,7 +115,6 @@ autocmd BufRead,BufNewFile **/bazel-out/**/*.log FixBazelPaths
 " disable MUcomplete for fish and for git commit messages
 autocmd BufEnter * if &ft ==# 'gitcommit' || &ft ==# 'fish' | MUcompleteAutoOff | else | MUcompleteAutoOn | endif
 
-" recognize tmux config files
 autocmd BufRead,BufNewFile *.tmux set filetype=tmux
 autocmd BufRead,BufNewFile /usr/share/X11/xkb/* set syntax=javascript
 autocmd BufRead,BufNewFile sxhkdrc set syntax=sh
@@ -333,12 +332,13 @@ nnoremap q <Nop>
 nnoremap x "_x
 
 " delete not into register with <Leader>d
+" conflict with/overwriting mapping in line 270
 nnoremap <Leader>d "_d
 
 " select word/WORD under cursor
 " or use + (vim-expand-region), not exactly the same because of vim-wordmotion
 nnoremap <Leader>v viw
-" or use ++ (vim-expand-region)
+" or use ++/+++/++++ (vim-expand-region)
 nnoremap <Leader>V viW
 
 " replace word/selection with yanked text (without yanking the replaced text)
@@ -531,7 +531,7 @@ xnoremap <S-Up> :m '<-2<CR>gv=gv
 map <F2> :mksession! ~/.session.vim<cr>
 " And load session with F3
 map <F3> :source ~/.session.vim<cr>
-" Load automatically saved session with F4
+" load automatically saved session with F4
 map <F4> :source ~/.autosession.vim<cr>
 
 " Markdown formatting
