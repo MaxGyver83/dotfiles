@@ -129,6 +129,12 @@ super + alt + i
 super + ctrl + alt + i
     ~/bin/snippets.sh
 
+super + alt + space
+    ~/bin/rescue-menu
+
+super + alt + m
+    ~/bin/main-menu
+
 # activate VOU layout in KMonad
 ctrl + shift + Escape
     sleep 0.2 && ~/bin/start-kmonad.fish --keyboard all
