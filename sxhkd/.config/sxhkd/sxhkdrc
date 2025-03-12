@@ -181,3 +181,5 @@ XF86AudioLowerVolume
 XF86AudioRaiseVolume
     ~/bin/volume.sh "+"
 
+XF86PowerOff
+    ~/bin/power-menu
