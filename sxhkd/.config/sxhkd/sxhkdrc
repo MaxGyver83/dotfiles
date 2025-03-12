@@ -124,6 +124,9 @@ super + alt + u
     unipicker --command 'rofi -dmenu -font "mono 22" -theme-str "window \{width: 80%;\}"' --copy-command 'xclip -sel clip'
 
 super + alt + i
+    ~/bin/snippets-dmenu1.sh
+
+super + ctrl + alt + i
     ~/bin/snippets.sh
 
 # activate VOU layout in KMonad
