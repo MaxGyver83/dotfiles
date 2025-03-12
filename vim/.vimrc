@@ -279,7 +279,7 @@ nnoremap <Leader>,tw :set wrap!<cr>
 " Copy current line/selection into tmux buffer and paste into last pane.
 " Use count to paste into current pane + count.
 " This mapping is made for sending code lines to ipython3. Disable %autoindent first!
-if exists('$TMUX')
+if exists('$TMUX') && !has("gui_running")
     noremap <Leader><Return> <cmd>:exe 'call YankAndPasteInOtherTmuxPane('.v:count.')'<cr>
 endif
 
