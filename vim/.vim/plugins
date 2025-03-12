@@ -28,6 +28,7 @@ inkarkat/vim-ReplaceWithRegister
 lifepillar/vim-mucomplete
 kshenoy/vim-signature
 godlygeek/tabular
+dhruvasagar/vim-table-mode
 junegunn/vim-easy-align
 joereynolds/vim-minisnip
 rstacruz/vim-closer
@@ -53,6 +54,7 @@ chaoren/vim-wordmotion
 # ludovicchabant/vim-gutentags
 MaxGyver83/vim-gutentags
 preservim/tagbar
+stsewd/gx-extended.vim
 
 # open, find and search files
 EinfachToll/DidYouMean
