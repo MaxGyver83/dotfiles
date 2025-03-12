@@ -152,10 +152,10 @@ autocmd BufWinLeave * call clearmatches()
 " also highlight no-break spaces (U+00A0) and narrow no-break spaces (U+202F),
 " and soft hyphen (U+00AD)
 highlight NoBreakWhitespace ctermbg=blue guibg=blue
-autocmd BufWinEnter,InsertLeave * match NoBreakWhitespace / \| \|­/
+autocmd BufWinEnter,InsertLeave * 2match NoBreakWhitespace / \| \|­/
 " highlight NUL bytes
 highlight NULByte ctermbg=yellow ctermfg=black guibg=yellow guifg=black
-autocmd BufWinEnter,InsertLeave * match NULByte /\%x00/
+autocmd BufWinEnter,InsertLeave * 3match NULByte /\%x00/
 
 augroup autocom
     autocmd!
