@@ -1372,6 +1372,9 @@ nmap <Leader>l <Plug>(Limelight)
 xmap <Leader>l <Plug>(Limelight)
 nmap <Leader>ll :Limelight!!<CR>
 
+" vim-table-mode
+let g:table_mode_map_prefix = '<Leader>mt'
+
 " vimspector
 let g:vimspector_enable_mappings = 'HUMAN'
 " let g:buftabline_show = 0
