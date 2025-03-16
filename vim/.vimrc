@@ -109,6 +109,7 @@ autocmd BufRead,BufNewFile **/dwm.c set autoindent noexpandtab tabstop=4 shiftwi
 autocmd BufRead,BufNewFile *.js.tid set filetype=javascript noexpandtab tabstop=4 shiftwidth=4
 autocmd BufRead,BufNewFile *.h,*.c set filetype=c
 autocmd BufRead,BufNewFile *.gnu set filetype=gnuplot
+autocmd BufRead,BufNewFile *.ics setfiletype icalendar
 autocmd BufRead,BufNewFile tags-* set filetype=tags
 autocmd BufRead,BufNewFile **/bazel-out/**/*.log FixBazelPaths
 

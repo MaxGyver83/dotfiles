@@ -79,6 +79,7 @@ weakish/rcshell.vim
 bakpakin/janet.vim
 ~maxgyver83/hare-jump.vim
 baskerville/vim-sxhkdrc
+vim-scripts/icalendar.vim
 
 # language server
 # prabirshrestha/vim-lsp
