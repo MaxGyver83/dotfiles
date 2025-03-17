@@ -11,7 +11,9 @@ elif type lsb_release >/dev/null 2>&1; then
         dpkg --list raspberrypi-kernel | grep '^ii'
     else
         # Ubuntu, Raspberry Pi OS Bookworm and newer (raspi1, ionos)
-        dpkg --list 'linux-image*' | grep '^ii'
+        dpkg --list 'linux-image-*' | grep '^ii' | sed 's/^ii *//'
+        dpkg --list 'linux-modules-*' | grep '^ii' | sed 's/^ii *//'
+        dpkg --list 'linux-headers-*' | grep '^ii' | sed 's/^ii *//'
     fi
 else
     echo "Unknown distribution!"
