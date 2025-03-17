@@ -1323,8 +1323,9 @@ let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 " vim-oscyank
 if $SSH_CLIENT != "" || $SSH_TTY != "" || $IN_DOCKER != ""
   " let g:oscyank_term = 'default'
-  vnoremap <leader>y <Plug>OSCYankVisual
   nmap <leader>y <Plug>OSCYankOperator
+  nmap <leader>yy <leader>y_
+  vmap <leader>y <Plug>OSCYankVisual
 endif
 
 " vim-easy-align
