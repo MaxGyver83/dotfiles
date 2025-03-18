@@ -207,6 +207,8 @@ tere() {
   [ -n "$result" ] && cd -- "$result"
 }
 
+_Z_EXCLUDE_DIRS=/media/ubuntu/home/max
+_Z_NO_RESOLVE_SYMLINKS=1
 [ -f ~/repos/z/z.sh ] && source ~/repos/z/z.sh
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
