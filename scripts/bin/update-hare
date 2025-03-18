@@ -61,7 +61,7 @@ case "$1" in
 qbe)   update_qbe;;
 harec) update_harec;;
 hare)  update_hare;;
-*)     update_qbe && update_harec && update_hare;;
+*)     update_qbe; update_harec; update_hare;;
 esac
 
 exit 0
