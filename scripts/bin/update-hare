@@ -1,6 +1,8 @@
 #!/bin/sh
 
-# usage: update [-f] [qbe|harec|hare]
+usage() {
+    echo 'update-hare [-h|--help] [-f|--force] [qbe|harec|hare]'
+}
 
 COLOR_BLUE="\033[0;34m"
 BOLD="\033[1m"
@@ -8,6 +10,7 @@ RESET="\033[0m"
 PATH="/usr/local/bin:/usr/bin"
 
 case $1 in
+-h|--help) usage; exit;;
 -f|--force) force=1; shift;;
 esac
 
