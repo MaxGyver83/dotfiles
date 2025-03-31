@@ -74,7 +74,8 @@ fi
 run nm-applet
 run pasystray
 run blueman-applet
-restart copyq
+# restart copyq
+run greenclip daemon
 run sxhkd
 # internxt="$(\ls ~/install/Internxt-Drive-* | head -n 1)"
 # [ "$internxt" ] && run "$internxt"
