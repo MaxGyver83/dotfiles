@@ -39,7 +39,7 @@ echo "DPI_CHANGED=$DPI_CHANGED"
 # See https://unix.stackexchange.com/a/230442/305474
 export NO_AT_BRIDGE=1
 
-PATH="$PATH:~/.local/bin"
+PATH="$PATH":~/.local/bin:~/install
 
 # numlockx off
 ~/bin/start-keyboard-layouts -b -l || {
