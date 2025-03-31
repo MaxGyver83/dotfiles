@@ -2,4 +2,5 @@
 filename="${1%%:*}"
 dest="/tmp/wiki/${filename%.*}"
 ~/repos/wiki/utils/migrate-to-markdown.sh "$WIKI_DIR/$filename" "$dest" "$dest"
+ln -sf "$WIKI_DIR"/../img /tmp/wiki/
 exec xdg-open "$dest/index.html"
