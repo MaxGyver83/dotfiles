@@ -78,10 +78,19 @@ vis:map(vis.modes.NORMAL, '<C-q>', ':q<Enter>')
 
 vis:map(vis.modes.NORMAL, '<Enter>', 'o<Escape>')
 
+vis:command('map! normal j <vis-motion-line-up>')
+vis:command('map! normal k <vis-motion-line-down>')
 vis:command('map! normal <C-j> <vis-selection-new-lines-above>')
 vis:command('map! normal <C-k> <vis-selection-new-lines-below>')
+vis:command('map! normal <M-C-j> <vis-selection-new-lines-above-first>')
+vis:command('map! normal <M-C-k> <vis-selection-new-lines-below-last>')
+-- vis:map(vis.modes.NORMAL, '<C-k>', '<C-j>')
+-- vis:map(vis.modes.NORMAL, '<C-j>', '<C-k>')
 vis:map(vis.modes.NORMAL, '<C-Up>', '<C-j>')
 vis:map(vis.modes.NORMAL, '<C-Down>', '<C-k>')
+
+vis:map(vis.modes.VISUAL, '<C-j>', '<C-u>')
+vis:map(vis.modes.VISUAL, '<C-k>', '<C-d>')
 
 vis:map(vis.modes.NORMAL, '<C-Left>', 'b')
 vis:map(vis.modes.NORMAL, '<C-Right>', 'w')
@@ -102,3 +111,32 @@ vis:map(vis.modes.NORMAL, '<C-w><Left>', '<C-w>h')
 vis:map(vis.modes.NORMAL, '<C-w><Right>', '<C-w>l')
 vis:map(vis.modes.NORMAL, '<C-w><Up>', '<C-w>k')
 vis:map(vis.modes.NORMAL, '<C-w><Down>', '<C-w>j')
+
+-- Path to the fzf executable (default: "fzf")
+-- plugin_vis_open = require('plugins/vis-fzf-open')
+-- plugin_vis_open.fzf_path = (
+    -- "FZF_DEFAULT_COMMAND=\"fd --type f --hidden --follow --exclude .git --search-path $HOME\" fzf"
+-- )
+-- vis:map(vis.modes.NORMAL, ' x', ':fzf<Enter>')
+
+-- local strf = string.format
+-- local lastMode
+-- function updateStatus(win)
+-- 	if lastMode ~= vis.mode then
+-- 		lastMode = vis.mode
+-- 		local n
+-- 		if lastMode == vis.modes.INSERT then
+-- 			n = 6
+-- 		elseif lastMode == vis.modes.OPERATOR_PENDING then
+-- 			n = 4
+-- 		elseif lastMode == vis.modes.REPLACE then
+-- 			n = 4
+-- 		else
+-- 			n = 2
+-- 		end
+-- 		io.stderr:write(strf('\x1b[%d q', n))
+-- 	end
+-- 	-- status drawing/etc...
+-- end
+
+-- vis.events.subscribe(vis.events.WIN_STATUS, updateStatus)
