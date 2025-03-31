@@ -63,6 +63,7 @@ echo "$(timestamp) Switching to external screen (if available) done"
 # set first (=laptop) display to 70% brightness
 # xrandr --output $(xrandr | grep -w connected | head -n 1 | cut -d " " -f1) --brightness 0.7
 # test -f ~/.screenlayout/ext-monitor-acer.sh && ~/.screenlayout/ext-monitor-acer.sh
+~/.config/dwm/update-status.bash
 run ~/bin/set-random-wallpaper
 if exists picom ; then
   run picom
