@@ -6,5 +6,6 @@ i ionos server	st -e ssh -t ionos 'tmux a || tmux'
 s ionos server (no tmux)	st -e ssh -t ionos
 w wiki links	url="$(wiki-links --dmenu)"; [ "$url" ] && firefox "$url"
 p passmenu	passmenu
+m transform markdown link	transform-markdown-link
 u update-status	update-status.bash
 eof
