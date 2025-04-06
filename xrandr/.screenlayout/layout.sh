@@ -1,5 +1,10 @@
 #!/bin/sh
 
+list_active_monitors() {
+    # xrandr --listactivemonitors | awk '{ print $4 }' # slow
+    rg -l ^enabled /sys/class/drm/*/enabled | awk -F/ '{print $5}' | cut -d- -f2-
+}
+
 activate_one() {
     echo "Activate $1:"
     command="xrandr --output $1 --primary --pos 0x0 --rotate normal"
@@ -36,7 +41,7 @@ activate_other() {
     connected_count=$(echo "$connected_devices" | wc -l)
     [ "$connected_count" = 1 ] && exit 0
 
-    active_monitors="$(xrandr --listactivemonitors | awk '{ print $4 }')"
+    active_monitors="$(list_active_monitors)"
     case "$active_monitors" in
     *$laptop*) activate_one "$first_external_device" ;;
     *)         activate_one "$laptop" ;;
@@ -51,9 +56,10 @@ guess_layout() {
     esac
 }
 
-connected_devices="$(xrandr | awk '/ conn/{print $1}')"
-disconnected_devices="$(xrandr | awk '/disconnected/{print $1}')"
-configured_devices="$(xrandr | awk '/connected( primary)? [0-9]/{print $1}')"
+output="$(xrandr)"
+connected_devices="$(echo "$output" | awk '/ conn/{print $1}')"
+disconnected_devices="$(echo "$output" | awk '/disconnected/{print $1}')"
+configured_devices="$(echo "$output" | awk '/connected( primary)? [0-9]/{print $1}')"
 
 case "$connected_devices" in
 *eDP1*) laptop=eDP1;;
