@@ -2,7 +2,7 @@
 
 list_active_monitors() {
     # xrandr --listactivemonitors | awk '{ print $4 }' # slow
-    rg -l ^enabled /sys/class/drm/*/enabled | awk -F/ '{print $5}' | cut -d- -f2-
+    rg -l ^enabled /sys/class/drm/*/enabled | cut -d/ -f5 | cut -d- -f2-
 }
 
 activate_one() {
