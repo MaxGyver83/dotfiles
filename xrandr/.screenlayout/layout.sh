@@ -21,7 +21,7 @@ activate_both() {
     echo "Activate $*:"
     command="xrandr --output $1 --primary --pos 0x0 --rotate normal --auto"
     if [ "$2" ]; then
-        command="$command --output $2 --left-of $1 --primary"
+        command="$command --output $2 --left-of $1 --primary --auto"
     fi
     # other_devices = connected except the one to be activated
     other_devices="$(echo "$connected_devices" | grep -v -w "$1" | grep -v -w "$2")"
