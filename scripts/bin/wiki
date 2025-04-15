@@ -106,10 +106,11 @@ fzfcombined() {
 }
 
 case "$1" in
-""|-h|--help) usage ;;
+-h|--help) usage ;;
 new) shift; new "$@" ;;
 list) cd "$WIKI_DIR" && fd -etid -emd ;;
 find) shift; cd "$WIKI_DIR" && fd -e tid -e md --exclude '$__*' "$*" ;;
+"") cd "$WIKI_DIR" && fzffind "$@" ;;
 ifind) shift; cd "$WIKI_DIR" && fzffind "$@" ;;
 grep) shift; cd "$WIKI_DIR" && rg -g '*.{tid,md}' "$@" ;;
 igrep) shift; cd "$WIKI_DIR" && fzfgrep "$@" ;;
