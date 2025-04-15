@@ -61,7 +61,7 @@ fzffind() {
 
     preview='bat -l=md --style=numbers --color=always {1}'
 
-    fd -e tid -e md --exclude '$__*' "$*" | sed 's|^\./||' \
+    fd -e tid -e md --exclude '$__*' "$*" -X ls -t | sed 's|^\./||' \
         | fzf -d ':' --exit-0 --bind "$default,$bat,$rich,$filename,$html" \
           --preview-window 'down:40%:+{2}' \
           --preview "$preview"
