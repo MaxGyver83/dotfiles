@@ -6,8 +6,9 @@ menu <<"eof"
 3 VOU (KMonad)	sleep 0.2 && ~/bin/start-kmonad.fish --keyboard all
 4 VOU (keyboard-layouts stable)	sleep 0.2 && ~/bin/start-keyboard-layouts --stable --background --log
 5 VOU (keyboard-layouts)	sleep 0.2 && ~/bin/start-keyboard-layouts --background --log
-6 Release CapsLock	xset -q | grep -qE 'Caps Lock: *on' && xdotool key Caps_Lock
-7 Reload touchpad driver	sudo modprobe -r psmouse ; sudo modprobe psmouse
-8 st	st
-9 screenshot	~/bin/screenshot-menu.bash -w
+6 Kill keyboard-layouts	pkill -f keyboard-layouts
+7 Release CapsLock	xset -q | grep -qE 'Caps Lock: *on' && xdotool key Caps_Lock
+8 Reload touchpad driver	sudo modprobe -r psmouse ; sudo modprobe psmouse
+9 st	st
+s screenshot	~/bin/screenshot-menu.bash -w
 eof
