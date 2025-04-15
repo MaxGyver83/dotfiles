@@ -1,6 +1,6 @@
 #!/bin/sh
 # example usage: see ~/bin/rescue-menu
-cmd=$(dmenu -c -1 -i -l 10 -fn 'monospace:size=16')
+cmd=$(dmenu -c -1 -l 15 -fn 'monospace:size=16')
 [ "$cmd" ] || exit
 notify-send "$cmd" &
 echo "$cmd" | ${SHELL:-"/bin/sh"} &
