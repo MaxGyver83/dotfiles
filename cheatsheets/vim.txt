@@ -18,7 +18,7 @@ g,  of next change (after g;)
 C-]  jump to tag under cursor (or follow link in vim help) (my alias: C-t)
 g]   show all matching tags
 
-:Hi  recent files
+:Hi  recent files (my alias: <leader>hi)
 
 :g/xxx\|yyy/d   delete all lines containing 'xxx' or 'yyy'
 :g!/xxx\|yyy/d  delete all lines not containing 'xxx' or 'yyy'
@@ -58,4 +58,4 @@ F4  load autosession
 :.!cmd        Same as above but only for current line (in normal mode)
 
 g8      show UTF-8 encoding
-ga/:as  show Unicode code point
+ga/:as  show Unicode code point (my alias: g9)
