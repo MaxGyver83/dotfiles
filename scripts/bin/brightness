@@ -14,7 +14,7 @@ set_hardware_brightness() {
     *)            light -G; exit 0 ;;
     esac
 
-    notify-send -t 500 $(light -G | sed -E 's/\.0+//')"% (hardware)"
+    notify-send -t 500 $(light -G | sed -E 's/\.0+$//')"% (hardware)"
 }
 
 set_xrandr_brightness() {
@@ -53,7 +53,7 @@ set_xrandr_brightness() {
     # xrandr --output "$first_monitor" --brightness "$NEWBRIGHT"
 
     xrandr --output "$active_monitor" --brightness "$NEWBRIGHT"
-    notify-send -t 500 $(echo "$NEWBRIGHT * 100" | bc | sed -E 's/\.0+//')"% (xrandr)"
+    notify-send -t 500 $(echo "$NEWBRIGHT * 100" | bc | sed -E 's/\.0+$//')"% (xrandr)"
 }
 
 case "$1" in
