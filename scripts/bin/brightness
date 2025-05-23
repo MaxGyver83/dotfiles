@@ -4,6 +4,27 @@ timestamp() { date "+%Y-%m-%d %H:%M:%S.%3N"; }
 
 exists() { command -v "$1" > /dev/null 2>&1 ; }
 
+is_single_line() {
+    test -n "$1" && [ $(echo "$1" | wc -l) = 1 ]
+}
+
+get_active_monitor() {
+    enabled_devices=$(rg -l ^enabled /sys/class/drm/*/enabled | awk -F/ '{print $5}' | cut -d- -f2-)
+    if is_single_line "$enabled_devices"; then
+        echo "$enabled_devices"
+        return
+    fi
+
+    monitor_xpos=$(xdotool getactivewindow getwindowgeometry | grep Position | grep -o '[0-9]*,' | sed 's/,//')
+    active_mon=$(xrandr | grep -w connected | grep "+$monitor_xpos+" | head -n 1 | cut -d " " -f1)
+    if [ $active_mon ]; then
+        echo "$active_mon"
+    else
+        # use primary monitor as fallback
+        xrandr | grep -w 'connected primary' | head -n 1 | cut -d " " -f1
+    fi
+}
+
 print_hardware_brightness() {
     backlight_dir='/sys/class/backlight'
     vendor_backlight_dir=$backlight_dir/$(ls $backlight_dir | head -n1)
@@ -70,10 +91,7 @@ case "$1" in
     ;;
 esac
 
-monitor_xpos=$(xdotool getactivewindow getwindowgeometry | grep Position | grep -o '[0-9]*,' | sed 's/,//')
-active_monitor=$(xrandr | grep -w connected | grep "+$monitor_xpos+" | head -n 1 | cut -d " " -f1)
-# use primary monitor as fallback
-[ -z $active_monitor ] && active_monitor=$(xrandr | grep -w 'connected primary' | head -n 1 | cut -d " " -f1)
+active_monitor=$(get_active_monitor)
 
 if [ "$(hostname)" = 'max-laptop' ] && [ "$active_monitor" = 'eDP-1' ] && exists backlight_control && ! [ $SOFTWARE ]; then
     [ "$1" ] && printf "Set " || printf "Current "
