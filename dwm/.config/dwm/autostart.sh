@@ -77,6 +77,7 @@ run blueman-applet
 # restart copyq
 run greenclip daemon
 run sxhkd
+run udiskie -s
 # internxt="$(\ls ~/install/Internxt-Drive-* | head -n 1)"
 # [ "$internxt" ] && run "$internxt"
 # run xbanish -i shift -i control -i mod1 -i mod4
