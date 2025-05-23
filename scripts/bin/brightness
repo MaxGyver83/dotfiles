@@ -75,11 +75,13 @@ active_monitor=$(xrandr | grep -w connected | grep "+$monitor_xpos+" | head -n 1
 # use primary monitor as fallback
 [ -z $active_monitor ] && active_monitor=$(xrandr | grep -w 'connected primary' | head -n 1 | cut -d " " -f1)
 
-    echo "Set hardware brightness"
 if [ "$(hostname)" = 'max-laptop' ] && [ "$active_monitor" = 'eDP-1' ] && exists backlight_control && ! [ $SOFTWARE ]; then
+    [ "$1" ] && printf "Set " || printf "Current "
+    echo "hardware brightness"
     set_hardware_brightness "$1"
 else
-    echo "Set xrandr brightness"
+    [ "$1" ] && printf "Set " || printf "Current "
+    echo "xrandr brightness"
     set_xrandr_brightness "$1"
 fi
 
