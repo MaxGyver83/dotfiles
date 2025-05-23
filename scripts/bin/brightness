@@ -4,17 +4,25 @@ timestamp() { date "+%Y-%m-%d %H:%M:%S.%3N"; }
 
 exists() { command -v "$1" > /dev/null 2>&1 ; }
 
+print_hardware_brightness() {
+    backlight_dir='/sys/class/backlight'
+    vendor_backlight_dir=$backlight_dir/$(ls $backlight_dir | head -n1)
+    max_brightness=$(cat $vendor_backlight_dir/max_brightness)
+    cur_brightness=$(cat $vendor_backlight_dir/brightness)
+    echo "scale=2; $cur_brightness/$max_brightness*100" | bc
+}
+
 set_hardware_brightness() {
     case "$1" in
-    +)            light -A 10 ;;
-    -)            light -U 10 ;;
-    max|full|100) light -S 100 ;;
-    [1-9][0-9])   light -S "$1" ;;
-    [1-9])        light -S "$1" ;;
-    *)            light -G; exit 0 ;;
+    +)            backlight_control +10 ;;
+    -)            backlight_control -10 ;;
+    max|full|100) backlight_control 100 ;;
+    [1-9][0-9])   backlight_control "$1" ;;
+    [1-9])        backlight_control "$1" ;;
+    *)            print_hardware_brightness; exit 0 ;;
     esac
 
-    notify-send -t 500 $(light -G | sed -E 's/\.0+$//')"% (hardware)"
+    notify-send -t 500 $(print_hardware_brightness | sed -E 's/\.0+$//')"% (hardware)"
 }
 
 set_xrandr_brightness() {
@@ -67,8 +75,8 @@ active_monitor=$(xrandr | grep -w connected | grep "+$monitor_xpos+" | head -n 1
 # use primary monitor as fallback
 [ -z $active_monitor ] && active_monitor=$(xrandr | grep -w 'connected primary' | head -n 1 | cut -d " " -f1)
 
-if [ "$(hostname)" = 'max-laptop' ] && [ "$active_monitor" = 'eDP-1' ] && exists light && ! [ $SOFTWARE ]; then
     echo "Set hardware brightness"
+if [ "$(hostname)" = 'max-laptop' ] && [ "$active_monitor" = 'eDP-1' ] && exists backlight_control && ! [ $SOFTWARE ]; then
     set_hardware_brightness "$1"
 else
     echo "Set xrandr brightness"
