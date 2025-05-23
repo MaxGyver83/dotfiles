@@ -18,6 +18,7 @@ Key bindings in FZF:
 - Ctrl-b: Open in bat.
 - Ctrl-l: Open selected line in bat.
 - Ctrl-r: Open in rich.
+- Ctrl-g: Open in glow.
 - Ctrl-h: Convert to HTML and open in browser.
 "
 }
@@ -57,12 +58,13 @@ fzffind() {
     filename="ctrl-f:become(echo '$WIKI_DIR'/{})"
     bat='ctrl-b:become(bat --style=plain,header-filename -l md {})'
     rich='ctrl-r:become(python -m rich.markdown -c {} |& less -R)'
+    glow='ctrl-g:become(glow {})'
     html='ctrl-h:become(open-in-browser {})'
 
     preview='bat -l=md --style=numbers --color=always {1}'
 
     fd -e tid -e md --exclude '$__*' "$*" -X ls -t | sed 's|^\./||' \
-        | fzf -d ':' --exit-0 --bind "$default,$bat,$rich,$filename,$html" \
+        | fzf -d ':' --exit-0 --bind "$default,$bat,$rich,$glow,$filename,$html" \
           --preview-window 'down:40%:+{2}' \
           --preview "$preview"
 }
@@ -73,6 +75,7 @@ setsharedvars() {
     line='ctrl-l:become(open-in-bat {} single-line)'
     bat='ctrl-b:become(open-in-bat {})'
     rich='ctrl-r:become(open-in-rich {})'
+    glow='ctrl-g:become(glow {})'
     html='ctrl-h:become(open-in-browser {})'
     # Alternative to external open-in-browser script (and open-in-*):
     # Use bash; define and export open-in-browser function.
@@ -86,7 +89,7 @@ fzfgrep() {
     rg --line-number --no-heading --color=always --smart-case \
           --glob '*.{tid,md}' "${@}" \
         | fzf -d ':' --ansi --no-sort --exit-0 \
-          --bind "$default,$bat,$rich,$filename,$line,$html" \
+          --bind "$default,$bat,$rich,$glow,$filename,$line,$html" \
           --preview-window 'down:40%:+{2}' \
           --preview "$preview"
 }
@@ -100,7 +103,7 @@ fzfcombined() {
      rg --line-number --no-heading --color=always --smart-case \
           --glob '*.{tid,md}' "$or_regex") \
         | fzf -d ':' --ansi --no-sort --exit-0 \
-          --bind "$default,$bat,$rich,$filename,$line,$html" \
+          --bind "$default,$bat,$rich,$glow,$filename,$line,$html" \
           --preview-window 'down:40%:+{2}' \
           --preview "$preview"
 }
