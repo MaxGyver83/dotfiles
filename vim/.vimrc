@@ -1298,14 +1298,19 @@ autocmd FileType cpp     let b:gutentags_ctags_extra_args = ['--languages=C++']
 autocmd FileType vim     let b:gutentags_ctags_extra_args = ['--languages=Vim']
 autocmd FileType sh      let b:gutentags_ctags_extra_args = ['--languages=Sh']
 autocmd FileType c       let b:gutentags_ctags_extra_args = ['-h=.c.h']
+autocmd FileType java,kotlin  let b:gutentags_ctags_extra_args = ['--languages=Java', '--languages=+Kotlin', '--exclude=build']
 " hare-jump
 autocmd FileType hare    nnoremap <buffer><silent> <C-t> :HareJumpToDefinition<CR>
 
 function! GutentagsInitFunction(file)
     " echo a:file
-    if index(['c', 'cpp', 'cmake', 'janet', 'lisp', 'python', 'sh', 'vim'], &ft) >= 0
+    if index(['c', 'cpp', 'cmake', 'janet', 'java', 'lisp', 'python', 'sh', 'vim'], &ft) >= 0
         execute 'setl tags=tags-'.&ft.'-external'
         let b:gutentags_ctags_tagfile = "tags-" . &ft
+        return 1
+    elseif &ft == 'kotlin'
+        execute 'setl tags=tags-java-external'
+        let b:gutentags_ctags_tagfile = "tags-java"
         return 1
     endif
     " ignore all other filetypes
