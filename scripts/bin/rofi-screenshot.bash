@@ -32,7 +32,7 @@ then
         $SLEEP ; scrot -s /tmp/"$FILENAME Region.png" -e "copyq write image/png - < '\$f' && $NOTIFICATION"
         ;;
       "Show screenshots and select one to be copied to clipboard (select with m, quit with q)")
-        xclip -selection clipboard -t image/png -i "$(sxiv -ft ~/Screenshots/* -o)"
+        xclip -selection clipboard -t image/png -i "$(nsxiv -ft ~/Screenshots/* -o)"
         ;;
       *)
         ;;
