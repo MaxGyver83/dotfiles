@@ -79,7 +79,7 @@ super + alt + o
 
 # lock screen
 super + alt + l
-    png="$(xdg-user-dir PICTURES)/Leo5_2560x1440.png" && test -f "$png" && i3lock -e -f -i "$png" -t || i3lock -e -f -c 333333
+    slock || png="$(xdg-user-dir PICTURES)/Leo5_2560x1440.png" && test -f "$png" && i3lock -e -f -i "$png" -t || i3lock -e -f -c 333333
 
 super + 8
     ~/bin/screen-menu.bash -w
