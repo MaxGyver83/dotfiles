@@ -40,7 +40,7 @@ alias rsyncp='rsync --info=progress2 -ah'
 
 exists most && alias manc='PAGER=most man'
 alias y='yank'
-alias cb='xclip -sel clip'
+alias clipboard='xclip -sel clip'
 alias vou='setxkbmap de koy && xkbcomp ~/bin/vou.xkb $DISPLAY'
 
 alias acs='apt-cache search'
@@ -84,6 +84,7 @@ alias cn="$VIM ~/.config/nvim/init.lua"
 alias cf="$VIM ~/.config/fish/config.fish"
 alias ca="$VIM ~/.config/fish/aliases.fish"
 alias cs="$VIM ~/.config/sxhkd/sxhkdrc"
+alias cb="$VIM ~/.bashrc"
 alias ct="$VIM ~/.tmux.conf"
 alias ck="$VIM ~/.config/kmonad/vou-linux-de-rctrl.kbd"
 alias td="$VIM ~/dev/gta_local/max/todo/todo.md"
