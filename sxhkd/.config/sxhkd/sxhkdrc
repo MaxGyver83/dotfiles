@@ -94,17 +94,17 @@ super + Print
     ~/bin/screenshot-menu.bash -w
 
 Print
+    sleep 0.2 ; scrot ~/Screenshots/"%Y-%m-%d %H.%M.%S \$wx\$h.png" -e 'notify-send "$f\\n(fullscreen)"'
     #xfce4-screenshooter -s $(xdg-user-dir PICTURES)
-    sleep 0.2 ; scrot ~/Screenshots/"%Y-%m-%d %H.%M.%S \$wx\$h.png"
 
 # screenshot of active window
 alt + Print
-    sleep 0.2 ; scrot -u ~/Screenshots/"%Y-%m-%d %H.%M.%S \$wx\$h.png"
+    sleep 0.2 ; scrot --focused ~/Screenshots/"%Y-%m-%d %H.%M.%S \$wx\$h.png" -e 'notify-send "$f\\n(window: $W)"'
     #xfce4-screenshooter -w -s $(xdg-user-dir PICTURES)
 
 # screenshot of selected region
 shift + Print
-    sleep 0.2 ; scrot -s ~/Screenshots/"%Y-%m-%d %H.%M.%S \$wx\$h.png"
+    sleep 0.2 ; scrot --select ~/Screenshots/"%Y-%m-%d %H.%M.%S \$wx\$h.png" -e 'notify-send "$f\\n(region)"'
     #xfce4-screenshooter -r -s $(xdg-user-dir PICTURES)
 
 # screenshot of active window to /tmp and clipboard
