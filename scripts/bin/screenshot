@@ -31,7 +31,7 @@ GEOMETRY_FILE='/tmp/geometry'
 sleep 0.2
 
 if [ "$GALLERY" = 1 ]; then
-  xclip -selection clipboard -t image/png -i "$(ls -t ~/Screenshots/*.png /tmp/20*.png | sxiv -ft -i -o)"
+  xclip -selection clipboard -t image/png -i "$(ls -t ~/Screenshots/*.png /tmp/20*.png | nsxiv -ft -i -o)"
 
 elif [ "$OCR" = 1 ]; then
   ~/bin/ocr-region-to-clipboard.bash && notify-send "Copied to clipboard:" "$(xsel -bo)"
