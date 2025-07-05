@@ -1,6 +1,6 @@
 #!/bin/sh
 menu <<"eof"
-lock screen	png="$(xdg-user-dir PICTURES)/Leo4.png" && test -f "$png" && i3lock -n -e -f -i "$png" -t || i3lock -n -e -f -c 333333
+lock screen	slock || { png="$(xdg-user-dir PICTURES)/Leo4.png" && test -f "$png" && i3lock -n -e -f -i "$png" -t; } || i3lock -n -e -f -c 333333
 kill dwm (=restart)	[ $WM = bspwm ] && bspc wm -r || pkill -f '^dwm'
 exit dwm (logout)	[ $WM = bspwm ] && { pkill -x panel ; bspc quit; } || { pkill xinit || pkill dwm; }
 reboot	systemctl reboot
