@@ -1,0 +1,13 @@
+#!/bin/sh
+menu -q <<"eof"
+S All screen	screenshot -s
+W Active window	screenshot -w
+R Select region	screenshot -r
+L Last region	screenshot -l
+s All screens	screenshot -s -c
+w Active window (/tmp + clipboard)	screenshot -w -c
+r Select region or window (/tmp + clipboard)	screenshot -r -c
+l last region (/tmp + clipboard)	screenshot -l -c
+o OCR region (to clipboard)	screenshot -o
+g Gallery of screenshots: Select one to be copied to clipboard (`mq`)	screenshot -g
+eof
