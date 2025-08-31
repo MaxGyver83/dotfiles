@@ -1,11 +1,25 @@
 janet
 =====
 
-|Mutable (@) |Immutable
-|------------|---------------------
-|Array       |Tuple   [1 2]
-|Table       |Struct  {:a 1 :b 2}
-|Buffer      |String  "Hello World"
+|Mutable (@) |Immutable | Example (immutable)
+|------------|----------|--------------------
+|Array       |Tuple     | [1 2]
+|Table       |Struct    | {:a 1 :b 2}
+|Buffer      |String    | "Hello" `world`
+
+Strings in double quotes strip newlines!
+Escape them with "\" or use backtick strings.
+
+(function arg1 arg2)
+
+Splice (splat, unpack):
+    ;(1 2 3)
+Unnamed function (lambda):
+    ((fn [x] (+ x 1)) 10) → 11
+Short function (short-fn), uses $ as placeholder:
+    (|(+ $ 1) 10) → 11
+Map:
+    (map |(* $ 2) [1 2 3]) → [2 4 6]
 
 Start netrepl server
 --------------------
