@@ -6,6 +6,8 @@ vim.cmd('let &packpath = &runtimepath')
 vim.cmd('source ~/.vimrc')
 
 vim.call('plug#begin', '~/.local/share/nvim/plugged')
+Plug('sainnhe/everforest')
+Plug 'iibe/gruvbox-high-contrast'
 -- Plug('nvim-treesitter/nvim-treesitter', {['do'] = function() vim.fn[':TSUpdate']() end})
 Plug('nvim-treesitter/nvim-treesitter', {['do'] = ':TSUpdate'})
 Plug('neovim/nvim-lspconfig')
@@ -68,7 +70,7 @@ dap.adapters.dart = {
   command = 'dart',    -- if you're using fvm, you'll need to provide the full path to dart (dart.exe for windows users), or you could prepend the fvm command
   args = { 'debug_adapter' },
   -- windows users will need to set 'detached' to false
-  options = { 
+  options = {
     detached = true,
   }
 }
@@ -77,7 +79,7 @@ dap.adapters.flutter = {
   command = 'flutter',   -- if you're using fvm, you'll need to provide the full path to flutter (flutter.bat for windows users), or you could prepend the fvm command
   args = { 'debug_adapter' },
   -- windows users will need to set 'detached' to false
-  options = { 
+  options = {
     detached = true,
   }
 }
@@ -98,4 +100,14 @@ vim.keymap.set('n', '<F12>', ':lua require("dap").step_out()<cr>')
 
 vim.diagnostic.config({ float = { border = 'rounded' } })
 
+-- workaround because otherwise colors are missing for diff files:
+if vim.version().minor >= 10 then
+  vim.cmd('colorscheme everforest')
+  -- vim.cmd('colorscheme minimalist')
+  vim.cmd('highlight Normal ctermbg=NONE guibg=NONE')
+  -- prevent same color for strings and functions
+  vim.cmd('highlight String guifg=#83b8c0')
+else
+  vim.cmd('colorscheme minimalist')
+end
 vim.cmd('highlight Whitespace ctermfg=236 ctermbg=NONE cterm=NONE guifg=#555555 guibg=NONE gui=NONE')
