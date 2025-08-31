@@ -1,0 +1,8 @@
+#!/bin/sh
+
+CHEATSHEET_DIR=~/.dotfiles/cheatsheets
+
+cheatsheet=$(ls $CHEATSHEET_DIR | dmenu -c -1 -l 15 -fn 'monospace:size=16')
+if [ -n "$cheatsheet" ]; then
+    cheatsheet.bash $CHEATSHEET_DIR/$cheatsheet
+fi
