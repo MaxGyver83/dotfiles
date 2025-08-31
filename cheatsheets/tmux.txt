@@ -11,3 +11,4 @@ PREFIX !              Move pane to new window (and focus it)
 PREFIX y              Copy cwd
 PREFIX Y              Copy cwd of previous pane
 PREFIX P              Copy cwd of previous pane and paste
+PREFIX a              Copy last output line/filename
