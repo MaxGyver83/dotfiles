@@ -59,6 +59,7 @@ while true; do
     fi
     xrdb ~/.Xresources
     # [ -f $HOME/.xmodmap ] && xmodmap $HOME/.xmodmap
+    xset r rate 300 50
     # Log stderror to a file
     dwm > ~/log/dwm.log 2>&1
     export RESTART=1
