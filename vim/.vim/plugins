@@ -92,6 +92,8 @@ inkarkat/SyntaxAttr.vim
 liuchengxu/vim-which-key
 tpope/vim-dispatch
 dhruvasagar/vim-markify
+morhetz/gruvbox
+junegunn/rainbow_parentheses.vim
 
 [vim-only]
 machakann/vim-highlightedyank
