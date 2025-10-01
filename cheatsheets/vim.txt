@@ -20,6 +20,8 @@ g]   show all matching tags
 
 :Hi  recent files (my alias: <leader>hi)
 
+`[v`]  select last changed/yanked/pasted text (my alias: <space>,v)
+
 :g/xxx\|yyy/d   delete all lines containing 'xxx' or 'yyy'
 :g!/xxx\|yyy/d  delete all lines not containing 'xxx' or 'yyy'
 
