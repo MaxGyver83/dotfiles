@@ -17,6 +17,7 @@ tpope/vim-sensible
 tpope/vim-surround
 tpope/vim-repeat
 tpope/vim-commentary
+suy/vim-context-commentstring
 tpope/vim-abolish
 tpope/vim-speeddating
 tpope/vim-sleuth
