@@ -138,14 +138,13 @@ prompt_command() {
     else
         type __prompt_command > /dev/null 2>&1 && __prompt_command
     fi
-    echo
     # breaks when the prompt is so long that it wraps but only with color prompt and
     # inside git directories (even when GIT_COLOR and COLOR_RESET in omitted)!
     # (breaks only when prompt is wrapped twice or wrapped inside cwd!?)
     if [ "$color_prompt" = yes ]; then
-        PS1="${STATUS}${KRB_STATUS_MSG}${HOSTINFO}${DEBIAN_CHROOT}${CWD}${GIT_COLORED} ${COLOR_BLUE}\$${COLOR_RESET} "
+        PS1="\n${STATUS}${KRB_STATUS_MSG}${HOSTINFO}${DEBIAN_CHROOT}${CWD}${GIT_COLORED}\n${COLOR_BLUE}\$${COLOR_RESET} "
     else
-        PS1="${STATUS}${KRB_STATUS_MSG}${HOSTINFO}${DEBIAN_CHROOT}${CWD}${GIT_NOCOLOR} \$ "
+        PS1="\n${STATUS}${KRB_STATUS_MSG}${HOSTINFO}${DEBIAN_CHROOT}${CWD}${GIT_NOCOLOR}\n\$ "
     fi
 }
 
