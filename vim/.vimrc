@@ -276,6 +276,8 @@ nnoremap <Leader>,lb :set spelllang=en,de \| set spell<cr>
 " toggle spell, wrap
 nnoremap <Leader>,ts :set spell!<cr>
 nnoremap <Leader>,tw :set wrap!<cr>
+" select last changed, yanked or pasted text
+nnoremap <Leader>,v `[v`]
 
 " Copy current line/selection into tmux buffer and paste into last pane.
 " Use count to paste into current pane + count.
