@@ -4,5 +4,5 @@ mkdir -p ~/.config ~/bin ~/repos ~/.vim/pack/plugins/start ~/.vim/pack/plugins/o
 [ -e ~/.bashrc ] && mv ~/.bashrc ~/.bashrc_bak
 # Run stow but strip spurious warning
 # (https://github.com/aspiers/stow/issues/65)
-stow -t "$HOME" bash fish tmux vim ripgrep scripts \
+stow -t "$HOME" bash tmux vim nvim ripgrep scripts \
     2> >(grep -v 'BUG in find_stowed_path? Absolute/relative mismatch' 1>&2)
