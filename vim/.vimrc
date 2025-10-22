@@ -35,6 +35,7 @@ if &term != 'cygwin'
         highlight CursorLine ctermfg=NONE ctermbg=239 cterm=NONE
         highlight Special    ctermfg=172              cterm=bold          guifg=Orange
     endtry
+    autocmd FileType toml highlight link tomlString String
     highlight DiffAdd    ctermfg=10   ctermbg=24   cterm=bold gui=none guifg=bg guibg=Red
     highlight DiffDelete ctermfg=167  ctermbg=NONE cterm=NONE          guifg=#D75F5F guibg=#1C1C1C
     highlight DiffChange ctermfg=10   ctermbg=24   cterm=bold gui=none guifg=bg guibg=Red
@@ -146,7 +147,7 @@ set spelllang=de,en
 
 " highlight trailing whitespaces (except when typing at the end of a line)
 highlight ExtraWhitespace ctermbg=red guibg=red
-autocmd BufWinEnter * if expand('%') != 'REPL' && expand('%') != '/tmp/printscreen' | match ExtraWhitespace /\s\+$/ | endif
+autocmd BufWinEnter * if expand('%') != 'REPL' && expand('%') != '/tmp/printscreen' && &ft != 'qf' | match ExtraWhitespace /\s\+$/ | endif
 autocmd InsertEnter * if expand('%') != 'REPL' && expand('%') != '/tmp/printscreen' | match ExtraWhitespace /\s\+\%#\@<!$/ | endif
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
@@ -268,6 +269,7 @@ xnoremap <Leader>,s <cmd>call WrapShellCommand('selection')<cr>
 nnoremap <Leader>,w :TrimWhitespace<cr>
 nnoremap <Leader>,c :StripColorCodes<cr>
 nnoremap <Leader>,g :GitHub<cr>
+" close other splits: :on[ly] or Ctrl-w o
 nnoremap <Leader>,o :CloseOtherBuffers<cr>
 " spell language english/deutsch/both
 nnoremap <Leader>,le :set spelllang=en \| set spell<cr>
@@ -349,6 +351,10 @@ nnoremap <Leader>V viW
 nnoremap <Leader>rw "_ciw<C-r>"<ESC>
 " same as gr (vim-ReplaceWithRegister)
 " xnoremap <Leader>r "_c<C-r>"<ESC>
+" unmap gra because it causes a delay for gr (vim-ReplaceWithRegister)
+if has('nvim')
+    xunmap gra
+endif
 
 " overwrite with yanked text
 nnoremap <Leader>ro R<C-r>"<ESC>
@@ -436,8 +442,8 @@ nnoremap <Leader>k <C-w><C-w>
 " previous/next result (after vimgrep)
 "noremap <Leader>e :cprevious<cr>
 "noremap <Leader>i :cnext<cr>
-noremap <C-p> :cprevious<cr>
-noremap <C-n> :cnext<cr>
+nnoremap <C-p> :try \| :cprevious \| catch \| :cc \| endtry<cr>
+nnoremap <C-n> :try \| :cnext \| catch \| :cc \| endtry<cr>
 
 " previous/next misspelled word, previous/next difference in vimdiff, previous/next error in ALE (if loaded) or previous/next hunk (gitgutter) otherwise
 nmap <expr> <C-l> &spell ? '[s' : &diff ? '[c' : (exists("g:ale_enabled") && g:ale_enabled==1) ? ':ALEPrevious<CR>' : '<Plug>(GitGutterPrevHunk)'
@@ -1008,7 +1014,9 @@ let g:which_key_map['f'] = {
         \ 't' : [':set ft=tags'     , 'tags'],
         \ },
       \ }
-call which_key#register('<Space>', "g:which_key_map")
+if exists('*which_key#register')
+    call which_key#register('<Space>', "g:which_key_map")
+endif
 
 
 "" swap ; and , (next/previous match after s, S)
@@ -1328,7 +1336,7 @@ nmap <F8> :TagbarToggle f<CR>
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
 " vim-oscyank
-if $SSH_CLIENT != "" || $SSH_TTY != "" || $IN_DOCKER != ""
+if !has('clipboard') || $SSH_CLIENT != "" || $SSH_TTY != "" || $IN_DOCKER != ""
   " let g:oscyank_term = 'default'
   nmap <leader>y <Plug>OSCYankOperator
   nmap <leader>yy <leader>y_
