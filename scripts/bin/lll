@@ -1,7 +1,19 @@
 #!/bin/sh
 # Usage example: lll \*.md 30
+# Usage example: lll ~/Screenshots | grep 1440
+dir="${1:-.}"
+count="${2:-10}"
 if type eza > /dev/null 2>&1 ; then
-    eza -la -s age --color=always ${1:-.} | head -n ${2:-10}
+    if [ -t 1 ]; then
+        eza -la -s age --color=always "$dir" | head -n "$count"
+    else
+        eza -a -s age --absolute "$dir" | head -n "$count"
+    fi
 else
-    ls -hAlF -t --color=always ${1:-.} | tail -n +2 | head -n ${2:-10}
+    if [ -t 1 ]; then
+        ls -hAlF -t --color=always "$dir" | tail -n +2 | head -n "$count"
+    else
+        dir="${dir%%/}"
+        ls -A -t "$dir" | head -n "$count" | xargs -n 1 printf '%s/%s\n' "$dir"
+    fi
 fi
