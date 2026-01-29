@@ -61,3 +61,6 @@ F4  load autosession
 
 g8      show UTF-8 encoding
 ga/:as  show Unicode code point (my alias: g9)
+
+set formatoptions-=t  Disable auto-wrapping
+set formatoptions+=t  Enable auto-wrapping
