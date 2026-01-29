@@ -10,5 +10,6 @@ menu <<"eof"
 7 Release CapsLock	xset -q | grep -qE 'Caps Lock: *on' && xdotool key Caps_Lock
 8 Reload touchpad driver	sudo modprobe -r psmouse ; sudo modprobe psmouse
 9 st	st
-s screenshot	~/bin/screenshot-menu.bash -w
+s screenshot	~/bin/screenshot-menu
+x xkill	xkill
 eof
