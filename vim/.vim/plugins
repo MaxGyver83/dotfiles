@@ -81,6 +81,7 @@ bakpakin/janet.vim
 ~maxgyver83/hare-jump.vim
 baskerville/vim-sxhkdrc
 vim-scripts/icalendar.vim
+freitass/todo.txt-vim
 
 # language server
 # prabirshrestha/vim-lsp
