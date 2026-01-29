@@ -7,7 +7,8 @@ for plugin in \
     https://gitlab.com/mcepl/vis-jump.git \
     https://repo.or.cz/vis-surround.git \
     https://repo.or.cz/vis-goto-file.git \
-    https://repo.or.cz/vis-exchange.git
+    https://repo.or.cz/vis-exchange.git \
+    https://github.com/erf/vis-plug.git
 do
     git clone $plugin
 done
