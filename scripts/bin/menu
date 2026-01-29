@@ -1,7 +1,7 @@
 #!/bin/sh
 # -q quiet = no notification
-# example usage: see ~/bin/rescue-menu
+# example usage: see ~/bin/main-menu
 cmd=$(dmenu -c -1 -l 15 -fn 'monospace:size=16')
 [ "$cmd" ] || exit
 [ "$1" = "-q" ] || notify-send "$cmd" &
-echo "$cmd" | ${SHELL:-"/bin/sh"} &
+echo "$cmd" | ${SHELL:-/bin/sh} &
