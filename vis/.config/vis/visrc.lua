@@ -14,7 +14,7 @@ local plugins = {
 	{ 'erf/vis-sneak' },
 	{ 'git.sr.ht/~mcepl/vis-fzf-open' },
 	{ 'peaceant/vis-fzf-mru.git', file = 'fzf-mru' },
-	{ 'seifferth/vis-editorconfig' },
+	-- { 'seifferth/vis-editorconfig' }, -- error on loading
 	-- { 'gitlab.com/muhq/vis-spellcheck' },
 	-- { 'jocap/vis-filetype-settings' },
 	{ 'samlwood/vis-gruvbox', file = 'gruvbox', theme = true },
