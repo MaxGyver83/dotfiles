@@ -4,6 +4,8 @@ menu <<"eof"
 3 raspi3	st -e ssh raspi3
 i ionos server	st -e ssh -t ionos 'tmux a || tmux'
 s ionos server (no tmux)	st -e ssh -t ionos
+I ionos2 server	st -e ssh -t ionos2 'tmux a || tmux'
+S ionos2 server (no tmux)	st -e ssh -t ionos2
 w wiki links	url="$(wiki-links --dmenu)"; [ "$url" ] && firefox "$url"
 p passmenu	passmenu
 m transform markdown link	transform-markdown-link
