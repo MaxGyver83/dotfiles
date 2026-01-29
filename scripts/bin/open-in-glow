@@ -1,0 +1,5 @@
+#!/bin/sh
+filename="${1%%:*}"
+
+echo glow "$WIKI_DIR/$filename"
+glow "$WIKI_DIR/$filename"

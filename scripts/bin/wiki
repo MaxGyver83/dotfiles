@@ -75,7 +75,7 @@ setsharedvars() {
     line='ctrl-l:become(open-in-bat {} single-line)'
     bat='ctrl-b:become(open-in-bat {})'
     rich='ctrl-r:become(open-in-rich {})'
-    glow='ctrl-g:become(glow {})'
+    glow='ctrl-g:become(open-in-glow {})'
     html='ctrl-h:become(open-in-browser {})'
     # Alternative to external open-in-browser script (and open-in-*):
     # Use bash; define and export open-in-browser function.
