@@ -9,6 +9,14 @@ vpn() { ip -br -4 a show dev tun0 2> /dev/null | awk '{print $3}' | grep -q '^10
 kerb() { klist -s ; }
 proxy() { systemctl --quiet --user is-active proxy.service; }
 vou() { pgrep -fa "kmonad|/keyboard-layouts" &> /dev/null; }
+availmem() {
+  awk '
+  BEGIN { avail=0; anon=0 }
+  /^MemAvailable:/ { avail=$2 }
+  /^AnonPages:/     { anon=$2 }
+  END { printf("%.1f%%\n", avail*100/(avail+anon)) }' /proc/meminfo
+}
+
 
 
 if test -f ~/bin/toggle_bluetooth_profile_WH-XB910N.sh ; then
@@ -46,7 +54,9 @@ fi
 
 disk="$(df -h --output=avail / | tail +2 | tr -d ' ')  "
 
+mem="$(availmem)  "
+
 dat=$(date "+%a %F %R")
 
 
-xsetroot -name "${layout}${headset_profile}${mailinfo}${network}${brightness}${battery}${disk}${dat}"
+xsetroot -name "${layout}${headset_profile}${mailinfo}${network}${brightness}${battery}${disk}${mem}${dat}"
