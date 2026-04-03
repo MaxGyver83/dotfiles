@@ -21,6 +21,11 @@ gI   add file to .git/info/exclude
 cc   create commit
 ca   amend last commit and edit message
 ce   amend last commit (keep message)
+:Git push  push changes
+P    (cursor in Unpushed section) push commit
+ri   rebase interactive
+rr   rebase --continue
+ra   rebase --abort
 
 
 Custom mappings
