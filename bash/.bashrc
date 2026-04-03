@@ -144,6 +144,17 @@ if ! shopt -oq posix; then
   fi
 fi
 
+source /usr/share/bash-completion/completions/git
+if declare -F __git_complete >/dev/null; then
+    __git_complete glc _git_log
+    __git_complete glcn _git_log
+    __git_complete glch _git_log
+    __git_complete glcnh _git_log
+    __git_complete gitlog _git_log
+    __git_complete gitlogs _git_log
+    __git_complete gitloga _git_log
+fi
+
 # default settings for less
 export LESS='-iMFXRj4a#4'
 
