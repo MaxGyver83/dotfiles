@@ -155,6 +155,8 @@ if declare -F __git_complete >/dev/null; then
     __git_complete gitloga _git_log
 fi
 
+export XKB_DEFAULT_LAYOUT=de
+
 # default settings for less
 export LESS='-iMFXRj4a#4'
 
@@ -248,6 +250,11 @@ export FZF_CTRL_T_OPTS="--preview 'bat --style=numbers --line-range :60 --color=
 export BAT_THEME=TwoDark
 
 export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/ripgreprc"
+
+export ANDROID_HOME="$HOME/Android/Sdk"
+export ANDROID_NDK_HOME=$ANDROID_HOME/ndk/29.0.14033849
+
+export FYNE_THEME=light
 
 LANG='en_US.UTF-8'
 
