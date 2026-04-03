@@ -223,7 +223,7 @@ vssh() {
 }
 
 tere() {
-  local result=$(~/.local/bin/tere "$@")
+  local result=$(command tere "$@")
   [ -n "$result" ] && cd -- "$result"
 }
 
