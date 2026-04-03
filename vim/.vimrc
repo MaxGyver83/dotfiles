@@ -296,6 +296,7 @@ nnoremap <Leader>,fr :let @+ = expand("%") \| :echo getreg('+')<cr>
 nnoremap <Leader>,fp :let @+ = expand("%:p") \| :echo getreg('+')<cr>
 nnoremap <Leader>,fn :let @+ = expand("%:t") \| :echo getreg('+')<cr>
 nnoremap <Leader>,fl :let @+ = expand("%:p").' +'.line(".") \| :echo getreg('+')<cr>
+nnoremap <Leader>,fL :let @+ = expand("%:p").':'.line(".") \| :echo getreg('+')<cr>
 
 " copy file/selection formatted as HTML for emails (no line numbers)
 let g:html_number_lines = 0
