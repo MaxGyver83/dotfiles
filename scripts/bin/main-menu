@@ -9,6 +9,7 @@ S ionos2 server (no tmux)	st -e ssh -t ionos2
 w wiki links	url="$(wiki-links --dmenu)"; [ "$url" ] && firefox "$url"
 p passmenu	passmenu
 m transform markdown link	transform-markdown-link
-M transform markdown to TW link	transform-markdown-to-tiddlywiki-link
-u update-status	update-status.bash
+M transform markdown link	transform-markdown-link --strip-dev
+t transform markdown to TW link	transform-markdown-to-tiddlywiki-link
+u update-status	~/.config/dwm/update-status.bash
 eof
