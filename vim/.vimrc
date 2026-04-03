@@ -1087,6 +1087,9 @@ let g:jedi#usages_command = "<leader>jn"
 let g:jedi#completions_command = "<C-Space>"
 let g:jedi#rename_command = "<leader>jr"
 
+" vim-go
+let g:go_template_autocreate = 0
+
 nnoremap <Leader>ftl :set ft=log<CR>
 nnoremap <Leader>fti :set ft=ini<CR>
 nnoremap <Leader>fts :set ft=sh<CR>
