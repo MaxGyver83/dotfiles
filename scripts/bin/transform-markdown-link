@@ -5,10 +5,14 @@
 # to
 # [dev/project](url): Description
 #
+# If --strip-dev is given, only the dev name is stripped:
+# [project](url): Description
+#
 # To be executed after copying a GitHub link in Firefox with the
 # "Copy URL to clipboard" extension.
 
 xclip -o -selection clipboard \
     | sed -E 's|^\[([^]:]+)(: [^]]+)(\]\([^)]+\))|\[\1\3\2|' \
+    | { if [ "$1" = '--strip-dev' ]; then sed -E 's|^\[[^]/]+/|\[|'; else cat -; fi; } \
     | xclip -i -selection clipboard
 notify-send "$(xclip -o -selection clipboard)"
