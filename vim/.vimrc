@@ -336,6 +336,7 @@ nnoremap q <Nop>
 
 " delete not into register (use dl for cutting one character into register)
 nnoremap x "_x
+xnoremap x "_x
 
 " delete not into register with <Leader>d
 " conflict with/overwriting mapping in line 270
