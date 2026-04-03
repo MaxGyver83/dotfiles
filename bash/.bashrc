@@ -31,10 +31,16 @@ prepend_to_path() {
 
 remove_from_path_if_symlink /sbin
 remove_from_path_if_symlink /bin
+remove_from_path_if_symlink /usr/sbin
 
-prepend_to_path $HOME/Android/Sdk/tools/
+prepend_to_path $HOME/Android/Sdk/platform-tools # adb
+prepend_to_path $HOME/Android/Sdk/tools/bin
+prepend_to_path $HOME/.local/share/gem/ruby/3.4.0/bin
+prepend_to_path $HOME/.cargo/bin
+prepend_to_path $HOME/go/bin
 prepend_to_path $HOME/.local/bin
 prepend_to_path $HOME/install
+PATH="$PATH:/opt/android-studio/jbr/bin"
 
 exists() {
     command -v "$1" > /dev/null 2>&1 ;
