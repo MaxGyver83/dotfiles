@@ -24,6 +24,8 @@ map <leader>p :action $Paste<CR>
 map <leader>b <Action>(CloseContent)
 map <leader>w <Action>(SaveAll)
 
+nmap <C-t> :action GotoImplementation<CR>
+
 let g:EasyMotion_keys = 'iterancyb.ouglhfzx,pdwmks'
 let g:EasyMotion_smartcase = 1
 nmap s <Plug>(easymotion-s2)
@@ -42,6 +44,7 @@ set scrolloff=2
 
 " edit ideavim config
 nnoremap <leader>vv :e ~/.config/ideavim/ideavimrc<CR>
+" reload ideavim config
 nnoremap <leader>vr :source ~/.config/ideavim/ideavimrc<CR>
 
 " open current file in Neovim
