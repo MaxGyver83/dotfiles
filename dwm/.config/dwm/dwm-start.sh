@@ -1,5 +1,7 @@
 #!/bin/bash
 
+. ~/.profile
+
 # dwm statusbar - show current date and time
 while true; do
     ~/.config/dwm/update-status.bash
@@ -21,12 +23,7 @@ mkdir -p ~/log
 msteams_cookies="$HOME/.config/Microsoft/Microsoft Teams/Cookies"
 [ -f "$msteams_cookies" ] && rm "$msteams_cookies" 2> /dev/null
 
-PATH="$HOME/bin:$HOME/.local/bin:$PATH"
-# Remove /bin and /sbin from PATH (covered by /usr/bin and /usr/sbin).
-# This is necessary to have /usr/local/bin before /usr/bin.
-PATH="${PATH/:\/sbin:/:}"
-PATH="${PATH/:\/bin:/:}"
-echo "PATH=$PATH" > ~/log/dwm-start.log
+printf "PATH=\n$PATH\n" | tr : '\n' > ~/log/dwm-start.log
 
 # start dwm
 while true; do
