@@ -1,5 +1,6 @@
 #!/bin/sh
 menu <<"eof"
+o open document	dmenu-open-document
 1 raspi1	st -e ssh raspi1
 3 raspi3	st -e ssh raspi3
 i ionos server	st -e ssh -t ionos 'tmux a || tmux'
