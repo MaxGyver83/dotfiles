@@ -8,45 +8,6 @@ case $- in
       *) return;;
 esac
 
-remove_from_path() {
-    # remove $1 from middle of $PATH
-    PATH="${PATH//:$1:/:}"
-    # remove $1 from beginning of $PATH
-    PATH="${PATH#$1:}"
-}
-
-remove_from_path_if_symlink() {
-    if [[ -L $1 ]] \
-        && [[ $(realpath $1) == /usr/bin ]] \
-        && [[ $PATH == *:$1:* || $PATH == $1:* ]] \
-        && [[ $PATH == *:/usr/bin:* ]]
-    then
-        remove_from_path $1
-    fi
-}
-
-prepend_to_path() {
-    [ -d "$1" ] && remove_from_path "$1" && PATH="$1:$PATH"
-}
-
-remove_from_path_if_symlink /sbin
-remove_from_path_if_symlink /bin
-remove_from_path_if_symlink /usr/sbin
-
-prepend_to_path $HOME/Android/Sdk/platform-tools # adb
-prepend_to_path $HOME/Android/Sdk/tools/bin
-prepend_to_path $HOME/.local/share/gem/ruby/3.4.0/bin
-prepend_to_path $HOME/.cargo/bin
-prepend_to_path $HOME/go/bin
-prepend_to_path $HOME/.local/bin
-prepend_to_path $HOME/install
-PATH="$PATH:/opt/android-studio/jbr/bin"
-
-exists() {
-    command -v "$1" > /dev/null 2>&1 ;
-}
-exists luarocks && eval $(luarocks path)
-
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
