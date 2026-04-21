@@ -1,0 +1,27 @@
+#!/bin/sh
+
+uri_to_path() {
+    uri=$1
+
+    # strip file://
+    path=${uri#file://}
+
+    # replace % with \x for printf
+    path=$(printf '%s\n' "$path" | sed 's/%/\\x/g')
+
+    # decode percent-encoding
+    path=$(printf '%b' "$path")
+
+    # replace $HOME with ~
+    case $path in
+        "$HOME"/*) path="~${path#$HOME}" ;;
+    esac
+
+    printf '%s\n' "$path"
+}
+
+grep -oP 'href="\K[^"]+' ~/.local/share/recently-used.xbel \
+  | while read -r uri; do uri_to_path "$uri"; done \
+  | dmenu -i -c -l 20 -fn 'monospace:size=16' \
+  | sed "s:^~:$HOME:" \
+  | xargs -d '\n' xdg-open
