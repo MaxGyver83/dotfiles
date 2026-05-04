@@ -65,9 +65,6 @@ echo "$(timestamp) Switching to external screen (if available) done"
 run ~/bin/set-random-wallpaper
 if exists picom ; then
   run picom
-elif exists compton ; then
-  # compton: `--focus...` is needed to not dim the status bar and rofi
-  run compton
 fi
 run nm-applet
 run pasystray
