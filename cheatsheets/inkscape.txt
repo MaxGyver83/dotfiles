@@ -1,0 +1,30 @@
+s  selector tool
+n  node tool
+t  text tool
+r  rectangle tool
+e  ellipse tool
+*  star tool (also triangles)
+
+tab  jump to next widget
+
+ctrl-d  duplicate at same position
+
+ctrl-shift-f  fill and stroke
+ctrl-shift-l  layers
+ctrl-shift-a  align and distribute
+ctrl-shift-e  export
+
+%    toggle snapping
+F12  toggle sidebar
+
+triangle  star with 3 corners
+trapezoid  rectangle, object to path, move two corners
+           (enable "Show transformation handles for selected nodes", hold shift for symmetry)
+
+4  zoom to drawing
+5  zoom to page
+
+DoubleClick  Enter group
+Alt-LeftClick  Select lower object (repeat for lower levels)
+Alt-Mousewheel  Select lower object (with highlighting)
+Ctrl-LeftClick  Select object in a group

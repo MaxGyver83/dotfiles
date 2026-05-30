@@ -1,0 +1,12 @@
+C-p    File picker
+C-S-p  Execute command
+C-,    Settings
+C-A-,  settings.json
+C-k C-s  Keymap editor
+C-S-x  Extensions
+
+
+Vim mode
+--------
+g d  go to definition
+p    paste from system clipboard

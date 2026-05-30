@@ -1,0 +1,8 @@
+Ctrl-Enter          Insert line break
+Alt-Arrow           Change column/row size
+Ctrl-1              Format cell dialog
+Shift-Space         Select row
+Shift-Space Ctrl-+  Insert row above
+'2                  Enter number as text
+Ctrl-;              Insert current date
+Ctrl-.              Insert current date (custom shortcut)
