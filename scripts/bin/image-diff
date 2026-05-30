@@ -1,0 +1,23 @@
+#!/bin/sh
+usage() {
+    echo "Usage: $0 image1 image2"
+    exit
+}
+
+if [ "$#" -ne 2 ]; then
+    usage
+fi
+
+case "$1" in
+-h|--help) usage;;
+esac
+
+if [ -e /tmp/diff.png ]; then
+    rm /tmp/diff.png
+fi
+
+magick compare -compose src "$1" "$2" /tmp/diff.png
+status=$?
+if [ "$status" -le 1 ]; then
+    nsxiv --anti-alias=no --alpha-layer /tmp/diff.png "$1" "$2"
+fi
