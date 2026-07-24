@@ -1,0 +1,19 @@
+#!/bin/sh
+
+# When I press a shortcut that emits "<Esc>:bn<CR>" (in order to navigate to
+# the next buffer in vim) while I'm not in a vim but a bash pane, run this
+# script to select the vim pane (same for bp which symlinks to this script).
+# If there are multiple vim panes, select the last one.
+[ "$TMUX" ] || exit 0
+vim_panes="$(tmux list-panes -F "#{pane_id} #{pane_current_command}" | awk '/vim|nvim/ {print $1}')"
+# p.e. "%4\n%83"
+
+[ -z "$vim_panes" ] && exit 0
+# if there is exactly one pane running vim, select it
+if echo $vim_panes | grep --quiet -E '^%[0-9]+$'; then
+    echo "Selecting tmux pane $vim_panes"
+    tmux select-pane -t $vim_panes
+else
+    echo "There are multiple tmux panes running vim/nvim:" $vim_panes
+    tmux last-pane
+fi
