@@ -1,0 +1,366 @@
+#!/bin/sh
+
+contains_540() {
+    case "$1" in
+    *540*) return 0 ;;
+    *) return 1 ;;
+    esac
+}
+
+ends_in_540() {
+    case "$1" in
+    *" 540") return 0 ;;
+    *) return 1 ;;
+    esac
+}
+
+pull() {
+    if [ "$1" = '-h' ]; then
+        echo "Usage: $0 pull <album>"
+        exit 1
+    fi
+    if [ -z "$1" ]; then
+        selection=$(adb shell 'ls /sdcard/DCIM/Alben' | fzf)
+        if [ -z "$selection" ]; then
+            echo No selection!
+            exit 1
+        fi
+        set -- "$selection"
+    fi
+    if adb shell "test -d '$1'"; then
+        src="$1"
+    elif adb shell "test -d '/sdcard/DCIM/Alben/$1'"; then
+        src="/sdcard/DCIM/Alben/$1"
+    else
+        match_count=$(adb shell find /sdcard/DCIM/Alben -type d -iname "*$1*" | wc -l)
+        if [ "$match_count" = 1 ]; then
+            src="$(adb shell find /sdcard/DCIM/Alben -type d -iname "*$1*" | head -n 1)"
+        else
+            echo "Multiple matches for '$1':"
+            adb shell find /sdcard/DCIM/Alben -type d -iname "*$1*"
+            exit 1
+        fi
+    fi
+    folder="$(basename "$src")"
+    if contains_540 "$src"; then
+        src="$src 540"
+        dst="Fotos 540/$folder"
+    else
+        dst="Fotos/$folder"
+    fi
+    if test -d "$dst"; then
+        echo "'$dst' already exists"
+        exit 1
+    fi
+    adb pull "$src" "$dst"
+}
+
+push() {
+    if [ -z "$1" ]; then
+        selection=$(fd -td '.*' Fotos Fotos\ 540 | fzf)
+        if [ -z "$selection" ]; then
+            echo No selection!
+            exit 1
+        fi
+        set -- "$selection"
+    fi
+    folder="$(basename "$1")"
+    if [ -z "$folder" ]; then
+        echo "Usage: $0 push <album>"
+        exit 1
+    fi
+    if contains_540 "$1"; then
+        adb push "Fotos 540/$folder" "/sdcard/DCIM/Alben/$folder 540"
+    else
+        adb push "Fotos/$folder" "/sdcard/DCIM/Alben/$folder"
+    fi
+}
+
+get_months_pattern() {
+    case "$1" in
+    Q1) echo '0[123]' ;;
+    Q2) echo '0[456]' ;;
+    Q3) echo '0[789]' ;;
+    Q4) echo '1[012]' ;;
+    *) echo;
+    esac
+}
+
+get_first_month_of_quarter() {
+    case "$1" in
+    Q1) echo '01' ;;
+    Q2) echo '04' ;;
+    Q3) echo '07' ;;
+    Q4) echo '10' ;;
+    *) echo;
+    esac
+}
+
+status() {
+    folders=$(adb shell 'ls -d -- /sdcard/DCIM/Alben/* | grep -v " 540\$"')
+    if [ -z "$folders" ]; then
+        echo "No albums found"
+        exit 1
+    fi
+    echo "Path on Android: /sdcard/DCIM/Alben/"
+    echo "B=backup, R=renamed, M=minimized, A=minimized version on Android"
+    echo "B R M A  Album name"
+    IFS=$'\n'
+    for folder in $folders; do
+        b=$(basename "$folder")
+        backup=$(test -d "Fotos/$b")
+        test -d "Fotos/$b" && printf "✔ " || printf "✘ "
+        ls "Fotos/$b" | head -n 1 | grep -q '^20..-[01][0-9]-[0-3][0-9] ' && printf "✔ " || printf "✘ "
+        test -d "Fotos 540/$b" && printf "✔ " || printf "✘ "
+        adb shell 'test -d "/sdcard/DCIM/Alben/$b 540"' && printf "✔ " || printf "✘ "
+        echo " $b"
+    done
+}
+
+list() {
+    if [ "$1" = '-s' ]; then
+        # adb shell 'cd /sdcard/DCIM/Alben; du -s -- *  | sort -n'
+        adb shell 'du -s -- /sdcard/DCIM/Alben/* | sort -n'
+    else
+        # adb shell 'cd /sdcard/DCIM/Alben; du -s -- *'
+        adb shell 'du -s -- /sdcard/DCIM/Alben/*'
+    fi
+}
+
+check() {
+    if [ "$1" = '-s' ]; then
+        output=$(adb shell 'du -s -- /sdcard/DCIM/Alben/* | sort -n')
+    else
+        output=$(adb shell 'du -s -- /sdcard/DCIM/Alben/*')
+    fi
+    IFS=$'\n'
+    for line in $output; do
+        album=${line##*/}
+        if ends_in_540 "$album"; then
+            folder="Fotos 540"
+            dir="$folder/${album% 540}/"
+        else
+            folder="Fotos"
+            dir="$folder/$album/"
+        fi
+        GREEN='\033[0;32m'
+        RED='\033[0;31m'
+        RESET='\033[0m'
+        if [ -d "$dir" ]; then
+            printf "$line ${GREEN}✔$RESET\n"
+        else
+            printf "$line → ${RED}Please backup!$RESET\n"
+        fi
+    done
+}
+
+list_camera() {
+    if [ "$1" = '--delete' ]; then
+        shift
+        subcmd='delete-files'
+        delete_arg='-delete'
+    else
+        subcmd='list-files'
+        delete_arg=
+    fi
+    src='/sdcard/DCIM/Camera'
+    case "$1" in
+    20[0-9][0-9])
+        year="$1"
+        months=$(get_months_pattern "$2")
+        if [ -z "$months" ]; then
+            echo "Usage: $0 $subcmd camera YYYY Q1|Q2|Q3|Q4"
+            exit 1
+        fi ;;
+    *)
+        echo "Usage: $0 $subcmd camera YYYY Q1|Q2|Q3|Q4"
+        exit 1 ;;
+    esac
+    if [ -n "$delete_arg" ]; then
+        echo "TODO: Ask for confirmation before deleting"
+        exit 1
+    fi
+    adb shell "find $src -name '[IV][MI][GD]$year$months*' -o -name 'PANO$year$months*' -o -name 'IMG_$year$months*' $delete_arg"
+}
+
+pull_camera() {
+    src='/sdcard/DCIM/Camera'
+    case "$1" in
+    20[0-9][0-9])
+        year="$1"
+        months=$(get_months_pattern "$2")
+        if [ -z "$months" ]; then
+            echo "Usage: $0 pull camera YYYY Q1|Q2|Q3|Q4"
+            exit 1
+        fi
+        m=$(get_first_month_of_quarter "$2")
+        dst="Fotos/$year-$m-01 $year $2/"
+        ;;
+    *)
+        echo "Usage: $0 pull camera YYYY Q1|Q2|Q3|Q4"
+        exit 1 ;;
+    esac
+    if test -d "$dst"; then
+        echo "'$dst' already exists"
+        exit 1
+    fi
+    mkdir -p "$dst"
+    adb shell "find $src -name '[IV][MI][GD]$year$months*' -o -name 'PANO$year$months*' -o -name 'IMG_$year$months*'" \
+        | xargs -I{} -n 1 adb pull -a "{}" "$dst"
+}
+
+rename() {
+    case "$1" in
+    Fotos/*) folder="$1" ;;
+    *) folder="Fotos/$1" ;;
+    esac
+    if [ ! -d "$folder" ]; then
+        echo "'$folder' does not exist"
+        exit 1
+    fi
+    ls -d "$folder" | xargs -I{} renameAllMediaFilesInFolder.sh {}
+}
+
+minimize() {
+    case "$1" in
+    Fotos/*) folder="$1" ;;
+    *) folder="Fotos/$1" ;;
+    esac
+    if [ ! -d "$folder" ]; then
+        echo "'$folder' does not exist"
+        exit 1
+    fi
+    ls -d "$folder" | xargs -I{} copyMediaTo540Folder.sh -b Fotos {}
+    # TODO: Minimize or warn about subfolders (currently skipped)
+}
+
+check_minimized() {
+    case "$1" in
+    Fotos/*) folder="$1" ;;
+    *) folder="Fotos/$1" ;;
+    esac
+    if [ ! -d "$folder" ]; then
+        echo "'$folder' does not exist"
+        exit 1
+    fi
+    minimized="Fotos 540/${folder#Fotos/}"
+    du -s -- "$minimized"
+}
+
+delete_on_device() {
+    pattern=$*
+
+    # matches=$(adb shell "
+    # 	find /sdcard/DCIM/Alben -maxdepth 1 -type d \
+    # 		| grep -F '$pattern'
+    # ")
+    matches=$(adb shell "
+    find /sdcard/DCIM/Alben -maxdepth 1 -type d \
+        -name '*$pattern*'
+    ")
+
+    if [ -z "$matches" ]; then
+        echo "No matching folders found."
+        return 1
+    fi
+
+    echo "Matching folders:"
+    echo "$matches"
+    echo
+
+    printf 'Delete these folders? [y/N] '
+    read answer
+    case $answer in
+    y|Y|yes|YES)
+        echo "$matches" |
+            while IFS= read -r dir; do
+                [ -n "$dir" ] || continue
+                echo "Deleting: $dir"
+                adb shell rm -rf "\"$dir\""
+            done
+            ;;
+    *) echo "Aborted." ;;
+    esac
+}
+
+HDD='/run/media/max/WD ext4'
+if [ "$PWD" != "$HDD" ]; then
+    echo "Must be run in '$HDD'"
+    exit 1
+fi
+
+if [ -z "$1" ] || [ "$1" = '-h' ]; then
+    echo "Usage:
+List albums on Android device (in /sdcard/DCIM/Alben/):
+  album list [-s]
+List albums on Android device and check if they exist locally (in 'Fotos/' or 'Fotos 540/'):
+  album check [-s]
+List pictures/videos on Android camera (in /sdcard/DCIM/Camera/) by year and quarter:
+  album list-files camera YYYY Q1|Q2|Q3|Q4
+Delete pictures/videos on Android camera (in /sdcard/DCIM/Camera/) by year and quarter:
+  album delete-files camera YYYY Q1|Q2|Q3|Q4
+Copy pictures/videos from Android camera to local 'Fotos/' by year and quarter:
+  album pull camera YYYY Q1|Q2|Q3|Q4
+Copy albums from Android device to local 'Fotos/' or 'Fotos 540/':
+  album pull <folder name/pattern/path>
+Copy albums from local 'Fotos/' or 'Fotos 540/' to Android device:
+  album push <path>
+Rename files in album in local 'Fotos/':
+  album rename <album name>
+Minimize files in album in local 'Fotos/' and store in 'Fotos 540/':
+  album minimize <album name>
+Check if album in local 'Fotos/' exists in 'Fotos 540/':
+  album check-minimized <album name>
+Delete albums on Android device (in /sdcard/DCIM/Alben/):
+  album delete <folder name/pattern/path>
+Show free space on device
+  album free"
+    exit 0
+fi
+
+command="$1"
+shift
+
+case "$command" in
+status)
+    status "$@" ;;
+list)
+    list "$@" ;;
+check)
+    check "$@" ;;
+list-files)
+    if [ "$1" = camera ]; then
+        shift
+        list_camera "$@"
+    else
+        echo "Usage: $0 list-files camera YYYY Q1|Q2|Q3|Q4"
+        exit 1
+    fi ;;
+delete-files)
+    if [ "$1" = camera ]; then
+        shift
+        list_camera --delete "$@"
+    else
+        echo "Usage: $0 delete-files camera YYYY Q1|Q2|Q3|Q4"
+        exit 1
+    fi ;;
+pull)
+    if [ "$1" = camera ]; then
+        shift
+        pull_camera "$@"
+    else
+        pull "$@"
+    fi ;;
+push)
+    push "$@" ;;
+rename)
+    rename "$*" ;;
+minimize)
+    minimize "$*" ;;
+check-minimized)
+    check_minimized "$*" ;;
+delete-on-device)
+    delete_on_device "$*" ;;
+free)
+    adb shell df -h /sdcard/ ;;
+esac
