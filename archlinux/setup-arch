@@ -1,0 +1,53 @@
+#!/bin/sh
+loadkeys de-latin1
+
+iwctl device list
+iwctl station DEVICE scan
+iwctl station DEVICE get-networks
+iwctl station DEVICE connect SSID
+ping archlinux.org
+
+timedatectl
+
+# wget https://github.com/MaxGyver83/dotfiles/archlinux/setup-arch
+wget https://raw.githubusercontent.com/MaxGyver83/dotfiles/refs/heads/master/archlinux/setup-arch
+cat setup-arch
+
+# partition the disk and format partitions
+fdisk -l
+# ...
+
+# mount partitions
+# mount /dev/root_partition /mnt
+# mount --mkdir /dev/efi_system_partition /mnt/boot
+# mount --mkdir /dev/home_partition /mnt/home
+
+pacstrap -K /mnt base linux linux-firmware intel-ucode iwd networkmanager man-db man-pages vim bash-completion
+
+arch-chroot /mnt
+
+# basics
+pacman -S grub efibootmgr dhcpcd sudo wget git
+
+# convenience
+pacman -S nvim pynvim ctags stow rsync cronie bat tmux fzf fd ripgrep duf sd inetutils pass direnv ranger lf superfile broot ncdu bc xdg-user-dirs usbutils ntfs-3g htop github-cli glow hexyl tcc imagemagick moreutils nmap ntp
+# moreutils for vidir, chronic, sponge
+
+# X11 + dwm
+pacman -S base-devel xorg ly xsel xclip xterm sxhkd dunst dmenu rofi libspng libx11 libxft libxinerama pasystray picom xdotool wmctrl network-manager-applet blueman xdg-utils dante noto-fonts noto-fonts-emoji ttf-dejavu udiskie rofimoji upower gnome-keyring
+# libreoffice-fresh libreoffice-fresh-de
+
+# GUI applications
+pacman -S firefox aerc mupdf gimp mpv
+
+# netpbm
+
+# install yay
+git clone https://aur.archlinux.org/yay-bin.git
+cd yay-bin
+makepkg -si
+cd ..
+
+# bsdmainutils contains ncal
+# backlight_control: Use my fork instead: https://github.com/MaxGyver83/backlight_control/tree/print_brightness
+yay -S unipicker nodejs-tiddlywiki backlight_control bsdmainutils nomacs
