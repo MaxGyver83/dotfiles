@@ -24,7 +24,4 @@ else
   cmd="cd \"\$(dirname $document)\" && nvim -c '$vim_settings' $document"
 fi
 
-WINIT_X11_SCALE_FACTOR=1.0 alacritty -t Cheatsheet \
-  -o "window.dimensions.columns=$cols" -o "window.dimensions.lines=$rows" \
-  -o "font.size=14.0" $YELLOW -e bash -c "$cmd"
-#  -o "window.padding.x=10" -o "window.padding.y=10" -o "colors.primary.background='#000000'" \
+st -t Cheatsheet -g "${cols}x${rows}" -b 7 -e bash -c "$cmd"
