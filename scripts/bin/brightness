@@ -1,6 +1,21 @@
 #!/bin/sh
 
-timestamp() { date "+%Y-%m-%d %H:%M:%S.%3N"; }
+usage() {
+    echo "Usage:
+brightness [-h|--help] [-s|--software] [<percent>|+[<percent>]|-[<percent>]]
+
+This script uses backlight_control for the internal display and xrandr for
+external displays.
+
+Examples:
+brightness              Show current brightness.
+brightness <percent>    Set brightness to <percent>%.
+brightness +<percent>   Increase brightness by <percent>%.
+brightness +            Increase brightness by 10%.
+brightness -<percent>   Decrease brightness by <percent>%.
+brightness -            Decrease brightness by 10%.
+"
+}
 
 exists() { command -v "$1" > /dev/null 2>&1 ; }
 
@@ -15,7 +30,7 @@ get_active_monitor() {
         return
     fi
 
-    monitor_xpos=$(xdotool getactivewindow getwindowgeometry | grep Position | grep -o '[0-9]*,' | sed 's/,//')
+    monitor_xpos=$(xdotool getactivewindow getwindowgeometry | grep Position | grep -o '[0-9]*,' | tr -d ,)
     active_mon=$(xrandr | grep -w connected | grep "+$monitor_xpos+" | head -n 1 | cut -d " " -f1)
     if [ $active_mon ]; then
         echo "$active_mon"
@@ -26,44 +41,46 @@ get_active_monitor() {
 }
 
 print_hardware_brightness() {
-    backlight_dir='/sys/class/backlight'
-    vendor_backlight_dir=$backlight_dir/$(ls $backlight_dir | head -n1)
-    max_brightness=$(cat $vendor_backlight_dir/max_brightness)
-    cur_brightness=$(cat $vendor_backlight_dir/brightness)
-    echo "scale=2; $cur_brightness/$max_brightness*100" | bc
+    # https://github.com/MaxGyver83/backlight_control/tree/print_brightness
+    backlight_control
+}
+
+get_software_brightness() {
+    cached_brightness="/tmp/brightness-$active_monitor"
+    if [ -e "$cached_brightness" ]; then
+        cat "$cached_brightness"
+    else
+        stdbuf -o0 xrandr --verbose | grep "^$active_monitor" -A 5 | awk '/Brightness/ { print $2; exit }'
+    fi
 }
 
 set_hardware_brightness() {
     case "$1" in
-    +)            backlight_control +10 ;;
-    -)            backlight_control -10 ;;
-    max|full|100) backlight_control 100 ;;
-    [1-9][0-9])   backlight_control "$1" ;;
-    [1-9])        backlight_control "$1" ;;
-    *)            print_hardware_brightness; exit 0 ;;
+    "")   print_hardware_brightness; exit 0 ;;
+    *)    backlight_control "$1" ;;
     esac
 
     notify-send -t 500 $(print_hardware_brightness | sed -E 's/\.0+$//')"% (hardware)"
 }
 
 set_xrandr_brightness() {
-    BRIGHT=$(stdbuf -o0 xrandr --verbose | grep "^$active_monitor" -A 5 | awk '/Brightness/ { print $2; exit }')
+    BRIGHT=$(get_software_brightness)
     STEP=0.1
 
     case "$1" in
-    +)
-        NEWBRIGHT=$(echo "$BRIGHT + $STEP" | bc)
+    +[1-9]|+[1-9][0-9])
+        NEWBRIGHT=$(echo "scale=2; $BRIGHT $1/100" | bc)
         if [ "$(echo "$NEWBRIGHT > 1.0" | bc)" -eq 1 ]; then
             NEWBRIGHT='1.0'
         fi
         ;;
-    -)
-        NEWBRIGHT=$(echo "$BRIGHT - $STEP" | bc)
+    -[1-9]|-[1-9][0-9])
+        NEWBRIGHT=$(echo "scale=2; $BRIGHT $1/100" | bc)
         if [ "$(echo "$NEWBRIGHT < 0.1" | bc)" -eq 1 ]; then
             NEWBRIGHT='0.1'
         fi
         ;;
-    max|full|100)
+    100)
         NEWBRIGHT='1.0'
         ;;
     [1-9][0-9])
@@ -82,13 +99,25 @@ set_xrandr_brightness() {
     # xrandr --output "$first_monitor" --brightness "$NEWBRIGHT"
 
     xrandr --output "$active_monitor" --brightness "$NEWBRIGHT"
+    echo "$NEWBRIGHT" > /tmp/brightness-"$active_monitor"
     notify-send -t 500 $(echo "$NEWBRIGHT * 100" | bc | sed -E 's/\.0+$//')"% (xrandr)"
 }
 
 case "$1" in
--s|--software)
-    SOFTWARE=1; shift
-    ;;
+-h|--help) usage; exit ;;
+-s|--software) SOFTWARE=1; shift ;;
+esac
+
+case "$1" in
++)            PARAM=+10 ;;
+-)            PARAM=-10 ;;
+[+-][1-9]|[+-][1-9][0-9])
+              PARAM="$1" ;;
+max|full|100) PARAM=100 ;;
+[1-9][0-9])   PARAM="$1" ;;
+[1-9])        PARAM="$1" ;;
+'')           ;; #print_hardware_brightness; exit 0 ;;
+*)            printf "Unknown argument: $1\n\n"; usage; exit 1 ;;
 esac
 
 active_monitor=$(get_active_monitor)
@@ -96,11 +125,11 @@ active_monitor=$(get_active_monitor)
 if [ "$(hostname)" = 'max-laptop' ] && [ "$active_monitor" = 'eDP-1' ] && exists backlight_control && ! [ $SOFTWARE ]; then
     [ "$1" ] && printf "Set " || printf "Current "
     echo "hardware brightness"
-    set_hardware_brightness "$1"
+    set_hardware_brightness "$PARAM"
 else
     [ "$1" ] && printf "Set " || printf "Current "
     echo "xrandr brightness"
-    set_xrandr_brightness "$1"
+    set_xrandr_brightness "$PARAM"
 fi
 
 exec ~/.config/dwm/update-status.bash
