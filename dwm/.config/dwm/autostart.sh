@@ -100,7 +100,8 @@ if ! pgrep -a '^st$' ; then
   grep -q 'dpi: 150' ~/.Xresources && fontarg='-z 28'
   tmux has-session -t 0 && run "st $fontarg -e tmux a -t 0" || st $fontarg -e tmux &
 fi
-restart firefox
+# restart firefox
+restart limitcpu -l 300 -- firefox
 echo "$(timestamp) Sleep for 1 second"
 sleep 1
 echo "$(timestamp) Focus tmux:"
