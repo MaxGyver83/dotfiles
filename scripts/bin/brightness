@@ -24,7 +24,7 @@ is_single_line() {
 }
 
 get_active_monitor() {
-    enabled_devices=$(rg -l ^enabled /sys/class/drm/*/enabled | awk -F/ '{print $5}' | cut -d- -f2-)
+    enabled_devices=$(rg -l ^enabled /sys/class/drm/*/enabled | sed -E 's#.*/card[0-9]+-##; s/-A-/-/; s#/enabled##')
     if is_single_line "$enabled_devices"; then
         echo "$enabled_devices"
         return
