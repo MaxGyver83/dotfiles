@@ -23,7 +23,11 @@ activate_one() {
 }
 
 activate_both() {
-    echo "Activate $*:"
+    echo "Activate \"$1\" and \"$2\":"
+    if [ -z "$1" ] || [ -z "$2" ]; then
+        echo "Both devices must be set!"
+        exit 1
+    fi
     command="xrandr --output $1 --primary --pos 0x0 --rotate normal --auto"
     if [ "$2" ]; then
         command="$command --output $2 --left-of $1 --primary --auto"
@@ -50,10 +54,11 @@ activate_other() {
 
 guess_layout() {
     connected_count=$(echo "$connected_devices" | wc -l)
-    case "$connected_count" in
-    1) activate_one "$laptop" ;;
-    *) activate_one "$first_external_device" ;;
-    esac
+    if [ -n "$laptop" ] && [ "$connected_count" = 1 ]; then
+        activate_one "$laptop"
+    else
+        activate_one "$first_external_device"
+    fi
 }
 
 output="$(xrandr)"
@@ -68,7 +73,7 @@ case "$connected_devices" in
 esac
 
 external_devices="$(echo "$connected_devices
-$disconnected_devices" | grep -v -w $laptop)"
+$disconnected_devices" | grep -v -w "$laptop")"
 
 first_external_device="$(echo "$external_devices" | head -n 1)"
 
@@ -82,7 +87,8 @@ auto) guess_layout ;;
 other) activate_other ;;
 laptop) [ $laptop ] && activate_one "$laptop" ;;
 external) activate_one "$first_external_device" "$2" ;;
-all|both|*) activate_both "$laptop" "$first_external_device" ;;
+all|both) activate_both "$laptop" "$first_external_device" ;;
+*) echo "Unexpected argument: $1"; exit 1 ;;
 esac
 
 # reload current wallpaper (with updated size/position)
