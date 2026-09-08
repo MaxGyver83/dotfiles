@@ -50,6 +50,8 @@ restart dunst
 echo "$(timestamp) Switch to external screen (if available)"
 if [ "$(hostname)" = 'max-laptop' ]; then
   [ "$(head -1 /sys/class/drm/card0-DP-1/modes)" = '2560x1440' ] || [ "$(head -1 /sys/class/drm/card1-DP-1/modes)" = '2560x1440' ] && ~/.screenlayout/layout.sh external
+elif [ "$(hostname)" = 'max-kron' ]; then
+  echo "max-kron: Don't call layout.sh"
 elif xrandr | grep -q 3840x2160 ; then
   ~/.screenlayout/layout.sh external 4K
 elif xrandr | grep -q 2560x1440 ; then
