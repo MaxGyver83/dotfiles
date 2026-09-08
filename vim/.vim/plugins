@@ -82,6 +82,7 @@ bakpakin/janet.vim
 baskerville/vim-sxhkdrc
 vim-scripts/icalendar.vim
 freitass/todo.txt-vim
+hjson/vim-hjson
 
 # language server
 # prabirshrestha/vim-lsp
@@ -96,6 +97,7 @@ tpope/vim-dispatch
 dhruvasagar/vim-markify
 morhetz/gruvbox
 junegunn/rainbow_parentheses.vim
+romainl/vim-redir
 
 [vim-only]
 machakann/vim-highlightedyank
