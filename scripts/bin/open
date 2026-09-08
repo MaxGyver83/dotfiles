@@ -4,5 +4,6 @@ case "$1" in
 -h|--help|"")
     echo "Usage: open FILE..."; exit;;
 *.fodt) libreoffice "$@";;
+*.docx) libreoffice "$@";;
 *)      xdg-open "$@";;
 esac
