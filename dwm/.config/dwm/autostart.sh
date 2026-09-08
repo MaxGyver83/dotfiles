@@ -75,6 +75,7 @@ run blueman-applet
 run greenclip daemon
 run sxhkd
 run udiskie -s
+run megasync
 # internxt="$(\ls ~/install/Internxt-Drive-* | head -n 1)"
 # [ "$internxt" ] && run "$internxt"
 # run xbanish -i shift -i control -i mod1 -i mod4
