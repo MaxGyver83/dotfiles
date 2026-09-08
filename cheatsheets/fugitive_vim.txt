@@ -22,7 +22,7 @@ cc   create commit
 ca   amend last commit and edit message
 ce   amend last commit (keep message)
 :Git push  push changes
-P    (cursor in Unpushed section) push commit
+P    (cursor in Unpushed section) push commit → use gpP
 ri   rebase interactive
 rr   rebase --continue
 ra   rebase --abort

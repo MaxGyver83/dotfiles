@@ -4,6 +4,7 @@ t  text tool
 r  rectangle tool
 e  ellipse tool
 *  star tool (also triangles)
+d  dropper tool (pipette)
 
 tab  jump to next widget
 
