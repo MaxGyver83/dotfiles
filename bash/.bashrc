@@ -189,7 +189,7 @@ locatehi() {
 }
 
 # mkdir and cd into it
-mkcd() { mkdir -p -- "$1" && cd -P -- "$1" ; }
+mkcd() { mkdir -p -- "$1" && cd -- "$1" ; }
 
 # copy ~/.vimrc to /tmp/.vimrc of host before ssh into it
 vssh() {
