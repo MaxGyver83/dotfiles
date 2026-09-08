@@ -16,5 +16,13 @@
 	untracked = red bold
 [init]
 	defaultBranch = main
+[credential "https://github.com"]
+	helper = !gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = !gh auth git-credential
 [delta]
 	syntax-scheme = zenburn
+[push]
+	default = current
+[github]
+	user = MaxGyver83
