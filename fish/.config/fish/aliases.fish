@@ -91,7 +91,7 @@ abbr nf "$VIM (tmux-select-filename.sh)"
 alias vr='~/bin/vimrg.fish'
 # start vim and open vim-fugitive's git status
 # (and close the empty buffer and jump to the first unstaged file)
-alias vg=$VIM' +G +"silent %bd|e#" +"norm gU"'
+alias vg='command vim +G +"silent %bd|e#" +"norm gU"'
 abbr ro "$VIM -M"
 
 alias helix='COLORTERM=truecolor command helix'
@@ -104,7 +104,7 @@ abbr a 'aerc'
 # no decorations, no pager
 alias batp='bat -pp'
 # bat with pager
-alias batl='bat --pager="less"'
+alias batl='bat --pager=less'
 # bat with pager, scroll to end
 alias bate='bat --pager="less +G"'
 # bat with pager, header, line numbers
@@ -174,6 +174,7 @@ abbr gfu 'git ls-files --others --exclude-standard'
 abbr gfc 'git diff --name-only --diff-filter=U'
 # git log
 abbr gl 'git log'
+abbr grv 'git remote -v'
 
 set hash_date_reldate '%C(Yellow)%h   %C(reset)%ai %<(14)(%C(Green)%cr%C(reset))%x09 %C(reset)'
 set author '%C(Cyan)%an: %C(reset)'
@@ -202,7 +203,7 @@ abbr cpbr 'git rev-parse --abbrev-ref HEAD | tr -d \n | xclip -sel clip'
 # abbr cpbr 'git branch --show-current | tr -d \n | xclip -sel clip'
 
 function clone
-     command clone $argv && cd (basename "$argv" .git)
+    command clone $argv && cd (basename "$argv" .git)
 end
 
 abbr dps 'docker ps --format="table {{.ID}}\t{{.Image}}\t{{.Status}}\t{{.Names}}"'
@@ -221,6 +222,6 @@ abbr en 'LANG=en_US.UTF-8'
 
 # source work related / private stuff (not part of the dotfiles repo)
 if [ -f $HOME/.config/fish/local.fish ]
-  source $HOME/.config/fish/local.fish
+    source $HOME/.config/fish/local.fish
 end
 
