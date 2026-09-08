@@ -90,14 +90,28 @@ alias l='ls -CF'
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
-if [ -f ~/.bash_aliases ]; then
+if [ -f ~/.aliases ]; then
+    # echo 'Loading ~/.aliases'
+    VIM='nvim'
+    hash_date_reldate='%C(Yellow)%h   %C(reset)%ai %<(14)(%C(Green)%cr%C(reset))%x09 %C(reset)'
+    author='%C(Cyan)%an: %C(reset)'
+    message_refs='%s %C(Red)%d%C(reset)'
+    format_short="${hash_date_reldate}${message_refs}"
+    format_names="${hash_date_reldate}${author}${message_refs}"
+    clone() {
+        command clone "$@" && {
+            [ -n "$2" ] && cd "$2" || cd "$(basename "$1" .git)"
+        }
+    }
+    while read -r line; do
+        [ -z "$line" ] && continue
+        alias "$line"
+    done < <(sed -E "s/^#.*//; s/='([^']+)'\$/=\1/; s/=\"([^\"]+)\"\$/=\1/" ~/.aliases | grep .)
+elif [ -f ~/.bash_aliases ]; then
+    # echo 'Loading ~/.bash_aliases'
     . ~/.bash_aliases
 elif [ -f ~/.dotfiles/bash/.bash_aliases ]; then
+    # echo 'Loading ~/.dotfiles/bash/.bash_aliases'
     . ~/.dotfiles/bash/.bash_aliases
 fi
 

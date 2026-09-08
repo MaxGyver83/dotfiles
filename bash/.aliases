@@ -1,0 +1,185 @@
+# exists() {
+#   command -v "$1" > /dev/null 2>&1 ;
+# }
+..='cd ..'
+...='cd ../..'
+....='cd ../../..'
+.....='cd ../../../..'
+
+la='ls -A'
+ll='ls -alF'
+# if exists exa; then
+l='exa -alF --color-scale all --color-scale-mode fixed'
+# else
+#   alias l='ls -CF'
+# fi
+lg='exa -alF --color-scale all --color-scale-mode fixed --git'
+
+f='find . -iname'
+fif='find . -type f -iname'
+fid='find . -type d -iname'
+# exists fd || { exists fdfind && alias fd='fdfind'; }
+fda='fd -HI'
+
+du1='du -h -d1'
+du0='du -h -d0'
+grn='grep -rn'
+grni='grep -rni'
+wlan='nmcli d wifi'
+ncdu='ncdu --color=dark'
+rgf='rg --fixed-strings'
+
+path='echo $PATH | tr : "\n"'
+pypath='echo $PYTHONPATH | tr : "\n"'
+
+xo='xdg-open'
+
+# exists ncal && alias cal='ncal -bwM3' || alias cal='cal -3'
+
+rsyncp='rsync --info=progress2 -ah'
+
+# exists most && alias manc='PAGER=most man'
+y='yank'
+clipboard='xclip -sel clip'
+vou='setxkbmap de koy && xkbcomp ~/bin/vou.xkb $DISPLAY'
+
+acs='apt-cache search'
+sai='sudo apt install'
+sau='sudo apt update'
+saU='sudo apt upgrade'
+alu='apt list --upgradable'
+ali='apt list --installed'
+ap='apt policy'
+
+pss='pacman -Ss'
+sps='sudo pacman -S'
+# syu='sudo pacman -Syu'
+syu='yay -Pw && sudo pacman -Syu'
+
+nh='sudo nethogs wlp2s0 -v 3'
+hg='history | grep'
+# the next one does not work for rc
+# titlecase='perl-rename "s/(\S+)/\u\L\$1/g"'
+
+pl='patool list'
+pe='patool extract'
+px='patool extract'
+pc='patool create'
+pd='patool diff'
+
+# exists nvim && VIM='nvim' || VIM='vim'
+# alias v=$VIM
+# alias vim=$VIM
+# alias vv="$VIM -c \"normal '0\""
+n='nvim'
+# start vim and open vim-fugitive's git status
+# (and close the empty buffer and jump to the first unstaged file)
+# alias vg="$VIM +G +'silent %bd|e#' +'norm gU'"
+vg="command vim +G '+silent %bd|e#' '+norm gU'"
+
+rr='ranger'
+# "simple": no header, no line numbers, no pager
+bats='bat -pp'
+# plain: no header, no line numbers, but with pager
+batp='bat -p'
+# bat with pager (same as bat?)
+batl='bat --pager=less'
+# bat with pager, scroll to end
+bate='bat --pager=less\ +G'
+# bat with pager, header, line numbers
+# alias batc='bat --paging=always --pager="less -R"'
+iv='nsxiv --anti-alias --alpha-layer'
+rich='python -m rich.markdown -c'
+ren='vidir --verbose'
+
+te='tere -N --autocd-timeout=off'
+
+cv="$VIM $HOME/.vimrc"
+cn="$VIM $HOME/.config/nvim/init.lua"
+cf="$VIM $HOME/.config/fish/config.fish"
+cs="$VIM $HOME/.config/sxhkd/sxhkdrc"
+ct="$VIM $HOME/.tmux.conf"
+ca="$VIM $HOME/.aliases"
+cb="$VIM $HOME/.bashrc"
+cz="$VIM $HOME/.zshrc"
+ck="$VIM $HOME/.config/kmonad/vou-linux-de-rctrl.kbd"
+pj="$VIM $HOME/repos/goodlife/tiddlers/projekte.md"
+td="$VIM $HOME/MEGA/markor/todo.txt"
+jour="$VIM + $HOME/MEGA/markor/journal.txt"
+
+psk='pgrep -fa "kmonad|/keyboard-layouts"'
+
+akku='upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep -E "power|updated|state|energy|time to|perc|capa" | grep -v design'
+
+# git
+g='git status --short'
+G='git status'
+gc='git clone'
+gcb='git checkout -'
+gd='git diff'
+gdd='git -c "core.pager=delta" -c "delta.syntax-scheme=zenburn" diff'
+gds='git -c "core.pager=delta" -c "delta.features=side-by-side" -c "delta.syntax-scheme=zenburn" diff'
+gdt='git difftool'
+gf='git fetch'
+gp='git pull'
+gps='git push'
+# git push upstream
+gpsu='git push --set-upstream origin "$(git rev-parse --abbrev-ref HEAD)"'
+# git reset hard to origin
+grho='git reset --hard "origin/$(git rev-parse --abbrev-ref HEAD)"'
+gcm='git co $(basename $(git rev-parse --abbrev-ref origin/HEAD || echo main)) || git co master'
+gch='git co HEAD --'
+# gr = "git root" (go to the toplevel of the current repo)
+gr='cd $(git rev-parse --show-toplevel)'
+# unstaged files
+gfm='git ls-files --modified --deduplicate'
+# untracked files
+gfu='git ls-files --others --exclude-standard'
+gfc='git diff --name-only --diff-filter=U'
+gsp='git stash push'
+gsa='git stash apply'
+grv='git remote -v'
+
+# git log
+gl='git log'
+
+# clone() { command clone "$@" && cd "$(basename "$1" .git)"; }
+
+# hash_date_reldate='%C(Yellow)%h   %C(reset)%ai %<(14)(%C(Green)%cr%C(reset))%x09 %C(reset)'
+# author='%C(Cyan)%an: %C(reset)'
+# message_refs='%s %C(Red)%d%C(reset)'
+# format_short="${hash_date_reldate}${message_refs}"
+# format_names="${hash_date_reldate}${author}${message_refs}"
+# git log compact
+glc='git log --pretty="${format_short}" --decorate'
+glch='git --no-pager log --pretty="${format_short}" --decorate -n 10'
+# git log compact [with] names
+glcn='git log --pretty="${format_names}" --decorate'
+glcnh='git --no-pager log --pretty="${format_names}" --decorate -n 10'
+
+gitlog='git log --oneline --graph --decorate'
+gitlogs='git log --oneline --graph --decorate --stat'
+gitloga='git log --oneline --graph --decorate --all'
+gitunpushed='git log ..@{u}'
+gitunmerged='git branch --no-merged master'
+
+# copy (yank) current branch name into clipboard
+yb='git rev-parse --abbrev-ref HEAD | tr -d \n | xclip -sel clip'
+
+crl='crontab -l | grep --color=never "^[^#]"'
+
+red='redshift -P -O 3500 -b 1'
+notred='redshift -P -O 6500 || redshift -O 6500'
+
+disp='. ~/bin/update-DISPLAY.sh'
+
+flip='magick mogrify -flip'
+
+caei='xhost > /dev/null 2>&1 && setxkbmap de -option || sudo loadkeys de'
+asdf='xhost > /dev/null 2>&1 && setxkbmap de koy && xkbcomp -w 0 ~/bin/vou-tabwin.xkb $DISPLAY || sudo loadkeys ~/bin/vou.map'
+
+# if [ "$TERM" = cygwin ]; then
+#   alias nvim='~/Downloads/Neovim/bin/nvim-qt.exe'
+#   alias nvimdiff='~/Downloads/Neovim/bin/nvim-qt.exe -- -d'
+# fi
+# vim: set filetype=sh:
