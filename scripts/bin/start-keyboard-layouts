@@ -58,7 +58,7 @@ fi
 # sleep to not miss the return key release event
 sleep 0.2
 
-if [ ! $KEYCHRON ]; then
+if [ ! $KEYCHRON ] && [ "$HOSTNAME" != max-kron ] ; then
     echo "Start keyboard-layouts for built-in keyboard"
     if [ $BACKGROUND ] || [ $K6_CONNECTED ]; then
         $BINARY --config-file $CONFIG \
