@@ -61,12 +61,11 @@ sleep 0.2
 if [ ! $KEYCHRON ] && [ "$HOSTNAME" != max-kron ] ; then
     echo "Start keyboard-layouts for built-in keyboard"
     LOGFILE=$HOME/log/"$(date '+%Y-%m-%d_%H.%M.%S')_key.log"
+    COMMAND="$BINARY --config-file $CONFIG ${LOG:+--key-log-file "$LOGFILE"} $@"
     if [ $BACKGROUND ] || [ $K6_CONNECTED ]; then
-        $BINARY --config-file $CONFIG \
-          ${LOG:+--key-log-file "$LOGFILE"} "$@" > /dev/null &
+        $COMMAND > /dev/null &
     else
-        exec $BINARY --config-file $CONFIG \
-          ${LOG:+--key-log-file "$LOGFILE"} "$@"
+        exec $COMMAND
     fi
 fi
 
@@ -74,16 +73,14 @@ if [ $K6_CONNECTED ]; then
     # pkill -f 'keyboard-layouts.*usb-Keychron_Keychron_K6-event-kbd'
     echo "Start keyboard-layouts for Keychron K6 (via USB)"
     LOGFILE=$HOME/log/"$(date '+%Y-%m-%d_%H.%M.%S')_key_K6.log"
+    COMMAND="$BINARY \
+          --config-file $CONFIG \
+          --device /dev/input/by-id/usb-Keychron_Keychron_K6-event-kbd \
+          ${LOG:+--key-log-file "$LOGFILE"} $@"
     if [ $BACKGROUND ]; then
-        $BINARY \
-          --config-file $CONFIG \
-          --device /dev/input/by-id/usb-Keychron_Keychron_K6-event-kbd \
-          ${LOG:+--key-log-file "$LOGFILE"} "$@" > /dev/null &
+        $COMMAND > /dev/null &
     else
-        exec $BINARY \
-          --config-file $CONFIG \
-          --device /dev/input/by-id/usb-Keychron_Keychron_K6-event-kbd \
-          ${LOG:+--key-log-file "$LOGFILE"} "$@"
+        exec $COMMAND
     fi
 fi
 
@@ -91,15 +88,13 @@ if [ $K6_BLUETOOTH_CONNECTED ]; then
     # pkill -f 'keyboard-layouts.*usb-Keychron_Keychron_K6-event-kbd'
     echo "Start keyboard-layouts for Keychron K6 (via Bluetooth)"
     LOGFILE=$HOME/log/"$(date '+%Y-%m-%d_%H.%M.%S')_key_K6_bt.log"
+    COMMAND="$BINARY \
+          --config-file $CONFIG \
+          --device "$k6_bluetooth_device" \
+          ${LOG:+--key-log-file "$LOGFILE"} $@"
     if [ $BACKGROUND ]; then
-        $BINARY \
-          --config-file $CONFIG \
-          --device "$k6_bluetooth_device" \
-          ${LOG:+--key-log-file "$LOGFILE"} "$@" > /dev/null &
+        $COMMAND > /dev/null &
     else
-        exec $BINARY \
-          --config-file $CONFIG \
-          --device "$k6_bluetooth_device" \
-          ${LOG:+--key-log-file "$LOGFILE"} "$@"
+        exec $COMMAND
     fi
 fi
