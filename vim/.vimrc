@@ -17,7 +17,12 @@ syntax enable       " enable syntax highlighting
 if &term != 'cygwin'
     try
         if empty(glob('/tmp/st-light'))
-            colorscheme minimalist
+            if has('nvim-0.10')
+                colorscheme everforest
+            else
+                colorscheme minimalist
+                " colorscheme onehalfdark
+            endif
             if exists('$TMUX')
                 highlight Normal ctermbg=NONE guibg=NONE
                 highlight LineNr ctermbg=NONE guibg=NONE
