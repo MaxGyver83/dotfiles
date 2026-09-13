@@ -116,9 +116,22 @@ autocmd BufRead,BufNewFile **/dwm.c set autoindent noexpandtab tabstop=4 shiftwi
 autocmd BufRead,BufNewFile *.js.tid set filetype=javascript noexpandtab tabstop=4 shiftwidth=4
 autocmd BufRead,BufNewFile *.h,*.c set filetype=c
 autocmd BufRead,BufNewFile *.gnu set filetype=gnuplot
+autocmd BufRead,BufNewFile *.rc set filetype=rcshell
 autocmd BufRead,BufNewFile *.ics setfiletype icalendar
+autocmd BufRead,BufNewFile *.xkb setfiletype xkb
+" autocmd BufRead,BufNewFile *.ha set noexpandtab shiftwidth=8 softtabstop=0 tabstop=8 textwidth=80
 autocmd BufRead,BufNewFile tags-* set filetype=tags
 autocmd BufRead,BufNewFile **/bazel-out/**/*.log FixBazelPaths
+autocmd BufRead,BufNewFile **/.vim/plugins* set filetype=conf
+autocmd BufRead,BufNewFile **/INBOX/cur/* set filetype=mail
+autocmd BufWinEnter **/hare/**/README call SyntaxRange#Include('^\t', '^$', 'hare')
+autocmd BufWinEnter emailbook.txt syntax match email /<[^ @<>]\+@[^ @<>]\+>/
+autocmd BufRead,BufNewFile emailbook.txt highlight email ctermfg=blue
+augroup DuneShell
+  autocmd!
+  autocmd BufWinEnter **/.dune-prelude syntax match lispHashComment /^#.*/ contains=Comment
+  autocmd BufWinEnter **/.dune-prelude highlight link lispHashComment Comment
+augroup END
 
 " disable MUcomplete for fish and for git commit messages
 autocmd BufEnter * if &ft ==# 'gitcommit' || &ft ==# 'fish' | MUcompleteAutoOff | else | MUcompleteAutoOn | endif
