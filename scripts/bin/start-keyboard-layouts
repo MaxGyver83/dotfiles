@@ -38,6 +38,10 @@ fi
 [ -e /dev/input/by-id/usb-Keychron_Keychron_K6-event-kbd ] && K6_CONNECTED=1
 echo K6_CONNECTED=$K6_CONNECTED
 
+k6_bluetooth_device="/dev/input/$(grep -B 8 -A 4 12001 /proc/bus/input/devices | grep Keychron -A 4 | grep -oE 'event[0-9]+')"
+[ -e $k6_bluetooth_device ] && K6_BLUETOOTH_CONNECTED=1
+echo K6_BLUETOOTH_CONNECTED=$K6_BLUETOOTH_CONNECTED
+
 if [ $PARSE ]; then
     set -- "$@" -p
 else
@@ -78,5 +82,21 @@ if [ $K6_CONNECTED ]; then
           --config-file $CONFIG \
           --device /dev/input/by-id/usb-Keychron_Keychron_K6-event-kbd \
           ${LOG:+--key-log-file $HOME/log/"$(date '+%Y-%m-%d_%H.%M.%S')_key_K6.log"} "$@"
+    fi
+fi
+
+if [ $K6_BLUETOOTH_CONNECTED ]; then
+    # pkill -f 'keyboard-layouts.*usb-Keychron_Keychron_K6-event-kbd'
+    echo "Start keyboard-layouts for Keychron K6 (via Bluetooth)"
+    if [ $BACKGROUND ]; then
+        $BINARY \
+          --config-file $CONFIG \
+          --device "$k6_bluetooth_device" \
+          ${LOG:+--key-log-file $HOME/log/"$(date '+%Y-%m-%d_%H.%M.%S')_key_K6_bt.log"} "$@" > /dev/null &
+    else
+        exec $BINARY \
+          --config-file $CONFIG \
+          --device "$k6_bluetooth_device" \
+          ${LOG:+--key-log-file $HOME/log/"$(date '+%Y-%m-%d_%H.%M.%S')_key_K6_bt.log"} "$@"
     fi
 fi
