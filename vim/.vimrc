@@ -80,6 +80,7 @@ set listchars=tab:\|_ " show tabs as |_
 if has('nvim') || v:version >= 900
     set listchars+=lead:· " show leading spaces as ·
 endif
+set listchars+=nbsp:+
 set list             " show non-printable chars
 
 " Workaround for bug https://github.com/vim/vim/issues/7742
