@@ -19,12 +19,12 @@ if &term != 'cygwin'
         if empty(glob('/tmp/st-light'))
             colorscheme minimalist
             if exists('$TMUX')
-                highlight Normal ctermbg=NONE
-                highlight LineNr ctermbg=NONE
-                highlight NonText ctermbg=NONE
-                highlight SpecialKey ctermbg=NONE
+                highlight Normal ctermbg=NONE guibg=NONE
+                highlight LineNr ctermbg=NONE guibg=NONE
+                highlight NonText ctermbg=NONE guibg=NONE
+                highlight SpecialKey ctermbg=NONE guibg=NONE
             endif
-            highlight CursorLineNr ctermbg=NONE ctermfg=252
+            highlight CursorLineNr ctermbg=NONE guibg=NONE ctermfg=252
         else
             colorscheme PaperColor
         endif
