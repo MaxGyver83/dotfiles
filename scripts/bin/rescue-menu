@@ -12,4 +12,5 @@ menu <<"eof"
 9 st	st
 s screenshot	~/bin/screenshot-menu
 x xkill	xkill
+k kill-menu	~/bin/kill-menu
 eof

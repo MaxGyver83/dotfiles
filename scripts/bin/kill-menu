@@ -1,0 +1,5 @@
+#!/bin/sh
+ps -u "$USER" -o pid,comm,%cpu,%mem,cmd \
+    | dmenu -i -c -l 15 -fn 'monospace:size=16' -p Kill: \
+    | awk '{print $1}' \
+    | xargs -r kill
