@@ -38,8 +38,11 @@ fi
 [ -e /dev/input/by-id/usb-Keychron_Keychron_K6-event-kbd ] && K6_CONNECTED=1
 echo K6_CONNECTED=$K6_CONNECTED
 
-k6_bluetooth_device="/dev/input/$(grep -B 8 -A 4 12001 /proc/bus/input/devices | grep Keychron -A 4 | grep -oE 'event[0-9]+')"
-[ -e $k6_bluetooth_device ] && K6_BLUETOOTH_CONNECTED=1
+keychron_devices=$(grep -B 8 -A 4 12001 /proc/bus/input/devices | grep Keychron -A 4)
+if echo "$keyboard_devices" | grep -q bluetooth; then
+    k6_bluetooth_device="/dev/input/$(grep -B 8 -A 4 12001 /proc/bus/input/devices | grep Keychron -A 4 | grep -oE 'event[0-9]+')"
+    [ -e $k6_bluetooth_device ] && K6_BLUETOOTH_CONNECTED=1
+fi
 echo K6_BLUETOOTH_CONNECTED=$K6_BLUETOOTH_CONNECTED
 
 if [ $PARSE ]; then
