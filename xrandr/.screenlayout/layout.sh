@@ -1,4 +1,8 @@
 #!/bin/sh
+error() {
+    >&2 printf "\e[1;31m$@\e[0m\n"
+    exit 1
+}
 
 list_active_monitors() {
     # xrandr --listactivemonitors | awk '{ print $4 }' # slow
@@ -25,8 +29,7 @@ activate_one() {
 activate_both() {
     echo "Activate \"$1\" and \"$2\":"
     if [ -z "$1" ] || [ -z "$2" ]; then
-        echo "Both devices must be set!"
-        exit 1
+        error "Both devices must be set!"
     fi
     command="xrandr --output $1 --primary --pos 0x0 --rotate normal --auto"
     if [ "$2" ]; then
@@ -85,10 +88,10 @@ case "$1" in
 info) echo "Active:"; xrandr --listactivemonitors; exit 0 ;;
 auto) guess_layout ;;
 other) activate_other ;;
-laptop) [ $laptop ] && activate_one "$laptop" ;;
+laptop) [ $laptop ] && activate_one "$laptop" || error "Not a laptop!" ;;
 external) activate_one "$first_external_device" "$2" ;;
 all|both) activate_both "$laptop" "$first_external_device" ;;
-*) echo "Unexpected argument: $1"; exit 1 ;;
+*) error "Unexpected argument: $1" ;;
 esac
 
 # reload current wallpaper (with updated size/position)
