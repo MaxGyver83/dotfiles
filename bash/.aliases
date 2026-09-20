@@ -105,7 +105,7 @@ cz="$VIM $HOME/.zshrc"
 ck="$VIM $HOME/.config/kmonad/vou-linux-de-rctrl.kbd"
 pj="$VIM $HOME/repos/goodlife/tiddlers/projekte.md"
 td="$VIM $HOME/MEGA/markor/todo.txt"
-jour="$VIM + $HOME/MEGA/markor/journal.txt"
+jour="$VIM + $HOME/MEGA/markor/journal.md"
 
 psk='pgrep -fa "kmonad|/keyboard-layouts"'
 
