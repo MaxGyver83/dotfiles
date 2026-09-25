@@ -1,23 +1,39 @@
 #!/bin/sh
+running=$(uname -r | sed 's/-arch.*//')
 if [ -f /etc/arch-release ]; then
     # Arch Linux (only one kernel version)
-    pacman -Qe linux
+    installed=$(pacman -Q linux | awk '{print $2}' | sed 's/\.arch.*//')
 elif type lsb_release >/dev/null 2>&1; then
     # Distributions of interest: Ubuntu and Raspbian
     distro=$(lsb_release -d | grep Description | cut -f2 | cut -d' ' -f1)
     release=$(lsb_release -r | grep Release | cut -f2)
     if [ $distro = Raspbian ] && [ $((release < 12)) = 1 ]; then
         # Raspberry Pi OS Bullseye and older (raspi3)
-        dpkg --list raspberrypi-kernel | grep '^ii'
+        # dpkg --list raspberrypi-kernel | grep '^ii'
+        installed=$(dpkg --list raspberrypi-kernel | awk '/ii/{print $2}')
+        # TODO: Test -q on raspi3
     else
         # Ubuntu, Raspberry Pi OS Bookworm and newer (raspi1, ionos)
-        dpkg --list 'linux-image-*' | grep '^ii' | sed 's/^ii *//'
-        dpkg --list 'linux-modules-*' | grep '^ii' | sed 's/^ii *//'
-        dpkg --list 'linux-headers-*' | grep '^ii' | sed 's/^ii *//'
+        installed=$(dpkg-query -W -f='${Package}\n' 'linux-image-[0-9]*' |
+            sed 's/^linux-image-//' |
+            sort -V |
+            tail -n1)
     fi
 else
     echo "Unknown distribution!"
+    exit 2
 fi
 
-set -x
-uname -r
+if [ "$1" = '-q' ]; then
+    if [ -z "$installed" ]; then
+        echo "Couldn't determine latest installed kernel!"
+        exit 2
+    elif [ "$installed" != "$running" ]; then
+        exit 1
+    else
+        exit 0
+    fi
+fi
+
+echo "Installed: $installed"
+echo "Running:   $running"
