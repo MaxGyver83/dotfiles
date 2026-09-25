@@ -17,7 +17,10 @@ availmem() {
   END { printf("%.1f%%\n", avail*100/(avail+anon)) }' /proc/meminfo
 }
 
-
+kernel-versions -q
+if [ $? = 1 ]; then
+  reboot="REBOOT "
+fi
 
 if test -f ~/bin/toggle_bluetooth_profile_WH-XB910N.sh ; then
   headset_profile="$(~/bin/toggle_bluetooth_profile_WH-XB910N.sh --status)"
@@ -39,7 +42,7 @@ if [ "$(hostname)" = 'max-laptop' ] && [ "$active_monitor" = 'eDP-1' ] && exists
 else
   brightness_percent=$(xrandr --verbose | grep "^$active_monitor" -A 5 | awk '/Brightness/ { printf "%.0f\n", $2 * 100; exit }')
 fi
-[ $brightness_percent = 100 ] && brightness="" || brightness=☀"${brightness_percent}%  "
+[ "$brightness_percent" = 100 ] && brightness="" || brightness=☀"${brightness_percent}%  "
 
 battery=""
 if test -f /sys/class/power_supply/BAT0/status ; then
@@ -59,4 +62,4 @@ mem="$(availmem)  "
 dat=$(date "+%a %F %R")
 
 
-xsetroot -name "${layout}${headset_profile}${mailinfo}${network}${brightness}${battery}${disk}${mem}${dat}"
+xsetroot -name "${reboot}${layout}${headset_profile}${mailinfo}${network}${brightness}${battery}${disk}${mem}${dat}"
