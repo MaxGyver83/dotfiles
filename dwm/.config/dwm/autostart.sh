@@ -93,10 +93,10 @@ export SSH_AUTH_SOCK
 # fi ) &
 
 (sleep 3 \
-    && sudo renice -n -15 -p $(pidof Xorg) \
-    && sudo renice -n -14 -p $(pidof dwm) \
-    && sudo renice -n -13 -p $(pidof keyboard-layouts) \
-    && sudo renice -n -12 -p $(pidof st)) &
+    && echo "renice Xorg" && sudo renice -n -15 -p $(pidof Xorg) \
+    && echo "renice dwm" && sudo renice -n -14 -p $(pidof dwm) \
+    && echo "renice keyboard-layouts" && sudo renice -n -13 -p $(pidof keyboard-layouts) \
+    && echo "renice st" && sudo renice -n -12 -p $(pidof st)) &
 
 # start st with tmux and Firefox if not yet running
 if ! pgrep -a '^st$' ; then
