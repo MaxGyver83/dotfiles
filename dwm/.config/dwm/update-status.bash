@@ -34,13 +34,14 @@ if [[ "$USER" =~ sc* ]]; then
   kerb || network+="No Kerb "
 fi
 
-# TODO: Does not work when no window is open.
-monitor_xpos=$(xdotool getactivewindow getwindowgeometry | grep Position | grep -o '[0-9]*,' | sed 's/,//')
+monitor_xpos=$(xdotool getactivewindow getwindowgeometry 2>/dev/null | grep -o 'Position:.*' | grep -o '[0-9]*,' | tr -d ,)
+[ -n "$monitor_xpos" ] || monitor_xpos=$(xrandr | awk '/ primary/{print $4}' | grep -o '[0-9]*')
 active_monitor=$(xrandr | grep -w connected | grep "+$monitor_xpos+" | head -n 1 | cut -d " " -f1)
 if [ "$(hostname)" = 'max-laptop' ] && [ "$active_monitor" = 'eDP-1' ] && exists light ; then
   brightness_percent="$(round "$(light -G)")"
 else
-  brightness_percent=$(xrandr --verbose | grep "^$active_monitor" -A 5 | awk '/Brightness/ { printf "%.0f\n", $2 * 100; exit }')
+  brightness_percent=$(xrandr --verbose | grep "^$active_monitor" -A 5 |
+    awk '/Brightness/ && !seen++ { printf "%.0f\n", $2 * 100 }')
 fi
 [ "$brightness_percent" = 100 ] && brightness="" || brightness=☀"${brightness_percent}%  "
 
