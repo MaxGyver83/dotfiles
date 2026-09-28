@@ -101,7 +101,7 @@ export SSH_AUTH_SOCK
 # start st with tmux and Firefox if not yet running
 if ! pgrep -a '^st$' ; then
   grep -q 'dpi: 150' ~/.Xresources && fontarg='-z 28'
-  tmux has-session -t 0 && run "st $fontarg -e tmux a -t 0" || st $fontarg -e tmux &
+  tmux has-session -t 0 2>/dev/null && run "st $fontarg -e tmux a -t 0" || st $fontarg -e tmux &
 fi
 # restart firefox
 restart limitcpu -l 300 -- firefox
