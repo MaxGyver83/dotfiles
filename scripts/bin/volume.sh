@@ -1,7 +1,8 @@
 #!/bin/sh
 
 notify() {
-    status=$(amixer sget Master | grep 'Mono:' | awk '{print $4,$6}' | tr -d '[]' | sd ' on' '' | sd 'off' '(muted)')
+    status=$(pactl get-sink-volume "@DEFAULT_SINK@" | grep -oE '[0-9]+%' | head -1)
+    [ "$(pactl get-sink-mute "@DEFAULT_SINK@" | sed 's/^Mute: //')" = yes ] && status="$status (muted)"
     notify-send -t 500 "$status"
 }
 
