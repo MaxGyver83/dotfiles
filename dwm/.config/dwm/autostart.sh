@@ -8,9 +8,13 @@ timestamp() {
   date "+%Y-%m-%d %H:%M:%S.%3N"
 }
 
+log() {
+  echo "$(timestamp) $@"
+}
+
 run() {
   if ! pgrep -fa "$*"; then
-    echo "$(timestamp) Run: $@"
+    log "Run: $@"
     $@&
   fi
 }
@@ -21,17 +25,17 @@ restart() {
       # restart $1 if it's already running
       pkill "$1" && action=Restart || return
     else
-      echo "$(timestamp) WM restarted, no DPI change: Ignore '$@'."
+      log "WM restarted, no DPI change: Ignore '$@'."
       return
     fi
   else
     action=Run
   fi
-  echo "$(timestamp) $action: $@"
+  log "$action: $@"
   $@&
 }
 
-echo "$(timestamp) Start running autostart.sh"
+log "Start running autostart.sh"
 echo "RESTART=$RESTART"
 echo "DPI_CHANGED=$DPI_CHANGED"
 
@@ -41,13 +45,13 @@ export NO_AT_BRIDGE=1
 
 # numlockx off
 ~/bin/start-keyboard-layouts -b -l || {
-  echo "$(timestamp) Run start-kmonad.fish --keyboard all"
-  { ~/bin/start-kmonad.fish --keyboard all; echo "$(timestamp) start-kmonad.fish done"; } &
+  log "Run start-kmonad.fish --keyboard all"
+  { ~/bin/start-kmonad.fish --keyboard all; log "start-kmonad.fish done"; } &
 }
 #xset r rate 300 50
 #xinput set-prop 'ETPS/2 Elantech Touchpad' 'libinput Natural Scrolling Enabled' 1
 restart dunst
-echo "$(timestamp) Switch to external screen (if available)"
+log "Switch to external screen (if available)"
 if [ "$(hostname)" = 'max-laptop' ]; then
   [ "$(head -1 /sys/class/drm/card0-DP-1/modes)" = '2560x1440' ] || [ "$(head -1 /sys/class/drm/card1-DP-1/modes)" = '2560x1440' ] && ~/.screenlayout/layout.sh external
 elif [ "$(hostname)" = 'max-kron' ]; then
@@ -58,8 +62,8 @@ elif xrandr | grep -q 2560x1440 ; then
   ~/.screenlayout/layout.sh external
   # [ $(xrandr | grep -wc connected) -eq 3 ] && ~/.screenlayout/2x-acer.sh
 fi
-echo "$(timestamp) Switching to external screen (if available) done"
-# echo "$(timestamp) Set first (=laptop) display to 70% brightness"
+log "Switching to external screen (if available) done"
+# log "Set first (=laptop) display to 70% brightness"
 # set first (=laptop) display to 70% brightness
 # xrandr --output $(xrandr | grep -w connected | head -n 1 | cut -d " " -f1) --brightness 0.7
 # test -f ~/.screenlayout/ext-monitor-acer.sh && ~/.screenlayout/ext-monitor-acer.sh
@@ -105,9 +109,9 @@ if ! pgrep -a '^st$' ; then
 fi
 # restart firefox
 restart limitcpu -l 300 -- firefox
-echo "$(timestamp) Sleep for 1 second"
+log "Sleep for 1 second"
 sleep 1
-echo "$(timestamp) Focus tmux:"
+log "Focus tmux:"
 wmctrl -a tmux
 
-echo "$(timestamp) autostart.sh done"
+log "autostart.sh done"
