@@ -54,7 +54,7 @@ ap='apt policy'
 pss='pacman -Ss'
 sps='sudo pacman -S'
 # syu='sudo pacman -Syu'
-syu='yay -Pw && sudo pacman -Syu'
+syu='yay -Pw && sudo pacman -Syu && ~/.config/dwm/update-status.bash'
 
 nh='sudo nethogs wlp2s0 -v 3'
 hg='history | grep'
