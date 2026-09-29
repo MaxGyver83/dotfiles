@@ -31,7 +31,7 @@
     origin = top-center
 
     # Offset from the origin
-    offset = 0x15
+    offset = (0, 15)
 
     # Scale factor. It is auto-detected if value is 0.
     scale = 0
@@ -194,7 +194,8 @@
     max_icon_size = 128
 
     # Paths to default icons.
-    icon_path = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
+    enable_recursive_icon_lookup = true
+    icon_theme = Adwaita
 
     ### History ###
 
