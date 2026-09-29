@@ -1,0 +1,6 @@
+#!/bin/sh
+case "$1" in
+*.aab) bundletool dump manifest --bundle "$1" | grep --color=auto -E '(target|min)Sdk|versionCode|versionName|android:label' ;;
+*.apk) /home/max/Android/Sdk/build-tools/37.0.0/aapt2 dump badging "$1" | grep --color=auto -E '(target|min)Sdk|versionCode|versionName|application-label' ;;
+*) echo "Usage: $0 APKFILE|AABFILE"; exit 1 ;;
+esac
