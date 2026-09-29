@@ -1,4 +1,16 @@
 #!/bin/sh
+case $HOSTNAME in
+max-laptop) interface=wlp1s0 ;;
+max-kron)   interface=enp2s0 ;;
+# try first interface (after localhost):
+*)          interface=$(ip -br a | grep -v 127.0.0.1 | head -n1 | awk '{print $1}') ;;
+esac
+
+while ! ip -4 a show "$interface" | rg -q 'inet 192\.168\.\d+\.\d+'
+do
+    sleep 2
+done
+
 {
 cd ~/repos/wiki \
     && git pull \
