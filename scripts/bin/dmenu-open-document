@@ -15,6 +15,8 @@ uri_to_path() {
     # replace $HOME with ~
     case $path in
         "$HOME"/*) path="~${path#$HOME}" ;;
+        /media/ubuntu/home/max/*) path="~${path#/media/ubuntu/home/max}" ;;
+        /media/home/max/*) path="~${path#/media/home/max}" ;;
     esac
 
     printf '%s\n' "$path"
