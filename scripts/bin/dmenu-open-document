@@ -22,7 +22,12 @@ uri_to_path() {
     printf '%s\n' "$path"
 }
 
-grep -oP 'href="\K[^"]+' ~/.local/share/recently-used.xbel \
+xmlstarlet sel -t \
+    -m '//bookmark' \
+    -v '@visited' -o ' ' -v '@href' -n \
+    ~/.local/share/recently-used.xbel \
+  | sort -r \
+  | cut -d' ' -f2- \
   | while read -r uri; do uri_to_path "$uri"; done \
   | dmenu -i -c -l 20 -fn 'monospace:size=16' \
   | sed "s:^~:$HOME:" \
