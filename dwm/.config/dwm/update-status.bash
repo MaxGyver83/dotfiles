@@ -1,6 +1,7 @@
 #!/bin/bash
 # notmuch help &> /dev/null && mailinfo="✉$(notmuch search tag:unread | wc -l), " || mailinfo=""
 
+HOSTNAME=${HOSTNAME:-$(hostname)}
 exists() { command -v "$1" > /dev/null 2>&1 ; }
 round() { LC_ALL=C printf '%.0f' "$1" ; }
 office_lan() { ip -br -4 a show dev enx0c379667313c 2> /dev/null | awk '{print $3}' | grep -q '^10\.' ; }
@@ -39,6 +40,8 @@ monitor_xpos=$(xdotool getactivewindow getwindowgeometry 2>/dev/null | grep -o '
 active_monitor=$(xrandr | grep -w connected | grep "+$monitor_xpos+" | head -n 1 | cut -d " " -f1)
 if [ "$(hostname)" = 'max-laptop' ] && [ "$active_monitor" = 'eDP-1' ] && exists light ; then
   brightness_percent="$(round "$(light -G)")"
+elif [ "$HOSTNAME" = 'max-kron' ]; then
+  brightness_percent=$(awk '{printf "%.0f\n", $1 * 100}' /tmp/brightness-DP-1 2>/dev/null || echo 100)
 else
   brightness_percent=$(xrandr --verbose | grep "^$active_monitor" -A 5 |
     awk '/Brightness/ && !seen++ { printf "%.0f\n", $2 * 100 }')
