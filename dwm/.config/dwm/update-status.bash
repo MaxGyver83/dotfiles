@@ -17,6 +17,11 @@ availmem() {
   /^AnonPages:/     { anon=$2 }
   END { printf("%.1f%%\n", avail*100/(avail+anon)) }' /proc/meminfo
 }
+monitor_xpos() {
+  xdotool getactivewindow getwindowgeometry 2>/dev/null | grep -o 'Position:.*' | grep -o '[0-9]*,' | tr -d , \
+  || xrandr | awk '/ primary/{print $4}' | grep -o '[0-9]*'
+}
+active_monitor() { xrandr | grep " connected.*+$(monitor_xpos)+" | head -n 1 | cut -d " " -f1 ; }
 
 kernel-versions -q
 if [ $? = 1 ]; then
@@ -35,15 +40,12 @@ if [[ "$USER" =~ sc* ]]; then
   kerb || network+="No Kerb "
 fi
 
-monitor_xpos=$(xdotool getactivewindow getwindowgeometry 2>/dev/null | grep -o 'Position:.*' | grep -o '[0-9]*,' | tr -d ,)
-[ -n "$monitor_xpos" ] || monitor_xpos=$(xrandr | awk '/ primary/{print $4}' | grep -o '[0-9]*')
-active_monitor=$(xrandr | grep -w connected | grep "+$monitor_xpos+" | head -n 1 | cut -d " " -f1)
-if [ "$(hostname)" = 'max-laptop' ] && [ "$active_monitor" = 'eDP-1' ] && exists light ; then
+if [ "$HOSTNAME" = 'max-laptop' ] && exists light && [ "$(active_monitor)" = 'eDP-1' ] ; then
   brightness_percent="$(round "$(light -G)")"
 elif [ "$HOSTNAME" = 'max-kron' ]; then
   brightness_percent=$(awk '{printf "%.0f\n", $1 * 100}' /tmp/brightness-DP-1 2>/dev/null || echo 100)
 else
-  brightness_percent=$(xrandr --verbose | grep "^$active_monitor" -A 5 |
+  brightness_percent=$(xrandr --verbose | grep " connected.*+$(monitor_xpos)+" -A 5 |
     awk '/Brightness/ && !seen++ { printf "%.0f\n", $2 * 100 }')
 fi
 [ "$brightness_percent" = 100 ] && brightness="" || brightness=☀"${brightness_percent}%  "
