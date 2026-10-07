@@ -19,7 +19,7 @@ availmem() {
 
 kernel-versions -q
 if [ $? = 1 ]; then
-  reboot="REBOOT "
+  reboot="REBOOT  "
 fi
 
 if test -f ~/bin/toggle_bluetooth_profile_WH-XB910N.sh ; then
