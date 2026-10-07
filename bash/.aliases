@@ -139,6 +139,8 @@ gfc='git diff --name-only --diff-filter=U'
 gsp='git stash push'
 gsa='git stash apply'
 grv='git remote -v'
+gbs='git branch --sort=-committerdate'
+gbl='git branch --sort=-committerdate --color=always | head -n 5'
 
 # git log
 gl='git log'
