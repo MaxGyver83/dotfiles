@@ -166,7 +166,7 @@ gitunmerged='git branch --no-merged master'
 # copy (yank) current branch name into clipboard
 yb='git rev-parse --abbrev-ref HEAD | tr -d \n | xclip -sel clip'
 
-crl='crontab -l | grep --color=never "^[^#]"'
+crl='crontab -l | grep --color=never "^[^#]" | bat -l crontab -pp'
 
 red='redshift -P -O 3500 -b 1'
 notred='redshift -P -O 6500 || redshift -O 6500'
