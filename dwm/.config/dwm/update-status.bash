@@ -4,6 +4,7 @@
 HOSTNAME=${HOSTNAME:-$(hostname)}
 exists() { command -v "$1" > /dev/null 2>&1 ; }
 round() { LC_ALL=C printf '%.0f' "$1" ; }
+is_single_line() { test -n "$1" && [ $(echo "$1" | wc -l) = 1 ] ; }
 office_lan() { ip -br -4 a show dev enx0c379667313c 2> /dev/null | awk '{print $3}' | grep -q '^10\.' ; }
 office_wifi() { ip -br -4 a show dev wlp0s20f3 2> /dev/null | grep -Eq 'UP\ +10\.' ; }
 vpn() { ip -br -4 a show dev tun0 2> /dev/null | awk '{print $3}' | grep -q '^10\.' ; }
@@ -21,7 +22,21 @@ monitor_xpos() {
   xdotool getactivewindow getwindowgeometry 2>/dev/null | grep -o 'Position:.*' | grep -o '[0-9]*,' | tr -d , \
   || xrandr | awk '/ primary/{print $4}' | grep -o '[0-9]*'
 }
-active_monitor() { xrandr | grep " connected.*+$(monitor_xpos)+" | head -n 1 | cut -d " " -f1 ; }
+active_monitor() {
+  enabled_devices=$(rg -l ^enabled /sys/class/drm/*/enabled | awk -F/ '{print $5}' | cut -d- -f2-)
+  if is_single_line "$enabled_devices"; then
+    echo "$enabled_devices"
+    return
+  fi
+
+  active_mon=$(xrandr | grep " connected.*+$(monitor_xpos)+" | head -n 1 | cut -d " " -f1)
+  if [ $active_mon ]; then
+    echo "$active_mon"
+  else
+    # use primary monitor as fallback
+    xrandr | grep -w 'connected primary' | head -n 1 | cut -d " " -f1
+  fi
+}
 
 kernel-versions -q
 if [ $? = 1 ]; then
@@ -42,6 +57,7 @@ fi
 
 if [ "$HOSTNAME" = 'max-laptop' ] && exists light && [ "$(active_monitor)" = 'eDP-1' ] ; then
   brightness_percent="$(round "$(light -G)")"
+  # brightness_percent="$(round "$(/home/max/repos/backlight_control_dev/backlight_control)")"
 elif [ "$HOSTNAME" = 'max-kron' ]; then
   brightness_percent=$(awk '{printf "%.0f\n", $1 * 100}' /tmp/brightness-DP-1 2>/dev/null || echo 100)
 else
