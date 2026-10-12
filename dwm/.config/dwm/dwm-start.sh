@@ -25,6 +25,8 @@ msteams_cookies="$HOME/.config/Microsoft/Microsoft Teams/Cookies"
 
 printf "PATH=\n$PATH\n" | tr : '\n' > ~/log/dwm-start.log
 
+snixembed --fork
+
 # start dwm
 while true; do
     devPixelsPerPxOld=$devPixelsPerPx
