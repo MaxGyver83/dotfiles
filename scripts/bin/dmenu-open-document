@@ -1,16 +1,17 @@
-#!/bin/sh
+#!/bin/bash
 
 uri_to_path() {
-    uri=$1
+    local uri=$1
+    local path
 
     # strip file://
     path=${uri#file://}
 
     # replace % with \x for printf
-    path=$(printf '%s\n' "$path" | sed 's/%/\\x/g')
+    path=${path//%/\\x}
 
-    # decode percent-encoding
-    path=$(printf '%b' "$path")
+    # decode percent-encoding (printf -v writes back, no subshell needed)
+    printf -v path '%b' "$path"
 
     # replace $HOME with ~
     case $path in
