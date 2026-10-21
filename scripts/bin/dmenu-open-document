@@ -22,13 +22,9 @@ uri_to_path() {
     printf '%s\n' "$path"
 }
 
-xmlstarlet sel -t \
-    -m '//bookmark' \
-    -v '@visited' -o ' ' -v '@href' -n \
-    ~/.local/share/recently-used.xbel \
-  | sort -r \
-  | cut -d' ' -f2- \
+recently-opened-documents --frecency \
   | while read -r uri; do uri_to_path "$uri"; done \
+  | uniq \
   | dmenu -i -c -l 20 -fn 'monospace:size=16' \
   | sed "s:^~:$HOME:" \
   | xargs -d '\n' open
