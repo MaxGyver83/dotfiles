@@ -1,0 +1,120 @@
+#!/bin/sh
+
+# Usage: recently-opened-documents [--frecency|--frequency]
+#
+# Print recently opened documents, sorted by recency, frequency,
+# or frecency: a mix of how recently and how often a document was opened.
+#
+#   score = number_of_opens * 2^(-age_in_days / half_life)
+#
+# Half life (in days) of the age decay, higher = older documents keep their
+# score longer. Can be overridden via the environment.
+FRECENCY_HALF_LIFE=${FRECENCY_HALF_LIFE:-30}
+
+# Print "<score>\t<href>" for every line "<count> <modified> <visited> <added> <href>"
+frecency_score() {
+    awk -v now="$(date +%s)" -v half_life="$FRECENCY_HALF_LIFE" '
+        BEGIN {
+            if (half_life + 0 <= 0) half_life = 30
+        }
+
+        # days since 1970-01-01 for a proleptic gregorian date
+        function days_from_civil(y, m, d,   era, yoe, doy, doe) {
+            y -= (m <= 2)
+            era = int((y >= 0 ? y : y - 399) / 400)
+            yoe = y - era * 400
+            doy = int((153 * (m + (m > 2 ? -3 : 9)) + 2) / 5) + d - 1
+            doe = yoe * 365 + int(yoe / 4) - int(yoe / 100) + doy
+            return era * 146097 + doe - 719468
+        }
+
+        # "2026-10-15T09:13:02.883042Z" -> seconds since 1970-01-01 (UTC)
+        function epoch(ts,   y, mo, d, h, mi, s) {
+            if (ts !~ /^[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]T/) return 0
+            y  = substr(ts, 1, 4) + 0
+            mo = substr(ts, 6, 2) + 0
+            d  = substr(ts, 9, 2) + 0
+            h  = substr(ts, 12, 2) + 0
+            mi = substr(ts, 15, 2) + 0
+            s  = substr(ts, 18, 2) + 0
+            return days_from_civil(y, mo, d) * 86400 + h * 3600 + mi * 60 + s
+        }
+
+        # n-th space separated field of line
+        function field(line, n,   i, p, off) {
+            p = 1
+            for (i = 1; i < n; i++) {
+                off = index(substr(line, p), " ")
+                if (off == 0) return ""
+                p = p + off
+            }
+            off = index(substr(line, p), " ")
+            if (off == 0) return substr(line, p)
+            return substr(line, p, off - 1)
+        }
+
+        # everything after the n-th space separated field of line
+        function rest(line, n,   i, p, off) {
+            p = 1
+            for (i = 1; i <= n; i++) {
+                off = index(substr(line, p), " ")
+                if (off == 0) return ""
+                p = p + off
+            }
+            return substr(line, p)
+        }
+
+        {
+            count    = field($0, 1) + 0
+            modified = field($0, 2)
+            visited  = field($0, 3)
+            added    = field($0, 4)
+            href     = rest($0, 4)
+
+            # last time the document was opened (modified > visited > added)
+            last = modified
+            if (last == "") last = visited
+            if (last == "") last = added
+
+            # age in days, never negative (clock skew)
+            age = (now - epoch(last)) / 86400
+            if (age < 0) age = 0
+
+            # a document that was never opened counts as one open
+            if (count < 1) count = 1
+
+            printf "%.6f\t%s\n", count * exp(-log(2) * age / half_life), href
+        }
+    '
+}
+
+if [ "$1" = --frecency ]; then
+    xmlstarlet sel -t \
+        -m '//bookmark' \
+        -v 'sum(.//*[local-name()="application"]/@count)' -o ' ' \
+        -v '@modified' -o ' ' \
+        -v '@visited' -o ' ' \
+        -v '@added' -o ' ' \
+        -v '@href' -n \
+        ~/.local/share/recently-used.xbel \
+      | frecency_score \
+      | sort -k1,1nr \
+      | cut -f2-
+elif [ "$1" = --frequency ]; then
+    xmlstarlet sel -t \
+        -m '//bookmark' \
+        -v 'sum(.//*[local-name()="application"]/@count)' -o ' ' \
+        -v '@modified' -o ' ' \
+        -v '@href' -n \
+        ~/.local/share/recently-used.xbel \
+      | sort -k1,1nr -k2,2r \
+      | cut -d' ' -f3-
+else
+    # by recency
+    xmlstarlet sel -t \
+        -m '//bookmark' \
+        -v '@modified' -o ' ' -v '@href' -n \
+        ~/.local/share/recently-used.xbel \
+      | sort -r \
+      | cut -d' ' -f2-
+fi
