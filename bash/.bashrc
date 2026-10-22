@@ -177,6 +177,12 @@ copy_line_to_x_clipboard () {
 # bind to Ctrl-x x
 bind -x '"\C-xx": copy_line_to_x_clipboard'
 
+# Readline: Make C-w delete a full path (even quoted or with escaped spaces)
+if [ -f ~/.dotfiles/scripts/bin/delete_path.sh ]; then
+    source ~/.dotfiles/scripts/bin/delete_path.sh
+    delete_path_bind '"\C-w"'
+fi
+
 # use locate to find a file in home directory and highlight matches
 locateh() {
   # case sensitive
