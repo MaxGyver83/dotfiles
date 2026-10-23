@@ -212,6 +212,12 @@ _Z_EXCLUDE_DIRS=/media/ubuntu/home/max
 _Z_NO_RESOLVE_SYMLINKS=1
 [ -f ~/repos/z/z.sh ] && source ~/repos/z/z.sh
 
+unalias z 2> /dev/null
+z() {
+    [ $# -gt 0 ] && _z "$*" && return
+    cd "$(_z -l 2>&1 | FZF_DEFAULT_OPTS="--color fg:-1,bg:-1,hl:#fa9a2d,fg+:3,hl+:#fa9a2d,info:150,prompt:110,spinner:150,pointer:167,marker:174" fzf --height 40% --nth 2.. --reverse --inline-info +s --tac --query "${*##-* }" | sed 's/^[0-9,.]* *//')"
+}
+
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 if [ -d ~/repos/fzf-tab-completion ]; then
