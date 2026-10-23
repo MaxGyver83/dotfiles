@@ -252,6 +252,9 @@ export FYNE_THEME=light
 
 LANG='en_US.UTF-8'
 
+# fzf: Change directory
+bind '"\C-g": " \e\C-b\C-k \C-u`__fzf_cd__`\e\C-e\e(\C-m\C-y\C-h\e \C-y\ey\C-x\C-x\C-d\C-y\ey\C-_"'
+
 # disable terminal freeze "scroll lock" with Ctrl-s (unlocking with Ctrl-q btw.)
 stty -ixon
 
