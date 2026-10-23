@@ -128,6 +128,7 @@ gpsu='git push --set-upstream origin "$(git rev-parse --abbrev-ref HEAD)"'
 # git reset hard to origin
 grho='git reset --hard "origin/$(git rev-parse --abbrev-ref HEAD)"'
 gcm='git co $(basename $(git rev-parse --abbrev-ref origin/HEAD || echo main)) || git co master'
+gcd='git co develop'
 gch='git co HEAD --'
 # gr = "git root" (go to the toplevel of the current repo)
 gr='cd $(git rev-parse --show-toplevel)'
@@ -164,6 +165,8 @@ gitlogs='git log --oneline --graph --decorate --stat'
 gitloga='git log --oneline --graph --decorate --all'
 gitunpushed='git log ..@{u}'
 gitunmerged='git branch --no-merged master'
+
+gmt='go mod tidy'
 
 # copy (yank) current branch name into clipboard
 yb='git rev-parse --abbrev-ref HEAD | tr -d \n | xclip -sel clip'
