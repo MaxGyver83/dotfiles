@@ -6,5 +6,9 @@ case "$1" in
 *.fodt) libreoffice "$@";;
 *.docx) libreoffice "$@";;
 *.gif)  eog "$@";;
+*.png|*.jpg|*.jpeg)
+        nsxiv "$@";;
+*.txt|*.sh)
+        nvim "$@";;
 *)      xdg-open "$@";;
 esac
