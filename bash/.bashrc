@@ -223,7 +223,7 @@ z() {
 if [ -d ~/repos/fzf-tab-completion ]; then
     export FZF_COMPLETION_OPTS='--bind=ctrl-i:down,btab:up'
     source ~/repos/fzf-tab-completion/bash/fzf-bash-completion.sh
-    bind -x '"\C-s": fzf_bash_completion'
+    bind -x '"\t": fzf_bash_completion'
     _fzf_bash_completion_loading_msg() { echo "${PS1@P}${READLINE_LINE}" | tail -n1; }
 fi
 
