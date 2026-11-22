@@ -1,0 +1,14 @@
+#!/bin/sh
+# Print and copy full path of argument $1 to clipboard.
+
+if [ -z "$1" ]; then
+    echo "Usage: $0 FILENAME"
+    exit 1
+elif [ ! -e "$1" ]; then
+    echo "File not found: \"$1\""
+    exit 1
+fi
+
+fullpath="$PWD/${1#./}"
+echo "$fullpath"
+echo "$fullpath" | xclip -sel clip
