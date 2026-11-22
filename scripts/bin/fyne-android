@@ -1,0 +1,15 @@
+#!/bin/sh
+
+export ANDROID_HOME=${ANDROID_HOME:-$HOME/Android/Sdk}
+export ANDROID_NDK_HOME=${ANDROID_NDK_HOME:-$ANDROID_HOME/ndk/29.0.14206865}
+
+fyne-app-id-add-dot
+
+package=$(grep '^ *ID' FyneApp.toml | sed -E 's/.*"([^"]+)"/\1/')
+
+which fyne
+
+fyne package --os android/arm64 --release --verbose \
+  && fyne install --os android/arm64 --verbose \
+  && adb shell am start -n $package/org.golang.app.GoNativeActivity \
+  && adb logcat -s Fyne:D $package:D -v color

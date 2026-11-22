@@ -1,0 +1,20 @@
+#!/bin/sh
+
+if ! [ -e FyneApp.toml ]; then
+    echo "FyneApp.toml not found"
+    exit 1
+fi
+
+if ! grep -q '^ID' FyneApp.toml; then
+    echo "ID not found in FyneApp.toml"
+    exit 1
+fi
+
+id=$(grep '^ID' FyneApp.toml | sed 's/^ID *= *"//; s/"$//')
+case "$id" in
+*.*)
+    echo "ID contains already a dot: $id" ;;
+*)
+    echo "Update ID to com.example.$id"
+    sed -i -E 's/^ID *= *"([^"]+)"/ID = "com.example.\1"/' FyneApp.toml ;;
+esac

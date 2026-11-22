@@ -1,0 +1,13 @@
+#!/bin/sh
+set -x
+
+cd "$(git rev-parse --show-toplevel)"
+
+# delete old test files which might break `go test ./app`
+rm -rf /tmp/Documents
+
+gofumpt -w . \
+    && goimports -w . \
+    && golangci-lint run ./... \
+    && go test -race -tags ci,migrated_fynedo ./... \
+    && go test -race -tags mobile,ci,migrated_fynedo ./...

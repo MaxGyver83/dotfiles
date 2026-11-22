@@ -1,0 +1,4 @@
+#!/bin/sh
+
+go mod edit -replace fyne.io/fyne/v2=/home/max/repos/my-fyne
+go mod tidy
